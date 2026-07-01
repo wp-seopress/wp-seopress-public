@@ -75,10 +75,18 @@ class Uri implements UriInterface, \JsonSerializable
         }
         // Preserve bracketed IPv6 literals before encoding, including dotted IPv4 tails.
         $prefix = '';
-        if (preg_match('%^([0-9A-Za-z+.-]+://\[[0-9:.a-fA-F]+\])(.*?)$%', $url, $matches)) {
+        $ipv6Prefix = preg_match('%\A([0-9A-Za-z+.-]+://\[[^\]\x00-\x20/?#@]+\])(.*)\z%s', $url, $matches);
+        if ($ipv6Prefix === \false) {
+            return \false;
+        }
+        if ($ipv6Prefix === 1) {
             /** @var array{0:string, 1:string, 2:string} $matches */
+            $suffix = $matches[2];
+            if ($suffix !== '' && strpos(':/?#', $suffix[0]) === \false) {
+                return \false;
+            }
             $prefix = $matches[1];
-            $url = $matches[2];
+            $url = $suffix;
         }
         /** @var string|null */
         $encodedUrl = preg_replace_callback('%[^:/@?&=#]+%usD', static function ($matches) {
@@ -341,7 +349,22 @@ class Uri implements UriInterface, \JsonSerializable
         if ($host === '') {
             return;
         }
-        if (preg_match('/[\x00-\x20\x7F]/', $host)) {
+        // Reject control characters and URI authority delimiters so getHost()
+        // cannot disagree with the on-wire authority.
+        $invalidHost = preg_match('/[\x00-\x20\x7F\/\?#@\\\\]/', $host);
+        if ($invalidHost === \false) {
+            throw new \RuntimeException('Unable to validate URI host: ' . preg_last_error_msg());
+        }
+        if ($invalidHost === 1) {
+            throw new \InvalidArgumentException(sprintf('Invalid host: "%s"', $host));
+        }
+        if (strpos($host, '[') !== \false || strpos($host, ']') !== \false) {
+            if ($host[0] !== '[' || substr($host, -1) !== ']') {
+                throw new \InvalidArgumentException(sprintf('Invalid host: "%s"', $host));
+            }
+            return;
+        }
+        if (strpos($host, ':') !== \false) {
             throw new \InvalidArgumentException(sprintf('Invalid host: "%s"', $host));
         }
     }
@@ -516,7 +539,7 @@ class Uri implements UriInterface, \JsonSerializable
         if (!is_string($component)) {
             throw new \InvalidArgumentException('User info must be a string');
         }
-        return preg_replace_callback('/(?:[^%' . Rfc3986::CHAR_UNRESERVED . Rfc3986::CHAR_SUB_DELIMS . ']+|%(?![A-Fa-f0-9]{2}))/', [$this, 'rawurlencodeMatchZero'], $component);
+        return $this->filterComponent('/(?:[^%' . Rfc3986::CHAR_UNRESERVED . Rfc3986::CHAR_SUB_DELIMS . ']+|%(?![A-Fa-f0-9]{2}))/', $component, 'Unable to filter URI user info');
     }
     /**
      * @param mixed $host
@@ -596,7 +619,7 @@ class Uri implements UriInterface, \JsonSerializable
         if (!is_string($path)) {
             throw new \InvalidArgumentException('Path must be a string');
         }
-        return preg_replace_callback('/(?:[^' . Rfc3986::CHAR_UNRESERVED . Rfc3986::CHAR_SUB_DELIMS . '%:@\/]++|%(?![A-Fa-f0-9]{2}))/', [$this, 'rawurlencodeMatchZero'], $path);
+        return $this->filterComponent('/(?:[^' . Rfc3986::CHAR_UNRESERVED . Rfc3986::CHAR_SUB_DELIMS . '%:@\/]++|%(?![A-Fa-f0-9]{2}))/', $path, 'Unable to filter URI path');
     }
     /**
      * Filters the query string or fragment of a URI.
@@ -610,7 +633,15 @@ class Uri implements UriInterface, \JsonSerializable
         if (!is_string($str)) {
             throw new \InvalidArgumentException('Query and fragment must be a string');
         }
-        return preg_replace_callback('/(?:[^' . Rfc3986::CHAR_UNRESERVED . Rfc3986::CHAR_SUB_DELIMS . '%:@\/\?]++|%(?![A-Fa-f0-9]{2}))/', [$this, 'rawurlencodeMatchZero'], $str);
+        return $this->filterComponent('/(?:[^' . Rfc3986::CHAR_UNRESERVED . Rfc3986::CHAR_SUB_DELIMS . '%:@\/\?]++|%(?![A-Fa-f0-9]{2}))/', $str, 'Unable to filter URI query or fragment');
+    }
+    private function filterComponent(string $pattern, string $component, string $context): string
+    {
+        $filtered = preg_replace_callback($pattern, [$this, 'rawurlencodeMatchZero'], $component);
+        if ($filtered === null) {
+            throw new \RuntimeException($context . ': ' . preg_last_error_msg());
+        }
+        return $filtered;
     }
     private function rawurlencodeMatchZero(array $match): string
     {

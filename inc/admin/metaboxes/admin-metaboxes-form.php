@@ -757,10 +757,13 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 											return;
 										}
 
-										const dataResponse = await fetch("<?php echo esc_url( rest_url() ); ?>seopress/v1/search-url?url=" + term)
+										const dataResponse = await fetch(
+											"<?php echo esc_url( rest_url() ); ?>seopress/v1/search-url?url=" + encodeURIComponent( term ),
+											{ headers: { 'X-WP-Nonce': '<?php echo esc_js( wp_create_nonce( 'wp_rest' ) ); ?>' } }
+										);
 										const data = await dataResponse.json();
 
-										cache[ term ] = data.map(item => {
+										cache[ term ] = ( Array.isArray( data ) ? data : [] ).map(item => {
 											return {
 												label: item.post_title + " (" + item.guid + ")",
 												value: item.guid

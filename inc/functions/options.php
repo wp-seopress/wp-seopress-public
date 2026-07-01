@@ -396,7 +396,7 @@ if ( '1' == seopress_get_toggle_option( 'advanced' ) ) { // phpcs:ignore -- TODO
 			add_filter( 'get_comment_author_url', '__return_empty_string' );
 		}
 
-		if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedCommentsAuthorURLDisable() ) {
+		if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedCommentsWebsiteDisable() ) {
 			/**
 			 * Advanced comments website hook.
 			 *

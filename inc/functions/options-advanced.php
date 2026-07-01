@@ -67,7 +67,10 @@ if ( seopress_get_service( 'AdvancedOption' )->getAdvancedReplytocom() === '1' )
  * @return string $link
  */
 function seopress_remove_reply_to_com( $link ) {
-	return preg_replace( '/href=\'(.*(\?|&)replytocom=(\d+)#respond)/', 'href=\'#comment-$3', $link );
+	// WordPress outputs the reply link with double-quoted attributes and may HTML-encode
+	// the query separator (&#038; / &amp;) when replytocom is not the first argument, so
+	// match both quote styles and every separator encoding.
+	return preg_replace( '/href=(["\'])[^"\']*?(?:\?|&|&#0*38;|&amp;)replytocom=(\d+)#respond/', 'href=$1#comment-$2', $link );
 }
 
 /**

@@ -125,7 +125,11 @@ final class UriNormalizer
             $uri = $uri->withPath(UriResolver::removeDotSegments($uri->getPath()));
         }
         if ($flags & self::REMOVE_DUPLICATE_SLASHES) {
-            $uri = $uri->withPath(preg_replace('#//++#', '/', $uri->getPath()));
+            $path = preg_replace('#//++#', '/', $uri->getPath());
+            if ($path === null) {
+                throw new \RuntimeException('Unable to remove duplicate slashes from URI path: ' . preg_last_error_msg());
+            }
+            $uri = $uri->withPath($path);
         }
         if ($flags & self::SORT_QUERY_PARAMETERS && $uri->getQuery() !== '') {
             $queryKeyValues = explode('&', $uri->getQuery());
@@ -175,7 +179,7 @@ final class UriNormalizer
     {
         $normalized = preg_replace_callback($regex, $callback, $component);
         if ($normalized === null) {
-            throw new \RuntimeException('Unable to normalize URI component percent-encoding');
+            throw new \RuntimeException('Unable to normalize URI component percent-encoding: ' . preg_last_error_msg());
         }
         return $normalized;
     }

@@ -51,7 +51,7 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
-		if ( isset( $_GET['et_fb'] ) && '1' === $_GET['app_window'] ) { // phpcs:ignore
+		if ( isset( $_GET['et_fb'], $_GET['app_window'] ) && '1' === $_GET['app_window'] ) { // phpcs:ignore
 			$response = false;
 		}
 

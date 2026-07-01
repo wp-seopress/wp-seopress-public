@@ -116,6 +116,7 @@ return array(
     'SEOPress\\Vendor\\GuzzleHttp\\Handler\\Proxy' => $vendorDir . '/guzzlehttp/guzzle/src/Handler/Proxy.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Handler\\ProxyEnvironment' => $vendorDir . '/guzzlehttp/guzzle/src/Handler/ProxyEnvironment.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Handler\\StreamHandler' => $vendorDir . '/guzzlehttp/guzzle/src/Handler/StreamHandler.php',
+    'SEOPress\\Vendor\\GuzzleHttp\\Handler\\TlsVersion' => $vendorDir . '/guzzlehttp/guzzle/src/Handler/TlsVersion.php',
     'SEOPress\\Vendor\\GuzzleHttp\\MessageFormatter' => $vendorDir . '/guzzlehttp/guzzle/src/MessageFormatter.php',
     'SEOPress\\Vendor\\GuzzleHttp\\MessageFormatterInterface' => $vendorDir . '/guzzlehttp/guzzle/src/MessageFormatterInterface.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Middleware' => $vendorDir . '/guzzlehttp/guzzle/src/Middleware.php',

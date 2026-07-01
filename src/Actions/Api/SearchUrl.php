@@ -44,14 +44,22 @@ class SearchUrl implements ExecuteHooks {
 			array(
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'process' ),
-				'permission_callback' => '__return_true',
+				// Admin-only autocomplete: it enumerates post titles/permalinks,
+				// so require the same capability needed to edit content.
+				'permission_callback' => function () {
+					return current_user_can( 'edit_posts' );
+				},
 				'args'                => array(
 					'url' => array(
 						'required'          => true,
 						'validate_callback' => function ( $param ) {
 							return is_string( $param ) && ! empty( $param );
 						},
-						'sanitize_callback' => 'esc_url_raw',
+						// This param is a free-text search keyword, not a URL.
+						// esc_url_raw() prepends "http://" to schemeless terms
+						// (e.g. "blog" => "http://blog"), which breaks the
+						// post_name / post_title LIKE search below.
+						'sanitize_callback' => 'sanitize_text_field',
 					),
 				),
 			)

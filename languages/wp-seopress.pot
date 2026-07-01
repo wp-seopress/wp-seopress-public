@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-22T14:33:11+00:00\n"
+"POT-Creation-Date: 2026-07-01T08:56:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: wp-seopress\n"
@@ -1038,29 +1038,29 @@ msgstr ""
 msgid "Enter some keywords to auto-complete this field against your content."
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:780
+#: inc/admin/metaboxes/admin-metaboxes-form.php:783
 msgid "Query parameters"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:783
+#: inc/admin/metaboxes/admin-metaboxes-form.php:786
 msgid "Exactly match all parameters"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:786
+#: inc/admin/metaboxes/admin-metaboxes-form.php:789
 msgid "Exclude all parameters"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:789
+#: inc/admin/metaboxes/admin-metaboxes-form.php:792
 msgid "Exclude all parameters and pass them to the redirection"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:822
-#: app/react/layout/Main/components/Redirection/index.js:206
-#: public/admin/settings/tab-redirection.2ba6d0e659d7361a234b.js:1
+#: inc/admin/metaboxes/admin-metaboxes-form.php:825
+#: app/react/layout/Main/components/Redirection/index.js:228
+#: public/admin/settings/tab-redirection.5aeda013a2e9f8ad25a0.js:1
 msgid "Test your URL"
 msgstr ""
 
-#: inc/admin/metaboxes/admin-metaboxes-form.php:833
+#: inc/admin/metaboxes/admin-metaboxes-form.php:836
 msgid "Need help with your redirections? Read our guide"
 msgstr ""
 
@@ -2759,8 +2759,6 @@ msgstr ""
 #: src/Data/CommandPaletteIndex.php:197
 #: src/Data/CommandPaletteIndex.php:198
 #: src/Data/CommandPaletteIndex.php:199
-#: src/Data/CommandPaletteIndex.php:202
-#: src/Data/CommandPaletteIndex.php:203
 #: src/Data/CommandPaletteIndex.php:204
 msgid "Analytics › Google Analytics"
 msgstr ""
@@ -2774,11 +2772,22 @@ msgid "Google Ads conversion ID"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:202
-msgid "Disable tracking"
+#: app/react/admin/settings/tabs/analytics/GdprTab.jsx:57
+#: public/admin/settings/891.72a3d89dd6779bfec42d.js:1
+msgid "Analytics tracking opt-in"
+msgstr ""
+
+#: src/Data/CommandPaletteIndex.php:202
+#: src/Data/CommandPaletteIndex.php:203
+#: src/Data/CommandPaletteIndex.php:232
+#: src/Data/CommandPaletteIndex.php:233
+msgid "Analytics › Cookie banner"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:203
-msgid "Disable tracking for logged-in users"
+#: app/react/admin/settings/tabs/analytics/GdprTab.jsx:66
+#: public/admin/settings/891.72a3d89dd6779bfec42d.js:1
+msgid "Auto-accept consent on page load"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:204
@@ -2892,11 +2901,6 @@ msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:232
 msgid "Cookie banner message"
-msgstr ""
-
-#: src/Data/CommandPaletteIndex.php:232
-#: src/Data/CommandPaletteIndex.php:233
-msgid "Analytics › Cookie banner"
 msgstr ""
 
 #: src/Data/CommandPaletteIndex.php:233
@@ -3120,6 +3124,7 @@ msgstr ""
 #: src/Data/CommandPaletteIndex.php:322
 #: src/Data/CommandPaletteIndex.php:323
 #: src/Data/CommandPaletteIndex.php:324
+#: src/Data/CommandPaletteIndex.php:325
 msgid "Advanced › Advanced"
 msgstr ""
 
@@ -3207,32 +3212,38 @@ msgstr ""
 msgid "Seznam verification"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:336
+#: src/Data/CommandPaletteIndex.php:325
+#: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:301
+#: public/admin/settings/415.a8f4da1fde9fe139176a.js:1
+msgid "Expose abilities via REST API"
+msgstr ""
+
+#: src/Data/CommandPaletteIndex.php:337
 msgid "Export settings (JSON)"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:336
 #: src/Data/CommandPaletteIndex.php:337
+#: src/Data/CommandPaletteIndex.php:338
 msgid "Tools › Settings"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:337
+#: src/Data/CommandPaletteIndex.php:338
 msgid "Import settings (JSON)"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:338
+#: src/Data/CommandPaletteIndex.php:339
 msgid "Import from Yoast / Rank Math / AIOSEO / SEOFramework"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:338
+#: src/Data/CommandPaletteIndex.php:339
 msgid "Tools › Plugins"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:339
+#: src/Data/CommandPaletteIndex.php:340
 msgid "Reset all SEOPress settings"
 msgstr ""
 
-#: src/Data/CommandPaletteIndex.php:339
+#: src/Data/CommandPaletteIndex.php:340
 msgid "Tools › Reset"
 msgstr ""
 
@@ -6317,6 +6328,8 @@ msgstr ""
 #: app/react/admin/command-palette/quickActions.js:106
 #: app/react/admin/command-palette/quickActions.js:121
 #: app/react/admin/command-palette/quickActions.js:131
+#: app/react/admin/command-palette/quickActions.js:141
+#: app/react/admin/command-palette/quickActions.js:163
 #: public/admin/command-palette.js:1
 msgid "Quick action"
 msgstr ""
@@ -6364,6 +6377,36 @@ msgstr ""
 #: app/react/admin/command-palette/quickActions.js:129
 #: public/admin/command-palette.js:1
 msgid "Open robots.txt (new tab)"
+msgstr ""
+
+#: app/react/admin/command-palette/quickActions.js:139
+#: public/admin/command-palette.js:1
+msgid "Clean content analysis scans"
+msgstr ""
+
+#: app/react/admin/command-palette/quickActions.js:150
+#: public/admin/command-palette.js:1
+msgid "Content scans cleaned."
+msgstr ""
+
+#: app/react/admin/command-palette/quickActions.js:153
+#: public/admin/command-palette.js:1
+msgid "Failed to clean content scans."
+msgstr ""
+
+#: app/react/admin/command-palette/quickActions.js:161
+#: public/admin/command-palette.js:1
+msgid "Reset dismissed notices"
+msgstr ""
+
+#: app/react/admin/command-palette/quickActions.js:172
+#: public/admin/command-palette.js:1
+msgid "Notices reset."
+msgstr ""
+
+#: app/react/admin/command-palette/quickActions.js:175
+#: public/admin/command-palette.js:1
+msgid "Failed to reset notices."
 msgstr ""
 
 #. translators: %s: feature name.
@@ -7466,11 +7509,6 @@ msgstr ""
 msgid "Expose SEO abilities to the WordPress Abilities API so AI agents and external tools can read and manage your SEO data."
 msgstr ""
 
-#: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:301
-#: public/admin/settings/415.a8f4da1fde9fe139176a.js:1
-msgid "Expose abilities via REST API"
-msgstr ""
-
 #: app/react/admin/settings/tabs/advanced/AdvancedTab.jsx:303
 #: public/admin/settings/415.a8f4da1fde9fe139176a.js:1
 msgid "Allow registered SEO abilities to be discovered and executed through the REST API"
@@ -8213,11 +8251,6 @@ msgstr ""
 msgid "Consent flow"
 msgstr ""
 
-#: app/react/admin/settings/tabs/analytics/GdprTab.jsx:57
-#: public/admin/settings/891.72a3d89dd6779bfec42d.js:1
-msgid "Analytics tracking opt-in"
-msgstr ""
-
 #: app/react/admin/settings/tabs/analytics/GdprTab.jsx:59
 #: public/admin/settings/891.72a3d89dd6779bfec42d.js:1
 msgid "Request user consent for analytics tracking (required by GDPR)"
@@ -8226,11 +8259,6 @@ msgstr ""
 #: app/react/admin/settings/tabs/analytics/GdprTab.jsx:62
 #: public/admin/settings/891.72a3d89dd6779bfec42d.js:1
 msgid "Users must click Accept to allow tracking. Excluded user roles never see the consent banner."
-msgstr ""
-
-#: app/react/admin/settings/tabs/analytics/GdprTab.jsx:66
-#: public/admin/settings/891.72a3d89dd6779bfec42d.js:1
-msgid "Auto-accept consent on page load"
 msgstr ""
 
 #: app/react/admin/settings/tabs/analytics/GdprTab.jsx:68
@@ -11493,28 +11521,28 @@ msgid "Start setup"
 msgstr ""
 
 #: app/react/layout/Main/components/Redirection/index.js:86
-#: public/admin/settings/tab-redirection.2ba6d0e659d7361a234b.js:1
+#: public/admin/settings/tab-redirection.5aeda013a2e9f8ad25a0.js:1
 msgid "Test failed."
 msgstr ""
 
-#: app/react/layout/Main/components/Redirection/index.js:209
-#: public/admin/settings/tab-redirection.2ba6d0e659d7361a234b.js:1
+#: app/react/layout/Main/components/Redirection/index.js:231
+#: public/admin/settings/tab-redirection.5aeda013a2e9f8ad25a0.js:1
 msgid "Checks that the destination URL is reachable. Open it in a new tab to test the redirection live in your browser."
 msgstr ""
 
 #. translators: %s: HTTP status code (410 or 451).
-#: app/react/layout/Main/components/Redirection/index.js:227
-#: public/admin/settings/tab-redirection.2ba6d0e659d7361a234b.js:1
+#: app/react/layout/Main/components/Redirection/index.js:249
+#: public/admin/settings/tab-redirection.5aeda013a2e9f8ad25a0.js:1
 msgid "This redirection returns HTTP %s (no destination to test)."
 msgstr ""
 
 #. translators: %s: HTTP status code.
-#: app/react/layout/Main/components/Redirection/index.js:246
-#: public/admin/settings/tab-redirection.2ba6d0e659d7361a234b.js:1
+#: app/react/layout/Main/components/Redirection/index.js:268
+#: public/admin/settings/tab-redirection.5aeda013a2e9f8ad25a0.js:1
 msgid "HTTP status: %s"
 msgstr ""
 
-#: app/react/layout/Main/components/Redirection/index.js:274
-#: public/admin/settings/tab-redirection.2ba6d0e659d7361a234b.js:1
+#: app/react/layout/Main/components/Redirection/index.js:296
+#: public/admin/settings/tab-redirection.5aeda013a2e9f8ad25a0.js:1
 msgid "Open redirection in a new tab"
 msgstr ""

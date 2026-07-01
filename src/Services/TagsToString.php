@@ -62,16 +62,23 @@ class TagsToString {
 	 * @return mixed
 	 */
 	public function getValueFromTag( $tag, $context = [] ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		// Validate tag against the whitelist before dispatching.
-		$allowed_tags = array_keys( $this->getTagsAvailable() );
-		if ( ! in_array( $tag, $allowed_tags, true ) ) {
+		// Resolve the tag to its handler. getTagClass() matches exact tags,
+		// aliases and custom-format tags (_cf_<field>, _ct_<slug>), and returns
+		// null for anything else, so an arbitrary method name is never dispatched.
+		// Calling the resolved handler directly (instead of
+		// call_user_func_array( array( $this, $tag ), … )) also removes the
+		// user-controlled method invocation entirely. A bare whitelist on
+		// getTagsAvailable() keys could not be used here because custom-format
+		// tags are registered only under their placeholder name
+		// (_cf_your_custom_field_name), never the actual field-based tag.
+		$tag_class = $this->getTagClass( $tag );
+		if ( null === $tag_class ) {
 			return '';
 		}
 
 		// 0 === 'context'
 		// 1 === 'tag'
-		return call_user_func_array(
-			array( $this, $tag ),
+		return $tag_class->getValue(
 			array(
 				0 => $context,
 				1 => $tag,

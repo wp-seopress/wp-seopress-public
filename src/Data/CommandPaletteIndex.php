@@ -198,9 +198,9 @@ class CommandPaletteIndex {
 			self::make_setting( 'analytics/ga4-id', __( 'Google Analytics measurement ID (GA4)', 'wp-seopress' ), array( 'ga4', 'measurement id', 'tracking id' ), __( 'Analytics › Google Analytics', 'wp-seopress' ), $page, 'tab_seopress_analytics_google', 'seopress_google_analytics_ga4' ),
 			self::make_setting( 'analytics/ga-ads', __( 'Google Ads conversion ID', 'wp-seopress' ), array( 'google ads', 'adwords', 'conversion' ), __( 'Analytics › Google Analytics', 'wp-seopress' ), $page, 'tab_seopress_analytics_google', 'seopress_google_analytics_ads' ),
 
-			// Tracking exclusions + options.
-			self::make_setting( 'analytics/disable-tracking', __( 'Disable tracking', 'wp-seopress' ), array( 'disable', 'stop', 'tracking' ), __( 'Analytics › Google Analytics', 'wp-seopress' ), $page, 'tab_seopress_analytics_google', 'seopress_google_analytics_disable' ),
-			self::make_setting( 'analytics/half-disable', __( 'Disable tracking for logged-in users', 'wp-seopress' ), array( 'logged-in', 'users', 'tracking' ), __( 'Analytics › Google Analytics', 'wp-seopress' ), $page, 'tab_seopress_analytics_google', 'seopress_google_analytics_half_disable' ),
+			// Consent / tracking options (rendered under the Cookie banner tab).
+			self::make_setting( 'analytics/disable-tracking', __( 'Analytics tracking opt-in', 'wp-seopress' ), array( 'consent', 'opt-in', 'gdpr', 'tracking' ), __( 'Analytics › Cookie banner', 'wp-seopress' ), $page, 'tab_seopress_analytics_gdpr', 'seopress_google_analytics_disable' ),
+			self::make_setting( 'analytics/half-disable', __( 'Auto-accept consent on page load', 'wp-seopress' ), array( 'consent', 'auto-accept', 'gdpr', 'tracking' ), __( 'Analytics › Cookie banner', 'wp-seopress' ), $page, 'tab_seopress_analytics_gdpr', 'seopress_google_analytics_half_disable' ),
 			self::make_setting( 'analytics/roles', __( 'Exclude user roles from tracking', 'wp-seopress' ), array( 'roles', 'exclude', 'tracking' ), __( 'Analytics › Google Analytics', 'wp-seopress' ), $page, 'tab_seopress_analytics_google', 'seopress_google_analytics_roles' ),
 
 			// Custom dimensions.
@@ -322,6 +322,7 @@ class CommandPaletteIndex {
 			self::make_setting( 'advanced/site-verification-pinterest', __( 'Pinterest verification', 'wp-seopress' ), array( 'pinterest', 'verification' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_advanced_pinterest' ),
 			self::make_setting( 'advanced/site-verification-facebook', __( 'Facebook domain verification', 'wp-seopress' ), array( 'facebook', 'verification', 'domain' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_advanced_facebook' ),
 			self::make_setting( 'advanced/site-verification-seznam', __( 'Seznam verification', 'wp-seopress' ), array( 'seznam', 'verification' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_advanced_seznam' ),
+			self::make_setting( 'advanced/abilities-rest', __( 'Expose abilities via REST API', 'wp-seopress' ), array( 'abilities', 'rest api', 'ai', 'mcp', 'expose' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_abilities_api_rest' ),
 		);
 	}
 

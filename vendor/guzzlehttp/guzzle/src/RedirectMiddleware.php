@@ -120,10 +120,11 @@ class RedirectMiddleware
         // would do.
         $statusCode = $response->getStatusCode();
         if ($statusCode == 303 || $statusCode <= 302 && !$options['allow_redirects']['strict']) {
-            $safeMethods = ['GET', 'HEAD', 'OPTIONS'];
             $requestMethod = $request->getMethod();
-            $modify['method'] = in_array($requestMethod, $safeMethods) ? $requestMethod : 'GET';
-            $modify['body'] = '';
+            if ($requestMethod !== 'QUERY' || !\in_array($statusCode, [301, 302], \true)) {
+                $modify['method'] = \in_array($requestMethod, ['GET', 'HEAD', 'OPTIONS'], \true) ? $requestMethod : 'GET';
+                $modify['body'] = '';
+            }
         }
         $uri = self::redirectUri($request, $response, $protocols);
         $idnOptions = Utils::normalizeIdnConversionOption($options['idn_conversion'] ?? null);

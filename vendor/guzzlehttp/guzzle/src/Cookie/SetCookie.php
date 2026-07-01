@@ -99,12 +99,23 @@ class SetCookie
             $this->data[$key] = $data[$key];
         }
         // Extract the Expires value and turn it into a UNIX timestamp if needed
-        if (!$this->getExpires() && $this->getMaxAge()) {
+        $maxAge = $this->getMaxAge();
+        if (!$this->getExpires() && $maxAge !== null) {
             // Calculate the Expires date
-            $this->setExpires(\time() + $this->getMaxAge());
+            $this->setExpires(self::maxAgeToExpires($maxAge, \time()));
         } elseif (null !== ($expires = $this->getExpires()) && !\is_numeric($expires)) {
             $this->setExpires($expires);
         }
+    }
+    private static function maxAgeToExpires(int $maxAge, int $now): int
+    {
+        if ($maxAge <= 0) {
+            return $now - 1;
+        }
+        if ($maxAge > \PHP_INT_MAX - $now) {
+            return \PHP_INT_MAX;
+        }
+        return $now + $maxAge;
     }
     public function __toString()
     {
@@ -340,7 +351,7 @@ class SetCookie
     {
         $cookiePath = $this->getPath();
         // Match on exact matches or when path is the default empty "/"
-        if ($cookiePath === '/' || $cookiePath == $requestPath) {
+        if ($cookiePath === '/' || $cookiePath === $requestPath) {
             return \true;
         }
         // Ensure that the cookie-path is a prefix of the request path.
@@ -367,7 +378,11 @@ class SetCookie
         }
         // Remove the leading '.' as per spec in RFC 6265.
         // https://datatracker.ietf.org/doc/html/rfc6265#section-5.2.3
-        $cookieDomain = \ltrim(\strtolower($cookieDomain), '.');
+        $cookieDomain = \strtolower($cookieDomain);
+        if ($cookieDomain !== '' && $cookieDomain[0] === '.') {
+            /** @var string */
+            $cookieDomain = \substr($cookieDomain, 1);
+        }
         if ('' === $cookieDomain) {
             return \false;
         }
@@ -375,12 +390,36 @@ class SetCookie
         if ($domain === $cookieDomain) {
             return \true;
         }
+        // IP literals and numeric hosts are exact-match-only per RFC 6265.
+        // Only the exact match above may succeed for those cookie domains.
+        if (self::isIpAddressOrNumericHost($cookieDomain)) {
+            return \false;
+        }
         // Matching the subdomain according to RFC 6265.
         // https://datatracker.ietf.org/doc/html/rfc6265#section-5.1.3
         if (\filter_var($domain, \FILTER_VALIDATE_IP)) {
             return \false;
         }
         return (bool) \preg_match('/\.' . \preg_quote($cookieDomain, '/') . '$/', $domain);
+    }
+    private static function isIpAddressOrNumericHost(string $host): bool
+    {
+        // Strip one root dot before detection so trailing-dot numeric hosts
+        // still cannot be matched by subdomains.
+        if ($host !== '' && \str_ends_with($host, '.')) {
+            $host = \substr($host, 0, -1);
+        }
+        if (\str_starts_with($host, '[') && \str_ends_with($host, ']')) {
+            $host = \substr($host, 1, -1);
+        }
+        if (\filter_var($host, \FILTER_VALIDATE_IP) !== \false) {
+            return \true;
+        }
+        // Public DNS names do not have an all-numeric rightmost label; treat
+        // those private/internal hosts as exact-match-only too.
+        $labels = \explode('.', $host);
+        $last = (string) \end($labels);
+        return $last !== '' && \ctype_digit($last);
     }
     /**
      * Check if the cookie is expired.

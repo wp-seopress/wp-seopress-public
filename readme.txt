@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 10.0.1
+Stable tag: 10.0.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -312,6 +312,17 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
+= 10.0.2 =
+* NEW Command palette updated with new actions and options
+* FIX Titles & Metas: custom field and custom taxonomy variables (%%_cf_...%%, %%_ct_...%%) resolve again
+* FIX Titles & Metas: the title and meta description character counters no longer stay at 0 when the value comes from a dynamic variable
+* FIX Autocomplete for redirections
+* FIX Metabox: the "Search a tag" variables popover is no longer hidden behind the floating front-end SEO panel
+* FIX Comments: the "Remove website field from comments" option now removes the website field on the front-end
+* FIX Comments: "Remove ?replytocom" link rewriting works again on WordPress 6.7+
+* FIX DIVI: prevent an "Undefined array key app_window" PHP warning in the front-end builder
+* FIX [PRO] Multisite: virtual robots.txt and llms.txt keep their line breaks when saved from the network settings
+
 = 10.0.1 =
 * INFO Performance: the admin stylesheet now loads only on the screens that actually use it (SEOPress pages, post & term editors and list tables, dashboard widgets) instead of on every wp-admin page (Free and PRO)
 * FIX Schemas: selecting "None" as the Knowledge Graph type no longer outputs an Organization schema on the homepage
