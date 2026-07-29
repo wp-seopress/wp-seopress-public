@@ -44,8 +44,15 @@ class PriceValidDate implements GetTagValue {
 		if ( ( is_singular( array( 'product' ) ) || $context['is_product'] ) && isset( $context['post']->ID ) ) {
 			$product = wc_get_product( $context['post']->ID );
 			$date    = $product->get_date_on_sale_to();
-			if ( $date ) {
-				$value = $date->date( 'm-d-Y' );
+
+			// WooCommerce restores the regular price when a sale ends but keeps the sale end
+			// date on the product, so this returns a past date long after the sale is over.
+			// Google drops the product snippet when priceValidUntil is in the past, so only
+			// expose the date while it is still ahead.
+			if ( $date && $date->getTimestamp() > time() ) {
+				// Google expects priceValidUntil in ISO 8601 (YYYY-MM-DD); the US m-d-Y
+				// format was reported as an invalid date in Search Console.
+				$value = $date->date( 'Y-m-d' );
 			}
 		}
 

@@ -65,6 +65,9 @@ class SocialSettings implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
+					if ( seopress_metabox_role_is_blocked( 'GLOBAL' ) ) {
+						return false;
+					}
 					$post_id = $request['id'];
 					return current_user_can( 'edit_post', $post_id );
 				},

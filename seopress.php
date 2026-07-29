@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 10.0.2
+ * Version: 10.1
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '10.0.2' );
+define( 'SEOPRESS_VERSION', '10.1' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -69,6 +69,13 @@ if ( file_exists( SEOPRESS_PLUGIN_DIR_PATH . 'vendor/autoload.php' ) ) {
 			'root'      => __DIR__,
 		)
 	);
+} else {
+	// During a plugin update the directory is replaced in stages: seopress.php can be
+	// present while vendor/ (and seopress-functions.php) is not yet extracted. In that
+	// window the runtime functions are undefined, so we must not register any runtime
+	// hook (e.g. plugins_loaded -> options.php -> seopress_get_toggle_option()).
+	// Activation/deactivation hooks above are intentionally kept registered.
+	return;
 }
 
 /**

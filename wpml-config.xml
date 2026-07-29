@@ -96,6 +96,7 @@
   <custom-fields>
 	<custom-field action="translate">_seopress_titles_title</custom-field>
 	<custom-field action="translate">_seopress_titles_desc</custom-field>
+	<custom-field action="translate">_seopress_analysis_target_kw</custom-field>
 	<custom-field action="translate">_seopress_social_fb_title</custom-field>
 	<custom-field action="translate">_seopress_social_fb_desc</custom-field>
 	<custom-field action="translate">_seopress_social_fb_img</custom-field>

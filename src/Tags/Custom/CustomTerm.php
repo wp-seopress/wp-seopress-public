@@ -35,11 +35,15 @@ class CustomTerm extends AbstractCustomTagValue implements GetTagValue {
 		$context = isset( $args[0] ) ? $args[0] : null;
 		$tag     = isset( $args[1] ) ? $args[1] : null;
 		$value   = '';
-		if ( null === $tag || ! $context ) {
+		if ( null === $tag || ! $context || ! is_array( $context ) ) {
 			return $value;
 		}
 
-		if ( ! $context['post'] ) {
+		// The context can be partial (schemas generated without a page context
+		// for example), so never assume the key is set.
+		$post = isset( $context['post'] ) ? $context['post'] : null;
+
+		if ( ! isset( $post->ID ) ) {
 			return $value;
 		}
 
@@ -53,7 +57,7 @@ class CustomTerm extends AbstractCustomTagValue implements GetTagValue {
 
 		$field = $matches['field'];
 
-		$terms = wp_get_post_terms( $context['post']->ID, $field );
+		$terms = wp_get_post_terms( $post->ID, $field );
 		if ( is_wp_error( $terms ) ) {
 			return $value;
 		}

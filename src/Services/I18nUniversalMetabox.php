@@ -118,6 +118,11 @@ class I18nUniversalMetabox {
 							'No custom title is set for this post. If the global meta title suits you, you can ignore this recommendation.',
 							'wp-seopress'
 						),
+						/* translators: %s the resolved meta title */
+						'from_global'         => __(
+							'No custom title is set on this post, but one is generated from your global title settings (e.g. a custom field): %s',
+							'wp-seopress'
+						),
 						'meta_title_found'    => __(
 							'Target keywords were found in the Meta Title.',
 							'wp-seopress'
@@ -139,6 +144,11 @@ class I18nUniversalMetabox {
 						'title'                     => __( 'Meta description', 'wp-seopress' ),
 						'no_meta_description'       => __(
 							'No custom meta description is set for this post. If the global meta description suits you, you can ignore this recommendation.',
+							'wp-seopress'
+						),
+						/* translators: %s the resolved meta description */
+						'from_global'               => __(
+							'No custom meta description is set on this post, but one is generated from your global settings (e.g. a custom field): %s',
 							'wp-seopress'
 						),
 						'meta_description_found'    => __(

@@ -98,6 +98,14 @@ class HTMLSitemapService {
 
 			$post_types_list = apply_filters( 'seopress_sitemaps_html_cpt', $post_types_list );
 
+			// The cpt shortcode attribute and the filter above bypass
+			// getPostTypesList(): strip SEOPress internal post types again so a
+			// shortcode like [seopress_html_sitemap cpt="seopress_404"] can never
+			// expose them.
+			foreach ( SitemapOption::INTERNAL_POST_TYPES as $internal_post_type ) {
+				unset( $post_types_list[ $internal_post_type ] );
+			}
+
 			foreach ( $post_types_list as $cpt_key => $cpt_value ) {
 				if ( ! empty( $cpt_value ) ) {
 					$html .= '<div class="sp-wrap-cpt">';
@@ -242,6 +250,10 @@ class HTMLSitemapService {
 			'orderby'          => $orderby_option,
 			'post_type'        => $cpt_key,
 			'post_status'      => 'publish',
+			// Exclude password-protected posts: they are not meant to be
+			// publicly listed, which is what the HTML sitemap does. Still
+			// filterable through seopress_sitemaps_html_query.
+			'has_password'     => false,
 			'meta_query'       => array(
 				'relation' => 'OR',
 				array(

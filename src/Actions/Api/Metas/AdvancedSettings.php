@@ -278,6 +278,19 @@ class AdvancedSettings implements ExecuteHooks {
 	 * @return  bool   $allowed The allowed.
 	 */
 	public function meta_auth( $allowed, $meta_key, $id ) {
+		// Enforce the Advanced > Security role restrictions on the Gutenberg
+		// native save path (core/editor persists these registered metas via
+		// /wp/v2/posts). The target keyword meta belongs to the Content
+		// Analysis area; every other key here belongs to the SEO metabox.
+		if ( function_exists( 'seopress_metabox_role_is_blocked' ) ) {
+			$area = '_seopress_analysis_target_kw' === $meta_key
+				? 'CONTENT_ANALYSIS'
+				: 'GLOBAL';
+			if ( seopress_metabox_role_is_blocked( $area ) ) {
+				return false;
+			}
+		}
+
 		return current_user_can( 'edit_posts', $id );
 	}
 }

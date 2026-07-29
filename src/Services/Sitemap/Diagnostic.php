@@ -78,6 +78,7 @@ class Diagnostic {
 
 		$http_code   = 0;
 		$duration_ms = 0;
+		$fetch       = null;
 
 		if ( self::STATUS_ERROR !== $feature['status'] ) {
 			// 2. Fetch the index sitemap (loopback request to our own site).
@@ -90,7 +91,7 @@ class Diagnostic {
 		}
 
 		// 4. Environment (white-box) checks. Always relevant.
-		$checks = array_merge( $checks, $this->environmentChecks( $url ) );
+		$checks = array_merge( $checks, $this->environmentChecks( $url, $fetch ) );
 
 		$checks = array_values( array_filter( $checks ) );
 
@@ -218,18 +219,23 @@ class Diagnostic {
 	/**
 	 * Environment (white-box) checks.
 	 *
-	 * @param string $url The tested URL.
+	 * @param string     $url   The tested URL.
+	 * @param array|null $fetch The fetch() result, or null when the sitemap was not fetched.
 	 *
 	 * @return array List of checks (nulls filtered out by caller).
 	 */
-	public function environmentChecks( $url ) {
+	public function environmentChecks( $url, $fetch = null ) {
+		// When the live fetch already proves the sitemap is served as XML, the
+		// caching reminder is moot, so skip it to avoid a false alarm.
+		$served_as_xml = is_array( $fetch ) && false !== strpos( $fetch['content_type'], 'xml' );
+
 		return array(
 			$this->checkPermalinks(),
 			$this->checkCoverage(),
 			$this->checkVisibility(),
 			$this->checkRobotsTxt( $url ),
 			$this->checkSeoPluginConflict(),
-			$this->checkCachingPlugins(),
+			$this->checkCachingPlugins( $served_as_xml ),
 			$this->checkServer(),
 		);
 	}
@@ -1012,9 +1018,20 @@ class Diagnostic {
 	/**
 	 * Active caching/optimization plugins that commonly break sitemaps.
 	 *
+	 * Purely a preventive reminder: it only detects that a cache/optimization
+	 * plugin is active, not that it actually breaks the sitemap. When the live
+	 * fetch already confirms the sitemap is served as XML, the reminder no longer
+	 * applies, so it is skipped to avoid a confusing false alarm.
+	 *
+	 * @param bool $served_as_xml Whether the live fetch confirmed an XML content type.
+	 *
 	 * @return array|null
 	 */
-	private function checkCachingPlugins() {
+	private function checkCachingPlugins( $served_as_xml = false ) {
+		if ( $served_as_xml ) {
+			return null;
+		}
+
 		$map = array(
 			'WP_ROCKET_VERSION'          => 'WP Rocket',
 			'W3TC'                       => 'W3 Total Cache',

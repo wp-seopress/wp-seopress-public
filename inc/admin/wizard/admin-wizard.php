@@ -112,6 +112,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 				'handler' => array( $this, 'seopress_setup_import_settings_save' ),
 				'parent'  => 'welcome',
 			),
+			'import_config'       => array(
+				'handler' => array( $this, 'seopress_setup_import_settings_save' ),
+				'parent'  => 'welcome',
+			),
 			'import_settings'     => array(
 				'handler' => array( $this, 'seopress_setup_import_settings_save' ),
 				'parent'  => 'welcome',
@@ -310,31 +314,45 @@ class SEOPRESS_Admin_Setup_Wizard {
 			'DISMISS_URL'            => $dismiss_url,
 			'PRO_INSTALLED_INACTIVE' => $this->is_pro_installed_inactive(),
 			'PRO_ACTIVATE_URL'       => $pro_activate_url,
-			'PRO_URL'                => isset( $docs_links['wizard']['pro'] ) ? $docs_links['wizard']['pro'] : 'https://www.seopress.org/seopress-pro/',
+			'PRO_URL'                => isset( $docs_links['wizard']['pro'] ) ? $docs_links['wizard']['pro'] : '',
 			'ASSETS_URL'             => SEOPRESS_URL_PUBLIC . '/admin/wizard',
 			'PLUGIN_URL'             => SEOPRESS_URL_ASSETS,
 			'SITEMAP_URL'            => admin_url( 'admin.php?page=seopress-xml-sitemap' ),
-			'PRIVACY_URL'            => isset( $docs_links['privacy'] ) ? $docs_links['privacy'] : 'https://www.seopress.org/privacy-policy/',
+			'PRIVACY_URL'            => isset( $docs_links['privacy'] ) ? $docs_links['privacy'] : '',
 			'USER_EMAIL'             => function_exists( 'wp_get_current_user' ) && wp_get_current_user() ? (string) wp_get_current_user()->user_email : '',
 			'SUB_ROUTINE'            => isset( $_GET['sub_routine'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['sub_routine'] ) ), // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			'FORM_ACTION'            => $form_action,
 			'NONCE'                  => array(
 				'setup' => wp_create_nonce( 'seopress-setup' ),
+				'rest'  => wp_create_nonce( 'wp_rest' ),
 			),
+			'CAN_IMPORT_CONFIG'      => current_user_can( seopress_capability( 'manage_options', 'tools' ) ),
+			// The settings file is read in the browser and posted as a JSON body, so the
+			// binding limit is post_max_size. wp_max_upload_size() already floors that
+			// with upload_max_filesize, which keeps us on the safe side of both.
+			'MAX_UPLOAD_SIZE'        => (int) wp_max_upload_size(),
+			'MAX_UPLOAD_SIZE_LABEL'  => size_format( wp_max_upload_size() ),
 			'INITIAL_VALUES'         => $initial_values,
 			'INDEXING'               => $indexing_data,
 			'DOCS_LINKS'             => array(
 				'alt_title'    => isset( $docs_links['titles']['alt_title'] ) ? $docs_links['titles']['alt_title'] : '',
-				'pro'          => isset( $docs_links['wizard']['pro'] ) ? $docs_links['wizard']['pro'] : 'https://www.seopress.org/seopress-pro/',
+				'pro'          => isset( $docs_links['wizard']['pro'] ) ? $docs_links['wizard']['pro'] : '',
 				'ebook'        => isset( $docs_links['wizard']['ebook'] ) ? $docs_links['wizard']['ebook'] : '',
 				'video_id'     => isset( $docs_links['wizard']['video_id'] ) ? $docs_links['wizard']['video_id'] : '1nUkjCBpIts',
-				'privacy'      => isset( $docs_links['privacy'] ) ? $docs_links['privacy'] : 'https://www.seopress.org/privacy-policy/',
+				'privacy'      => isset( $docs_links['privacy'] ) ? $docs_links['privacy'] : '',
 			),
 			'NEXT_STEP_URL'          => add_query_arg(
 				array(
 					'page'   => 'seopress-setup',
 					'step'   => 'site',
 					'parent' => 'site',
+				),
+				admin_url( 'admin.php' )
+			),
+			'READY_URL'              => add_query_arg(
+				array(
+					'page' => 'seopress-setup',
+					'step' => 'ready',
 				),
 				admin_url( 'admin.php' )
 			),

@@ -61,10 +61,17 @@ class PrintHeadJsonSchema implements ExecuteHooksFrontend {
 			return;
 		}
 
+		// Pass the real page context: the Knowledge Graph fields can hold tags,
+		// and without a context they would resolve to nothing. This runs on the
+		// front page only, so the context describes it (the static page set as
+		// front page, or the posts page).
+		$context = seopress_get_service( 'ContextPage' )->getContext();
+
 		$jsons = seopress_get_service( 'JsonSchemaGenerator' )->getJsonsEncoded(
 			array(
 				'organization',
-			)
+			),
+			$context
 		);
 		?><script type="application/ld+json"><?php echo apply_filters( 'seopress_schemas_organization_html', $jsons[0] ); // phpcs:ignore -- TODO: escape properly. ?></script>
 		<?php

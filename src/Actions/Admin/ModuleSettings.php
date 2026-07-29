@@ -488,8 +488,8 @@ class ModuleSettings implements ExecuteHooks {
 			'INITIAL_SETTINGS'    => $this->getInitialSettings( $page_config['option'] ),
 			'REVIEW_PROMPT'       => array(
 				'show'       => \SEOPress\Actions\Api\ReviewPrompt::should_show(),
-				'reviewUrl'  => 'https://wordpress.org/support/plugin/wp-seopress/reviews/?filter=5#new-post',
-				'supportUrl' => 'https://www.seopress.org/support/',
+				'reviewUrl'  => isset( $docs_links['external']['review'] ) ? $docs_links['external']['review'] : '',
+				'supportUrl' => isset( $docs_links['support'] ) ? $docs_links['support'] : '',
 			),
 			)
 		);

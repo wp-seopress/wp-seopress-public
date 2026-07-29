@@ -31,6 +31,22 @@ class GetContent {
 	private $seo_issues_database;
 
 	/**
+	 * Request-scoped memo of the post_content-derived heading outline, keyed by
+	 * "post ID:content hash". Both heading checks resolve the same outline, so
+	 * this avoids running do_blocks() + DOM parsing twice on the fallback path.
+	 *
+	 * @var array
+	 */
+	private $heading_outline_cache = array();
+
+	/**
+	 * Request-scoped memo of the page-builder detection, keyed by post ID.
+	 *
+	 * @var array
+	 */
+	private $builder_driven_cache = array();
+
+	/**
 	 * The constructor.
 	 */
 	public function __construct() {
@@ -467,6 +483,39 @@ class GetContent {
 	}
 
 	/**
+	 * Resolve the effective meta title or description SEOPress outputs for a
+	 * post: the global template with custom-field and dynamic variables
+	 * resolved, computed without the loop-back page fetch. Uses the same
+	 * TitleMeta / DescriptionMeta services that feed the editor metabox
+	 * placeholder, so the analysis stays in sync with what is actually
+	 * rendered even when the page could not be fetched (CDN, WAF, draft...).
+	 *
+	 * @since 10.0.0
+	 *
+	 * @param WP_Post $post The post.
+	 * @param string  $type Either 'title' or 'description'.
+	 *
+	 * @return string The resolved value, or '' when it cannot be resolved.
+	 */
+	protected function getEffectiveMeta( $post, $type ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( ! $post instanceof \WP_Post ) {
+			return '';
+		}
+
+		$context_service = seopress_get_service( 'ContextPage' );
+		$meta_service    = seopress_get_service( 'description' === $type ? 'DescriptionMeta' : 'TitleMeta' );
+
+		if ( ! is_object( $context_service ) || ! is_object( $meta_service ) ) {
+			return '';
+		}
+
+		$context = $context_service->buildContextWithCurrentId( $post->ID )->getContext();
+		$value   = $meta_service->getValue( $context );
+
+		return is_string( $value ) ? $value : '';
+	}
+
+	/**
 	 * The analyzeMetaTitle function.
 	 *
 	 * @param array   $analyzes The analyzes.
@@ -480,7 +529,19 @@ class GetContent {
 		$emitted_names = array();
 
 		$seopress_titles_title = ! empty( $data['title'] ) ? $data['title'] : get_post_meta( $post->ID, '_seopress_titles_title', true );
-		$title_length          = mb_strlen( $seopress_titles_title );
+
+		// When neither the analyzed <title> nor a per-post custom title is
+		// available, fall back to the effective title SEOPress outputs (global
+		// template with custom-field / dynamic variables resolved). This keeps
+		// the analysis aligned with the rendered title (and the metabox
+		// placeholder) even when the loop-back page fetch could not capture it,
+		// so a post whose title comes from a global or custom-field template is
+		// analyzed instead of being flagged as having no title.
+		if ( empty( $seopress_titles_title ) ) {
+			$seopress_titles_title = $this->getEffectiveMeta( $post, 'title' );
+		}
+
+		$title_length = mb_strlen( $seopress_titles_title );
 
 		if ( ! empty( $seopress_titles_title ) ) {
 			$desc = null;
@@ -550,7 +611,15 @@ class GetContent {
 		$emitted_names = array();
 
 		$seopress_titles_desc = ! empty( $data['description'] ) ? $data['description'] : get_post_meta( $post->ID, '_seopress_titles_desc', true );
-		$desc_length          = mb_strlen( $seopress_titles_desc );
+
+		// Same effective-value fallback as the meta title: resolve the
+		// description SEOPress outputs (global template, custom-field / dynamic
+		// variables) when no analyzed or per-post description is available.
+		if ( empty( $seopress_titles_desc ) ) {
+			$seopress_titles_desc = $this->getEffectiveMeta( $post, 'description' );
+		}
+
+		$desc_length = mb_strlen( $seopress_titles_desc );
 
 		if ( ! empty( $seopress_titles_desc ) ) {
 			$desc = null;
@@ -1412,6 +1481,246 @@ class GetContent {
 	}
 
 	/**
+	 * Resolve the heading outline used by the heading-structure and readability
+	 * checks.
+	 *
+	 * The primary outline is parsed from the fetched rendered page
+	 * (\SEOPress\Services\ContentAnalysis\GetContent\ContentStructure). When that
+	 * capture fails — a WAF/CDN challenge interstitial, an unrendered draft /
+	 * preview, a stale full-page cache, a cross-origin fetch — the fetched body
+	 * is empty and the outline comes back empty even though the post is full of
+	 * headings. Falling back to the server-rendered post_content (the same source
+	 * getContentWordCount() already uses) keeps these checks accurate regardless
+	 * of the front-end capture, and consistent with the word count they compare
+	 * against.
+	 *
+	 * @param array   $data The analysis data.
+	 * @param WP_Post $post The post.
+	 *
+	 * @return array Ordered list of heading levels (e.g. array( 2, 3, 3, 2 )).
+	 */
+	private function resolveHeadingOutline( $data, $post ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		$outline = isset( $data['content_structure']['outline'] ) && is_array( $data['content_structure']['outline'] )
+			? $data['content_structure']['outline']
+			: array();
+
+		if ( ! empty( $outline ) ) {
+			return $outline;
+		}
+
+		return $this->getHeadingOutlineFromContent( $post );
+	}
+
+	/**
+	 * Extract the heading outline from the server-rendered post_content.
+	 *
+	 * Renders the block content the same way getContentWordCount() does, then
+	 * reads the heading levels straight from the markup. post_content holds only
+	 * the article body — no theme header/footer/sidebar — so no scoping is
+	 * needed. Headings are matched by tag name, so builder headings that output a
+	 * real <hN> (Kadence Advanced Heading, etc.) are counted like core ones.
+	 *
+	 * @param WP_Post $post The post.
+	 *
+	 * @return array Ordered list of heading levels.
+	 */
+	private function getHeadingOutlineFromContent( $post ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		if ( null === $post || empty( $post->post_content ) || ! class_exists( 'DOMDocument' ) ) {
+			return array();
+		}
+
+		// Both heading checks resolve the same outline within one analysis run;
+		// memoize on the content hash so do_blocks() + DOM parsing runs once and
+		// the cache is never served stale after an edit.
+		$cache_key = $post->ID . ':' . md5( $post->post_content );
+		if ( isset( $this->heading_outline_cache[ $cache_key ] ) ) {
+			return $this->heading_outline_cache[ $cache_key ];
+		}
+
+		$content = $post->post_content;
+
+		if ( function_exists( 'has_blocks' ) && has_blocks( $content ) ) {
+			$content = do_blocks( $content );
+		}
+
+		if ( '' === trim( wp_strip_all_tags( $content ) ) ) {
+			$this->heading_outline_cache[ $cache_key ] = array();
+			return array();
+		}
+
+		$dom             = new \DOMDocument();
+		$internal_errors = libxml_use_internal_errors( true );
+
+		// The XML prolog forces UTF-8 decoding; the wrapper div gives loadHTML a
+		// single root so it does not inject its own <p> around loose text.
+		$dom->loadHTML( '<?xml encoding="utf-8" ?><div>' . $content . '</div>' );
+
+		libxml_clear_errors();
+		libxml_use_internal_errors( $internal_errors );
+
+		$xpath    = new \DOMXPath( $dom );
+		$headings = $xpath->query( '//h1|//h2|//h3|//h4|//h5|//h6' );
+
+		$outline = array();
+		if ( $headings ) {
+			foreach ( $headings as $heading ) {
+				if ( '' === trim( (string) $heading->nodeValue ) ) { // phpcs:ignore -- DOM property.
+					continue;
+				}
+
+				$outline[] = (int) substr( $heading->nodeName, 1 ); // phpcs:ignore -- DOM property.
+			}
+		}
+
+		$this->heading_outline_cache[ $cache_key ] = $outline;
+
+		return $outline;
+	}
+
+	/**
+	 * Whether the post is managed by a known page builder (Elementor, Bricks,
+	 * Beaver Builder, Oxygen, Zion, Breakdance, Divi, Avada, WPBakery,
+	 * Cornerstone...).
+	 *
+	 * The builder set mirrors \SEOPress\Services\EnqueueModuleMetabox, but is
+	 * detected here by storage signal (meta / post_content marker) rather than
+	 * by edit-context query args, since analysis runs on the saved post. Whether
+	 * the content is actually readable is decided separately by
+	 * aiContentChecksUnreliable() via the word-count gate, so both meta-based
+	 * builders (empty post_content) and shortcode-based ones (Divi, WPBakery)
+	 * are handled: they degrade only when post_content is genuinely too thin.
+	 *
+	 * @param WP_Post $post The post.
+	 *
+	 * @return bool
+	 */
+	private function isBuilderDriven( $post ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		if ( null === $post || empty( $post->ID ) ) {
+			return false;
+		}
+
+		if ( isset( $this->builder_driven_cache[ $post->ID ] ) ) {
+			return $this->builder_driven_cache[ $post->ID ];
+		}
+
+		$is_builder = false;
+
+		// Known page builders, aligned with the edit-context detection in
+		// \SEOPress\Services\EnqueueModuleMetabox::canEnqueue() (which keys off
+		// the builder preview query args). Content analysis runs on the saved
+		// post (REST / cron), outside any builder iframe, so we need a *storage*
+		// signal instead: a meta the builder writes, or a marker it leaves in
+		// post_content. A non-empty meta is enough; value semantics differ per
+		// builder (Elementor stores 'builder', Beaver '1', others a structure).
+		//
+		// It is safe to over-match here: aiContentChecksUnreliable() only
+		// degrades when post_content is *also* too thin to analyse, so a builder
+		// post that still exposes readable text in post_content is evaluated
+		// normally.
+		$meta_flags = array(
+			'_elementor_edit_mode',       // Elementor.
+			'_bricks_page_content_2',     // Bricks.
+			'_fl_builder_enabled',        // Beaver Builder.
+			'ct_builder_shortcodes',      // Oxygen.
+			'_zionbuilder_page_elements', // Zion Builder.
+			'_breakdance_data',           // Breakdance.
+			'_et_pb_use_builder',         // Divi.
+			'_cornerstone_data',          // Themeco Cornerstone / Pro.
+		);
+
+		foreach ( $meta_flags as $key ) {
+			if ( ! empty( get_post_meta( $post->ID, $key, true ) ) ) {
+				$is_builder = true;
+				break;
+			}
+		}
+
+		// Builders that leave a placeholder block or a wrapper shortcode in
+		// post_content while keeping the real layout elsewhere. These markers are
+		// reliable and survive meta-key changes across builder versions.
+		if ( ! $is_builder && ! empty( $post->post_content ) ) {
+			$content_markers = array(
+				'wp:breakdance/',            // Breakdance launcher block.
+				'[et_pb_section',            // Divi.
+				'[fusion_builder_container', // Avada / Fusion Builder.
+				'[vc_row',                   // WPBakery Page Builder.
+				'[cs_content',               // Themeco Cornerstone / Pro.
+			);
+
+			foreach ( $content_markers as $marker ) {
+				if ( false !== strpos( $post->post_content, $marker ) ) {
+					$is_builder = true;
+					break;
+				}
+			}
+		}
+
+		/**
+		 * Filter whether a post is considered managed by a page builder that
+		 * stores its content outside post_content. Return true to make the AI
+		 * content checks degrade to a "not evaluated" state instead of
+		 * analysing the (empty) post_content.
+		 *
+		 * @since 10.1
+		 *
+		 * @param bool    $is_builder Detected builder state.
+		 * @param WP_Post $post       The analysed post.
+		 */
+		$is_builder = (bool) apply_filters( 'seopress_content_analysis_builder_driven', $is_builder, $post );
+
+		$this->builder_driven_cache[ $post->ID ] = $is_builder;
+
+		return $is_builder;
+	}
+
+	/**
+	 * Whether the post_content-based AI content checks cannot be trusted for
+	 * this post.
+	 *
+	 * True only when a page builder holds the content outside post_content AND
+	 * post_content is itself too thin to analyse — so a hybrid post that still
+	 * keeps real text in post_content is evaluated normally.
+	 *
+	 * @param WP_Post $post The post.
+	 *
+	 * @return bool
+	 */
+	private function aiContentChecksUnreliable( $post ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		if ( ! $this->isBuilderDriven( $post ) ) {
+			return false;
+		}
+
+		$min_words = (int) apply_filters( 'seopress_content_analysis_min_words', 300, $post );
+
+		return $this->getContentWordCount( $post ) < $min_words;
+	}
+
+	/**
+	 * Put an AI content check into a neutral "not evaluated" state: no alert, no
+	 * unearned green pass, an explanatory note, and any stale issue for that
+	 * check cleared. Used when the content lives in a page builder and cannot be
+	 * read from post_content.
+	 *
+	 * @param array   $analyzes The analyzes.
+	 * @param string  $key      Analyze key, which is also the issue-type bucket
+	 *                          (content_depth, heading_hierarchy...).
+	 * @param WP_Post $post     The post.
+	 *
+	 * @return array
+	 */
+	private function markCheckNotEvaluated( $analyzes, $key, $post ) { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		// 'good' keeps the check out of the alert buckets and the aggregate
+		// score; the note makes clear it was skipped rather than passed.
+		$analyzes[ $key ]['impact'] = 'good';
+		$analyzes[ $key ]['desc']   = '<p>' . __( 'This content is built with a page builder that stores its layout outside the post content, so these checks could not read it and were skipped. Please verify these aspects directly on the published page.', 'wp-seopress' ) . '</p>';
+
+		// Drop any verdict emitted on a previous pass so a stale alert clears.
+		$this->cleanupResolvedIssues( $post->ID, $key, array() );
+
+		return $analyzes;
+	}
+
+	/**
 	 * The analyzeContentDepth function.
 	 *
 	 * @param array   $analyzes The analyzes.
@@ -1421,6 +1730,10 @@ class GetContent {
 	 * @return array
 	 */
 	protected function analyzeContentDepth( $analyzes, $data, $post ) {
+		if ( $this->aiContentChecksUnreliable( $post ) ) {
+			return $this->markCheckNotEvaluated( $analyzes, 'content_depth', $post );
+		}
+
 		$issue               = array();
 		$issue['issue_type'] = 'content_depth';
 		$emitted_names       = array();
@@ -1460,11 +1773,15 @@ class GetContent {
 	 * @return array
 	 */
 	protected function analyzeHeadingHierarchy( $analyzes, $data, $post ) {
+		if ( $this->aiContentChecksUnreliable( $post ) ) {
+			return $this->markCheckNotEvaluated( $analyzes, 'heading_hierarchy', $post );
+		}
+
 		$issue               = array();
 		$issue['issue_type'] = 'heading_hierarchy';
 		$emitted_names       = array();
 
-		$outline = isset( $data['content_structure']['outline'] ) && is_array( $data['content_structure']['outline'] ) ? $data['content_structure']['outline'] : array();
+		$outline = $this->resolveHeadingOutline( $data, $post );
 
 		$desc = '<p>' . __( 'Organize your content into clear sections with a coherent heading hierarchy. This helps both readers and AI systems understand the structure of your page.', 'wp-seopress' ) . '</p>';
 
@@ -1538,6 +1855,10 @@ class GetContent {
 	 * @return array
 	 */
 	protected function analyzeContentMedia( $analyzes, $data, $post ) {
+		if ( $this->aiContentChecksUnreliable( $post ) ) {
+			return $this->markCheckNotEvaluated( $analyzes, 'content_media', $post );
+		}
+
 		$issue               = array();
 		$issue['issue_type'] = 'content_media';
 		$emitted_names       = array();
@@ -1581,11 +1902,15 @@ class GetContent {
 	 * @return array
 	 */
 	protected function analyzeContentStructure( $analyzes, $data, $post ) {
+		if ( $this->aiContentChecksUnreliable( $post ) ) {
+			return $this->markCheckNotEvaluated( $analyzes, 'content_structure', $post );
+		}
+
 		$issue               = array();
 		$issue['issue_type'] = 'content_structure';
 		$emitted_names       = array();
 
-		$outline = isset( $data['content_structure']['outline'] ) && is_array( $data['content_structure']['outline'] ) ? $data['content_structure']['outline'] : array();
+		$outline = $this->resolveHeadingOutline( $data, $post );
 
 		$subheadings = 0;
 		foreach ( $outline as $level ) {

@@ -300,6 +300,33 @@ class ModuleDashboard implements ExecuteHooks {
 			);
 		}
 
+		$credits = array(
+			'key'          => 'seopress-ai-credits',
+			'type'         => 'credits',
+			'title'        => __( 'SEOPress AI Credits', 'wp-seopress' ),
+			'logo'         => SEOPRESS_URL_ASSETS . '/img/logo-seopress.svg',
+			'url'          => isset( $docs['pricing'] ) ? add_query_arg( 'tab', 'ai', $docs['pricing'] ) : '',
+			'ctaText'      => __( 'Get AI credits', 'wp-seopress' ),
+			'renewUrl'     => isset( $docs['license']['subscriptions'] ) ? $docs['license']['subscriptions'] : '',
+			'renewText'    => __( 'Renew', 'wp-seopress' ),
+			'status'       => 'inactive',
+			'label'        => __( 'Not configured', 'wp-seopress' ),
+			'showUpsell'   => true,
+			'showActivate' => false,
+			'activateUrl'  => '',
+		);
+
+		/**
+		 * Filter the AI Credits row of the Dashboard "SEOPress Suite" block.
+		 *
+		 * SEOPress PRO owns the AI Credits feature: it hooks here to expose the
+		 * balance endpoint (AJAX action + nonce) once a credits token is set, so
+		 * the row can be filled asynchronously without delaying the Dashboard.
+		 *
+		 * @param array $credits The AI Credits product row.
+		 */
+		$products[] = apply_filters( 'seopress_dashboard_suite_credits', $credits );
+
 		return array(
 			'visible'   => true,
 			'title'     => __( 'SEOPress Suite', 'wp-seopress' ),

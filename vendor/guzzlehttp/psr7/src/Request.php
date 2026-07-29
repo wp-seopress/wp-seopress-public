@@ -34,7 +34,7 @@ class Request implements RequestInterface
             $uri = new Uri($uri);
         }
         self::warnOnMethodCasingChange($method);
-        $this->method = strtoupper($method);
+        $this->method = Utils::asciiToUpper($method);
         $this->uri = $uri;
         $this->setHeaders($headers);
         $this->protocol = $version;
@@ -81,7 +81,7 @@ class Request implements RequestInterface
         $this->assertMethod($method);
         self::warnOnMethodCasingChange($method);
         $new = clone $this;
-        $new->method = strtoupper($method);
+        $new->method = Utils::asciiToUpper($method);
         return $new;
     }
     public function getUri(): UriInterface
@@ -136,7 +136,7 @@ class Request implements RequestInterface
     }
     private static function warnOnMethodCasingChange(string $method): void
     {
-        if ($method !== strtoupper($method)) {
+        if ($method !== Utils::asciiToUpper($method)) {
             \SEOPress\Vendor\trigger_deprecation('guzzlehttp/psr7', '2.11', 'Passing a non-uppercase HTTP method is deprecated; guzzlehttp/psr7 3.0 preserves method casing and will no longer uppercase it. Normalize the method before constructing or modifying requests if uppercase is required.');
         }
     }

@@ -604,6 +604,59 @@ function seopress_capability( $cap, $context = '' ) {
 }
 
 /**
+ * Whether the current user is blocked from editing a metabox area by the
+ * Advanced > Security role restrictions.
+ *
+ * Server-side mirror of the React `isTabBlockedForUser()` helper
+ * (app/react/constants/tabs.js): a user is blocked for an area when any of
+ * their roles is flagged ("1") for that area in the matching option. The tab
+ * bar and content panel already hide blocked areas client-side; this lets the
+ * REST endpoints, the Gutenberg meta auth callback and the Classic Editor save
+ * fallback enforce the same restriction server-side, so a crafted request
+ * cannot persist fields the UI hides.
+ *
+ * Super admins are never blocked: the settings screen excludes the
+ * administrator role, so they can never be a legitimate target.
+ *
+ * @since 10.1.1
+ *
+ * @param string $type Area to check: 'CONTENT_ANALYSIS' or 'GLOBAL'
+ *                     (the SEO metabox — the default for any other value).
+ *
+ * @return bool True when the current user is blocked from editing that area.
+ */
+function seopress_metabox_role_is_blocked( $type ) {
+	if ( is_super_admin() ) {
+		return false;
+	}
+
+	$advanced = seopress_get_service( 'AdvancedOption' );
+
+	if ( 'CONTENT_ANALYSIS' === $type ) {
+		$blocked_roles = $advanced->getSecurityMetaboxRoleContentAnalysis();
+	} else {
+		$blocked_roles = $advanced->getSecurityMetaboxRole();
+	}
+
+	if ( empty( $blocked_roles ) || ! is_array( $blocked_roles ) ) {
+		return false;
+	}
+
+	$user = wp_get_current_user();
+	if ( ! $user || empty( $user->roles ) ) {
+		return false;
+	}
+
+	foreach ( (array) $user->roles as $role ) {
+		if ( isset( $blocked_roles[ $role ] ) && '1' === (string) $blocked_roles[ $role ] ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * Whether the WordPress Abilities API is available on this site.
  *
  * The server-side Abilities API ships with WordPress 6.9. We feature-detect it
@@ -788,7 +841,12 @@ function seopress_btn_secondary_classes() {
 	global $pagenow;
 	if ( function_exists( 'get_current_screen' ) && method_exists( get_current_screen(), 'is_block_editor' ) && true === get_current_screen()->is_block_editor() ) {
 		$btn_classes_secondary = 'components-button is-secondary';
-	} elseif ( isset( $pagenow ) && ( $pagenow === 'term.php' || $pagenow === 'post.php' || $pagenow === 'post-new.php' ) ) {
+	} elseif ( isset( $pagenow ) && $pagenow === 'term.php' ) {
+		// The term edit screen loads wp-components, so use the native secondary
+		// button styling there (matching the block editor) instead of the classic
+		// button, which renders these tag buttons too tall and inconsistent.
+		$btn_classes_secondary = 'components-button is-secondary';
+	} elseif ( isset( $pagenow ) && ( $pagenow === 'post.php' || $pagenow === 'post-new.php' ) ) {
 		$btn_classes_secondary = 'button button-secondary';
 	} else {
 		$btn_classes_secondary = 'btn btnSecondary';

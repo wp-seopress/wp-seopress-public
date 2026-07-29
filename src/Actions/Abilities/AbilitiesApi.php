@@ -51,7 +51,12 @@ class AbilitiesApi implements ExecuteHooks {
 	 * @return void
 	 */
 	public function registerCategory() {
-		if ( function_exists( 'wp_get_ability_category' ) && wp_get_ability_category( self::CATEGORY ) ) {
+		// Use the registry's is_registered() rather than wp_get_ability_category():
+		// the latter calls get_registered(), which emits a "_doing_it_wrong" notice
+		// when the category is not registered yet, which is exactly the case the
+		// first time this guard runs.
+		if ( class_exists( 'WP_Ability_Categories_Registry' )
+			&& \WP_Ability_Categories_Registry::get_instance()->is_registered( self::CATEGORY ) ) {
 			return;
 		}
 

@@ -147,8 +147,35 @@ class ModuleMetabox implements ExecuteHooks {
 
 		$meta_keys_map = $this->getClassicEditorFallbackMetaKeys();
 
+		// Enforce the Advanced > Security role restrictions server-side: the
+		// tab bar hides blocked areas, but the Classic Editor post form could
+		// still carry their fields in a crafted request. Content Analysis keys
+		// are gated by the CA restriction, every other key by the SEO metabox
+		// (GLOBAL) restriction. Filterable so Pro can flag its own CA keys.
+		$global_blocked = seopress_metabox_role_is_blocked( 'GLOBAL' );
+		$ca_blocked     = seopress_metabox_role_is_blocked( 'CONTENT_ANALYSIS' );
+
+		/**
+		 * Filter the Classic Editor fallback meta keys that belong to the
+		 * Content Analysis area (gated by its own role restriction). Any key
+		 * not listed here is treated as part of the SEO metabox (GLOBAL).
+		 *
+		 * @since 10.1.1
+		 *
+		 * @param array<int, string> $ca_meta_keys Content Analysis meta keys.
+		 */
+		$ca_meta_keys = apply_filters(
+			'seopress_metabox_classic_fallback_ca_meta_keys',
+			array( '_seopress_analysis_target_kw' )
+		);
+
 		foreach ( $meta_keys_map as $meta_key => $sanitizer ) {
 			if ( ! array_key_exists( $meta_key, $_POST ) ) {
+				continue;
+			}
+
+			$is_ca_key = in_array( $meta_key, $ca_meta_keys, true );
+			if ( $is_ca_key ? $ca_blocked : $global_blocked ) {
 				continue;
 			}
 
@@ -523,7 +550,24 @@ class ModuleMetabox implements ExecuteHooks {
 					'CONTENT_ANALYSIS' => $settings_advanced->getSecurityMetaboxRoleContentAnalysis(),
 				),
 				'OPTIONS'                   => array(
-					'AI' => seopress_get_service( 'ToggleOption' )->getToggleAi() === '1' ? true : false,
+					/**
+					 * Filter whether the AI generation buttons are exposed in the
+					 * metabox for the current user on this post.
+					 *
+					 * PRO uses this to gate the buttons by user role (Advanced >
+					 * Security). Third parties can hook it for finer-grained
+					 * control (per post type, per field, per capability).
+					 *
+					 * @since 10.1.0
+					 *
+					 * @param bool     $enabled Whether AI buttons are enabled.
+					 * @param int|null $post_id The current post ID, if any.
+					 */
+					'AI' => apply_filters(
+						'seopress_metabox_options_ai',
+						seopress_get_service( 'ToggleOption' )->getToggleAi() === '1' ? true : false,
+						$post_id
+					),
 				),
 				// Per-user capability flags. Nested so wp_localize_script
 				// does not cast their booleans to strings (it only stringifies
@@ -554,10 +598,14 @@ class ModuleMetabox implements ExecuteHooks {
 				// /title-description-metas REST endpoint. SWRConfig wires
 				// this into the SWR cache as fallback data.
 				'INITIAL_DATA'              => $post_id ? array(
-					'titleDescription' => array(
+					'titleDescription'   => array(
 						'title'       => html_entity_decode( (string) get_post_meta( $post_id, '_seopress_titles_title', true ), ENT_QUOTES | ENT_XML1, 'UTF-8' ),
 						'description' => html_entity_decode( (string) get_post_meta( $post_id, '_seopress_titles_desc', true ), ENT_QUOTES | ENT_XML1, 'UTF-8' ),
 					),
+					// Lets the tab navigation flag the Redirection tab when a
+					// redirect is already enabled, so the user knows without
+					// opening it (a hidden redirect skews the content analysis).
+					'redirectionEnabled' => 'yes' === get_post_meta( $post_id, '_seopress_redirections_enabled', true ), // phpcs:ignore
 				) : null,
 			),
 			$args_localize

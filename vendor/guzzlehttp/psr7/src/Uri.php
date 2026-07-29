@@ -73,16 +73,22 @@ class Uri implements UriInterface, \JsonSerializable
         if (self::isPathNoSchemeReference($url)) {
             return self::parsePathNoSchemeReference($url);
         }
-        // Preserve bracketed IPv6 literals before encoding, including dotted IPv4 tails.
+        // Preserve bracketed IPv6 literals before encoding, including dotted IPv4
+        // tails. DEL (\x7F) is excluded so a raw-DEL host falls through to the
+        // general path and is rejected rather than silently mutated by parse_url().
         $prefix = '';
-        $ipv6Prefix = preg_match('%\A([0-9A-Za-z+.-]+://\[[^\]\x00-\x20/?#@]+\])(.*)\z%s', $url, $matches);
+        $ipv6Prefix = preg_match('%\A([0-9A-Za-z+.-]+://\[[^\]\x00-\x20\x7F/?#@]+\])(.*)\z%s', $url, $matches);
         if ($ipv6Prefix === \false) {
             return \false;
         }
         if ($ipv6Prefix === 1) {
             /** @var array{0:string, 1:string, 2:string} $matches */
             $suffix = $matches[2];
-            if ($suffix !== '' && strpos(':/?#', $suffix[0]) === \false) {
+            // After the bracketed host only an optional numeric port and/or a
+            // path, query, or fragment may follow. Anything else (for example
+            // `:80@evil` or `:80x`) would let parse_url() reinterpret a
+            // different host.
+            if (preg_match('%\A(?::[0-9]*)?(?:[/?#].*)?\z%s', $suffix) !== 1) {
                 return \false;
             }
             $prefix = $matches[1];
@@ -523,7 +529,7 @@ class Uri implements UriInterface, \JsonSerializable
         if (!is_string($scheme)) {
             throw new \InvalidArgumentException('Scheme must be a string');
         }
-        $scheme = \strtr($scheme, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
+        $scheme = Utils::asciiToLower($scheme);
         if ($scheme !== '' && !preg_match('/^[a-z][a-z0-9.+-]*$/D', $scheme)) {
             \SEOPress\Vendor\trigger_deprecation('guzzlehttp/psr7', '2.11', 'Passing "%s" as a URI scheme is deprecated; guzzlehttp/psr7 3.0 requires URI schemes to match RFC 3986 syntax and begin with a letter.', $scheme);
         }
@@ -551,7 +557,7 @@ class Uri implements UriInterface, \JsonSerializable
         if (!is_string($host)) {
             throw new \InvalidArgumentException('Host must be a string');
         }
-        $host = \strtr($host, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz');
+        $host = Utils::asciiToLower($host);
         self::assertValidHost($host);
         return $host;
     }

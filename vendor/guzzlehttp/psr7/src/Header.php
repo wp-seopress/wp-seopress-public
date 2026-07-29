@@ -80,6 +80,7 @@ final class Header
      */
     public static function normalize($header): array
     {
+        \SEOPress\Vendor\trigger_deprecation('guzzlehttp/psr7', '2.3', 'Header::normalize() is deprecated and will be removed in guzzlehttp/psr7 3.0. Use Header::splitList() instead.');
         $result = [];
         foreach ((array) $header as $value) {
             foreach (self::splitList($value) as $parsed) {
@@ -121,7 +122,7 @@ final class Header
                     continue;
                 }
                 if (!$isQuoted && $value[$i] === ',') {
-                    $v = \trim($v);
+                    $v = \trim($v, " \n\r\t\x00\v");
                     if ($v !== '') {
                         $result[] = $v;
                     }
@@ -140,7 +141,7 @@ final class Header
                 }
                 $v .= $value[$i];
             }
-            $v = \trim($v);
+            $v = \trim($v, " \n\r\t\x00\v");
             if ($v !== '') {
                 $result[] = $v;
             }

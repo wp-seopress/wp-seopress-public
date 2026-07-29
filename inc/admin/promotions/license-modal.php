@@ -86,7 +86,15 @@ function seopress_render_license_modal() {
 	$title       = __( 'Your SEOPress PRO License Has Expired', 'wp-seopress' );
 	$body        = __( 'Renew now to continue receiving updates, support, and access to all PRO features.', 'wp-seopress' );
 	$cta_text    = __( 'Renew License', 'wp-seopress' );
-	$cta_url     = 'https://www.seopress.org/account/?utm_source=plugin&utm_medium=license-modal&utm_campaign=renewal';
+	$docs_links  = function_exists( 'seopress_get_docs_links' ) ? seopress_get_docs_links() : array();
+	$cta_url     = add_query_arg(
+		array(
+			'utm_source'   => 'plugin',
+			'utm_medium'   => 'license-modal',
+			'utm_campaign' => 'renewal',
+		),
+		isset( $docs_links['license']['account'] ) ? $docs_links['license']['account'] : ''
+	);
 	$remind_text = __( 'Remind Me Later', 'wp-seopress' );
 
 	// Override with API content if available.

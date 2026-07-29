@@ -8,6 +8,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Toggle the Redirection tab indicator when the redirect enable checkbox changes.
+    function sp_toggle_redirect_alert() {
+        var $alert = $("#sp-redirect-alert");
+        $alert.empty();
+        if ($("#seopress_redirections_enabled_meta").is(":checked")) {
+            $alert.append('<span class="impact high" aria-hidden="true"></span>');
+        }
+    }
+    $(document).on("change", "#seopress_redirections_enabled_meta", sp_toggle_redirect_alert);
+
     function sp_get_field_length(e) {
         if (e.val().length > 0) {
             meta = e.val() + " ";
@@ -65,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 success: function (response) {
                     const { data } = response;
 
-                    if (data.length > 0) {
+                    if (data && data.length > 0) {
                         $(".snippet-title").hide();
                         $(".snippet-title-default").hide();
                         $(".snippet-title-custom").text(data);
@@ -114,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 success: function (response) {
                     const { data } = response;
 
-                    if (data.length > 0) {
+                    if (data && data.length > 0) {
                         $(".snippet-description").hide();
                         $(".snippet-description-default").hide();
                         $(".snippet-description-custom").text(data);

@@ -3,6 +3,7 @@
 namespace SEOPress\Vendor\GuzzleHttp;
 
 use SEOPress\Vendor\GuzzleHttp\Exception\BadResponseException;
+use SEOPress\Vendor\GuzzleHttp\Exception\RequestException;
 use SEOPress\Vendor\GuzzleHttp\Exception\TooManyRedirectsException;
 use SEOPress\Vendor\GuzzleHttp\Promise\PromiseInterface;
 use SEOPress\Vendor\Psr\Http\Message\RequestInterface;
@@ -73,6 +74,9 @@ class RedirectMiddleware
         if (isset($options['allow_redirects']['on_redirect'])) {
             $options['allow_redirects']['on_redirect']($request, $response, $nextRequest->getUri());
         }
+        // The caller's delay applies once, before the initial request, not
+        // before each followed redirect.
+        unset($options['delay']);
         $promise = $this($nextRequest, $options);
         // Add headers to be able to track history of redirects.
         if (!empty($options['allow_redirects']['track_redirects'])) {
@@ -124,6 +128,7 @@ class RedirectMiddleware
             if ($requestMethod !== 'QUERY' || !\in_array($statusCode, [301, 302], \true)) {
                 $modify['method'] = \in_array($requestMethod, ['GET', 'HEAD', 'OPTIONS'], \true) ? $requestMethod : 'GET';
                 $modify['body'] = '';
+                $modify['remove_headers'] = ['Content-Length', 'Transfer-Encoding'];
             }
         }
         $uri = self::redirectUri($request, $response, $protocols);
@@ -132,11 +137,18 @@ class RedirectMiddleware
             $uri = Utils::idnUriConvert($uri, $idnOptions);
         }
         $modify['uri'] = $uri;
-        Psr7\Message::rewindBody($request);
+        // The body only needs to be rewound when the next request reuses it.
+        if (!isset($modify['body'])) {
+            try {
+                Psr7\Message::rewindBody($request);
+            } catch (\RuntimeException $e) {
+                throw new RequestException('Redirect failed because the request body could not be rewound: ' . $e->getMessage(), $request, $response, $e);
+            }
+        }
         // Add the Referer header if it is told to do so and only
         // add the header if we are not redirecting from https to http.
         if ($options['allow_redirects']['referer'] && $modify['uri']->getScheme() === $request->getUri()->getScheme()) {
-            $uri = $request->getUri()->withUserInfo('');
+            $uri = $request->getUri()->withUserInfo('')->withFragment('');
             $modify['set_headers']['Referer'] = (string) $uri;
         } else {
             $modify['remove_headers'][] = 'Referer';

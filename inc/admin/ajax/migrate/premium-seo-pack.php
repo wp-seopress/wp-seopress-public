@@ -38,28 +38,28 @@ function seopress_premium_seo_pack_migration() {
 			if ( $premium_query_terms ) {
 				foreach ( $premium_query_terms as $taxonomies => $taxonomie ) {
 					foreach ( $taxonomie as $term_id => $term_value ) {
-						if ( '' !== $term_value['psp_meta']['title'] ) { // Import title tag.
+						if ( ! empty( $term_value['psp_meta']['title'] ) ) { // Import title tag.
 							update_term_meta( $term_id, '_seopress_titles_title', esc_html( $term_value['psp_meta']['title'] ) );
 						}
-						if ( '' !== $term_value['psp_meta']['description'] ) { // Import meta desc.
+						if ( ! empty( $term_value['psp_meta']['description'] ) ) { // Import meta desc.
 							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( $term_value['psp_meta']['description'] ) );
 						}
-						if ( '' !== $term_value['psp_meta']['facebook_titlu'] ) { // Import Facebook Title.
+						if ( ! empty( $term_value['psp_meta']['facebook_titlu'] ) ) { // Import Facebook Title.
 							update_term_meta( $term_id, '_seopress_social_fb_title', esc_html( $term_value['psp_meta']['facebook_titlu'] ) );
 						}
-						if ( '' !== $term_value['psp_meta']['facebook_desc'] ) { // Import Facebook Desc.
+						if ( ! empty( $term_value['psp_meta']['facebook_desc'] ) ) { // Import Facebook Desc.
 							update_term_meta( $term_id, '_seopress_social_fb_desc', esc_html( $term_value['psp_meta']['facebook_desc'] ) );
 						}
-						if ( '' !== $term_value['psp_meta']['facebook_image'] ) { // Import Facebook Image.
+						if ( ! empty( $term_value['psp_meta']['facebook_image'] ) ) { // Import Facebook Image.
 							update_term_meta( $term_id, '_seopress_social_fb_img', esc_url( $term_value['psp_meta']['facebook_image'] ) );
 						}
-						if ( 'noindex' === $term_value['psp_meta']['robots_index'] ) { // Import Robots NoIndex.
+						if ( isset( $term_value['psp_meta']['robots_index'] ) && 'noindex' === $term_value['psp_meta']['robots_index'] ) { // Import Robots NoIndex.
 							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
 						}
-						if ( 'nofollow' === $term_value['psp_meta']['robots_follow'] ) { // Import Robots NoFollow.
+						if ( isset( $term_value['psp_meta']['robots_follow'] ) && 'nofollow' === $term_value['psp_meta']['robots_follow'] ) { // Import Robots NoFollow.
 							update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
 						}
-						if ( '' !== $term_value['psp_meta']['canonical'] ) { // Import Canonical URL.
+						if ( ! empty( $term_value['psp_meta']['canonical'] ) ) { // Import Canonical URL.
 							update_term_meta( $term_id, '_seopress_robots_canonical', esc_url( $term_value['psp_meta']['canonical'] ) );
 						}
 					}

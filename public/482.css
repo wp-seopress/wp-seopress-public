@@ -420,6 +420,14 @@ body.toplevel_page_seopress-option #wpfooter {
     background: var(--colorLowAlert, #e39f48);
 }
 
+.seopress-dashboard-tasks__status.is-warning .seopress-dashboard-tasks__badge {
+    background: var(--colorWarning, #ffba00);
+}
+
+.seopress-dashboard-tasks__status.is-alert .seopress-dashboard-tasks__badge {
+    background: var(--colorAlert, #eb0f00);
+}
+
 .seopress-dashboard-tasks__label {
     color: var(--seopress-color-text-muted);
     font-size: 12px;

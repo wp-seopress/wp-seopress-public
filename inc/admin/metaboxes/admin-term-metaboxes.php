@@ -96,6 +96,13 @@ function seopress_display_seo_term_metaboxe() {
 			wp_register_style( 'seopress-tagify', SEOPRESS_ASSETS_DIR . '/css/tagify' . $prefix . '.css', array(), SEOPRESS_VERSION );
 			wp_enqueue_style( 'seopress-tagify' );
 
+			// Metabox styles. The term screens share the metabox form template
+			// with the post editor, but only the post path enqueued metaboxe.css
+			// (see ModuleMetabox). Without it the AI buttons and their spinner
+			// render unstyled on taxonomy term screens, so enqueue it here too.
+			wp_enqueue_style( 'wp-components' );
+			wp_enqueue_style( 'seopress-metabox', SEOPRESS_URL_PUBLIC . '/metaboxe.css', array( 'wp-components' ), SEOPRESS_VERSION );
+
 			// Register Google Snippet Preview / Content Analysis JS.
 			wp_enqueue_script(
 				'seopress-cpt-counters',

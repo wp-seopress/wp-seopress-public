@@ -71,7 +71,8 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 						$seo_tabs['social-tab']   = '<li><a href="#tabs-2">' . __( 'Social', 'wp-seopress' ) . '</a></li>';
 						$seo_tabs['advanced-tab'] = '<li><a href="#tabs-3">' . __( 'Advanced', 'wp-seopress' ) . '<span id="sp-advanced-alert"></span></a></li>';
 					}
-					$seo_tabs['redirect-tab'] = '<li><a href="#tabs-4">' . __( 'Redirection', 'wp-seopress' ) . '</a></li>';
+					$redirect_alert           = 'yes' === $seopress_redirections_enabled ? '<span class="impact high" aria-hidden="true"></span>' : '';
+					$seo_tabs['redirect-tab'] = '<li><a href="#tabs-4">' . __( 'Redirection', 'wp-seopress' ) . '<span id="sp-redirect-alert">' . $redirect_alert . '</span></a></li>';
 
 					$seo_tabs = apply_filters( 'seopress_metabox_seo_tabs', $seo_tabs, $typenow, $pagenow );
 

@@ -142,7 +142,15 @@ function seopress_render_pro_upsell( $feature_name, $feature_slug = '' ) {
 	}
 	if ( ! $cta_url ) {
 		$utm_campaign = $feature_slug ? 'upsell-' . $feature_slug : 'upsell';
-		$cta_url      = 'https://www.seopress.org/pricing/?utm_source=plugin&utm_medium=contextual&utm_campaign=' . $utm_campaign;
+		$docs_links   = function_exists( 'seopress_get_docs_links' ) ? seopress_get_docs_links() : array();
+		$cta_url      = add_query_arg(
+			array(
+				'utm_source'   => 'plugin',
+				'utm_medium'   => 'contextual',
+				'utm_campaign' => $utm_campaign,
+			),
+			isset( $docs_links['pricing'] ) ? $docs_links['pricing'] : ''
+		);
 	}
 	?>
 	<div class="seopress-pro-upsell">

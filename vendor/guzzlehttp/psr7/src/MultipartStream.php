@@ -63,7 +63,7 @@ final class MultipartStream implements StreamInterface
             $key = (string) $key;
             $str .= "{$key}: {$value}\r\n";
         }
-        return "--{$this->boundary}\r\n" . trim($str) . "\r\n\r\n";
+        return "--{$this->boundary}\r\n" . trim($str, " \n\r\t\x00\v") . "\r\n\r\n";
     }
     /**
      * Create the aggregate stream that will be used to upload the POST data
@@ -172,9 +172,9 @@ final class MultipartStream implements StreamInterface
      */
     private static function getHeader(array $headers, string $key): ?string
     {
-        $lowercaseHeader = strtolower($key);
+        $lowercaseHeader = Utils::asciiToLower($key);
         foreach ($headers as $k => $v) {
-            if (strtolower((string) $k) === $lowercaseHeader) {
+            if (Utils::asciiToLower((string) $k) === $lowercaseHeader) {
                 return $v;
             }
         }

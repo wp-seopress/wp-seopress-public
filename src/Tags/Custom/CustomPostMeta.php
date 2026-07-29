@@ -35,12 +35,17 @@ class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
 		$context = isset( $args[0] ) ? $args[0] : null;
 		$tag     = isset( $args[1] ) ? $args[1] : null;
 		$value   = '';
-		if ( null === $tag || ! $context ) {
+		if ( null === $tag || ! $context || ! is_array( $context ) ) {
 			return $value;
 		}
 
-		// Support both post and term contexts
-		if ( ! $context['post'] && ! $context['term_id'] ) {
+		// Support both post and term contexts.
+		// The context can be partial (schemas generated without a page context
+		// for example), so never assume the keys are set.
+		$post    = isset( $context['post'] ) ? $context['post'] : null;
+		$term_id = isset( $context['term_id'] ) ? $context['term_id'] : null;
+
+		if ( empty( $post ) && empty( $term_id ) ) {
 			return $value;
 		}
 		$regex = $this->buildRegex( self::CUSTOM_FORMAT );
@@ -57,15 +62,19 @@ class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
 		$length = apply_filters( 'seopress_excerpt_length', $length );
 
 		// Get meta value based on context type
-		if ( $context['post'] ) {
-			$raw_value = get_post_meta( $context['post']->ID, $field, true );
-		} elseif ( $context['term_id'] ) {
-			$raw_value = get_term_meta( $context['term_id'], $field, true );
+		if ( isset( $post->ID ) ) {
+			$raw_value = get_post_meta( $post->ID, $field, true );
+		} elseif ( $term_id ) {
+			$raw_value = get_term_meta( $term_id, $field, true );
 		} else {
 			$raw_value = '';
 		}
 
-		$value = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( $raw_value, true ) ) ) ) ), $length );
+		// A custom field can hold an array (multi value meta, ACF repeater...).
+		// strip_shortcodes() only accepts a string and would fatal on anything else.
+		$raw_value = is_scalar( $raw_value ) ? (string) $raw_value : '';
+
+		$value = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( $raw_value ) ) ) ) ), $length );
 
 		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context );
 	}

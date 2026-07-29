@@ -102,7 +102,17 @@ class ToolsSettings implements ExecuteHooks {
 	 * @return \WP_REST_Response
 	 */
 	public function processExport( \WP_REST_Request $request ) {
-		$data = seopress_get_service( 'ExportSettings' )->handle();
+		$exclude = $request->get_param( 'exclude' );
+
+		if ( is_string( $exclude ) ) {
+			$exclude = array_filter( array_map( 'sanitize_key', explode( ',', $exclude ) ) );
+		} elseif ( is_array( $exclude ) ) {
+			$exclude = array_filter( array_map( 'sanitize_key', $exclude ) );
+		} else {
+			$exclude = array();
+		}
+
+		$data = seopress_get_service( 'ExportSettings' )->handle( $exclude );
 
 		return new \WP_REST_Response( $data, 200 );
 	}

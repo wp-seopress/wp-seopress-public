@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\Description\Specifications;
 
+use SEOPress\Constants\MetasDefaultValues;
+
 /**
  * TaxonomySpecification
  */
@@ -39,7 +41,7 @@ class TaxonomySpecification {
 		}
 
 		if ( empty( $value ) || ! $value ) {
-			return '';
+			$value = MetasDefaultValues::getTermDescriptionValue();
 		}
 
 		return seopress_get_service( 'TagsToString' )->replace( $value, $context );
@@ -64,10 +66,6 @@ class TaxonomySpecification {
 		$context = $params['context'];
 
 		if ( ( $context['is_tax'] || $context['is_category'] || $context['is_tag'] ) && ! $context['is_search'] ) {
-			if ( empty( $this->getValue( $params ) ) ) {
-				return false;
-			}
-
 			return true;
 		}
 

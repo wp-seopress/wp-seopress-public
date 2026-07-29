@@ -337,8 +337,12 @@ function seopress_titles_the_title() {
 		$seopress_titles_archive_titles_option = esc_attr( seopress_get_service( 'TitleOption' )->getArchivesCPTTitle() );
 
 		$seopress_titles_title_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_archive_titles_option );
-	} elseif ( ( is_tax() || is_category() || is_tag() ) && seopress_get_service( 'TitleOption' )->getTaxTitle() ) { // IS TAX.
-		$seopress_titles_tax_titles_option = esc_attr( seopress_get_service( 'TitleOption' )->getTaxTitle() );
+	} elseif ( is_tax() || is_category() || is_tag() ) { // IS TAX.
+		$seopress_titles_tax_titles_option = seopress_get_service( 'TitleOption' )->getTaxTitle();
+		if ( empty( $seopress_titles_tax_titles_option ) ) {
+			$seopress_titles_tax_titles_option = \SEOPress\Constants\MetasDefaultValues::getTermTitleValue();
+		}
+		$seopress_titles_tax_titles_option = esc_attr( $seopress_titles_tax_titles_option );
 
 		if ( get_term_meta( get_queried_object()->{'term_id'}, '_seopress_titles_title', true ) ) {
 			$seopress_titles_title_template = esc_attr( get_term_meta( get_queried_object()->{'term_id'}, '_seopress_titles_title', true ) );
@@ -669,8 +673,12 @@ function seopress_titles_the_description_content() {
 		$seopress_titles_the_description = esc_attr( seopress_get_service( 'TitleOption' )->getArchivesCPTDesc() );
 
 		$seopress_titles_description_template = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_titles_the_description );
-	} elseif ( ( is_tax() || is_category() || is_tag() ) && seopress_get_service( 'TitleOption' )->getTaxDesc() ) { // IS TAX.
-		$seopress_titles_the_description = esc_attr( seopress_get_service( 'TitleOption' )->getTaxDesc() );
+	} elseif ( is_tax() || is_category() || is_tag() ) { // IS TAX.
+		$seopress_titles_the_description = seopress_get_service( 'TitleOption' )->getTaxDesc();
+		if ( empty( $seopress_titles_the_description ) ) {
+			$seopress_titles_the_description = \SEOPress\Constants\MetasDefaultValues::getTermDescriptionValue();
+		}
+		$seopress_titles_the_description = esc_attr( $seopress_titles_the_description );
 
 		if ( get_term_meta( get_queried_object()->{'term_id'}, '_seopress_titles_desc', true ) ) {
 			$seopress_titles_description_template = esc_attr( get_term_meta( get_queried_object()->{'term_id'}, '_seopress_titles_desc', true ) );

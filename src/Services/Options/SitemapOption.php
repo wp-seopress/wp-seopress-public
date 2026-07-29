@@ -16,6 +16,22 @@ class SitemapOption {
 	const NAME_SERVICE = 'SitemapOption';
 
 	/**
+	 * SEOPress internal post types (free, PRO, Insights): non-public storage
+	 * that must never be exposed in a sitemap, whatever the stored option says.
+	 *
+	 * @since 10.1
+	 * @var array
+	 */
+	const INTERNAL_POST_TYPES = array(
+		'seopress_404',
+		'seopress_schemas',
+		'seopress_bot',
+		'seopress_rankings',
+		'seopress_backlinks',
+		'seopress_p1_rankings',
+	);
+
+	/**
 	 * The getOption function.
 	 *
 	 * @since 4.3.0
@@ -68,7 +84,20 @@ class SitemapOption {
 	 * @return string|null
 	 */
 	public function getPostTypesList() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_xml_sitemap_post_types_list' );
+		$post_types = $this->searchOptionByKey( 'seopress_xml_sitemap_post_types_list' );
+
+		// SEOPress internal post types (redirections, schemas, broken links,
+		// Insights rankings/backlinks) are non-public storage: never expose them
+		// in a sitemap, even if a hand-edited or imported option flags them as
+		// included. The settings UI never offers them, so such an entry can only
+		// come from outside the UI.
+		if ( is_array( $post_types ) ) {
+			foreach ( self::INTERNAL_POST_TYPES as $internal_post_type ) {
+				unset( $post_types[ $internal_post_type ] );
+			}
+		}
+
+		return $post_types;
 	}
 
 	/**

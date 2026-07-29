@@ -55,13 +55,28 @@ class JsonSchemaGenerator {
 			return null;
 		}
 
+		// Schema classes read the context keys directly too, and getJsons()
+		// makes an empty context non-empty by writing its own key into it.
+		$context_service = seopress_get_service( 'ContextPage' );
+		if ( is_object( $context_service ) && method_exists( $context_service, 'normalizeContext' ) ) {
+			$context = $context_service->normalizeContext( $context );
+		}
+
 		$json_data = $class_json_schema->getJsonData( $context );
 
 		if ( isset( $context['variables'] ) ) {
 			$json_data = $this->variables_to_string->replaceDataToString( $json_data, $context['variables'], $options );
 		}
 
-		$json_data = $this->tags_to_string->replaceDataToString( $json_data, $context, $options );
+		// Ask for a second resolution pass: a schema field reaches the JSON as
+		// the value of a tag (organization.json holds [[name]], which becomes
+		// %%social_knowledge_name%%), so what an administrator typed in the
+		// settings is only visible to the resolver on a second look.
+		$json_data = $this->tags_to_string->replaceDataToString(
+			$json_data,
+			$context,
+			array_merge( $options, array( 'passes' => 2 ) )
+		);
 		if ( ! empty( $json_data ) ) {
 			$json_data = $class_json_schema->cleanValues( $json_data );
 		}

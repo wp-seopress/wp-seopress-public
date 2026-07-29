@@ -21,9 +21,13 @@ class ContextPage {
 	/**
 	 * The getEmptyContext function.
 	 *
+	 * Public since 10.1.1: consumers that have to hand a context over to the
+	 * tags or the schemas without being able to build a real one need the
+	 * expected shape, so they do not pass a partial array around.
+	 *
 	 * @return array
 	 */
-	protected function getEmptyContext() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+	public function getEmptyContext() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return array(
 			'post'                 => null,
 			'product'              => null,
@@ -47,6 +51,36 @@ class ContextPage {
 			'paged'                => null,
 			'schemas_manual'       => array(),
 		);
+	}
+
+	/**
+	 * The normalizeContext function.
+	 *
+	 * Give a context back the shape every consumer expects.
+	 *
+	 * Not every caller can build a real context: PrintLocalBusiness prints its
+	 * schema outside of any post or term and passes none, and getJsons() writes
+	 * its own key into the empty array it is handed, which makes it non-empty
+	 * while carrying no expected key. Tag classes and schemas then read
+	 * $context['post'] & co on it and warn, inside wp_head.
+	 *
+	 * Filling only the missing keys with their default leaves the resolved
+	 * values untouched: every default is falsy, and consumers test the keys
+	 * with isset() or truthiness, for which an absent key and a null one are
+	 * already equivalent. Only the warnings go away.
+	 *
+	 * @since 10.1.1
+	 *
+	 * @param mixed $context The context.
+	 *
+	 * @return mixed
+	 */
+	public function normalizeContext( $context ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		if ( ! is_array( $context ) ) {
+			return $context;
+		}
+
+		return array_merge( $this->getEmptyContext(), $context );
 	}
 
 	/**

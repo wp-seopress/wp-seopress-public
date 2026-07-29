@@ -37,7 +37,7 @@ final class Utils
                 // normalize float vs double
                 /** @var string $varDumpContent */
                 $varDumpContent = \ob_get_clean();
-                return \str_replace('double(', 'float(', \rtrim($varDumpContent));
+                return \str_replace('double(', 'float(', \rtrim($varDumpContent, " \n\r\t\x00\v"));
         }
     }
     /**
@@ -51,7 +51,7 @@ final class Utils
         $headers = [];
         foreach ($lines as $line) {
             $parts = \explode(':', $line, 2);
-            $headers[\trim($parts[0])][] = isset($parts[1]) ? \trim($parts[1]) : null;
+            $headers[\trim($parts[0], " \n\r\t\x00\v")][] = isset($parts[1]) ? \trim($parts[1], " \n\r\t\x00\v") : null;
         }
         return $headers;
     }
@@ -77,7 +77,7 @@ final class Utils
      *
      * The returned handler is not wrapped by any default middlewares.
      *
-     * @param array{transport_sharing?: mixed} $handlerOptions Handler constructor options.
+     * @param array{transport_sharing?: mixed, max_host_connections?: mixed, max_total_connections?: mixed, multiplex?: mixed} $handlerOptions Handler constructor options.
      *
      * @return callable(RequestInterface, array): Promise\PromiseInterface Returns the best handler for the given system.
      *
@@ -87,15 +87,19 @@ final class Utils
     {
         $sharingMode = CurlShareHandleState::normalizeMode($handlerOptions['transport_sharing'] ?? null, 'transport_sharing');
         $sharingRequired = self::isTransportSharingRequired($sharingMode);
-        $handler = self::createCurlHandler($sharingMode);
+        $connectionCapsRequired = self::hasConnectionCapOptions($handlerOptions);
+        $handler = self::createCurlHandler($sharingMode, $handlerOptions);
         if ($sharingRequired && $handler === null) {
             throw new \RuntimeException('Required transport sharing requires the PHP cURL extension, curl_exec() or curl_multi_exec(), and libcurl 7.21.2 or higher.');
         }
         if (\ini_get('allow_url_fopen')) {
-            return self::addStreamHandler($handler, $sharingMode, $sharingRequired);
+            return self::addStreamHandler($handler, $sharingMode, $sharingRequired, self::connectionCapOptions($handlerOptions));
         }
         if ($handler !== null) {
             return $handler;
+        }
+        if ($connectionCapsRequired) {
+            throw new \RuntimeException('Connection cap options require a cap-capable cURL multi handler or the allow_url_fopen ini setting for stream fallback.');
         }
         throw new \RuntimeException('GuzzleHttp requires cURL, the allow_url_fopen ini setting, or a custom HTTP handler.');
     }
@@ -104,22 +108,48 @@ final class Utils
         return $sharingMode === TransportSharing::HANDLER_REQUIRE;
     }
     /**
+     * @param array{max_host_connections?: mixed, max_total_connections?: mixed} $handlerOptions
+     */
+    private static function hasConnectionCapOptions(array $handlerOptions): bool
+    {
+        return self::connectionCapOptions($handlerOptions) !== [];
+    }
+    /**
+     * @param array{max_host_connections?: mixed, max_total_connections?: mixed, multiplex?: mixed} $handlerOptions
+     *
      * @return (callable(RequestInterface, array): Promise\PromiseInterface)|null
      */
-    private static function createCurlHandler(string $sharingMode): ?callable
+    private static function createCurlHandler(string $sharingMode, array $handlerOptions): ?callable
     {
         if (!\defined('CURLOPT_CUSTOMREQUEST') || !CurlVersion::supportsCurlHandler()) {
             return null;
         }
-        $curlHandlerOptions = self::createCurlHandlerOptions($sharingMode);
-        if (\function_exists('curl_multi_exec') && \function_exists('curl_exec')) {
-            return Proxy::wrapSync(new CurlMultiHandler($curlHandlerOptions), new CurlHandler($curlHandlerOptions));
+        $connectionCapOptions = self::connectionCapOptions($handlerOptions);
+        if ($connectionCapOptions !== [] && (!CurlVersion::supportsConnectionCaps() || !\function_exists('curl_multi_exec'))) {
+            return null;
         }
-        if (\function_exists('curl_exec')) {
+        $curlHandlerOptions = self::createCurlHandlerOptions($sharingMode);
+        $curlMultiHandlerOptions = $curlHandlerOptions + $connectionCapOptions;
+        if (($handlerOptions['multiplex'] ?? null) === Multiplexing::NONE) {
+            // Forwarded to the CurlMultiHandler only: CurlHandler and
+            // StreamHandler validate known options, and both satisfy NONE
+            // per-request without a handler option.
+            $curlMultiHandlerOptions['multiplex'] = Multiplexing::NONE;
+        }
+        if (\function_exists('curl_multi_exec') && \function_exists('curl_exec')) {
+            $multiHandler = new CurlMultiHandler($curlMultiHandlerOptions);
+            if ($connectionCapOptions !== []) {
+                // Connection caps only govern transfers on the multi handle, so
+                // the synchronous CurlHandler fast path would escape them.
+                return $multiHandler;
+            }
+            return Proxy::wrapSync($multiHandler, new CurlHandler($curlHandlerOptions));
+        }
+        if ($connectionCapOptions === [] && \function_exists('curl_exec')) {
             return new CurlHandler($curlHandlerOptions);
         }
         if (\function_exists('curl_multi_exec')) {
-            return new CurlMultiHandler($curlHandlerOptions);
+            return new CurlMultiHandler($curlMultiHandlerOptions);
         }
         return null;
     }
@@ -135,13 +165,34 @@ final class Utils
         return $shareState === null ? [] : ['transport_sharing' => $shareState];
     }
     /**
+     * @param array{max_host_connections?: mixed, max_total_connections?: mixed} $handlerOptions
+     *
+     * @return array{max_host_connections?: int, max_total_connections?: int}
+     */
+    private static function connectionCapOptions(array $handlerOptions): array
+    {
+        $options = [];
+        foreach (['max_host_connections', 'max_total_connections'] as $capOption) {
+            $value = $handlerOptions[$capOption] ?? null;
+            if ($value === null) {
+                continue;
+            }
+            if (!\is_int($value) || $value < 1) {
+                throw new InvalidArgumentException(\sprintf('%s must be a positive integer.', $capOption));
+            }
+            $options[$capOption] = $value;
+        }
+        return $options;
+    }
+    /**
      * @param (callable(RequestInterface, array): Promise\PromiseInterface)|null $handler
+     * @param array{max_host_connections?: int, max_total_connections?: int}     $connectionCapOptions
      *
      * @return callable(RequestInterface, array): Promise\PromiseInterface
      */
-    private static function addStreamHandler(?callable $handler, string $sharingMode, bool $sharingRequired): callable
+    private static function addStreamHandler(?callable $handler, string $sharingMode, bool $sharingRequired, array $connectionCapOptions): callable
     {
-        $streamHandler = new StreamHandler(['transport_sharing' => $sharingMode]);
+        $streamHandler = new StreamHandler(['transport_sharing' => $sharingMode] + $connectionCapOptions);
         if ($handler === null) {
             return $streamHandler;
         }
@@ -174,6 +225,7 @@ final class Utils
      */
     public static function defaultCaBundle(): string
     {
+        \SEOPress\Vendor\trigger_deprecation('guzzlehttp/guzzle', '7.1', '%s() is deprecated and will be removed in 8.0. This method is not needed in PHP 5.6+.', __METHOD__);
         static $cached = null;
         static $cafiles = [
             // Red Hat, CentOS, Fedora (provided by the ca-certificates package)
@@ -211,7 +263,7 @@ No system CA bundle could be found in any of the the common system locations.
 PHP versions earlier than 5.6 are not properly configured to use the system's
 CA bundle by default. In order to verify peer certificates, you will need to
 supply the path on disk to a certificate bundle to the 'verify' request option:
-https://github.com/guzzle/guzzle/blob/7.13/docs/request-options.md#verify. If
+https://github.com/guzzle/guzzle/blob/7.15/docs/request-options.md#verify. If
 you do not need a specific certificate bundle, then Mozilla provides a commonly
 used CA bundle which can be downloaded here (provided by the maintainer of
 cURL): https://curl.se/ca/cacert.pem. Once you have a CA bundle available on
@@ -229,7 +281,7 @@ EOT
     {
         $result = [];
         foreach (\array_keys($headers) as $key) {
-            $result[\strtolower((string) $key)] = $key;
+            $result[Psr7\Utils::asciiToLower((string) $key)] = $key;
         }
         return $result;
     }
@@ -326,7 +378,7 @@ EOT
             if (!\is_string($area)) {
                 continue;
             }
-            $area = \trim($area);
+            $area = \trim($area, " \n\r\t\x00\v");
             // Always match on wildcards.
             if ($area === '*') {
                 return \true;
@@ -366,7 +418,7 @@ EOT
      */
     private static function parseNoProxyRule(string $area): ?array
     {
-        $area = \trim($area);
+        $area = \trim($area, " \n\r\t\x00\v");
         if ($area === '' || $area === '*') {
             return null;
         }
@@ -424,7 +476,7 @@ EOT
                 return null;
             }
         }
-        return ['type' => 'domain', 'value' => \strtolower($host), 'port' => $port, 'matchesRoot' => $matchesRoot];
+        return ['type' => 'domain', 'value' => Psr7\Utils::asciiToLower($host), 'port' => $port, 'matchesRoot' => $matchesRoot];
     }
     /**
      * @return array{0: string, 1: int|null}|null
@@ -581,9 +633,11 @@ EOT
      * @throws InvalidArgumentException if the JSON cannot be decoded.
      *
      * @see https://www.php.net/manual/en/function.json-decode.php
+     * @deprecated Utils::jsonDecode() will be removed in guzzlehttp/guzzle:8.0. Use PHP's json_decode() instead.
      */
     public static function jsonDecode(string $json, bool $assoc = \false, int $depth = 512, int $options = 0)
     {
+        \SEOPress\Vendor\trigger_deprecation('guzzlehttp/guzzle', '7.15', '%s() is deprecated and will be removed in 8.0. Use PHP\'s json_decode() instead.', __METHOD__);
         if ($depth < 1) {
             throw new InvalidArgumentException('json_decode error: Maximum stack depth exceeded');
         }
@@ -603,9 +657,11 @@ EOT
      * @throws InvalidArgumentException if the JSON cannot be encoded.
      *
      * @see https://www.php.net/manual/en/function.json-encode.php
+     * @deprecated Utils::jsonEncode() will be removed in guzzlehttp/guzzle:8.0. Use PHP's json_encode() instead.
      */
     public static function jsonEncode($value, int $options = 0, int $depth = 512): string
     {
+        \SEOPress\Vendor\trigger_deprecation('guzzlehttp/guzzle', '7.15', '%s() is deprecated and will be removed in 8.0. Use PHP\'s json_encode() instead.', __METHOD__);
         $json = \json_encode($value, $options, $depth);
         if (\JSON_ERROR_NONE !== \json_last_error()) {
             throw new InvalidArgumentException('json_encode error: ' . \json_last_error_msg());

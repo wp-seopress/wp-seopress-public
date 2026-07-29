@@ -160,7 +160,7 @@ final class UriNormalizer
     {
         $regex = '/(?:%[A-Fa-f0-9]{2})++/';
         $callback = function (array $match): string {
-            return strtoupper($match[0]);
+            return Utils::asciiToUpper($match[0]);
         };
         return $uri->withPath(self::normalizePercentEncodingInComponent($uri->getPath(), $regex, $callback))->withQuery(self::normalizePercentEncodingInComponent($uri->getQuery(), $regex, $callback))->withFragment(self::normalizePercentEncodingInComponent($uri->getFragment(), $regex, $callback));
     }

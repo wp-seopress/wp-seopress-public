@@ -6,7 +6,7 @@ Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 10.0.2
+Stable tag: 10.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -312,66 +312,47 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 10.0.2 =
-* NEW Command palette updated with new actions and options
-* FIX Titles & Metas: custom field and custom taxonomy variables (%%_cf_...%%, %%_ct_...%%) resolve again
-* FIX Titles & Metas: the title and meta description character counters no longer stay at 0 when the value comes from a dynamic variable
-* FIX Autocomplete for redirections
-* FIX Metabox: the "Search a tag" variables popover is no longer hidden behind the floating front-end SEO panel
-* FIX Comments: the "Remove website field from comments" option now removes the website field on the front-end
-* FIX Comments: "Remove ?replytocom" link rewriting works again on WordPress 6.7+
-* FIX DIVI: prevent an "Undefined array key app_window" PHP warning in the front-end builder
-* FIX [PRO] Multisite: virtual robots.txt and llms.txt keep their line breaks when saved from the network settings
-
-= 10.0.1 =
-* INFO Performance: the admin stylesheet now loads only on the screens that actually use it (SEOPress pages, post & term editors and list tables, dashboard widgets) instead of on every wp-admin page (Free and PRO)
-* FIX Schemas: selecting "None" as the Knowledge Graph type no longer outputs an Organization schema on the homepage
-* FIX [PRO] Video: render-time YouTube auto-fill is now disabled by default to stop exhausting the shared YouTube Data API quota; the Video schema falls back to manual entry and the Video sitemap (which fetches at save time) is unaffected
-* FIX [PRO] Video sitemap: "Scan all posts" now processes every post in each batch instead of only the first one
-* FIX [PRO] Google Analytics: GA4 dashboards no longer return blank or all-zero stats
-* FIX [PRO] Breadcrumbs: custom HTML in the homepage label (SVG icons, spans)
-* FIX [PRO] Redirections: the "All redirections" count in the categories sidebar now matches the number of items in the list
-
-= 10.0 <a href="https://www.seopress.org/newsroom/product-news/seopress-10/">Read the blog post update</a> =
-* NEW [PRO] AI Assistant: a brand-new in-editor assistant available in the Block Editor — chat, quick actions, generate full articles with /write, copy results to the clipboard, and keep persistent conversations 🎉
-* NEW [PRO] SEOPress AI provider: purchase tokens from seopress.org and quickly get started using AI on your WordPress site - no-brainer! 🎉
-* NEW [PRO] Connect your own AI provider: OpenAI, Google Gemini, Anthropic Claude — plus WordPress Connectors (Abilities API) support on WordPress 7+, and manage/top up your AI credits directly 🎉
-* NEW [PRO] Per-field toggles to choose exactly which AI-generated image metadata (alt, caption, description) is written on upload
-* NEW XML Sitemap health check: a built-in tool that probes your sitemap index and the first sub-sitemap of each type, flags problems, reports coverage of optional content types, and offers one-click fixes (such as flushing permalinks)
-* NEW Google Preferred Sources block & shortcode to add Google's "Preferred Sources" follow button to your content
-* NEW [PRO] Redirections & 404s moved to a faster DataViews screen, with a dedicated Rank Math CSV redirections importer and an "Add another" button after creating a redirect
-* NEW [PRO] Video sitemap now scans page builder content (Bricks, etc.) for YouTube embeds, and auto-fill Video schema from YouTube falls back to a keyless oEmbed when the YouTube Data API quota is reached
-* NEW [PRO] robots.txt editor: contextual guidance on the quick-insert buttons, clearer "Recommended" labels, and native WordPress tooltips
-* NEW [PRO] SEO alerts now rely on the full XML sitemap diagnostic
-* NEW [PRO] Structured Data Types metabox is enabled by default on fresh installs
-* NEW Language packs install automatically on demand for your current locale (Free and PRO)
-* NEW Cookie consent now emits a dataLayer event and a DOM event when a visitor accepts or declines, so you can trigger your own scripts
-* NEW Notice in Titles & Metas pointing to your static posts page when one is set
-* NEW Tools: Import / Export reorganized into cards, with a clear warning that exported settings contain sensitive credentials
-* NEW Developer: headless Content Analysis REST endpoint (with rate limiting) and WordPress Abilities API support (WordPress 7+)
-* INFO Mobile-friendly admin: sticky save bar, responsive setup wizard, and various small-screen layout fixes
-* INFO Improved compatibility with Divi 5
-* FIX Security enhanced
-* FIX IndexNow: valid keys are no longer mistakenly base64-decoded
-* FIX XML sitemaps: non-existent custom post types/taxonomies are kept out of the sitemap index, and a per-type sitemap now returns a 404 when its type no longer exists
-* FIX XML sitemaps: hidden Polylang languages are now excluded
-* FIX Schemas: HTML entities (like &) are decoded before JSON-LD encoding to avoid double-encoding, and metabox schema fields bind by key instead of by position
-* FIX noindex warning now shows correctly in the admin bar even when the SEO menu is hidden
-* FIX Content Analysis no longer reports zero headings when the article sits outside <main>
-* FIX REST: empty integer metas are tolerated (WordPress 7 compatibility)
-* FIX "Get PRO" link is now readable on the dashboard card; license reminder rendering and spacing fixed
-* FIX FAQ block updated for the latest editor APIs (no more deprecation warnings); primary category picker is more stable
-* FIX Bundled Google SDK is scoped at build time to avoid namespace collisions with other plugins
-* FIX [PRO] WooCommerce Product schema: correct price & availability for out-of-stock and backorder variations, with an OutOfStock fallback only when the product is truly out of stock
-* FIX [PRO] Redirections: 404 hits counter starts at 1 on the first hit, and the "Test URL" button no longer duplicates the language prefix
-* FIX [PRO] Schemas: "manual value on each post" options restored in automatic schemas; saving no longer wipes schema data and the metabox Edit action routes to the React editor; Local Business opening-hours no longer triggers a PHP 8 warning
-* FIX [PRO] Video: non-video YouTube URLs are no longer sent to the YouTube Data API
-* FIX [PRO] llms.txt: post permalinks now resolve in their own language under WPML
-* FIX [PRO] Analytics degrades gracefully when another plugin loads a conflicting Google SDK
-* FIX [PRO] How-To block updated for the latest editor APIs
-* FIX [PRO] Table of Contents block is now detected inside template parts
-* FIX [PRO] Updater sends a neutral User-Agent for PRO update requests
-* FIX [PRO] Build: async chunk filenames are content-hashed to prevent stale-chunk crashes after updates
+= 10.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-10-1/">Read the blog post update</a> =
+NEW Automatically generate your meta title and description with AI when you publish a post (PRO)
+NEW Generate meta title and description with AI for your taxonomy terms (categories, tags...) (PRO)
+NEW Restrict AI generation features to specific user roles (PRO)
+NEW See your AI credits balance right from the SEOPress dashboard
+NEW Site Audit: new Technical tab with site-wide checks for your homepage (PRO)
+NEW Robots.txt revision history: compare changes and restore any previous version (PRO)
+NEW ProductGroup schema for WooCommerce variable products (PRO)
+NEW Product schema: sale price and merchant return policy support (PRO)
+NEW New Manual tab on the Schemas screen to find all content with manually assigned schemas (PRO)
+NEW Dynamic variables are now resolved in your custom schema fields
+NEW Import your redirections from Slim SEO (PRO)
+NEW Import a JSON settings file directly from the installation wizard
+NEW Export a reusable configuration file without site-specific data, perfect to reuse on other sites
+NEW Quick actions for SEOPress PRO in the WordPress command palette (PRO)
+NEW Redesigned License page with built-in update troubleshooting info (PRO)
+NEW Support for the latest DeepSeek V4 AI models (PRO)
+INFO Clearer on/off state for each feature on the settings pages
+INFO Improved Yoast migration: social profiles and feed settings are now imported
+INFO Improved SureRank migration with previously missing settings
+INFO The Redirection tab now shows an indicator when a redirect is active
+INFO Clearer Google Analytics connection flow in the dashboard (PRO)
+INFO Removed the Admin Columns Pro integration, now built into ACP 7.0+ (PRO)
+FIX Accurate GA4 purchase conversion tracking for WooCommerce (PRO)
+FIX Password-protected posts are no longer listed in the HTML sitemap
+FIX More reliable content analysis with page builders (Beaver Builder, Themeco Cornerstone) and local/staging environments
+FIX Content analysis now recognizes titles and descriptions coming from your global templates
+FIX Google snippet preview no longer shows a 404 title for draft posts
+FIX Product schema improvements: shipping details, price valid until date and no more empty review data (PRO)
+FIX Local Business schema: opening hours, closed days and homepage display now work as expected (PRO)
+FIX A stalled Site Audit or Broken Links scan now recovers automatically (PRO)
+FIX llms.txt is now compatible with WPML and multisite subsites (PRO)
+FIX Table of Contents now detects headings from third-party blocks (PRO)
+FIX Target keyword is now translatable with WPML
+FIX Default title and description now apply correctly to taxonomy archives
+FIX License deactivation no longer leaves the key marked as active (PRO)
+FIX AI button in the media modal, Gemini connection test and various interface fixes (PRO)
+FIX White label: removed remaining hardcoded brand names (PRO)
+FIX Visual glitches on taxonomy term screens and in the migration progress bar
+FIX Various PHP 8 warnings and a potential error during plugin updates
+FIX Various security improvements
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>
 <a href="https://www.seopress.org/support/guides/how-to-downgrade-seopress-pro-to-a-previous-version/" target="_blank">Need to downgrade/rollback?</a>

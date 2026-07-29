@@ -838,7 +838,7 @@ function seopress_smart_crawl_migration() {
 						if ( ! empty( $term_value['wds_nofollow'] ) && 'nofollow' === $term_value['wds_nofollow'] ) { // Import Robots NoFollow.
 							update_term_meta( $term_id, '_seopress_robots_follow', 'yes' );
 						}
-						if ( '' !== $term_value['wds_canonical'] ) { // Import Canonical URL.
+						if ( ! empty( $term_value['wds_canonical'] ) ) { // Import Canonical URL.
 							update_term_meta( $term_id, '_seopress_robots_canonical', esc_url_raw( $term_value['wds_canonical'] ) );
 						}
 					}

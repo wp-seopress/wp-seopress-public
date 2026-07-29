@@ -93,14 +93,58 @@ class AnalyticsSettings implements ExecuteHooks {
 
 		do_action( 'seopress_analytics_settings_updated', $sanitized_options );
 
-		return new \WP_REST_Response(
-			array(
-				'success' => true,
-				'message' => __( 'Settings saved successfully.', 'wp-seopress' ),
-				'data'    => $sanitized_options,
-			),
-			200
+		$response = array(
+			'success' => true,
+			'message' => __( 'Settings saved successfully.', 'wp-seopress' ),
+			'data'    => $sanitized_options,
 		);
+
+		// The custom tracking script fields keep their raw markup, so the
+		// sanitizer stores them only for users with the `unfiltered_html`
+		// capability. On multisite with DISALLOW_UNFILTERED_HTML that capability
+		// is removed from everyone, super admins included, and the submitted
+		// scripts are dropped. Surface that instead of reporting a plain success,
+		// so the save is not silently misleading.
+		$warning = $this->trackingScriptsWarning( $new_options, $sanitized_options );
+		if ( '' !== $warning ) {
+			$response['warning'] = $warning;
+		}
+
+		return new \WP_REST_Response( $response, 200 );
+	}
+
+	/**
+	 * Build a warning when submitted custom tracking scripts were not stored
+	 * because the current user lacks the `unfiltered_html` capability.
+	 *
+	 * @param array $submitted The values sent by the client.
+	 * @param array $saved     The values actually persisted after sanitization.
+	 *
+	 * @since 10.1.0
+	 *
+	 * @return string The warning message, or an empty string when nothing was dropped.
+	 */
+	protected function trackingScriptsWarning( $submitted, $saved ) {
+		if ( current_user_can( 'unfiltered_html' ) ) {
+			return '';
+		}
+
+		$fields = array(
+			'seopress_google_analytics_other_tracking',
+			'seopress_google_analytics_other_tracking_body',
+			'seopress_google_analytics_other_tracking_footer',
+		);
+
+		foreach ( $fields as $field ) {
+			$sent   = isset( $submitted[ $field ] ) ? (string) $submitted[ $field ] : '';
+			$stored = isset( $saved[ $field ] ) ? (string) $saved[ $field ] : '';
+
+			if ( '' !== trim( $sent ) && $sent !== $stored ) {
+				return __( 'Your custom tracking scripts could not be saved: this installation does not allow unfiltered HTML (the "unfiltered_html" capability is disabled, typically by DISALLOW_UNFILTERED_HTML on multisite). Every other setting on this page was saved.', 'wp-seopress' );
+			}
+		}
+
+		return '';
 	}
 
 	/**

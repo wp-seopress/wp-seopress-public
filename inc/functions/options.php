@@ -63,7 +63,15 @@ if ( '1' == seopress_get_toggle_option( 'titles' ) ) { // phpcs:ignore -- TODO: 
 				function seopress_titles_single_enable_metabox( $seopress_get_post_types ) {
 					global $post;
 
-					if ( '1' === seopress_get_service( 'TitleOption' )->getSingleCptEnable( $post->post_type ) && isset( $post->post_type ) ) {
+					// The global $post is not set on every context where this
+					// filter runs (init, save_post, REST). Guard before reading
+					// its property, otherwise PHP 8 warns "Attempt to read
+					// property post_type on null".
+					if ( ! $post instanceof WP_Post || empty( $post->post_type ) ) {
+						return $seopress_get_post_types;
+					}
+
+					if ( '1' === seopress_get_service( 'TitleOption' )->getSingleCptEnable( $post->post_type ) ) {
 						unset( $seopress_get_post_types[ $post->post_type ] );
 					}
 

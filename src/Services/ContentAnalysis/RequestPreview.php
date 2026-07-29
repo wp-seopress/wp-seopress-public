@@ -38,21 +38,39 @@ class RequestPreview {
 			$theme = wp_get_theme();
 			// Oxygen / beTheme compatibility.
 			$oxygen_metabox_enabled = get_option( 'oxygen_vsb_ignore_post_type_' . get_post_type( $id ) ) ? false : true;
+			// Beaver Builder compatibility: it renders its module layout (including
+			// the heading modules) on the public URL but not on the preview URL, so
+			// the preview HTML reports zero headings. Analyse the permalink instead.
+			$beaver_builder_enabled = ( class_exists( 'FLBuilderModel' ) || defined( 'FL_BUILDER_VERSION' ) )
+				&& '1' === get_post_meta( (int) $id, '_fl_builder_enabled', true );
 			if (
 				( is_plugin_active( 'oxygen/functions.php' ) && function_exists( 'ct_template_output' ) && true === $oxygen_metabox_enabled )
 				||
 				( 'betheme' === $theme->template || 'Betheme' === $theme->parent_theme )
+				||
+				$beaver_builder_enabled
 			) {
 				$link = get_permalink( (int) $id );
-				$link = add_query_arg( 'no_admin_bar', 1, $link );
 			} else {
-				$link = add_query_arg( 'no_admin_bar', 1, get_preview_post_link( (int) $id, $args ) );
+				$link = get_preview_post_link( (int) $id, $args );
 			}
 		} else {
 			// Taxonomy.
 			$link = get_term_link( (int) $id, $taxname );
-			$link = add_query_arg( 'no_admin_bar', 1, $link );
 		}
+
+		// Each source fails differently when the object cannot be resolved (an
+		// unknown id, a status that is not previewable...): get_permalink()
+		// returns false, get_preview_post_link() returns null and
+		// get_term_link() returns a WP_Error. Feeding that to add_query_arg()
+		// emitted PHP 8.1+ "passing null" deprecations on every admin screen
+		// and built a meaningless relative URL ("?no_admin_bar=1") that was
+		// then used as the preview URL. Stop here instead.
+		if ( ! is_string( $link ) || '' === $link ) {
+			return '';
+		}
+
+		$link = add_query_arg( 'no_admin_bar', 1, $link );
 
 		$link = apply_filters( 'seopress_get_dom_link', $link, $id );
 
@@ -200,6 +218,39 @@ class RequestPreview {
 	 * @return array|\WP_Error
 	 */
 	private function requestPreview( $link, $args, $is_self, $id, $taxname = null ) {
+		/**
+		 * Force the preview fetch through a local origin (loop-back / internal
+		 * IP) for the PRIMARY request, instead of only as a fallback when the
+		 * public URL is challenged.
+		 *
+		 * On a VPS whose internal IP differs from its external IP, the public
+		 * URL resolves to the external IP and the self-request hair-pins out and
+		 * back (hairpin NAT): slow, and at Site-Audit scale an occasional hung
+		 * request can stall the whole run. Returning true makes the preview try
+		 * candidateIps() first (127.0.0.1, SERVER_ADDR, ::1, plus the
+		 * seopress_real_preview_loopback_ips / _ip filters), validating the body
+		 * is this very post before trusting it, and only falls back to the
+		 * public URL when no local origin serves it.
+		 *
+		 * @since 10.1.0
+		 *
+		 * @param bool   $force   Whether to try the local origin first. Default false.
+		 * @param string $link    The preview URL.
+		 * @param bool   $is_self Whether the link points to this very site.
+		 */
+		if ( $is_self && (bool) apply_filters( 'seopress_real_preview_force_loopback', false, $link, $is_self ) ) {
+			foreach ( $this->candidateIps() as $ip ) {
+				$loopback = $this->requestOrigin( $link, $args, $ip );
+
+				if ( ! $this->looksBlocked( $loopback ) && $this->bodyMatchesPost( $loopback, $id, $taxname ) ) {
+					return $loopback;
+				}
+			}
+			// No local origin served this post: fall through to the public URL
+			// so a misconfigured filter degrades to today's behavior instead of
+			// failing the preview.
+		}
+
 		// Public-first: load the post's own URL, the path that works on a
 		// normal host and behind a host-level WAF alike. This is the only path
 		// a non-CDN host ever takes, so its behavior is unchanged.

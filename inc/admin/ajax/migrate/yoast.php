@@ -9,6 +9,189 @@
 defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 /**
+ * Map Yoast social account URLs to SEOPress social account fields.
+ *
+ * Facebook, X/Twitter, Instagram, LinkedIn, YouTube and Pinterest are routed
+ * to their dedicated SEOPress fields; any other profile falls back to the
+ * "additional accounts" field. X/Twitter handles are stored as-is (no http://
+ * prefix is ever added), and a dedicated field already imported from a specific
+ * Yoast key (e.g. facebook_site) is never overwritten by other_social_urls.
+ *
+ * @param array $wpseo_social    Yoast `wpseo_social` option.
+ * @param array $seopress_social Current SEOPress social option array.
+ * @return array Updated SEOPress social option array.
+ */
+function seopress_yoast_map_social_accounts( $wpseo_social, $seopress_social ) {
+	if ( ! is_array( $wpseo_social ) ) {
+		return $seopress_social;
+	}
+	if ( ! is_array( $seopress_social ) ) {
+		$seopress_social = array();
+	}
+
+	if ( isset( $wpseo_social['facebook_site'] ) && '' !== $wpseo_social['facebook_site'] ) {
+		$seopress_social['seopress_social_accounts_facebook'] = esc_url( $wpseo_social['facebook_site'] );
+	}
+
+	if ( isset( $wpseo_social['twitter_site'] ) && '' !== $wpseo_social['twitter_site'] ) {
+		// Twitter/X handle - don't add http:// prefix. Remove a leading @ if present.
+		$seopress_social['seopress_social_accounts_twitter'] = esc_html( ltrim( $wpseo_social['twitter_site'], '@' ) );
+	}
+
+	if ( isset( $wpseo_social['other_social_urls'] ) && is_array( $wpseo_social['other_social_urls'] ) ) {
+		// Map domain patterns to SEOPress social account fields.
+		$social_networks = array(
+			'instagram.com' => 'seopress_social_accounts_instagram',
+			'linkedin.com'  => 'seopress_social_accounts_linkedin',
+			'youtube.com'   => 'seopress_social_accounts_youtube',
+			'youtu.be'      => 'seopress_social_accounts_youtube',
+			'pinterest.com' => 'seopress_social_accounts_pinterest',
+			'pinterest.fr'  => 'seopress_social_accounts_pinterest',
+			'facebook.com'  => 'seopress_social_accounts_facebook',
+			'fb.com'        => 'seopress_social_accounts_facebook',
+			'twitter.com'   => 'seopress_social_accounts_twitter',
+			'x.com'         => 'seopress_social_accounts_twitter',
+		);
+
+		$extra_accounts = array();
+		foreach ( $wpseo_social['other_social_urls'] as $social_url ) {
+			if ( empty( $social_url ) ) {
+				continue;
+			}
+
+			$social_url_lower = strtolower( $social_url );
+			$matched          = false;
+
+			foreach ( $social_networks as $domain => $field ) {
+				if ( false !== strpos( $social_url_lower, $domain ) ) {
+					// Twitter/X: extract the handle from the URL, without a leading @.
+					if ( 'seopress_social_accounts_twitter' === $field ) {
+						if ( empty( $seopress_social[ $field ] ) ) {
+							$parsed = wp_parse_url( $social_url );
+							if ( ! empty( $parsed['path'] ) ) {
+								$seopress_social[ $field ] = esc_html( ltrim( trim( $parsed['path'], '/' ), '@' ) );
+							}
+						}
+					} elseif ( empty( $seopress_social[ $field ] ) ) {
+						// Do not overwrite a dedicated field already imported
+						// from a specific Yoast key (e.g. facebook_site).
+						$seopress_social[ $field ] = esc_url( $social_url );
+					}
+					$matched = true;
+					break;
+				}
+			}
+
+			// Unknown network - add to extra accounts.
+			if ( ! $matched ) {
+				$extra_accounts[] = ( 0 === strpos( $social_url, '@' ) ) ? esc_html( $social_url ) : esc_url( $social_url );
+			}
+		}
+
+		if ( ! empty( $extra_accounts ) ) {
+			$seopress_social['seopress_social_accounts_extra'] = implode( "\n", $extra_accounts );
+		}
+	}
+
+	return $seopress_social;
+}
+
+/**
+ * Map Yoast feed (crawl optimization) settings to SEOPress PRO RSS options.
+ *
+ * SEOPress exposes three feed toggles: the posts feed, the global comments feed
+ * and a single "extra feeds" toggle. Yoast splits its extra feeds (per-post
+ * comments, authors, categories, tags, custom taxonomies, post types and
+ * search) into separate options, but they all map to WordPress'
+ * feed_links_extra output, which SEOPress controls with that single toggle. We
+ * therefore enable it when any of the Yoast extra feed options is enabled.
+ *
+ * @param array $wpseo        Yoast `wpseo` option.
+ * @param array $seopress_pro Current SEOPress PRO option array.
+ * @return array Updated SEOPress PRO option array.
+ */
+function seopress_yoast_map_feed_settings( $wpseo, $seopress_pro ) {
+	if ( ! is_array( $wpseo ) ) {
+		return $seopress_pro;
+	}
+	if ( ! is_array( $seopress_pro ) ) {
+		$seopress_pro = array();
+	}
+
+	if ( isset( $wpseo['remove_feed_global'] ) ) {
+		if ( true === $wpseo['remove_feed_global'] ) {
+			$seopress_pro['seopress_rss_disable_posts_feed'] = '1';
+		} else {
+			unset( $seopress_pro['seopress_rss_disable_posts_feed'] );
+		}
+	}
+	if ( isset( $wpseo['remove_feed_global_comments'] ) ) {
+		if ( true === $wpseo['remove_feed_global_comments'] ) {
+			$seopress_pro['seopress_rss_disable_comments_feed'] = '1';
+		} else {
+			unset( $seopress_pro['seopress_rss_disable_comments_feed'] );
+		}
+	}
+
+	$yoast_extra_feed_keys     = array(
+		'remove_feed_post_comments',
+		'remove_feed_authors',
+		'remove_feed_categories',
+		'remove_feed_tags',
+		'remove_feed_custom_taxonomies',
+		'remove_feed_post_types',
+		'remove_feed_search',
+	);
+	$yoast_has_extra_feed_key  = (bool) array_intersect_key( array_flip( $yoast_extra_feed_keys ), $wpseo );
+	$yoast_extra_feed_disabled = false;
+	foreach ( $yoast_extra_feed_keys as $yoast_extra_feed_key ) {
+		if ( ! empty( $wpseo[ $yoast_extra_feed_key ] ) ) {
+			$yoast_extra_feed_disabled = true;
+			break;
+		}
+	}
+	if ( $yoast_has_extra_feed_key ) {
+		if ( $yoast_extra_feed_disabled ) {
+			$seopress_pro['seopress_rss_disable_extra_feed'] = '1';
+		} else {
+			unset( $seopress_pro['seopress_rss_disable_extra_feed'] );
+		}
+	}
+
+	return $seopress_pro;
+}
+
+/**
+ * Map Yoast's attachment redirect default to SEOPress.
+ *
+ * Yoast's `disable-attachment` option redirects attachment URLs to the media
+ * file itself. SEOPress reproduces this with the "redirect attachments to their
+ * file URL" advanced option, which also supersedes the "redirect to parent"
+ * option.
+ *
+ * @param array $wpseo_titles      Yoast `wpseo_titles` option.
+ * @param array $seopress_advanced Current SEOPress advanced option array.
+ * @return array Updated SEOPress advanced option array.
+ */
+function seopress_yoast_map_attachment_redirect( $wpseo_titles, $seopress_advanced ) {
+	if ( ! is_array( $wpseo_titles ) || ! isset( $wpseo_titles['disable-attachment'] ) ) {
+		return $seopress_advanced;
+	}
+	if ( ! is_array( $seopress_advanced ) ) {
+		$seopress_advanced = array();
+	}
+
+	if ( true === $wpseo_titles['disable-attachment'] ) {
+		$seopress_advanced['seopress_advanced_advanced_attachments_file'] = '1';
+		unset( $seopress_advanced['seopress_advanced_advanced_attachments'] );
+	} else {
+		unset( $seopress_advanced['seopress_advanced_advanced_attachments_file'] );
+	}
+
+	return $seopress_advanced;
+}
+
+/**
  * Yoast migration
  */
 function seopress_yoast_migration() {
@@ -103,29 +286,10 @@ function seopress_yoast_migration() {
 						unset( $seopress_advanced['seopress_advanced_advanced_emoji'] );
 					}
 				}
-				// RSS Feeds.
-				if ( 'remove_feed_global' === $key ) {
-					if ( true === $value ) {
-						$seopress_pro['seopress_rss_disable_posts_feed'] = '1';
-					} else {
-						unset( $seopress_pro['seopress_rss_disable_posts_feed'] );
-					}
-				}
-				if ( 'remove_feed_global_comments' === $key ) {
-					if ( true === $value ) {
-						$seopress_pro['seopress_rss_disable_comments_feed'] = '1';
-					} else {
-						unset( $seopress_pro['seopress_rss_disable_comments_feed'] );
-					}
-				}
-				if ( 'remove_feed_post_comments' === $key ) {
-					if ( true === $value ) {
-						$seopress_pro['seopress_rss_disable_extra_feed'] = '1';
-					} else {
-						unset( $seopress_pro['seopress_rss_disable_extra_feed'] );
-					}
-				}
 			}
+
+			// RSS / feed crawl optimization.
+			$seopress_pro = seopress_yoast_map_feed_settings( $wpseo, $seopress_pro );
 		}
 
 		if ( ! empty( $wpseo_titles ) ) {
@@ -328,16 +492,6 @@ function seopress_yoast_migration() {
 				if ( 'metadesc-archive-wpseo' === $key ) {
 					$seopress_titles['seopress_titles_archives_date_desc'] = esc_html( $value );
 				}
-				// Attachment redirect.
-				// Yoast redirects attachment URLs to the file itself by default when enabled.
-				if ( 'disable-attachment' === $key ) {
-					if ( true === $value ) {
-						$seopress_advanced['seopress_advanced_advanced_attachments_file'] = '1';
-						unset( $seopress_advanced['seopress_advanced_advanced_attachments'] );
-					} else {
-						unset( $seopress_advanced['seopress_advanced_advanced_attachments_file'] );
-					}
-				}
 				// Author.
 				if ( 'disable-author' === $key ) {
 					if ( true === $value ) {
@@ -362,71 +516,15 @@ function seopress_yoast_migration() {
 			}
 		}
 
+		// Attachment redirect.
+		$seopress_advanced = seopress_yoast_map_attachment_redirect( $wpseo_titles, $seopress_advanced );
+
 		// Import social.
 		if ( ! empty( $wpseo_social ) ) {
-			foreach ( $wpseo_social as $key => $value ) {
-				if ( 'facebook_site' === $key ) {
-					$seopress_social['seopress_social_accounts_facebook'] = esc_url( $value );
-				}
-				if ( 'twitter_site' === $key ) {
-					// Twitter/X handle - don't add http:// prefix.
-					// Remove @ if present at the beginning.
-					$twitter_handle = ltrim( $value, '@' );
-					$seopress_social['seopress_social_accounts_twitter'] = esc_html( $twitter_handle );
-				}
-				if ( 'other_social_urls' === $key && is_array( $value ) ) {
-					// Map domain patterns to SEOPress social account fields.
-					$social_networks = array(
-						'instagram.com'  => 'seopress_social_accounts_instagram',
-						'linkedin.com'   => 'seopress_social_accounts_linkedin',
-						'youtube.com'    => 'seopress_social_accounts_youtube',
-						'youtu.be'       => 'seopress_social_accounts_youtube',
-						'pinterest.com'  => 'seopress_social_accounts_pinterest',
-						'pinterest.fr'   => 'seopress_social_accounts_pinterest',
-						'twitter.com'    => 'seopress_social_accounts_twitter',
-						'x.com'          => 'seopress_social_accounts_twitter',
-					);
+			$seopress_social = seopress_yoast_map_social_accounts( $wpseo_social, $seopress_social );
 
-					$extra_accounts = array();
-					foreach ( $value as $social_url ) {
-						if ( empty( $social_url ) ) {
-							continue;
-						}
-
-						$social_url_lower = strtolower( $social_url );
-						$matched          = false;
-
-						foreach ( $social_networks as $domain => $field ) {
-							if ( false !== strpos( $social_url_lower, $domain ) ) {
-								// Twitter/X: extract handle from URL.
-								if ( 'seopress_social_accounts_twitter' === $field ) {
-									if ( empty( $seopress_social[ $field ] ) ) {
-										$parsed = wp_parse_url( $social_url );
-										if ( ! empty( $parsed['path'] ) ) {
-											$seopress_social[ $field ] = esc_html( trim( $parsed['path'], '/' ) );
-										}
-									}
-								} else {
-									$seopress_social[ $field ] = esc_url( $social_url );
-								}
-								$matched = true;
-								break;
-							}
-						}
-
-						// Unknown network - add to extra accounts.
-						if ( ! $matched ) {
-							$extra_accounts[] = ( 0 === strpos( $social_url, '@' ) ) ? esc_html( $social_url ) : esc_url( $social_url );
-						}
-					}
-
-					if ( ! empty( $extra_accounts ) ) {
-						$seopress_social['seopress_social_accounts_extra'] = implode( "\n", $extra_accounts );
-					}
-				}
-				if ( 'pinterestverify' === $key ) {
-					$seopress_advanced['seopress_advanced_advanced_pinterest'] = esc_html( $value );
-				}
+			if ( isset( $wpseo_social['pinterestverify'] ) ) {
+				$seopress_advanced['seopress_advanced_advanced_pinterest'] = esc_html( $wpseo_social['pinterestverify'] );
 			}
 		}
 
@@ -444,37 +542,37 @@ function seopress_yoast_migration() {
 			if ( $yoast_query_terms ) {
 				foreach ( $yoast_query_terms as $taxonomies => $taxonomie ) {
 					foreach ( $taxonomie as $term_id => $term_value ) {
-						if ( '' !== $term_value['wpseo_title'] ) { // Import title tag.
+						if ( ! empty( $term_value['wpseo_title'] ) ) { // Import title tag.
 							update_term_meta( $term_id, '_seopress_titles_title', esc_html( $term_value['wpseo_title'] ) );
 						}
-						if ( '' !== $term_value['wpseo_desc'] ) { // Import meta desc.
+						if ( ! empty( $term_value['wpseo_desc'] ) ) { // Import meta desc.
 							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( $term_value['wpseo_desc'] ) );
 						}
-						if ( '' !== $term_value['wpseo_opengraph-title'] ) { // Import Facebook Title.
+						if ( ! empty( $term_value['wpseo_opengraph-title'] ) ) { // Import Facebook Title.
 							update_term_meta( $term_id, '_seopress_social_fb_title', esc_html( $term_value['wpseo_opengraph-title'] ) );
 						}
-						if ( '' !== $term_value['wpseo_opengraph-description'] ) { // Import Facebook Desc.
+						if ( ! empty( $term_value['wpseo_opengraph-description'] ) ) { // Import Facebook Desc.
 							update_term_meta( $term_id, '_seopress_social_fb_desc', esc_html( $term_value['wpseo_opengraph-description'] ) );
 						}
-						if ( '' !== $term_value['wpseo_opengraph-image'] ) { // Import Facebook Image.
+						if ( ! empty( $term_value['wpseo_opengraph-image'] ) ) { // Import Facebook Image.
 							update_term_meta( $term_id, '_seopress_social_fb_img', esc_url( $term_value['wpseo_opengraph-image'] ) );
 						}
-						if ( '' !== $term_value['wpseo_twitter-title'] ) { // Import Twitter Title.
+						if ( ! empty( $term_value['wpseo_twitter-title'] ) ) { // Import Twitter Title.
 							update_term_meta( $term_id, '_seopress_social_twitter_title', esc_html( $term_value['wpseo_twitter-title'] ) );
 						}
-						if ( '' !== $term_value['wpseo_twitter-description'] ) { // Import Twitter Desc.
+						if ( ! empty( $term_value['wpseo_twitter-description'] ) ) { // Import Twitter Desc.
 							update_term_meta( $term_id, '_seopress_social_twitter_desc', esc_html( $term_value['wpseo_twitter-description'] ) );
 						}
-						if ( '' !== $term_value['wpseo_twitter-image'] ) { // Import Twitter Image.
+						if ( ! empty( $term_value['wpseo_twitter-image'] ) ) { // Import Twitter Image.
 							update_term_meta( $term_id, '_seopress_social_twitter_img', esc_url( $term_value['wpseo_twitter-image'] ) );
 						}
-						if ( 'noindex' === $term_value['wpseo_noindex'] ) { // Import Robots NoIndex.
+						if ( isset( $term_value['wpseo_noindex'] ) && 'noindex' === $term_value['wpseo_noindex'] ) { // Import Robots NoIndex.
 							update_term_meta( $term_id, '_seopress_robots_index', 'yes' );
 						}
-						if ( '' !== $term_value['wpseo_canonical'] ) { // Import Canonical URL.
+						if ( ! empty( $term_value['wpseo_canonical'] ) ) { // Import Canonical URL.
 							update_term_meta( $term_id, '_seopress_robots_canonical', esc_url( $term_value['wpseo_canonical'] ) );
 						}
-						if ( '' !== $term_value['wpseo_bctitle'] ) { // Import Breadcrumb Title.
+						if ( ! empty( $term_value['wpseo_bctitle'] ) ) { // Import Breadcrumb Title.
 							update_term_meta( $term_id, '_seopress_robots_breadcrumbs', esc_html( $term_value['wpseo_bctitle'] ) );
 						}
 					}

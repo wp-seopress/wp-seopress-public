@@ -36,11 +36,15 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
 		$context = isset( $args[0] ) ? $args[0] : null;
 		$tag     = isset( $args[1] ) ? $args[1] : null;
 		$value   = '';
-		if ( null === $tag || ! $context ) {
+		if ( null === $tag || ! $context || ! is_array( $context ) ) {
 			return $value;
 		}
 
-		if ( ! $context['post'] ) {
+		// The context can be partial (schemas generated without a page context
+		// for example), so never assume the key is set.
+		$post = isset( $context['post'] ) ? $context['post'] : null;
+
+		if ( empty( $post ) ) {
 			return $value;
 		}
 		$regex = $this->buildRegex( self::CUSTOM_FORMAT );
@@ -59,12 +63,16 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
 			if ( isset( $context['is_author'] ) && isset( $context['author']->ID ) ) {
 				$author_id = $context['author']->ID;
 			}
-			if ( $context['post'] && isset( $context['post']->post_author ) ) {
-				$author_id = $context['post']->post_author;
+			if ( isset( $post->post_author ) ) {
+				$author_id = $post->post_author;
 			}
 		}
 
-		$value = esc_attr( get_user_meta( $user_id, $field, true ) );
+		$raw_value = get_user_meta( $user_id, $field, true );
+
+		// A user meta can hold an array (multi value meta, ACF repeater...).
+		// esc_attr() would cast it and output the literal string "Array".
+		$value = is_scalar( $raw_value ) ? esc_attr( (string) $raw_value ) : '';
 
 		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context );
 	}
