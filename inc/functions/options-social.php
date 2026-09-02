@@ -14,6 +14,27 @@ if ( '1' !== seopress_get_service( 'TitleOption' )->getNoSiteLinksSearchBox() ) 
 	 * @return void
 	 */
 	function seopress_social_website_option() {
+		/*
+		 * The WebSite schema belongs on the front page only. This check used to
+		 * sit next to the add_action() at the bottom of this file, which made
+		 * registering the callback depend on conditional query tags evaluated
+		 * while the file was being included.
+		 *
+		 * That works in a normal request, since the file is pulled in on
+		 * wp_head priority 0, long after the query has run. It fails silently
+		 * anywhere the file is loaded earlier: the tags return false, the hook
+		 * is never registered, and nothing puts it back once the query is
+		 * available. The integration suite preloads this file to keep its hooks
+		 * in WP_UnitTestCase's snapshot, and lost this one entirely because of
+		 * it, which is how the schema went untested through wp_head.
+		 *
+		 * Deciding here instead is equivalent in a real request and robust
+		 * everywhere else.
+		 */
+		if ( ! is_home() && ! is_front_page() ) {
+			return;
+		}
+
 		$site_tile      = ! empty( seopress_get_service( 'TitleOption' )->getHomeSiteTitle() ) ? seopress_get_service( 'TitleOption' )->getHomeSiteTitle() : get_bloginfo( 'name' );
 		$alt_site_title = ! empty( seopress_get_service( 'TitleOption' )->getHomeSiteTitleAlt() ) ? seopress_get_service( 'TitleOption' )->getHomeSiteTitleAlt() : get_bloginfo( 'name' );
 		$site_desc      = ! empty( seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle() ) ? seopress_get_service( 'TitleOption' )->getHomeDescriptionTitle() : get_bloginfo( 'description' );
@@ -27,24 +48,45 @@ if ( '1' !== seopress_get_service( 'TitleOption' )->getNoSiteLinksSearchBox() ) 
 
 		$seopress_titles_template_variables_array = $variables['seopress_titles_template_variables_array'] ?? array();
 		$seopress_titles_template_replace_array   = $variables['seopress_titles_template_replace_array'] ?? array();
+		$seopress_excerpt_length                  = $variables['seopress_excerpt_length'] ?? 30;
 
 		$site_tile      = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $site_tile );
 		$alt_site_title = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $alt_site_title );
 		$site_desc      = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $site_desc );
 
+		// The static arrays above only cover the basic variables. Custom field,
+		// custom taxonomy and user meta placeholders (%%_cf_*%%, %%_ct_*%%,
+		// %%_ucf_*%%) are resolved by the shared helper, the same one the
+		// homepage branches of seopress_titles_the_title() call, so the schema
+		// stays consistent with the title tag and the meta description.
+		if ( function_exists( 'seopress_resolve_dynamic_field_placeholders' ) ) {
+			global $post;
+
+			$seopress_home_post_id = isset( $post ) && $post ? (int) $post->ID : 0;
+
+			$site_tile      = seopress_resolve_dynamic_field_placeholders( $site_tile, $seopress_home_post_id, $seopress_excerpt_length );
+			$alt_site_title = seopress_resolve_dynamic_field_placeholders( $alt_site_title, $seopress_home_post_id, $seopress_excerpt_length );
+			$site_desc      = seopress_resolve_dynamic_field_placeholders( $site_desc, $seopress_home_post_id, $seopress_excerpt_length );
+		}
+
 		$website_schema = array(
 			'@context'      => seopress_check_ssl() . 'schema.org',
 			'@type'         => 'WebSite',
-			'name'          => esc_html( $site_tile ),
-			'alternateName' => esc_html( $alt_site_title ),
-			'description'   => esc_html( $site_desc ),
+			'name'          => $site_tile,
+			'alternateName' => $alt_site_title,
+			'description'   => $site_desc,
 			'url'           => get_home_url(),
 		);
 
 		$website_schema = apply_filters( 'seopress_schemas_website', $website_schema );
 
+		// Entities are decoded and every "&", "<" and quote leaves as a JSON
+		// unicode escape, so nothing here depends on a consumer unescaping HTML
+		// and no value can close the script element.
+		$encoded = seopress_json_ld_encode( $website_schema );
+
 		$jsonld  = '<script id="website-schema" type="application/ld+json">';
-		$jsonld .= wp_json_encode( $website_schema );
+		$jsonld .= $encoded;
 		$jsonld .= '</script>';
 		$jsonld .= "\n";
 
@@ -52,9 +94,7 @@ if ( '1' !== seopress_get_service( 'TitleOption' )->getNoSiteLinksSearchBox() ) 
 
 		echo $jsonld;
 	}
-	if ( is_home() || is_front_page() ) {
-		add_action( 'wp_head', 'seopress_social_website_option', 1 );
-	}
+	add_action( 'wp_head', 'seopress_social_website_option', 1 );
 }
 
 /**
@@ -69,7 +109,7 @@ function seopress_social_facebook_og_url_hook() {
 		$current_url = user_trailingslashit( home_url( add_query_arg( array(), $wp->request ) ) );
 
 		if ( is_search() ) {
-			$seopress_social_og_url = '<meta property="og:url" content="' . htmlspecialchars( urldecode( get_home_url() . '/search/' . get_search_query() ) ) . '">';
+			$seopress_social_og_url = '<meta property="og:url" content="' . htmlspecialchars( urldecode( get_home_url() . '/search/' . get_search_query() ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) . '">';
 		} else {
 			$seopress_social_og_url = '<meta property="og:url" content="' . htmlspecialchars( urldecode( $current_url ), ENT_COMPAT, 'UTF-8' ) . '">';
 		}
@@ -733,7 +773,11 @@ function seopress_social_fb_img_hook() {
 			$seopress_social_og_thumb .= seopress_get_service( 'FacebookImageOptionMeta' )->getMetasBy( 'id' );
 		} elseif ( ( function_exists( 'is_shop' ) && is_shop() ) && '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt() ) ) { // Default OG:IMAGE from global CPT settings.
 
-			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt( $post->ID ) );
+			// No argument, like the post type archive branch below: the getter
+			// resolves the post type itself. `$post->ID` warned on a shop page
+			// whose query holds no product, where the condition right above now
+			// resolves the post type without the loop.
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt() );
 		} elseif ( ( is_singular() || ( function_exists( 'is_shop' ) && is_shop() ) ) && '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookImgDefault() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookImg() ) {// If "Apply this image to all your og:image tag" ON.
 
 			$seopress_social_og_thumb .= seopress_get_service( 'FacebookImageOptionMeta' )->getMetasBy( 'id' );
@@ -748,7 +792,10 @@ function seopress_social_fb_img_hook() {
 			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_social_fb_img_product_cat_option() );
 		} elseif ( is_post_type_archive() && ! is_search() && '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt() ) ) {// Default OG:IMAGE from global CPT settings.
 
-			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt( $post->ID ) );
+			// No argument: the getter resolves the post type from the queried
+			// object. Passing `$post->ID` made the lookup depend on the archive
+			// holding at least one post, and warned when it held none.
+			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt() );
 		} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookImg() ) {// Default OG:IMAGE from global settings.
 
 			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_get_service( 'SocialOption' )->getSocialFacebookImg() );
@@ -968,8 +1015,6 @@ function seopress_social_twitter_title_hook() {
 			$seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . esc_attr( seopress_social_fb_title_post_option() ) . '">';
 		} elseif ( function_exists( 'seopress_titles_the_title' ) && '' !== seopress_titles_the_title() ) {
 			$seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . esc_attr( seopress_titles_the_title() ) . '">';
-		} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCardOg() && function_exists( 'seopress_titles_the_title' ) && '' !== seopress_titles_the_title() ) {
-			$seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . esc_attr( seopress_titles_the_title() ) . '">';
 		} elseif ( '' !== get_the_title() ) {
 			$seopress_social_twitter_card_title .= '<meta name="twitter:title" content="' . esc_attr( wp_get_document_title() ) . '">';
 		}
@@ -1110,8 +1155,6 @@ function seopress_social_twitter_desc_hook() {
 			$seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . esc_attr( seopress_social_fb_desc_post_option() ) . '">';
 		} elseif ( function_exists( 'seopress_titles_the_description_content' ) && '' !== seopress_titles_the_description_content() ) {
 			$seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . esc_attr( seopress_titles_the_description_content() ) . '">';
-		} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && function_exists( 'seopress_titles_the_description_content' ) && '' !== seopress_titles_the_description_content() && '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCardOg() ) {
-			$seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . esc_attr( seopress_titles_the_description_content() ) . '">';
 		} elseif ( null !== $post && has_excerpt( $post->ID ) ) {
 			$seopress_social_twitter_card_desc .= '<meta name="twitter:description" content="' . wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( $post->post_excerpt ) ) ), $seopress_excerpt_length ) . '">';
 		}
@@ -1226,7 +1269,31 @@ function seopress_social_twitter_img_hook() {
 			$url = seopress_social_fb_img_term_option();
 		} elseif ( is_tax( 'product_cat' ) && ! is_search() && seopress_social_fb_img_product_cat_option() !== '' ) {// If product category thumbnail.
 			$url = seopress_social_fb_img_product_cat_option();
-		} elseif ( '' !== seopress_get_service( 'SocialOption' )->getSocialTwitterImg() ) {// Default Twitter.
+		} elseif ( is_post_type_archive() && ! is_search() && '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCardOg() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt() ) ) {
+			/*
+			 * Per post type archive image, mirroring the og:image branch. It
+			 * sits behind the "use og:image for Twitter" option like every
+			 * other value borrowed from the Facebook side, and above the two
+			 * sitewide defaults so an archive with its own image stops
+			 * advertising the site-wide one.
+			 */
+			$url = seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt();
+		} elseif ( ! empty( seopress_get_service( 'SocialOption' )->getSocialTwitterImg() ) ) {// Default Twitter.
+			/*
+			 * `! empty()` rather than `'' !== …`: the getter returns null when
+			 * the key is missing from the option group, and `'' !== null` is
+			 * true, so this branch was entered with nothing to assign and the
+			 * Facebook fallback right below it never ran. A site in that state
+			 * emitted no twitter:image at all while its settings said to reuse
+			 * the og:image.
+			 *
+			 * Only reachable on an option group holding a Facebook default but
+			 * no Twitter key: a normal save writes the key as an empty string
+			 * (`'' !== ''` is false, so the branch was already skipped), a fresh
+			 * install has neither image, and every importer that writes one
+			 * writes both. Where it does apply, the change adds the tag the
+			 * setting promises; it never alters or removes an existing one.
+			 */
 			$url = seopress_get_service( 'SocialOption' )->getSocialTwitterImg();
 		} elseif ( '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookImg() && '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCardOg() ) {// Default Facebook.
 			$url = seopress_get_service( 'SocialOption' )->getSocialFacebookImg();

@@ -35,7 +35,7 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
-		if ( isset( $_GET['post_type'] ) && 'elementor_library' === $_GET['post_type'] ) { // Elementor library page
+		if ( isset( $_GET['post_type'] ) && 'elementor_library' === $_GET['post_type'] ) { // Elementor library page.
 			$response = false;
 		}
 
@@ -52,6 +52,10 @@ class EnqueueModuleMetabox {
 		}
 
 		if ( isset( $_GET['et_fb'], $_GET['app_window'] ) && '1' === $_GET['app_window'] ) { // phpcs:ignore
+			$response = false;
+		}
+
+		if ( isset( $_GET['mp_preview'] ) ) { // MailerPress preview.
 			$response = false;
 		}
 

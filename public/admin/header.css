@@ -176,10 +176,14 @@
     flex: 0 0 auto;
 }
 
+/*
+ * Geometry is deliberately left to `@wordpress/components`: `.components-button`
+ * owns the height and `.has-icon` the square min-width and padding. Pinning them
+ * here froze the button at whatever core shipped the day the rule was written,
+ * which is exactly what breaks when core resizes its controls — WP 7.1 moves
+ * form controls to 40px with no opt out. Only appearance is overridden below.
+ */
 #seopress-admin-header-root .seopress-admin-header__action.components-button.has-icon {
-    min-width: 36px;
-    height: 36px;
-    padding: 6px;
     color: var(--seopress-header-color-text);
     background: transparent;
     border: 0;

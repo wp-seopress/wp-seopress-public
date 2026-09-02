@@ -171,12 +171,16 @@ class RedirectionSettings implements ExecuteHooks {
 		// The destination is user-provided, so use the safe HTTP API (it blocks
 		// requests to private / loopback hosts). Redirects are followed so the
 		// reported status reflects where the target actually ends up.
+		//
+		// The certificate is verified: this test exists to tell the user whether
+		// visitors reach the destination, and a browser refuses a target whose
+		// certificate does not validate. Skipping the check reported a healthy
+		// 200 for a destination nobody can actually load.
 		$http = wp_safe_remote_get(
 			$destination_url,
 			array(
-				'timeout'   => 10,
-				'sslverify' => false,
-				'headers'   => array(
+				'timeout' => 10,
+				'headers' => array(
 					'Cache-Control' => 'no-cache',
 				),
 			)

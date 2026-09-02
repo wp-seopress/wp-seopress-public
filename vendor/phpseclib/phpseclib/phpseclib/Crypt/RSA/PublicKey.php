@@ -16,7 +16,6 @@ use SEOPress\Vendor\phpseclib3\Crypt\Hash;
 use SEOPress\Vendor\phpseclib3\Crypt\Random;
 use SEOPress\Vendor\phpseclib3\Crypt\RSA;
 use SEOPress\Vendor\phpseclib3\Crypt\RSA\Formats\Keys\PSS;
-use SEOPress\Vendor\phpseclib3\Exception\BadConfigurationException;
 use SEOPress\Vendor\phpseclib3\Exception\UnsupportedAlgorithmException;
 use SEOPress\Vendor\phpseclib3\Exception\UnsupportedFormatException;
 use SEOPress\Vendor\phpseclib3\File\ASN1;
@@ -200,7 +199,11 @@ final class PublicKey extends RSA implements Common\PublicKey
         // be output.
         $emLen = $emBits + 7 >> 3;
         // ie. ceil($emBits / 8);
-        $sLen = $this->sLen !== null ? $this->sLen : $this->hLen;
+        if (static::$autoSaltLength) {
+            $sLen = 0;
+        } else {
+            $sLen = $this->sLen !== null ? $this->sLen : $this->hLen;
+        }
         $mHash = $this->hash->hash($m);
         if ($emLen < $this->hLen + $sLen + 2) {
             return \false;
@@ -217,11 +220,15 @@ final class PublicKey extends RSA implements Common\PublicKey
         $dbMask = $this->mgf1($h, $emLen - $this->hLen - 1);
         $db = $maskedDB ^ $dbMask;
         $db[0] = ~chr(256 - (1 << ($emBits & 7))) & $db[0];
-        $temp = $emLen - $this->hLen - $sLen - 2;
-        if (substr($db, 0, $temp) != str_repeat(chr(0), $temp) || ord($db[$temp]) != 1) {
+        // PS is a run of zero bytes terminated by a single 0x01
+        $psLen = strspn($db, "\x00");
+        if ($psLen == strlen($db) || $db[$psLen] != chr(0x1)) {
             return \false;
         }
-        $salt = substr($db, $temp + 1);
+        if (!static::$autoSaltLength && $psLen != $emLen - $this->hLen - $sLen - 2) {
+            return \false;
+        }
+        $salt = substr($db, $psLen + 1);
         // should be $sLen long
         $m2 = "\x00\x00\x00\x00\x00\x00\x00\x00" . $mHash . $salt;
         $h2 = $this->hash->hash($m2);

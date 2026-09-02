@@ -125,11 +125,16 @@ class ContentAnalysisRepository extends AbstractRepository {
 	public function insertContentAnalysis( $data ) {
 
 		global $wpdb;
-		$sql  = $this->getInsertInstruction( $data );
-		$sql .= $this->getInsertValuesInstruction( $data );
+
+		$columns = $this->prepareColumns( (array) $data, $this->getAuthorizedInsertValues(), array( 'post_id' ) );
+
+		if ( empty( $columns ) ) {
+			return null;
+		}
 
 		try {
-			return $wpdb->query( $sql );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- custom table, values are bound by $wpdb->insert().
+			return $wpdb->insert( $this->getTableName(), $columns );
 		} catch ( \Exception $e ) {
 			return null;
 		}
@@ -146,12 +151,15 @@ class ContentAnalysisRepository extends AbstractRepository {
 
 		$post_id = absint( $post_id );
 
-		$sql  = $this->getUpdateInstruction( $data );
-		$sql .= $this->getUpdateValues( $data );
-		$sql .= " WHERE post_id = {$post_id}";
+		$columns = $this->prepareColumns( (array) $data, $this->getAuthorizedUpdateValues() );
+
+		if ( empty( $columns ) ) {
+			return null;
+		}
 
 		try {
-			return $wpdb->query( $sql );
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery -- custom table, values and WHERE are bound by $wpdb->update().
+			return $wpdb->update( $this->getTableName(), $columns, array( 'post_id' => $post_id ) );
 		} catch ( \Exception $e ) {
 			return null;
 		}
@@ -168,6 +176,17 @@ class ContentAnalysisRepository extends AbstractRepository {
 	public function getContentAnalysis( $post_id, $columns = array( '*' ) ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 
 		global $wpdb;
+
+		// A column name cannot be a bound parameter, so the caller's list is
+		// matched against the columns this repository knows about. Every caller
+		// passes a hardcoded list today; this keeps that true for the next one.
+		$allowed = array_merge( array( 'id', 'post_id' ), $this->getAuthorizedInsertValues() );
+		$columns = array_values( array_intersect( (array) $columns, $allowed ) );
+
+		if ( empty( $columns ) ) {
+			$columns = array( '*' );
+		}
+
 		$str_columns = implode( ', ', $columns );
 		$sql         = $wpdb->prepare(
 			"SELECT {$str_columns}

@@ -82,6 +82,21 @@ class ExportSettings {
 						'seopress_social_facebook_app_id',
 						'seopress_social_facebook_link_ownership_id',
 						'seopress_social_twitter',
+						// The default sharing image and everything the media
+						// picker stores beside it. Listed rather than matched
+						// with a `seopress_social_facebook_img*` prefix, because
+						// that prefix also covers
+						// `seopress_social_facebook_img_default`, which is the
+						// "Override og:image globally" toggle: behaviour worth
+						// carrying into a reusable configuration, not a value
+						// belonging to one site.
+						'seopress_social_facebook_img',
+						'seopress_social_facebook_img_attachment_id',
+						'seopress_social_facebook_img_attachment_width',
+						'seopress_social_facebook_img_attachment_height',
+						'seopress_social_facebook_img_width',
+						'seopress_social_facebook_img_height',
+						'seopress_social_facebook_img_cpt',
 					),
 				),
 			),

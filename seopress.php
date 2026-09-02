@@ -4,7 +4,7 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 10.1
+ * Version: 10.2
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
@@ -37,7 +37,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '10.1' );
+define( 'SEOPRESS_VERSION', '10.2' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -240,6 +240,15 @@ function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 				?>
 				<div style="display:flex;justify-content:center;align-items:center;min-height:200px;padding:40px"><span class="spinner is-active" style="float:none"></span></div>
 				<?php
+			}
+		}
+
+		// Admin notices anchor - same story: every settings template calls it, so
+		// it has to exist even when the white-label header kept admin-header.php
+		// from loading. See that file for what the marker is for.
+		if ( ! function_exists( 'seopress_admin_notices_anchor' ) ) {
+			function seopress_admin_notices_anchor() {
+				echo '<hr class="wp-header-end seopress-notices-anchor">';
 			}
 		}
 

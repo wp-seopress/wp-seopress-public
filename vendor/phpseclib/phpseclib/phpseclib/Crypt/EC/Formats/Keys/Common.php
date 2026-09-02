@@ -13,11 +13,14 @@
 namespace SEOPress\Vendor\phpseclib3\Crypt\EC\Formats\Keys;
 
 use SEOPress\Vendor\phpseclib3\Common\Functions\Strings;
+use SEOPress\Vendor\phpseclib3\Crypt\EC;
 use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Base as BaseCurve;
 use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Binary as BinaryCurve;
 use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Montgomery;
 use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\Prime as PrimeCurve;
 use SEOPress\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedEdwards as TwistedEdwardsCurve;
+use SEOPress\Vendor\phpseclib3\Crypt\EC\Curves\Curve25519;
+use SEOPress\Vendor\phpseclib3\Exception\BadConfigurationException;
 use SEOPress\Vendor\phpseclib3\Exception\UnsupportedCurveException;
 use SEOPress\Vendor\phpseclib3\File\ASN1;
 use SEOPress\Vendor\phpseclib3\File\ASN1\Maps;
@@ -468,6 +471,46 @@ trait Common
             return $returnArray ? ['specifiedCurve' => $data] : ASN1::encodeDER(['specifiedCurve' => $data], Maps\ECParameters::MAP);
         }
         throw new UnsupportedCurveException('Curve cannot be serialized');
+    }
+    private static function deriveMontgomeryPublicKey(array $components)
+    {
+        $curve = $components['curve'];
+        $dA = $components['dA'];
+        $forcedEngine = EC::getForcedEngine();
+        $useLibsodium = !isset($forcedEngine) && $curve instanceof Curve25519 && function_exists('sodium_crypto_box_publickey_from_secretkey');
+        if ($forcedEngine === 'libsodium') {
+            $useLibsodium = \true;
+            if (!$curve instanceof Curve25519) {
+                throw new \RuntimeException('Engine libsodium is forced but is not supported for Curve448');
+            }
+            if (!function_exists('sodium_crypto_box_publickey_from_secretkey')) {
+                throw new BadConfigurationException('Engine libsodium is forced but not available');
+            }
+        }
+        if ($useLibsodium) {
+            //$r = pack('H*', '0900000000000000000000000000000000000000000000000000000000000000');
+            //$QA = sodium_crypto_scalarmult($dA->toBytes(), $r);
+            $QA = sodium_crypto_box_publickey_from_secretkey(str_pad($dA->toBytes(), 32, chr(0), \STR_PAD_LEFT));
+            return [$components['curve']->convertInteger(new BigInteger(strrev($QA), 256))];
+        }
+        $useOpenSSL = !isset($forcedEngine) && function_exists('openssl_pkey_get_private');
+        if ($forcedEngine == 'OpenSSL') {
+            $useOpenSSL = \true;
+            if (!function_exists('openssl_pkey_get_private')) {
+                throw new BadConfigurationException('Engine OpenSSL is forced but is not available');
+            }
+        }
+        if ($useOpenSSL) {
+            $pem = PKCS8::savePrivateKey($dA, $curve, []);
+            $res = openssl_pkey_get_private($pem);
+            if ($res !== \false && ($details = openssl_pkey_get_details($res)) !== \false) {
+                $index = $curve instanceof Curve25519 ? 'x25519' : 'x448';
+                return isset($details[$index]['pub_key']) ? [$curve->convertInteger(new BigInteger(strrev($details[$index]['pub_key']), 256))] : PKCS8::load($details['key'])['QA'];
+            } elseif ($forcedEngine == 'OpenSSL') {
+                throw new BadConfigurationException('Engine OpenSSL is forced but was unable to derive the public key because of ' . openssl_error_string());
+            }
+        }
+        return [$components['curve']->multiplyPoint($components['curve']->getBasePoint(), $components['dA'])[0]];
     }
     /**
      * Use Specified Curve

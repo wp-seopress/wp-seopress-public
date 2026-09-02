@@ -77,8 +77,6 @@ class AbilitiesApi implements ExecuteHooks {
 	 * @return void
 	 */
 	public function registerAbilities() {
-		$show_in_rest = seopress_abilities_api_rest_enabled();
-
 		$post_id_schema = array(
 			'type'        => 'object',
 			'properties'  => array(
@@ -122,12 +120,11 @@ class AbilitiesApi implements ExecuteHooks {
 						(int) $input['post_id']
 					);
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
-						'readonly'  => true,
+				'meta'                => seopress_abilities_api_meta(
+					array(
+						'readonly'   => true,
 						'idempotent' => true,
-					),
+					)
 				),
 			)
 		);
@@ -178,13 +175,12 @@ class AbilitiesApi implements ExecuteHooks {
 						$params
 					);
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
-						'readonly'   => false,
+				'meta'                => seopress_abilities_api_meta(
+					array(
+						'readonly'    => false,
 						'destructive' => true,
-						'idempotent' => true,
-					),
+						'idempotent'  => true,
+					)
 				),
 			)
 		);
@@ -210,12 +206,11 @@ class AbilitiesApi implements ExecuteHooks {
 						(int) $input['post_id']
 					);
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
+				'meta'                => seopress_abilities_api_meta(
+					array(
 						'readonly'   => true,
 						'idempotent' => true,
-					),
+					)
 				),
 			)
 		);
@@ -255,13 +250,12 @@ class AbilitiesApi implements ExecuteHooks {
 						$settings
 					);
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
+				'meta'                => seopress_abilities_api_meta(
+					array(
 						'readonly'    => false,
 						'destructive' => true,
 						'idempotent'  => true,
-					),
+					)
 				),
 			)
 		);
@@ -287,12 +281,11 @@ class AbilitiesApi implements ExecuteHooks {
 						(int) $input['post_id']
 					);
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
+				'meta'                => seopress_abilities_api_meta(
+					array(
 						'readonly'   => true,
 						'idempotent' => true,
-					),
+					)
 				),
 			)
 		);
@@ -332,13 +325,12 @@ class AbilitiesApi implements ExecuteHooks {
 						$settings
 					);
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
+				'meta'                => seopress_abilities_api_meta(
+					array(
 						'readonly'    => false,
 						'destructive' => true,
 						'idempotent'  => true,
-					),
+					)
 				),
 			)
 		);
@@ -384,11 +376,10 @@ class AbilitiesApi implements ExecuteHooks {
 						$params
 					);
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
+				'meta'                => seopress_abilities_api_meta(
+					array(
 						'readonly' => true,
-					),
+					)
 				),
 			)
 		);
@@ -417,12 +408,11 @@ class AbilitiesApi implements ExecuteHooks {
 
 					return is_array( $options ) ? $options : array();
 				},
-				'meta'                => array(
-					'show_in_rest' => $show_in_rest,
-					'annotations'  => array(
+				'meta'                => seopress_abilities_api_meta(
+					array(
 						'readonly'   => true,
 						'idempotent' => true,
-					),
+					)
 				),
 			)
 		);

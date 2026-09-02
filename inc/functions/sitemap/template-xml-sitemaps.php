@@ -36,20 +36,7 @@ add_filter(
 	}
 );
 
-add_action(
-	'the_post',
-	function ( $post ) {
-		$language = apply_filters(
-			'wpml_element_language_code',
-			null,
-			array(
-				'element_id'   => $post->ID,
-				'element_type' => 'page',
-			)
-		);
-		do_action( 'wpml_switch_language', $language );
-	}
-);
+add_action( 'the_post', 'seopress_sitemap_switch_wpml_language' );
 
 /**
  * Polylang: remove hidden languages
@@ -241,6 +228,7 @@ function seopress_xml_sitemap_index() {
 				if ( ! taxonomy_exists( $tax_key ) ) {
 					continue;
 				}
+
 				foreach ( $tax_value as $_tax_key => $_tax_value ) {
 					if ( '1' === $_tax_value ) {
 						$args = array(

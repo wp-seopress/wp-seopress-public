@@ -86,6 +86,12 @@ class SitemapsSettings implements ExecuteHooks {
 		// Sanitize using the same function as PHP form saves.
 		$sanitized_options = seopress_sanitize_options_fields( $new_options );
 
+		// The screen rewrites only the entry the user toggled, so without this a
+		// save carries every other malformed entry straight back into the
+		// option. Normalising here also repairs the stored value on the first
+		// save, instead of leaving it for the read-time normaliser forever.
+		$sanitized_options = $this->normalizeIncludeLists( $sanitized_options );
+
 		// Rewrite flush is handled by the update_option hook in OptionSaveHooks.
 		update_option( 'seopress_xml_sitemap_option_name', $sanitized_options );
 
@@ -102,6 +108,30 @@ class SitemapsSettings implements ExecuteHooks {
 	}
 
 	/**
+	 * Put both include lists into the shape the rest of the plugin expects.
+	 *
+	 * `SitemapOption` normalises these lists when it reads them, which is what
+	 * keeps the sitemap index correct on a malformed option. This controller
+	 * never goes through that service: it reads the raw option and writes it
+	 * back, so the normaliser was bypassed on both sides.
+	 *
+	 * The consequence was visible in two places. The screen reads
+	 * `list[type]['include']`, absent on a bare value, so a post type whose
+	 * sitemap is being served rendered unchecked. And because the screen
+	 * rewrites only the entry the user toggled, saving carried every other
+	 * malformed entry back into the option.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param array $options The sitemap option group.
+	 *
+	 * @return array
+	 */
+	protected function normalizeIncludeLists( $options ) {
+		return seopress_get_service( 'SitemapOption' )->normalizeIncludeLists( $options );
+	}
+
+	/**
 	 * The Sitemaps Settings process get.
 	 *
 	 * @param \WP_REST_Request $request The request.
@@ -114,6 +144,11 @@ class SitemapsSettings implements ExecuteHooks {
 		if ( empty( $options ) ) {
 			return new \WP_REST_Response( array() );
 		}
+
+		// Read the same shape the sitemap itself reads. The screen looks for
+		// `list[type]['include']`, which a bare value does not have, so an
+		// entry that is being served would otherwise render unchecked.
+		$options = $this->normalizeIncludeLists( $options );
 
 		$data = array();
 

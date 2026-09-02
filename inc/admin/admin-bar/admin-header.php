@@ -43,3 +43,29 @@ function seopress_settings_skeleton() {
 	<div style="display:flex;justify-content:center;align-items:center;min-height:200px;padding:40px"><span class="spinner is-active" style="float:none"></span></div>
 	<?php
 }
+
+/**
+ * Anchor telling WordPress where the admin notices belong on a SEOPress screen.
+ *
+ * WordPress prints admin notices at the very top of #wpbody-content, before the
+ * page callback has echoed anything. On SEOPress screens that spot is covered by
+ * #seopress-header-wrapper, which is fixed, so a notice ends up hidden behind the
+ * header bar (only its last line sticks out) and its height still pushes the rest
+ * of the page down, leaving a gap.
+ *
+ * wp-admin/js/common.js already solves this for core screens: it moves every
+ * `div.notice`, `div.updated` and `div.error` after `.wp-header-end`, falling
+ * back to the first `.wrap h1, .wrap h2`. Our screens have neither, so the move
+ * was a no-op and the notices stayed behind the header.
+ *
+ * Output this right after the page title block — never inside .seopress-php-header
+ * (the settings bundle empties it before portaling the React header into it) nor
+ * inside #seopress-admin-settings-root (React owns that subtree).
+ *
+ * @since 10.2.1
+ *
+ * @return void
+ */
+function seopress_admin_notices_anchor() {
+	echo '<hr class="wp-header-end seopress-notices-anchor">';
+}

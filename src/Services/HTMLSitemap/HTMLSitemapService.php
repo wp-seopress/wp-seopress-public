@@ -80,9 +80,20 @@ class HTMLSitemapService {
 		$html = '';
 
 		if ( ! empty( $this->sitemap_option->getPostTypesList() ) ) {
-			$html .= '<div class="wrap-html-sitemap sp-html-sitemap">';
-
 			$post_types_list = $this->sitemap_option->getPostTypesList();
+
+			// Unchecking a post type on the settings screen stores it as
+			// array( 'include' => '' ) rather than dropping the entry, so the
+			// option keeps listing every post type it knows about. The loop
+			// below only tested `! empty( $cpt_value )`, which such an entry
+			// passes, so the HTML sitemap listed post types the user had
+			// explicitly excluded. Keep only the ones actually included.
+			$post_types_list = array_filter(
+				(array) $post_types_list,
+				static function ( $cpt_value ) {
+					return is_array( $cpt_value ) && ! empty( $cpt_value['include'] );
+				}
+			);
 
 			if ( isset( $post_types_list['page'] ) ) {
 				$post_types_list = array( 'page' => $post_types_list['page'] ) + $post_types_list;
@@ -105,6 +116,13 @@ class HTMLSitemapService {
 			foreach ( SitemapOption::INTERNAL_POST_TYPES as $internal_post_type ) {
 				unset( $post_types_list[ $internal_post_type ] );
 			}
+
+			// Nothing left to list: emit nothing rather than an empty wrapper.
+			if ( empty( $post_types_list ) ) {
+				return $html;
+			}
+
+			$html .= '<div class="wrap-html-sitemap sp-html-sitemap">';
 
 			foreach ( $post_types_list as $cpt_key => $cpt_value ) {
 				if ( ! empty( $cpt_value ) ) {

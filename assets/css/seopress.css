@@ -651,6 +651,95 @@ body.seopress-white-label-noheader .seopress-option {
     content: none;
 }
 
+/* SEOPress admin notices
+ *
+ * WordPress prints admin notices at the very top of #wpbody-content, before the
+ * page callback has echoed anything — exactly where #seopress-header-wrapper
+ * sits, fixed, on top of them. Left alone, a notice is hidden behind the header
+ * bar (only its last line sticks out) while its height still pushes the rest of
+ * the page down, leaving a gap under the header.
+ *
+ * seopress_admin_notices_anchor() now outputs the `.wp-header-end` marker that
+ * wp-admin/js/common.js looks for, so core relocates every notice just below the
+ * page title, inside the content flow. The rules below place that relocated
+ * stack; the last block covers the screens where the move never happens because
+ * JavaScript is off.
+ */
+.seopress-styles .seopress-notices-anchor {
+    display: block;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    visibility: hidden;
+}
+
+.seopress-styles .seopress-notices-anchor ~ .notice,
+.seopress-styles .seopress-notices-anchor ~ div.updated,
+.seopress-styles .seopress-notices-anchor ~ div.error {
+    clear: both;
+    margin: 0 20px 12px 0;
+}
+
+/*
+ * The Dashboard centres its cards in a 1200px column with a 24px inner gutter
+ * (see .seopress-dashboard-app), so mirror that box instead of letting the
+ * notices run the full width. width + max-width keeps them lined up with the
+ * cards both above and below the point where the column stops growing.
+ */
+.seopress-styles .seopress-option:has(.seopress-dashboard-app) > .seopress-notices-anchor ~ .notice,
+.seopress-styles .seopress-option:has(.seopress-dashboard-app) > .seopress-notices-anchor ~ div.updated,
+.seopress-styles .seopress-option:has(.seopress-dashboard-app) > .seopress-notices-anchor ~ div.error {
+    width: calc(100% - 48px);
+    max-width: 1152px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/*
+ * Below 782px .seopress-option switches to `width: 100%` with a 20px gutter of
+ * its own, so the notices need that same gutter to stay aligned with the title
+ * and the settings content.
+ */
+@media only screen and (max-width: 782px) {
+    .seopress-styles .seopress-notices-anchor ~ .notice,
+    .seopress-styles .seopress-notices-anchor ~ div.updated,
+    .seopress-styles .seopress-notices-anchor ~ div.error {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+    .seopress-styles .seopress-option:has(.seopress-dashboard-app) > .seopress-notices-anchor ~ .notice,
+    .seopress-styles .seopress-option:has(.seopress-dashboard-app) > .seopress-notices-anchor ~ div.updated,
+    .seopress-styles .seopress-option:has(.seopress-dashboard-app) > .seopress-notices-anchor ~ div.error {
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+/*
+ * JavaScript disabled: core never runs the move, so the notices stay where
+ * WordPress printed them — above the fixed header. Offset the whole column by
+ * the header height instead of leaving them underneath it, and drop the offset
+ * .seopress-option carries for the same purpose so it is not counted twice.
+ * Scoped to `.no-js`, which WordPress swaps for `.js` in an inline script right
+ * after <body>, so this never paints for anyone running JavaScript — and skipped
+ * when the white-label header is off, since nothing overlaps the notices then.
+ */
+.no-js.seopress-styles:not(.seopress-white-label-noheader) #wpbody-content:has(> :is(.notice, div.updated, div.error) ~ #seopress-header-wrapper) {
+    padding-top: 84px;
+}
+
+.no-js.seopress-styles:not(.seopress-white-label-noheader) #wpbody-content:has(> :is(.notice, div.updated, div.error) ~ #seopress-header-wrapper) > .seopress-option {
+    padding-top: 0;
+}
+
+@media only screen and (max-width: 782px) {
+    .no-js.seopress-styles:not(.seopress-white-label-noheader) #wpbody-content:has(> :is(.notice, div.updated, div.error) ~ #seopress-header-wrapper) {
+        padding-top: 75px;
+    }
+}
+
 /* Tooltip */
 .sp-tooltip {
     position: relative;

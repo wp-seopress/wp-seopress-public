@@ -394,7 +394,7 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedImageAutoAltT
 			$content_match = $matches_tag[ $key ];
 			preg_match( $regex_src, $content_match, $match_src );
 
-			$content_to_replace = str_replace( 'alt=""', 'alt="' . htmlspecialchars( esc_html( $target_keyword ) ) . '"', $content_match );
+			$content_to_replace = str_replace( 'alt=""', 'alt="' . htmlspecialchars( esc_html( $target_keyword ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) . '"', $content_match );
 
 			if ( $content_match !== $content_to_replace ) {
 				$content = str_replace( $content_match, $content_to_replace, $content );
@@ -417,15 +417,44 @@ if ( ! empty( seopress_get_service( 'AdvancedOption' )->getAdvancedImageAutoAltT
 	 * @return string $filtered_image
 	 */
 	function seopress_auto_img_alt_txt( $filtered_image, $context, $attachment_id ) {
-		if ( $attachment_id ) {
-			if ( ! preg_match( '/<img[^>]+alt=(["\'])(.*?)\1/', $filtered_image ) || preg_match( '/<img[^>]+alt=(["\'])(\s*)\1/', $filtered_image ) ) {
-				$alt_text = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
-
-				$filtered_image = str_replace( '<img', '<img alt="' . esc_attr( $alt_text ) . '"', $filtered_image );
-			}
+		if ( ! $attachment_id ) {
+			return $filtered_image;
 		}
 
-		return $filtered_image;
+		$has_alt   = (bool) preg_match( '/<img[^>]+alt=(["\'])(.*?)\1/', $filtered_image );
+		$empty_alt = (bool) preg_match( '/<img[^>]+alt=(["\'])(\s*)\1/', $filtered_image );
+
+		// An image that already carries a real alt keeps it.
+		if ( $has_alt && ! $empty_alt ) {
+			return $filtered_image;
+		}
+
+		$alt_text = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
+
+		if ( $empty_alt ) {
+			/*
+			 * The Block Editor writes alt="" on every image block, so an empty
+			 * alt is the common case rather than the edge case. Prepending a
+			 * second alt here left the element carrying two of them: browsers
+			 * keep the first and ignore the rest, but the markup is invalid and
+			 * validators report it as a missing alt. Overwrite the attribute
+			 * where it already sits instead.
+			 *
+			 * preg_replace_callback rather than preg_replace: the alt text is
+			 * arbitrary user content, and a literal $1 or backslash in it would
+			 * otherwise be read as a backreference.
+			 */
+			return preg_replace_callback(
+				'/(<img[^>]*?\salt=)(["\'])\s*\2/',
+				function ( $matches ) use ( $alt_text ) {
+					return $matches[1] . '"' . esc_attr( $alt_text ) . '"';
+				},
+				$filtered_image,
+				1
+			);
+		}
+
+		return str_replace( '<img', '<img alt="' . esc_attr( $alt_text ) . '"', $filtered_image );
 	}
 	add_filter( 'wp_content_img_tag', 'seopress_auto_img_alt_txt', 10, 3 );
 }

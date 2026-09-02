@@ -44,11 +44,29 @@ class HTMLSitemapTemplate {
 			$postslist = get_posts( $args );
 
 			$args2 = array(
-				'post_type'   => $cpt_key,
-				'include'     => $postslist,
-				'sort_order'  => $this->sitemap_option->getHtmlOrder(),
-				'sort_column' => $this->sitemap_option->getHtmlOrderBy(),
+				'post_type' => $cpt_key,
+				'include'   => $postslist,
 			);
+
+			/*
+			 * Only pass these through when they hold something. The option
+			 * getters return null until the setting has been saved once, and
+			 * get_pages() runs sort_column through wp_parse_list(), so a null
+			 * reaches preg_split() as its subject: deprecated on PHP 8.1, a
+			 * TypeError on a future release. Leaving the keys out lets
+			 * get_pages() apply its own defaults, which is what the null was
+			 * silently relying on anyway.
+			 */
+			$sort_order  = $this->sitemap_option->getHtmlOrder();
+			$sort_column = $this->sitemap_option->getHtmlOrderBy();
+
+			if ( ! empty( $sort_order ) ) {
+				$args2['sort_order'] = $sort_order;
+			}
+
+			if ( ! empty( $sort_column ) ) {
+				$args2['sort_column'] = $sort_column;
+			}
 
 			$args2     = apply_filters( 'seopress_sitemaps_html_pages_query', $args2, $cpt_key );
 			$postslist = get_pages( $args2 );

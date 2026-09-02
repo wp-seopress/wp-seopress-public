@@ -322,7 +322,7 @@ class CommandPaletteIndex {
 			self::make_setting( 'advanced/site-verification-pinterest', __( 'Pinterest verification', 'wp-seopress' ), array( 'pinterest', 'verification' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_advanced_pinterest' ),
 			self::make_setting( 'advanced/site-verification-facebook', __( 'Facebook domain verification', 'wp-seopress' ), array( 'facebook', 'verification', 'domain' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_advanced_facebook' ),
 			self::make_setting( 'advanced/site-verification-seznam', __( 'Seznam verification', 'wp-seopress' ), array( 'seznam', 'verification' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_advanced_seznam' ),
-			self::make_setting( 'advanced/abilities-rest', __( 'Expose abilities via REST API', 'wp-seopress' ), array( 'abilities', 'rest api', 'ai', 'mcp', 'expose' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_abilities_api_rest' ),
+			self::make_setting( 'advanced/abilities-rest', __( 'Expose abilities to AI agents and external tools', 'wp-seopress' ), array( 'abilities', 'rest api', 'ai', 'mcp', 'agent', 'expose' ), __( 'Advanced › Advanced', 'wp-seopress' ), $page, $adv, 'seopress_advanced_abilities_api_rest' ),
 		);
 	}
 

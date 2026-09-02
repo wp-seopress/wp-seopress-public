@@ -208,7 +208,7 @@ function seopress_display_seo_term_metaboxe() {
 		}
 
 		$seo_tabs = array();
-		$seo_tabs = json_decode( stripslashes( htmlspecialchars_decode( $_POST['seo_tabs'] ) ) );
+		$seo_tabs = json_decode( stripslashes( htmlspecialchars_decode( $_POST['seo_tabs'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) ) );
 
 		if ( in_array( 'title-tab', $seo_tabs, true ) ) {
 			if ( ! empty( $_POST['seopress_titles_title'] ) ) {

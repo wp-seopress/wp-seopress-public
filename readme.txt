@@ -4,9 +4,9 @@ Contributors: seopress, rainbowgeek, corsonr, gmulti, juliobox, maigret, mgris, 
 Donate link: https://www.seopress.org/
 Tags: seo, ai seo, schema, xml sitemap, google search console
 Requires at least: 6.5
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 10.1
+Stable tag: 10.2
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,35 +20,36 @@ WordPress SEO plugin with AI SEO metadata, schema, XML sitemap, redirections & S
 
 [youtube https://www.youtube.com/watch?v=4ysKFVr_nu0]
 
-✔ <strong>One SEO plugin, every page builder</strong>: Universal SEO metabox for Gutenberg, Elementor, Divi, Bricks, Oxygen, Breakdance, WPBakery, Avada, Kadence and more. <a href="https://www.seopress.org/features/page-builders-integration/" target="_blank">See all integrations</a>.
-✔ <strong>AI-powered metadata</strong>: Generate SEO titles, meta descriptions, Open Graph, X (Twitter) Cards and image alt text in bulk with OpenAI, Google Gemini, Anthropic Claude, MistralAI or DeepSeek. <a href="https://www.seopress.org/features/openai/" target="_blank">Learn more</a>.
-✔ <strong>Built for AI search (AEO / GEO)</strong>: Native llms.txt support and one-click Agent Readiness toggle so ChatGPT, Claude, Perplexity & Gemini understand your content.
-✔ <strong>Privacy-first &amp; fully white label</strong>: No tracking, no data footprint, no upsells in admin. Your data stays yours. <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">Why white label matters</a>.
-✔ <strong>Content analysis with unlimited target keywords</strong>: No artificial limit per post.
-✔ <strong>Migrate in one click</strong>: From Yoast SEO, Rank Math, AIOSEO, The SEO Framework, Slim SEO, SmartCrawl, Squirrly, SEO Ultimate, WP Meta SEO, Premium SEO Pack, SiteSEO. <a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Start migration</a>.
-✔ <strong>Translated into 27+ languages</strong> with professional translations. <a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Help translate</a>.
-
+<ul>
+	<li>✔ <strong>One SEO plugin, every page builder</strong>: Universal SEO metabox for Gutenberg, Elementor, Divi 4 & 5, Bricks, Oxygen, Breakdance, WPBakery, Avada, Kadence and more. <a href="https://www.seopress.org/features/page-builders-integration/" target="_blank">See all integrations</a>.</li>
+	<li>✔ <strong>AI-powered metadata</strong>: Generate SEO titles, meta descriptions, Open Graph, X (Twitter) Cards and image alt text in bulk with OpenAI, Google Gemini, Anthropic Claude, MistralAI or DeepSeek. <a href="https://www.seopress.org/features/openai/" target="_blank">Learn more</a>.</li>
+	<li>✔ <strong>Built for AI search (AEO / GEO)</strong>: Native llms.txt support and one-click Agent Readiness toggle so ChatGPT, Claude, Perplexity & Gemini understand your content.</li>
+	<li>✔ <strong>Privacy-first &amp; fully white label</strong>: No tracking, no data footprint, no upsells in admin. Your data stays yours. <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">Why white label matters</a>.</li>
+	<li>✔ <strong>Content analysis with unlimited target keywords</strong>: No artificial limit per post.</li>
+	<li>✔ <strong>Migrate in one click</strong>: From Yoast SEO, Rank Math, AIOSEO, The SEO Framework, Slim SEO, SmartCrawl, Squirrly, SEO Ultimate, WP Meta SEO, Premium SEO Pack, SiteSEO. <a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Start migration</a>.</li>
+	<li>✔ <strong>Translated into 29+ languages</strong> with professional translations. <a href="https://translate.wordpress.org/projects/wp-plugins/wp-seopress" target="_blank">Help translate</a>.</li>
+</ul>
 <a href="https://www.seopress.org/pricing/" target="_blank"><strong>SEOPress PRO from $49/year: 1 site • Unlimited sites for $149/year</strong></a>
 
 <a href="https://www.seopress.org/features/" target="_blank">Features</a> | <a href="https://www.seopress.org/solutions/migrate-from/" target="_blank">Migrate</a> | <a href="https://www.seopress.org/wordpress-seo-plugins/pro/" target="_blank">PRO</a> | <a href="https://www.seopress.org/integrations/" target="_blank">Integrations</a> | <a href="https://www.seopress.org/support/" target="_blank">Support</a> | <a href="https://www.seopress.org/features/seopress-white-label/" target="_blank">White Label</a> | <a href="https://www.seopress.org/features/openai/" target="_blank">AI</a>
 
-<h3>What's new in SEOPress 10</h3>
+<h3>What's new in SEOPress 10.2</h3>
 
-Our biggest AI release yet: a brand new in-editor AI Assistant, your own AI credits, a smarter XML sitemap and a faster Redirections experience.
+AI made easier to get started with, more control over your redirections and Site Audit, and a major reliability pass.
 
 <ul>
-	<li><strong>🤖 Brand new AI Assistant</strong> (PRO): A full assistant right inside the Block Editor — chat, quick actions, generate complete articles with /write, copy results in one click, and keep persistent conversations.</li>
-	<li><strong>🔑 Your own AI, your way</strong> (PRO): Buy ready-to-use tokens from seopress.org, or connect your own OpenAI, Google Gemini or Anthropic Claude key — with WordPress Connectors (Abilities API) support on WordPress 7+ and credits you can top up directly.</li>
-	<li><strong>🖼️ Finer AI image metadata</strong> (PRO): Per-field toggles to choose exactly which AI-generated alt, caption and description are written on upload.</li>
-	<li><strong>🩺 XML Sitemap health check</strong>: A built-in tool that probes your sitemap index and sub-sitemaps, flags problems, reports coverage of optional content types, and offers one-click fixes.</li>
-	<li><strong>📰 Google Preferred Sources</strong>: A new block &amp; shortcode to add Google's "Preferred Sources" follow button anywhere in your content.</li>
-	<li><strong>⚡ Redirections &amp; 404s, faster</strong> (PRO): Moved to a snappy DataViews screen, with a dedicated Rank Math CSV importer and an "Add another" button after each redirect.</li>
-	<li><strong>🎬 Smarter Video sitemap</strong> (PRO): Now scans page builder content (Bricks and more) for YouTube embeds, with a keyless oEmbed fallback when the YouTube API quota is reached.</li>
-	<li><strong>🚦 robots.txt editor refined</strong> (PRO): Contextual guidance on quick-insert buttons, clearer "Recommended" labels, and native WordPress tooltips.</li>
-	<li><strong>🌍 Automatic language packs</strong>: Translations for your locale install on demand, no manual upload (Free and PRO).</li>
+	<li><strong>🤖 AI in the setup wizard</strong>: A new AI Assistant step to turn on AI and connect your provider without leaving the installation wizard.</li>
+	<li><strong>✨ AI Assistant ready to use</strong> (PRO): The assistant is now enabled by default in the editor, with a one-time notice explaining how it works.</li>
+	<li><strong>🕐 Opening hours post by post</strong> (PRO): Set your Local Business opening hours on each post — ideal for directories and multi-location sites.</li>
+	<li><strong>↪️ Redirections, faster to manage</strong> (PRO): Test a redirect straight from the list with the new "Test URL" action, and replace or remove categories in bulk.</li>
+	<li><strong>🩺 Site Audit at scale</strong> (PRO): Search, sort and filter your entire list of issues, not just the page displayed.</li>
+	<li><strong>📥 Smarter CSV import</strong> (PRO): The separator of your metadata file is now detected automatically, and errors are explained.</li>
+	<li><strong>⚡ Faster SEO metabox</strong>: Fewer requests sent to your server when you open a tab, plus better accessibility across the admin.</li>
+	<li><strong>🛠️ Nearly 40 fixes</strong>: Social sharing images on archives, XML &amp; HTML sitemaps, content analysis, schemas, table of contents, internal linking and more.</li>
+	<li><strong>✅ Ready for the latest versions</strong>: Tested with WordPress 7.1 and compatible with PHP 8.5.</li>
 </ul>
 
-<a href="https://www.seopress.org/newsroom/product-news/seopress-10/" target="_blank"><strong>Read the full 10.0 release notes →</strong></a>
+<a href="https://www.seopress.org/newsroom/product-news/seopress-10-2/" target="_blank"><strong>Read the full 10.2 release notes →</strong></a>
 
 <h3>Why SEOPress is the best WordPress SEO plugin?</h3>
 
@@ -59,7 +60,7 @@ Our biggest AI release yet: a brand new in-editor AI Assistant, your own AI cred
 	<li><strong>White label by default</strong>: Replace plugin name, logo, links and screens. Perfect for agencies and freelancers.</li>
 	<li><strong>GDPR-friendly</strong>: Privacy by design. Built-in compatibility with consent platforms.</li>
 	<li><strong>Beginner to expert</strong>: Installation wizard for newcomers, hundreds of hooks, REST API and WP-CLI for developers. Free <a href="https://www.seopress.org/support/" target="_blank">guides</a> and <a href="https://www.seopress.org/support/ebooks/" target="_blank">SEO ebooks</a>.</li>
-	<li><strong>Battle-tested</strong>: 350,000+ active installs, weekly releases, dedicated team since 2017.</li>
+	<li><strong>Battle-tested</strong>: 350,000+ active installs, regular releases, dedicated team since 2017.</li>
 </ul>
 
 <h3>SEOPress Free Features</h3>
@@ -312,46 +313,57 @@ By using our contact form (select Misc as subject), or directly from <a href="ht
 12. Schema metabox
 
 == Changelog ==
-= 10.1 <a href="https://www.seopress.org/newsroom/product-news/seopress-10-1/">Read the blog post update</a> =
-NEW Automatically generate your meta title and description with AI when you publish a post (PRO)
-NEW Generate meta title and description with AI for your taxonomy terms (categories, tags...) (PRO)
-NEW Restrict AI generation features to specific user roles (PRO)
-NEW See your AI credits balance right from the SEOPress dashboard
-NEW Site Audit: new Technical tab with site-wide checks for your homepage (PRO)
-NEW Robots.txt revision history: compare changes and restore any previous version (PRO)
-NEW ProductGroup schema for WooCommerce variable products (PRO)
-NEW Product schema: sale price and merchant return policy support (PRO)
-NEW New Manual tab on the Schemas screen to find all content with manually assigned schemas (PRO)
-NEW Dynamic variables are now resolved in your custom schema fields
-NEW Import your redirections from Slim SEO (PRO)
-NEW Import a JSON settings file directly from the installation wizard
-NEW Export a reusable configuration file without site-specific data, perfect to reuse on other sites
-NEW Quick actions for SEOPress PRO in the WordPress command palette (PRO)
-NEW Redesigned License page with built-in update troubleshooting info (PRO)
-NEW Support for the latest DeepSeek V4 AI models (PRO)
-INFO Clearer on/off state for each feature on the settings pages
-INFO Improved Yoast migration: social profiles and feed settings are now imported
-INFO Improved SureRank migration with previously missing settings
-INFO The Redirection tab now shows an indicator when a redirect is active
-INFO Clearer Google Analytics connection flow in the dashboard (PRO)
-INFO Removed the Admin Columns Pro integration, now built into ACP 7.0+ (PRO)
-FIX Accurate GA4 purchase conversion tracking for WooCommerce (PRO)
-FIX Password-protected posts are no longer listed in the HTML sitemap
-FIX More reliable content analysis with page builders (Beaver Builder, Themeco Cornerstone) and local/staging environments
-FIX Content analysis now recognizes titles and descriptions coming from your global templates
-FIX Google snippet preview no longer shows a 404 title for draft posts
-FIX Product schema improvements: shipping details, price valid until date and no more empty review data (PRO)
-FIX Local Business schema: opening hours, closed days and homepage display now work as expected (PRO)
-FIX A stalled Site Audit or Broken Links scan now recovers automatically (PRO)
-FIX llms.txt is now compatible with WPML and multisite subsites (PRO)
-FIX Table of Contents now detects headings from third-party blocks (PRO)
-FIX Target keyword is now translatable with WPML
-FIX Default title and description now apply correctly to taxonomy archives
-FIX License deactivation no longer leaves the key marked as active (PRO)
-FIX AI button in the media modal, Gemini connection test and various interface fixes (PRO)
-FIX White label: removed remaining hardcoded brand names (PRO)
-FIX Visual glitches on taxonomy term screens and in the migration progress bar
-FIX Various PHP 8 warnings and a potential error during plugin updates
+= 10.2 <a href="https://www.seopress.org/newsroom/product-news/seopress-10-2/">Read the blog post update</a> =
+NEW Setup wizard: a new AI Assistant step to turn on AI and connect your provider without leaving the wizard
+NEW The AI Assistant is now enabled by default in the editor, with a one-time notice explaining how it works (PRO)
+NEW Local Business schema: set your opening hours post by post, ideal for directories and multi-location sites (PRO)
+NEW Redirections: test a redirect directly from the list with the new "Test URL" row action (PRO)
+NEW Redirections: bulk actions can now replace or remove categories, not only add them (PRO)
+NEW Site Audit: search, sort and filter your entire list of issues, not just the page displayed (PRO)
+NEW Metadata CSV import: the separator is now detected automatically, and errors are explained (PRO)
+INFO Tested with WordPress 7.1 and compatible with PHP 8.5
+INFO Faster SEO metabox: fewer requests sent to your server when you open a tab
+INFO Clearer message in the SEO metabox when your role is not allowed to edit a section
+INFO Better accessibility: proper labels for the SEO button in the admin bar, the color picker and the opening hours fields
+INFO Schema markup is now output with standard JSON escaping, for better compatibility with validators
+FIX Default Event type for schemas
+FIX Social sharing image on archive pages and on the WooCommerce shop page (Facebook and X/Twitter)
+FIX Titles and meta descriptions on archive pages: the right post type is now detected
+FIX XML sitemap: the "noindex" option set on your blog page is now respected
+FIX XML sitemap: image URLs coming from page builders or a CDN are no longer broken
+FIX XML sitemap: no more repeated language switching with WPML on large sites
+FIX HTML sitemap: post types you unchecked in the settings are no longer listed
+FIX Content analysis: target keywords with accents or apostrophes are now matched correctly
+FIX Content analysis: every robots directive is reported, not only the last one
+FIX Image SEO: an empty alt attribute is now filled in, instead of a second one being added
+FIX FAQ block: the schema is no longer corrupted on save, and blocks already broken are repaired
+FIX WebSite schema: dynamic variables and custom fields are now resolved, without escaped characters
+FIX Settings: the dynamic variables dropdown no longer scrolls the page back to the top
+FIX Classic editor: the link search results no longer cover the search field
+FIX Google snippet preview no longer breaks when your content contains emojis
+FIX The SEO metabox no longer shows up empty with Bricks Builder
+FIX Restricting SEO sections by user role no longer prevents saving or publishing a post
+FIX "Page 1 of 0" is no longer displayed on content without pagination
+FIX Google Analytics tracking script no longer fails when jQuery loads late
+FIX Admin notices left behind by removed plugins no longer trigger a PHP error
+FIX The reusable configuration export no longer includes your default sharing image
+FIX Redirections: regular expressions are kept exactly as you typed them, on import and on save (PRO)
+FIX Redirections: the destination URL is no longer cleared when you click in the field (PRO)
+FIX Redirections: more accurate URL tester (home page, redirect chains, visitor conditions) (PRO)
+FIX 404 monitoring: your site's own internal requests are no longer logged as 404 (PRO)
+FIX AI: generation no longer fails on servers without the intl PHP extension (PRO)
+FIX AI: images can be attached again, and failed bulk generations are now reported as errors (PRO)
+FIX AI: retired OpenAI model replaced, and empty results fixed with GPT-5 and DeepSeek (PRO)
+FIX AI Assistant: correct width and position of the panel in the editor (PRO)
+FIX Schemas: dynamic variables in custom schemas, searchable term picker, and a more accurate Manual tab (PRO)
+FIX Schemas: an invalid schema no longer prevents you from saving your post (PRO)
+FIX Site Audit: a single problematic page no longer stops the whole scan (PRO)
+FIX Site Audit: stuck scans, robots.txt false positive and last scan date (PRO)
+FIX Internal linking: content built with page builders (Divi 5...) is now read, and saving no longer empties the index (PRO)
+FIX Table of contents: headings placed inside groups, columns or third-party blocks are now detected (PRO)
+FIX Agent Ready: the Markdown version is no longer served to your visitors by a cache plugin (PRO)
+FIX Agent Ready: URLs containing special characters are now handled correctly (PRO)
+FIX SEOPress PRO no longer causes errors when the free plugin is deactivated (PRO)
 FIX Various security improvements
 
 <a href="https://www.seopress.org/changelog/" target="_blank">View our complete changelog</a>

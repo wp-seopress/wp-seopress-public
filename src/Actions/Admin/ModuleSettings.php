@@ -683,6 +683,15 @@ class ModuleSettings implements ExecuteHooks {
 			return new \stdClass();
 		}
 
+		// This payload is inlined so the screen skips the REST round-trip, which
+		// means the GET controller never runs on the page the user lands on.
+		// The sitemap include lists have to be normalized here too, otherwise a
+		// bare `type => '1'` entry has no `include` key and renders unchecked
+		// while its sitemap is being served.
+		if ( 'seopress_xml_sitemap_option_name' === $option_name ) {
+			$options = seopress_get_service( 'SitemapOption' )->normalizeIncludeLists( $options );
+		}
+
 		return $options;
 	}
 

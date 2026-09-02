@@ -2,32 +2,47 @@
     let editor = null;
     const inputs = {};
     const getLink = () => editor ? editor.$('a[data-wplink-edit="true"]') : null;
+
+    /**
+     * Markup for a rel attribute row.
+     *
+     * WordPress styles its own "Open link in a new tab" row through the
+     * link-target class. Reusing it makes our rows inherit the core spacing,
+     * alignment and responsive rules whatever the WordPress version, instead of
+     * duplicating values that drift each time the dialog layout is reworked.
+     */
+    const relRow = (modifier, id, label) =>
+        `<div class="link-target ${modifier}">
+            <label><span></span>
+            <input type="checkbox" id="${id}" /> ${label}</label>
+        </div>`;
+
+    /**
+     * Insert a rel attribute row after the last checkbox row of the dialog,
+     * falling back to the options wrapper if WordPress ever drops that row.
+     */
+    const addRelRow = (html) => {
+        const options = $('#link-options');
+        const lastRow = options.children('.link-target').last();
+
+        if (lastRow.length) {
+            lastRow.after(html);
+        } else {
+            options.append(html);
+        }
+    };
+
     $(document).on('wplink-open', function (event, wrap) {
         if (!wpLink.isMCE()) return;
 
-        if (!inputs.sponsored) {
-            $('#link-options').append(
-                `<div class="link-sponsored">
-                <label><span></span>
-                <input type="checkbox" id="wp-link-sponsored" />${seopressI18n.sponsored}</label>
-            </div>`
-            );
+        if (!$('#wp-link-sponsored').length) {
+            addRelRow(relRow('link-sponsored', 'wp-link-sponsored', seopressI18n.sponsored));
         }
-        if (!inputs.nofollow) {
-            $('#link-options').append(
-                `<div class="link-no-follow">
-                    <label><span></span>
-                    <input type="checkbox" id="wp-link-no-follow" />${seopressI18n.nofollow}</label>
-                </div>`
-            );
+        if (!$('#wp-link-no-follow').length) {
+            addRelRow(relRow('link-no-follow', 'wp-link-no-follow', seopressI18n.nofollow));
         }
-        if (!inputs.ugc) {
-            $('#link-options').append(
-                `<div class="link-ugc">
-                    <label><span></span>
-                    <input type="checkbox" id="wp-link-ugc" />${seopressI18n.ugc}</label>
-                </div>`
-            );
+        if (!$('#wp-link-ugc').length) {
+            addRelRow(relRow('link-ugc', 'wp-link-ugc', seopressI18n.ugc));
         }
 
         inputs.sponsored = $('#wp-link-sponsored');

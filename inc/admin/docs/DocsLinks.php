@@ -186,7 +186,9 @@ function seopress_get_docs_links() {
 		'lb'                   => array(
 			'eat'      => 'https://www.seopress.org/newsroom/featured-stories/optimizing-wordpress-sites-for-google-eat/',
 			'ebook'    => 'https://www.seopress.org/support/ebooks/improving-your-local-seo-using-wordpress/',
-			'place_id' => 'https://developers.google.com/places/web-service/place-id',
+			// Google retired /places/web-service/place-id; that address only
+			// still resolves through a redirect.
+			'place_id' => 'https://developers.google.com/maps/documentation/places/web-service/place-id',
 		),
 		'robots'               => array(
 			'file' => 'https://www.seopress.org/support/guides/edit-robots-txt-file/',
@@ -384,7 +386,7 @@ function seopress_get_docs_links() {
 		$docs['google_preview']['authentification'] = 'https://www.seopress.org/fr/support/hooks/filtrer-la-requete-distante-google-snippet-preview/';
 
 		$docs['bot']            = 'https://www.seopress.org/fr/support/guides/detecter-les-liens-casses-dans-vos-contenus/';
-		$docs['lb']['place_id'] = 'https://developers.google.com/places/web-service/place-id?hl=fr';
+		$docs['lb']['place_id'] = 'https://developers.google.com/maps/documentation/places/web-service/place-id?hl=fr';
 		$docs['lb']['eat']      = 'https://www.seopress.org/fr/newsroom/reportage/optimiser-votre-site-wordpress-pour-google-eat/';
 		$docs['lb']['ebook']    = 'https://www.seopress.org/fr/support/ebooks/ameliorer-le-positionnement-de-votre-site-wordpress-grace-au-seo-local/';
 
@@ -463,7 +465,7 @@ function seopress_get_docs_links() {
 
 		$docs['privacy']           = 'https://www.seopress.org/fr/politique-de-confidentialite/';
 		$docs['wizard']['pro']     = 'https://www.seopress.org/fr/extensions-seo-wordpress/seopress-pro/';
-		$docs['wizard']['ebook']   = 'https://www.seopress.org/fr/support/ebooks/reussite-seo-pour-wordpress-avec-une-routine-de-deux-heures-par-semaine/';
+		$docs['wizard']['ebook']   = 'https://www.seopress.org/fr/support/ebooks/reussir-son-seo-sur-wordpress-avec-deux-heures-de-travail-semaine/';
 	}
 
 	$docs['external'] = array(

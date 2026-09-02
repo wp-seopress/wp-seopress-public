@@ -45,7 +45,7 @@ class GetImageInContent {
 							$url = get_home_url() . $url;
 						}
 						// Cleaning url.
-						$url = htmlspecialchars( esc_attr( wp_filter_nohtml_kses( $url ) ) );
+						$url = htmlspecialchars( esc_attr( wp_filter_nohtml_kses( $url ) ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 );
 
 						// Remove query strings.
 						$parse_url = wp_parse_url( $url );

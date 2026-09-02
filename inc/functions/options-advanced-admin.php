@@ -931,7 +931,7 @@ if ( seopress_get_service( 'AdvancedOption' )->getAdvancedTaxDescEditor() === '1
 				'textarea_name' => 'description',
 				'textarea_rows' => 10,
 			);
-			wp_editor( htmlspecialchars_decode( $tag->description ), 'html-tag-description', $settings );
+			wp_editor( htmlspecialchars_decode( $tag->description, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ), 'html-tag-description', $settings );
 			?>
 		<p class="description"><?php esc_html_e( 'The description is not prominent by default; however, some themes may show it.', 'wp-seopress' ); ?>
 		</p>

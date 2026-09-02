@@ -182,7 +182,7 @@ if ( '1' == seopress_get_toggle_option( 'google-analytics' ) && ! isset( $_GET['
 	 */
 	function seopress_google_analytics_ecommerce_js() {
 		$prefix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
-		wp_enqueue_script( 'seopress-analytics', plugins_url( 'assets/js/seopress-analytics' . $prefix . '.js', dirname( __DIR__ ) ), array(), SEOPRESS_VERSION, true );
+		wp_enqueue_script( 'seopress-analytics', plugins_url( 'assets/js/seopress-analytics' . $prefix . '.js', dirname( __DIR__ ) ), array( 'jquery' ), SEOPRESS_VERSION, true );
 
 		$seopress_analytics = array(
 			'seopress_nonce'     => wp_create_nonce( 'seopress_analytics_nonce' ),

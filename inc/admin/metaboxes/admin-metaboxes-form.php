@@ -230,11 +230,11 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 
 								if ( get_the_title() ) {
 									$gp_title     = '<div class="snippet-title-default" style="display:none">' . get_the_title() . ' - ' . get_bloginfo( 'name' ) . '</div>';
-									$gp_permalink = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars( urldecode( get_permalink() ) ) . '</div>';
+									$gp_permalink = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars( urldecode( get_permalink() ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) . '</div>';
 								} elseif ( $tag ) {
 									if ( false === is_wp_error( get_term_link( $tag ) ) ) {
 										$gp_title     = '<div class="snippet-title-default" style="display:none">' . $tag->name . ' - ' . get_bloginfo( 'name' ) . '</div>';
-										$gp_permalink = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars( urldecode( get_term_link( $tag ) ) ) . '</div>';
+										$gp_permalink = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars( urldecode( get_term_link( $tag ) ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) . '</div>';
 									}
 								}
 
@@ -331,7 +331,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 							</label>
 							<input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical"
 								class="components-text-control__input"
-								placeholder="<?php esc_html_e( 'Default value: ', 'wp-seopress' ) . htmlspecialchars( urldecode( get_permalink() ) ); ?>"
+								placeholder="<?php esc_html_e( 'Default value: ', 'wp-seopress' ) . htmlspecialchars( urldecode( get_permalink() ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ); ?>"
 								aria-label="<?php esc_attr_e( 'Canonical URL', 'wp-seopress' ); ?>"
 								value="<?php echo esc_url( $seopress_robots_canonical ); ?>" />
 						</p>
@@ -855,4 +855,4 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 </tr>
 <?php } ?>
 <input type="hidden" id="seo_tabs" name="seo_tabs"
-	value="<?php echo htmlspecialchars( wp_json_encode( array_keys( $seo_tabs ) ) ); ?>">
+	value="<?php echo htmlspecialchars( wp_json_encode( array_keys( $seo_tabs ) ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ); ?>">

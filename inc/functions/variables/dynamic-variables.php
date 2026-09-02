@@ -62,7 +62,7 @@ function seopress_get_dynamic_variables( $variables, $post, $is_oembed ) {
 
 	// Template variables.
 	if ( seopress_get_service( 'TitleOption' )->getSeparator() ) {
-		$sep = htmlspecialchars( seopress_get_service( 'TitleOption' )->getSeparator() );
+		$sep = htmlspecialchars( seopress_get_service( 'TitleOption' )->getSeparator(), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 );
 	} else {
 		$sep = '-';
 	}
@@ -282,6 +282,10 @@ function seopress_get_dynamic_variables( $variables, $post, $is_oembed ) {
 		'%%wc_single_tag%%',
 		'%%wc_single_short_desc%%',
 		'%%wc_single_price%%',
+		// Alias of %%wc_single_price%%. The tag picker advertised it for
+		// releases while only the schemas could resolve it, so product meta
+		// descriptions shipped it verbatim to search engines. See #1941.
+		'%%wc_get_price%%',
 		'%%wc_single_price_exc_tax%%',
 		'%%wc_sku%%',
 		'%%currentday%%',
@@ -340,6 +344,7 @@ function seopress_get_dynamic_variables( $variables, $post, $is_oembed ) {
 		$woo_single_tag_html,
 		$seopress_get_the_excerpt,
 		$woo_single_price,
+		$woo_single_price, // %%wc_get_price%%, alias of %%wc_single_price%%.
 		$woo_single_price_exc_tax,
 		$woo_single_sku,
 		date_i18n( 'j' ),

@@ -108,7 +108,7 @@
 	<custom-field action="translate">_seopress_robots_imageindex</custom-field>
 	<custom-field action="translate">_seopress_robots_snippet</custom-field>
 	<custom-field action="translate">_seopress_robots_canonical</custom-field>
-	<custom-field action="translate">_seopress_robots_primary_cat</custom-field>
+	<custom-field action="copy" type="taxonomy-ids">_seopress_robots_primary_cat</custom-field>
 	<custom-field action="translate">_seopress_robots_breadcrumbs</custom-field>
 	<custom-field action="translate">_seopress_redirections_enabled</custom-field>
 	<custom-field action="translate">_seopress_redirections_logged_status</custom-field>

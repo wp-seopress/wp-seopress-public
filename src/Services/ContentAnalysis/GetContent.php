@@ -118,6 +118,12 @@ class GetContent {
 	/**
 	 * The getMatches function.
 	 *
+	 * Both sides go through the same normalization before being compared:
+	 * entities are resolved, the typographic characters WordPress substitutes
+	 * at render time are folded back onto their ASCII form, then accents are
+	 * stripped. Without it a keyword typed with a straight apostrophe could
+	 * never match the typographic one wptexturize() puts on the page.
+	 *
 	 * @param string $content The content.
 	 * @param array  $target_keywords The target keywords.
 	 *
@@ -130,10 +136,16 @@ class GetContent {
 			return null;
 		}
 
-		foreach ( $target_keywords as $kw ) {
-			$kw = remove_accents( wp_specialchars_decode( $kw ) );
+		$normalized_content = remove_accents( ContentAnalysis::normalizeTypography( $content ) );
 
-			if ( preg_match_all( '@(?<![\w-])' . preg_quote( $kw, '@' ) . '(?![\w-])@is', remove_accents( $content ), $matches ) ) {
+		foreach ( $target_keywords as $kw ) {
+			$kw = remove_accents( ContentAnalysis::normalizeTypography( $kw ) );
+
+			if ( '' === trim( $kw ) ) {
+				continue;
+			}
+
+			if ( preg_match_all( '@(?<![\w-])' . preg_quote( $kw, '@' ) . '(?![\w-])@is', $normalized_content, $matches ) ) {
 				$data[ $kw ][] = $matches[0];
 			}
 		}
@@ -267,18 +279,14 @@ class GetContent {
 		$keywords  = isset( $data['keywords'] ) ? $data['keywords'] : array();
 		$matches   = $this->getMatches( $permalink, $keywords );
 
-		// Fallback: try matching transliterated keywords against the permalink slug.
-		// Handles Cyrillic/non-Latin keywords with Latin slugs (e.g. via Cyr-To-Lat plugin).
+		// Fallback: try the slug readings of the keywords against the permalink.
+		// Handles Cyrillic/non-Latin keywords with Latin slugs (e.g. via
+		// Cyr-To-Lat plugin) and keywords whose punctuation the slug dropped.
 		if ( empty( $matches ) && ! empty( $keywords ) ) {
-			$transliterated_kw = array();
-			foreach ( $keywords as $kw ) {
-				$sanitized = sanitize_title( $kw );
-				if ( $sanitized !== $kw ) {
-					$transliterated_kw[] = $sanitized;
-				}
-			}
-			if ( ! empty( $transliterated_kw ) ) {
-				$matches = $this->getMatches( $permalink, $transliterated_kw );
+			$slug_variants = ContentAnalysis::getSlugVariants( $keywords );
+
+			if ( ! empty( $slug_variants ) ) {
+				$matches = $this->getMatches( $permalink, $slug_variants );
 			}
 		}
 
@@ -1100,6 +1108,13 @@ class GetContent {
 	/**
 	 * The analyzeRobots function.
 	 *
+	 * A page can carry several robots directives at once, and each one is a
+	 * distinct issue row. They are therefore saved as they are detected
+	 * instead of through a single shared payload: with one payload the last
+	 * matching directive silently overwrote the previous ones, so a
+	 * `noindex, nofollow` page only ever reported nofollow, and the orphan
+	 * sweep below then deleted the noindex row written by an earlier run.
+	 *
 	 * @param array   $analyzes The analyzes.
 	 * @param array   $data The data.
 	 * @param WP_Post $post The post.
@@ -1107,10 +1122,8 @@ class GetContent {
 	 * @return array
 	 */
 	protected function analyzeRobots( $analyzes, $data, $post ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$issue               = array();
-		$issue['issue_type'] = 'robots';
-		$emitted_names       = array();
-		$desc = null;
+		$emitted_names = array();
+		$desc          = null;
 		if ( isset( $data['meta_robots'] ) && is_array( $data['meta_robots'] ) && ! empty( $data['meta_robots'] ) ) {
 			$meta_robots = $data['meta_robots'];
 
@@ -1121,8 +1134,16 @@ class GetContent {
 
 				$desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . /* translators: %s number of meta robots tags */ sprintf( esc_html__( 'We found %s meta robots in your page. There is probably something wrong with your theme!', 'wp-seopress' ), $count_meta_robots ) . '</p>';
 
-				$issue['issue_name'] = 'meta_robots_duplicated';
-				$issue['issue_desc'] = absint( $count_meta_robots );
+				$this->saveIssue(
+					$post->ID,
+					array(
+						'issue_type'     => 'robots',
+						'issue_name'     => 'meta_robots_duplicated',
+						'issue_desc'     => absint( $count_meta_robots ),
+						'issue_priority' => 'high',
+					),
+					$emitted_names
+				);
 			}
 
 			$encoded = wp_json_encode( $meta_robots );
@@ -1131,7 +1152,15 @@ class GetContent {
 				$analyzes['robots']['impact'] = 'high';
 				$desc                        .= '<p data-robots="noindex"><span class="dashicons dashicons-no-alt"></span>' . __( '<strong>noindex</strong> is on! Search engines can\'t index this page.', 'wp-seopress' ) . '</p>';
 
-				$issue['issue_name'] = 'meta_robots_noindex';
+				$this->saveIssue(
+					$post->ID,
+					array(
+						'issue_type'     => 'robots',
+						'issue_name'     => 'meta_robots_noindex',
+						'issue_priority' => 'high',
+					),
+					$emitted_names
+				);
 			} else {
 				$desc .= '<p data-robots="index"><span class="dashicons dashicons-yes"></span>' . __( '<strong>noindex</strong> is off. Search engines will index this page.', 'wp-seopress' ) . '</p>';
 			}
@@ -1140,7 +1169,15 @@ class GetContent {
 				$analyzes['robots']['impact'] = 'high';
 				$desc                        .= '<p><span class="dashicons dashicons-no-alt"></span>' . __( '<strong>nofollow</strong> is on! Search engines can\'t follow your links on this page.', 'wp-seopress' ) . '</p>';
 
-				$issue['issue_name'] = 'meta_robots_nofollow';
+				$this->saveIssue(
+					$post->ID,
+					array(
+						'issue_type'     => 'robots',
+						'issue_name'     => 'meta_robots_nofollow',
+						'issue_priority' => 'high',
+					),
+					$emitted_names
+				);
 			} else {
 				$desc .= '<p><span class="dashicons dashicons-yes"></span>' . __( '<strong>nofollow</strong> is off. Search engines will follow links on this page.', 'wp-seopress' ) . '</p>';
 			}
@@ -1149,7 +1186,15 @@ class GetContent {
 				$analyzes['robots']['impact'] = 'high';
 				$desc                        .= '<p><span class="dashicons dashicons-no-alt"></span>' . __( '<strong>noimageindex</strong> is on! Google will not index your images on this page (but if someone makes a direct link to one of your image in this page, it will be indexed).', 'wp-seopress' ) . '</p>';
 
-				$issue['issue_name'] = 'meta_robots_noimageindex';
+				$this->saveIssue(
+					$post->ID,
+					array(
+						'issue_type'     => 'robots',
+						'issue_name'     => 'meta_robots_noimageindex',
+						'issue_priority' => 'high',
+					),
+					$emitted_names
+				);
 			} else {
 				$desc .= '<p><span class="dashicons dashicons-yes"></span>' . __( '<strong>noimageindex</strong> is off. Google will index the images on this page.', 'wp-seopress' ) . '</p>';
 			}
@@ -1160,7 +1205,17 @@ class GetContent {
 				}
 				$desc .= '<p><span class="dashicons dashicons-no-alt"></span>' . __( '<strong>nosnippet</strong> is on! Search engines will not display a snippet of this page in search results.', 'wp-seopress' ) . '</p>';
 
-				$issue['issue_name'] = 'meta_robots_nosnippet';
+				// nosnippet stays medium on its own row even when another
+				// directive pushed the whole analysis to high.
+				$this->saveIssue(
+					$post->ID,
+					array(
+						'issue_type'     => 'robots',
+						'issue_name'     => 'meta_robots_nosnippet',
+						'issue_priority' => 'medium',
+					),
+					$emitted_names
+				);
 			} else {
 				$desc .= '<p><span class="dashicons dashicons-yes"></span>' . __( '<strong>nosnippet</strong> is off. Search engines will display a snippet of this page in search results.', 'wp-seopress' ) . '</p>';
 			}
@@ -1170,9 +1225,6 @@ class GetContent {
 
 		$analyzes['robots']['desc'] = $desc;
 
-		$issue['issue_priority'] = $analyzes['robots']['impact'] ? $analyzes['robots']['impact'] : 0;
-
-		$this->saveIssue( $post->ID, $issue, $emitted_names );
 		$this->cleanupResolvedIssues( $post->ID, 'robots', $emitted_names );
 
 		return $analyzes;

@@ -127,7 +127,13 @@
     z-index: 100;
     display: inline-flex;
     flex-direction: column;
-    align-items: stretch;
+    /* flex-start, not stretch: in a column the children would otherwise all
+       take the width of the widest one, so "Save changes" was stretched to
+       the width of "Undo changes" sitting under it. That second button keeps
+       its box even when hidden (visibility, not display, so the bar does not
+       jump when it appears), and translations make it far longer than the
+       English string, which is where the button turned into a banner. */
+    align-items: flex-start;
     gap: 4px;
     transform: translateY(80px);
     opacity: 0;
@@ -1143,7 +1149,17 @@
     color: #646970;
 }
 
+/*
+ * This row is built from bare HTML controls, so nothing keeps it in step with
+ * the `@wordpress/components` fields it sits among. Both references moved to
+ * 40px: WP 7.1 raises the wp-admin text input from a 30px to a 40px min-height
+ * with no opt out, and our own `TextControl` fields already ask for the 40px
+ * size on every version we support (see Fields/TextField.jsx). A swatch pinned
+ * to 36px was off on both sides of that change, so the whole row is sized from
+ * one token instead.
+ */
 .seopress-color-picker-control {
+    --seopress-color-picker-size: 40px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1151,15 +1167,15 @@
 
 .seopress-color-picker-swatch-wrap {
     position: relative;
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+    width: var(--seopress-color-picker-size);
+    height: var(--seopress-color-picker-size);
+    min-width: var(--seopress-color-picker-size);
 }
 
 .seopress-color-picker-swatch {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+    width: var(--seopress-color-picker-size);
+    height: var(--seopress-color-picker-size);
+    min-width: var(--seopress-color-picker-size);
     border: 1px solid #8c8f94;
     border-radius: 4px;
     cursor: pointer;
@@ -1172,22 +1188,31 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 36px;
-    height: 36px;
+    width: var(--seopress-color-picker-size);
+    height: var(--seopress-color-picker-size);
     opacity: 0;
     cursor: pointer;
     pointer-events: none;
 }
 
-.seopress-color-picker-input {
+/*
+ * Scoped to the wrapper so the two-class selector outranks the
+ * `input[type="text"]` sizing wp-admin applies to this field.
+ */
+.seopress-color-picker-control .seopress-color-picker-input {
+    box-sizing: border-box;
     width: 120px;
+    height: var(--seopress-color-picker-size);
+    min-height: var(--seopress-color-picker-size);
     padding: 4px 8px;
     border: 1px solid #8c8f94;
     border-radius: 4px;
     font-family: monospace;
 }
 
-.seopress-color-picker-clear {
+.seopress-color-picker-control .seopress-color-picker-clear {
+    box-sizing: border-box;
+    height: var(--seopress-color-picker-size);
     background: none;
     border: 1px solid #8c8f94;
     border-radius: 4px;

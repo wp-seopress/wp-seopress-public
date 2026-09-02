@@ -154,6 +154,76 @@ function seopress_remove_wpml_home_url_filter( $home_url, $url, $path, $orig_sch
 }
 
 /**
+ * Switch WPML to a post's own language while a sitemap is being generated.
+ *
+ * Hooked on `the_post`, so it runs once per entry. Two things matter here, and
+ * both used to be wrong.
+ *
+ * The element type has to be the post's actual type. WPML prefixes it (`page`
+ * becomes `post_page`) and looks the row up in `icl_translations` under that
+ * exact type, so asking for a post or a custom post type as if it were a page
+ * matches nothing and returns null. `wpml_switch_language` then falls back to
+ * the default language, and a sitemap mixing post types produces an
+ * alternating default, real, default, real sequence.
+ *
+ * And the switch has to be skipped when the language is already the current
+ * one. WPML writes its language cookie on every switch that differs from the
+ * previous value, which the alternation above defeats entirely: a 1000 URL
+ * sitemap emitted 651 Set-Cookie headers, over 70 KB of response headers, and
+ * any reverse proxy capping header size at 32 KB answers 502. Only the last of
+ * those cookies is ever observable, so the rest are pure overhead. Comparing
+ * against WPML's live current language rather than a remembered value keeps
+ * this correct even when something else switches in between.
+ *
+ * Named rather than a closure so it can be detached with remove_action(), and
+ * filterable so it can be turned off without touching the hook at all.
+ *
+ * @since 10.2.0
+ *
+ * @param WP_Post $post The post being rendered.
+ *
+ * @return void
+ */
+function seopress_sitemap_switch_wpml_language( $post ) {
+	if ( ! is_a( $post, 'WP_Post' ) ) {
+		return;
+	}
+
+	/**
+	 * Filter whether SEOPress switches the WPML language for a sitemap entry.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param bool    $switch Whether to switch. Default true.
+	 * @param WP_Post $post   The post being rendered.
+	 */
+	if ( ! apply_filters( 'seopress_sitemap_wpml_switch_language', true, $post ) ) {
+		return;
+	}
+
+	$language = apply_filters(
+		'wpml_element_language_code',
+		null,
+		array(
+			'element_id'   => $post->ID,
+			'element_type' => $post->post_type,
+		)
+	);
+
+	// Nothing resolved: leave WPML where it is rather than sending it back to
+	// the default language.
+	if ( empty( $language ) ) {
+		return;
+	}
+
+	if ( $language === apply_filters( 'wpml_current_language', null ) ) {
+		return;
+	}
+
+	do_action( 'wpml_switch_language', $language );
+}
+
+/**
  * Remove third-parties metaboxes on our CPT
  */
 function seopress_remove_metaboxes() {
@@ -226,6 +296,66 @@ function seopress_check_ssl() {
 	} else {
 		return 'http://';
 	}
+}
+
+/**
+ * Recursively decode HTML entities in a schema value.
+ *
+ * WordPress hands most of its content back entity-encoded: `get_the_title()`
+ * returns `&#038;` for an ampersand, `wp_kses()` turns a bare `&` into `&amp;`,
+ * and `esc_html()` adds `&lt;` and `&quot;`. None of that belongs in JSON-LD,
+ * which carries plain strings.
+ *
+ * @since 10.2.0
+ *
+ * @param mixed $value The schema value (array or scalar).
+ *
+ * @return mixed
+ */
+function seopress_json_ld_decode_entities( $value ) {
+	if ( is_array( $value ) ) {
+		return array_map( 'seopress_json_ld_decode_entities', $value );
+	}
+
+	if ( is_string( $value ) ) {
+		return html_entity_decode( $value, ENT_QUOTES | ENT_HTML5, 'UTF-8' );
+	}
+
+	return $value;
+}
+
+/**
+ * Encode schema data for a `<script type="application/ld+json">` element.
+ *
+ * Google's structured data parser applies a single pass of HTML unescaping to
+ * the body of the script element, so any entity left in a value is read as the
+ * character it stands for rather than as text. That makes an entity a poor way
+ * to carry anything: `&quot;` inside a string turns into the quote that ends
+ * it, and a title mentioning `&amp;` loses the mention. Since March 2026 the
+ * pass is applied once and only once, and Google asks for standard JSON escapes
+ * or Unicode hexadecimal escapes instead.
+ *
+ * So values are decoded once, then handed to JSON's own escaping: `&`, `<`,
+ * `>`, `'` and `"` leave as `\u0026`, `\u003C`, `\u003E`, `\u0027` and
+ * `\u0022`, which no unescaping pass can act on. Only those five need it —
+ * an accent or an emoji is never mistaken for markup, so they stay readable
+ * rather than becoming a run of `\uXXXX`.
+ *
+ * `JSON_HEX_TAG` has a second effect worth naming: no value can close the
+ * script element it sits in, whatever a filter put there. That is what makes
+ * `JSON_UNESCAPED_SLASHES` safe to add, which keeps URLs readable.
+ *
+ * @since 10.2.0
+ *
+ * @param mixed $data The schema data.
+ *
+ * @return string|false The JSON-LD, or false if the data cannot be encoded.
+ */
+function seopress_json_ld_encode( $data ) {
+	return wp_json_encode(
+		seopress_json_ld_decode_entities( $data ),
+		JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+	);
 }
 
 /**
@@ -307,6 +437,118 @@ function seopress_is_absolute( $url ) {
 	$pattern = "%^(?:(?:https?|ftp)://)(?:\S+(?::\S*)?@|\d{1,3}(?:\.\d{1,3}){3}|(?:(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)(?:\.(?:[a-z\d\x{00a1}-\x{ffff}]+-?)*[a-z\d\x{00a1}-\x{ffff}]+)*(?:\.[a-z\x{00a1}-\x{ffff}]{2,6}))(?::\d+)?(?:[^\s]*)?$%iu";
 
 	return (bool) preg_match( $pattern, $url );
+}
+
+/**
+ * Resolve an image `src` read from post content into an absolute URL, or
+ * reject it.
+ *
+ * The XML sitemap collects images from the stored post content, so a `src`
+ * arrives in whatever form the editor or the page builder left it in. Only a
+ * value with one unambiguous absolute form is resolved; anything else is
+ * rejected rather than guessed at.
+ *
+ * Prefixing the site URL onto whatever was found is what used to publish
+ * `https://example.com/{{featured_image key:url}}` for a page builder's
+ * unresolved dynamic tag, `https://example.com//wp-content/…` for a
+ * root-relative path, and `https://example.com///cdn.example.com/…` for a
+ * protocol-relative one, that last case announcing a CDN image on the site's
+ * own domain where nothing exists.
+ *
+ * @since 10.2.0
+ *
+ * @param string $url      Raw `src` attribute value.
+ * @param string $home_url Site home URL.
+ *
+ * @return string An absolute URL, or an empty string when the value cannot be one.
+ */
+function seopress_sitemap_resolve_image_url( $url, $home_url ) {
+	$url = trim( (string) $url );
+
+	if ( '' === $url ) {
+		return '';
+	}
+
+	// Already absolute: nothing to resolve.
+	if ( true === seopress_is_absolute( $url ) ) {
+		return $url;
+	}
+
+	// Braces mean a dynamic tag the builder resolves at render time and that
+	// is simply absent here ({{featured_image key:url}}, {post_title}); `../`
+	// is a path relative to the document rather than to the site root; a line
+	// break is a value that was never a URL. None of these has a single
+	// correct absolute form, so none is published.
+	if ( preg_match( '/[{}\r\n\t]/', $url ) || false !== strpos( $url, '../' ) ) {
+		return '';
+	}
+
+	$home_url = trailingslashit( $home_url );
+
+	// Protocol-relative (//host/path): only the scheme is missing, and it is
+	// the site's own.
+	if ( 0 === strpos( $url, '//' ) ) {
+		$scheme = wp_parse_url( $home_url, PHP_URL_SCHEME );
+
+		return ( ! empty( $scheme ) ? $scheme : 'https' ) . ':' . $url;
+	}
+
+	// Rooted at the site (/path) or relative to it (wp-content/…): one correct
+	// form either way. Trimming the leading slash keeps the join from doubling
+	// it.
+	return $home_url . ltrim( $url, '/' );
+}
+
+/**
+ * Get the page standing in for a post type archive, when there is one.
+ *
+ * Two archives are served by a real page: `post` when a static Posts page is
+ * set in Settings > Reading, and `product` when WooCommerce maps the catalog to
+ * its shop page. Both pages carry their own SEOPress metas, which the post type
+ * settings know nothing about.
+ *
+ * The Posts page only backs the archive when the front page is static, since
+ * WordPress falls back to the home URL otherwise while still keeping the stored
+ * `page_for_posts` value around.
+ *
+ * @since 10.2.0
+ *
+ * @param string $path Post type name.
+ *
+ * @return int Page ID, or 0 when the archive is not backed by a page.
+ */
+function seopress_sitemap_get_archive_page_id( $path ) {
+	$page_id = 0;
+
+	if ( 'post' === $path ) {
+		if ( 'page' === get_option( 'show_on_front' ) ) {
+			$page_id = (int) get_option( 'page_for_posts' );
+		}
+	} elseif ( 'product' === $path && function_exists( 'wc_get_page_id' ) ) {
+		// wc_get_page_id() returns -1 when the page is not configured.
+		$page_id = (int) wc_get_page_id( 'shop' );
+	}
+
+	return $page_id > 0 ? $page_id : 0;
+}
+
+/**
+ * Whether a page is excluded from the sitemaps by its own noindex setting.
+ *
+ * @since 10.2.0
+ *
+ * @param int $page_id Page ID.
+ *
+ * @return bool
+ */
+function seopress_sitemap_is_page_noindex( $page_id ) {
+	$page_id = (int) $page_id;
+
+	if ( $page_id <= 0 ) {
+		return false;
+	}
+
+	return 'yes' === get_post_meta( $page_id, '_seopress_robots_index', true );
 }
 
 /**
@@ -671,10 +913,11 @@ function seopress_abilities_api_available() {
 }
 
 /**
- * Whether the admin opted in to expose SEOPress abilities through the REST API.
+ * Whether the admin opted in to expose SEOPress abilities to external clients.
  *
  * Disabled by default. When off, abilities are still callable in PHP/JS locally
- * but are not exposed on the /wp-abilities/v1/ REST endpoint.
+ * but are not exposed on the /wp-abilities/v1/ REST endpoint, nor to MCP
+ * servers built on top of the Abilities API.
  *
  * @since 9.9.0
  *
@@ -686,13 +929,51 @@ function seopress_abilities_api_rest_enabled() {
 	$enabled = is_array( $options ) && ! empty( $options['seopress_advanced_abilities_api_rest'] );
 
 	/**
-	 * Filter whether SEOPress abilities are exposed via the REST API.
+	 * Filter whether SEOPress abilities are exposed to external clients.
+	 *
+	 * Since 10.2.0 this also controls MCP exposure, not only the REST API.
 	 *
 	 * @since 9.9.0
 	 *
-	 * @param bool $enabled Whether REST exposure is enabled.
+	 * @param bool $enabled Whether external exposure is enabled.
 	 */
 	return (bool) apply_filters( 'seopress_abilities_api_rest_enabled', $enabled );
+}
+
+/**
+ * Build the "meta" array shared by every SEOPress ability.
+ *
+ * The Abilities API is secure by default: an ability is only reachable by
+ * external clients when it opts in explicitly.
+ *
+ * - meta.mcp.public   is what the WordPress MCP Adapter actually reads to decide
+ *                     whether an ability is exposed to MCP clients. It has no
+ *                     fallback on meta.public, so this key is the one that makes
+ *                     the abilities show up as MCP tools.
+ * - meta.public       is the high-level flag of the Abilities API. WordPress core
+ *                     starts honouring it for the REST API in 7.1, and other
+ *                     clients read it today, so we keep it in sync.
+ * - meta.show_in_rest is still required for REST access on WordPress 6.9/7.0.
+ * - meta.mcp.type     tells MCP servers to surface the ability as a tool.
+ *
+ * @since 10.2.0
+ *
+ * @param array $annotations Optional MCP annotations (readonly, destructive, idempotent).
+ *
+ * @return array
+ */
+function seopress_abilities_api_meta( $annotations = array() ) {
+	$exposed = seopress_abilities_api_rest_enabled();
+
+	return array(
+		'public'       => $exposed,
+		'show_in_rest' => $exposed,
+		'mcp'          => array(
+			'public' => $exposed,
+			'type'   => 'tool',
+		),
+		'annotations'  => $annotations,
+	);
 }
 
 /**
@@ -735,18 +1016,26 @@ function seopress_remove_other_notices() {
 		remove_all_actions( 'admin_notices' );
 		remove_all_actions( 'user_admin_notices' );
 		remove_all_actions( 'all_admin_notices' );
-		add_action( 'admin_notices', 'seopress_admin_notices' );
+		if ( function_exists( 'seopress_admin_notices' ) ) {
+			add_action( 'admin_notices', 'seopress_admin_notices' );
+		}
 		// Guard on the constant, not only is_plugin_active(): a plugin can be
 		// listed as active while its main file did not finish loading (it
 		// crashed on init, or the active_plugins state is stale within the
 		// request), in which case its version constant is undefined and
 		// version_compare() would fatal on PHP 8+.
-		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) && defined( 'SEOPRESS_PRO_VERSION' ) ) {
+		//
+		// Guard on function_exists() too: these callbacks live in the other
+		// plugins, which are free to drop them (the Insights license reminder
+		// moved to React in 3.1). A version_compare() on its own keeps passing
+		// once the function is gone, and admin_notices then fatals on an
+		// invalid callback.
+		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) && defined( 'SEOPRESS_PRO_VERSION' ) && function_exists( 'seopress_pro_admin_notices' ) ) {
 			if ( version_compare( SEOPRESS_PRO_VERSION, '6.4', '>=' ) ) {
 				add_action( 'admin_notices', 'seopress_pro_admin_notices' );
 			}
 		}
-		if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) && defined( 'SEOPRESS_INSIGHTS_VERSION' ) ) {
+		if ( is_plugin_active( 'wp-seopress-insights/seopress-insights.php' ) && defined( 'SEOPRESS_INSIGHTS_VERSION' ) && function_exists( 'seopress_insights_notices' ) ) {
 			if ( version_compare( SEOPRESS_INSIGHTS_VERSION, '1.8.1', '>=' ) ) {
 				add_action( 'admin_notices', 'seopress_insights_notices' );
 			}

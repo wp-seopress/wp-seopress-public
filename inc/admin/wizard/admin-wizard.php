@@ -148,6 +148,10 @@ class SEOPRESS_Admin_Setup_Wizard {
 				'handler' => array( $this, 'seopress_setup_metabox_save' ),
 				'parent'  => 'advanced',
 			),
+			'ai_assistant'        => array(
+				'handler' => array( $this, 'seopress_setup_ai_assistant_save' ),
+				'parent'  => 'advanced',
+			),
 			'ready'               => array(
 				'handler' => array( $this, 'seopress_final_subscribe' ),
 			),
@@ -358,6 +362,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 			),
 			'IMPORT'                 => $this->get_import_data(),
 			'ADVANCED'               => $this->get_react_advanced_data(),
+			'AI'                     => $this->get_react_ai_data( $docs_links ),
 			'DYNAMIC_VARIABLES'      => $dynamic_variables,
 			'PREVIEW_VALUES'         => array(
 				'%%sitetitle%%' => get_bloginfo( 'name' ),
@@ -394,6 +399,37 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$pro_file = 'wp-seopress-pro/seopress-pro.php';
 
 		return file_exists( WP_PLUGIN_DIR . '/' . $pro_file ) && ! is_plugin_active( $pro_file );
+	}
+
+	/**
+	 * Build the AI Assistant step data for the React wizard.
+	 *
+	 * The free plugin only knows whether PRO is running and where to send people
+	 * who want credits. Whether a provider is connected, and the current state of
+	 * the assistant toggle, live in the PRO options: PRO fills those two keys in
+	 * through the `seopress_wizard_data` filter.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param array $docs_links Resolved documentation links.
+	 * @return array
+	 */
+	private function get_react_ai_data( $docs_links ) {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/plugin.php';
+		}
+
+		return array(
+			'pro_active'          => is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ),
+			'provider_configured' => false,
+			// Defaults to on so the checkbox matches what a fresh PRO install
+			// already does; PRO overrides it with the stored value.
+			'assistant_enabled'   => true,
+			// Filled in by PRO. Empty here means the step hides the key form
+			// rather than offering a provider list the free plugin invented.
+			'providers'           => array(),
+			'credits_url'         => isset( $docs_links['ai']['credits'] ) ? $docs_links['ai']['credits'] : '',
+		);
 	}
 
 	/**
@@ -945,6 +981,47 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_advanced_option['seopress_advanced_appearance_universal_metabox_disable_frontend'] = $enabled ? '0' : '1';
 
 		update_option( 'seopress_advanced_option_name', $seopress_advanced_option, false );
+
+		wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
+
+		exit;
+	}
+
+	/**
+	 * Save the AI Assistant step.
+	 *
+	 * The assistant itself is a PRO feature and its option lives in the PRO
+	 * settings, so the free plugin only reports the choice. PRO listens on the
+	 * action below and persists it; with PRO inactive the step is a presentation
+	 * screen and there is nothing to store.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @return void
+	 */
+	public function seopress_setup_ai_assistant_save() {
+		check_admin_referer( 'seopress-setup' );
+
+		$enabled = ! empty( $_POST['ai_assistant_enable'] );
+
+		// Optional: the step lets people paste a provider key without leaving the
+		// wizard. Both fields are absent unless they opened that form.
+		$provider = isset( $_POST['ai_provider'] ) ? sanitize_key( wp_unslash( $_POST['ai_provider'] ) ) : '';
+		$api_key  = isset( $_POST['ai_api_key'] ) ? sanitize_text_field( wp_unslash( $_POST['ai_api_key'] ) ) : '';
+
+		/**
+		 * Fires when the AI Assistant wizard step is submitted.
+		 *
+		 * The assistant and the provider credentials are PRO options, so the free
+		 * plugin only reports what was submitted and lets PRO store it.
+		 *
+		 * @since 10.2.0
+		 *
+		 * @param bool   $enabled  Whether the user asked for the assistant to be enabled.
+		 * @param string $provider Provider slug submitted with the key, empty when none.
+		 * @param string $api_key  API key or token submitted, empty when none.
+		 */
+		do_action( 'seopress_setup_wizard_ai_assistant_save', $enabled, $provider, $api_key );
 
 		wp_redirect( esc_url_raw( $this->get_next_step_link() ) );
 

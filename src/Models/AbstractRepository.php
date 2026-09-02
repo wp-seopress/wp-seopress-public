@@ -77,6 +77,48 @@ abstract class AbstractRepository {
 	}
 
 	/**
+	 * Reduce a payload to its allow-listed columns, ready to be bound by $wpdb.
+	 *
+	 * Replaces the getFormatValue() / constructValuesClause() pair for callers
+	 * that write through $wpdb->insert() / $wpdb->update(): those bind their
+	 * values, so the quoting the old builder did by hand is neither needed nor
+	 * wanted. The normalization is kept identical (DateTime formatted, arrays
+	 * serialized, an empty array stored as NULL) so the rows written do not
+	 * change.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param array $args       The payload.
+	 * @param array $authorized The column names that may be written.
+	 * @param array $integers   Column names to cast to int.
+	 *
+	 * @return array Column name => scalar value.
+	 */
+	protected function prepareColumns( array $args, array $authorized, array $integers = array() ) {
+		$data = array();
+
+		foreach ( $authorized as $column ) {
+			if ( ! isset( $args[ $column ] ) ) {
+				continue;
+			}
+
+			$value = $args[ $column ];
+
+			if ( $value instanceof \DateTime ) {
+				$value = $value->format( 'Y-m-d H:i:s' );
+			} elseif ( is_array( $value ) ) {
+				$value = empty( $value ) ? null : maybe_serialize( $value );
+			} elseif ( in_array( $column, $integers, true ) ) {
+				$value = (int) $value;
+			}
+
+			$data[ $column ] = $value;
+		}
+
+		return $data;
+	}
+
+	/**
 	 * The getFormatValue function.
 	 *
 	 * @param mixed $value The value.

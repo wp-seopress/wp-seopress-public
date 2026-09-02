@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
+use SEOPress\Helpers\ContentAnalysis;
 use SEOPress\ManualHooks\ApiHeader;
 
 /**
@@ -140,6 +141,9 @@ class PagePreview implements ExecuteHooks {
 					case 401:
 						$message = __( 'Your site is protected by an authentication.', 'wp-seopress' );
 						break;
+					case 'redirected':
+						$message = __( 'This URL redirects outside your site. Turn off the redirect to get the Google preview and content analysis.', 'wp-seopress' );
+						break;
 				}
 
 				return $this->previewMessage( $message );
@@ -155,7 +159,7 @@ class PagePreview implements ExecuteHooks {
 		}
 
 		$data['analysis_target_kw'] = array(
-			'value' => array_filter( explode( ',', strtolower( (string) get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) ),
+			'value' => array_filter( explode( ',', ContentAnalysis::toLowercase( (string) get_post_meta( $id, '_seopress_analysis_target_kw', true ) ) ) ),
 		);
 
 		return new \WP_REST_Response( $data );

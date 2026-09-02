@@ -23,6 +23,8 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 	<?php echo $this->feature_title( 'advanced' ); ?>
 </div>
 
+<?php seopress_admin_notices_anchor(); ?>
+
 <div id="seopress-admin-settings-root" class="seopress-option">
 	<?php seopress_settings_skeleton(); ?>
 </div>

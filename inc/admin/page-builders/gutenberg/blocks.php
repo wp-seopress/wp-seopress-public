@@ -35,6 +35,7 @@ add_action( 'init', 'seopress_register_blocks', 10 );
  */
 function seopress_register_blocks() {
 	require_once __DIR__ . '/blocks/faq/block.php';
+	require_once __DIR__ . '/blocks/faq-v2/block.php';
 	require_once __DIR__ . '/blocks/sitemap/block.php';
 	require_once __DIR__ . '/blocks/preferred-source/block.php';
 
@@ -138,6 +139,9 @@ function seopress_register_blocks() {
 		)
 	);
 	wp_set_script_translations( 'wpseopress/faq-block-v2', 'wp-seopress' );
+
+	// The FAQ v2 schema is printed at render time, not stored in the block markup.
+	add_filter( 'render_block', 'seopress_block_faq_v2_render_schema', 10, 2 );
 
 	// Google Preferred Sources Block.
 	register_block_type(

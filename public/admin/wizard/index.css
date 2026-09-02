@@ -159,9 +159,15 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    -webkit-box-align: stretch;
-        -ms-flex-align: stretch;
-            align-items: stretch;
+    /* flex-start, not stretch: in a column the children would otherwise all
+       take the width of the widest one, so "Save changes" was stretched to
+       the width of "Undo changes" sitting under it. That second button keeps
+       its box even when hidden (visibility, not display, so the bar does not
+       jump when it appears), and translations make it far longer than the
+       English string, which is where the button turned into a banner. */
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
     gap: 4px;
     -webkit-transform: translateY(80px);
         -ms-transform: translateY(80px);
@@ -1287,7 +1293,17 @@
     color: #646970;
 }
 
+/*
+ * This row is built from bare HTML controls, so nothing keeps it in step with
+ * the `@wordpress/components` fields it sits among. Both references moved to
+ * 40px: WP 7.1 raises the wp-admin text input from a 30px to a 40px min-height
+ * with no opt out, and our own `TextControl` fields already ask for the 40px
+ * size on every version we support (see Fields/TextField.jsx). A swatch pinned
+ * to 36px was off on both sides of that change, so the whole row is sized from
+ * one token instead.
+ */
 .seopress-color-picker-control {
+    --seopress-color-picker-size: 40px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -1299,15 +1315,15 @@
 
 .seopress-color-picker-swatch-wrap {
     position: relative;
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+    width: var(--seopress-color-picker-size);
+    height: var(--seopress-color-picker-size);
+    min-width: var(--seopress-color-picker-size);
 }
 
 .seopress-color-picker-swatch {
-    width: 36px;
-    height: 36px;
-    min-width: 36px;
+    width: var(--seopress-color-picker-size);
+    height: var(--seopress-color-picker-size);
+    min-width: var(--seopress-color-picker-size);
     border: 1px solid #8c8f94;
     border-radius: 4px;
     cursor: pointer;
@@ -1320,22 +1336,33 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 36px;
-    height: 36px;
+    width: var(--seopress-color-picker-size);
+    height: var(--seopress-color-picker-size);
     opacity: 0;
     cursor: pointer;
     pointer-events: none;
 }
 
-.seopress-color-picker-input {
+/*
+ * Scoped to the wrapper so the two-class selector outranks the
+ * `input[type="text"]` sizing wp-admin applies to this field.
+ */
+.seopress-color-picker-control .seopress-color-picker-input {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
     width: 120px;
+    height: var(--seopress-color-picker-size);
+    min-height: var(--seopress-color-picker-size);
     padding: 4px 8px;
     border: 1px solid #8c8f94;
     border-radius: 4px;
     font-family: monospace;
 }
 
-.seopress-color-picker-clear {
+.seopress-color-picker-control .seopress-color-picker-clear {
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    height: var(--seopress-color-picker-size);
     background: none;
     border: 1px solid #8c8f94;
     border-radius: 4px;
@@ -3110,6 +3137,142 @@ a.seopress-wizard-metabox-preview:focus-visible {
     position: absolute;
     color: #fff;
     margin-left: 4px; /* visual centering for the play triangle */
+}
+
+/* ---------- AI Assistant step ---------- */
+.seopress-wizard-ai__intro {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    background: var(--sp-wizard-promo-bg);
+    border-radius: var(--sp-wizard-card-radius);
+}
+
+.seopress-wizard-ai__logo {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.seopress-wizard-ai__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.seopress-wizard-ai__item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--sp-wizard-text);
+}
+
+.seopress-wizard-ai__check {
+    -ms-flex-negative: 0;
+        flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--sp-wizard-theme);
+}
+
+.seopress-wizard-ai__ready {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    gap: 10px;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--sp-wizard-text-muted);
+}
+
+/* The promo card is a row by default; this one stacks so the key form can
+   unfold underneath the call to action instead of fighting it for width. */
+.seopress-wizard-ai__connect {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    gap: 16px;
+}
+
+.seopress-wizard-ai__connect-actions {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 16px;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+}
+
+.seopress-wizard-ai__own-key {
+    padding: 0;
+    border: 0;
+    background: none;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--sp-wizard-theme);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
+}
+
+.seopress-wizard-ai__own-key:hover,
+.seopress-wizard-ai__own-key:focus {
+    color: var(--sp-wizard-theme);
+    opacity: 0.85;
+}
+
+.seopress-wizard-ai__key-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--sp-wizard-border);
+    max-width: 420px;
+}
+
+.seopress-wizard-ai__constant {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.45;
+    color: var(--sp-wizard-text-muted);
 }
 
 .seopress-wizard-form__caption {

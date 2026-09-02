@@ -97,7 +97,7 @@ class SitemapOption {
 			}
 		}
 
-		return $post_types;
+		return $this->normalizeIncludeList( $post_types );
 	}
 
 	/**
@@ -108,7 +108,70 @@ class SitemapOption {
 	 * @return string|null
 	 */
 	public function getTaxonomiesList() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		return $this->searchOptionByKey( 'seopress_xml_sitemap_taxonomies_list' );
+		return $this->normalizeIncludeList(
+			$this->searchOptionByKey( 'seopress_xml_sitemap_taxonomies_list' )
+		);
+	}
+
+	/**
+	 * Normalize a post type / taxonomy include list to the shape the settings
+	 * screen writes, `key => array( 'include' => '1' )`.
+	 *
+	 * An imported, migrated or hand-edited option can hold a bare scalar
+	 * instead, `key => '1'`. Consumers then either loop over a string, which
+	 * raises `foreach() argument must be of type array|object`, or read
+	 * `$list[ $key ]['include']` off a string and silently get nothing, which
+	 * is how a sitemap ends up advertised in the index while answering 404.
+	 *
+	 * Both plugins read these two lists from six different places. Normalizing
+	 * once here fixes all of them, rather than guarding each loop and missing
+	 * the next one.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param mixed $list Raw option value.
+	 *
+	 * @return mixed The list with scalar entries wrapped, untouched otherwise.
+	 */
+	public function normalizeIncludeList( $list ) { // phpcs:ignore -- matches the camelCase used across this service.
+		if ( ! is_array( $list ) ) {
+			return $list;
+		}
+
+		foreach ( $list as $key => $value ) {
+			if ( ! is_array( $value ) ) {
+				$list[ $key ] = array( 'include' => $value );
+			}
+		}
+
+		return $list;
+	}
+
+	/**
+	 * Normalize both include lists inside a whole sitemap option group.
+	 *
+	 * Callers that hand the option to the settings screen, rather than reading
+	 * a single list through this service, need the same rule applied to the
+	 * two keys at once. Keeping it here avoids a second copy drifting.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param mixed $options The sitemap option group.
+	 *
+	 * @return mixed The group with both lists normalized, untouched otherwise.
+	 */
+	public function normalizeIncludeLists( $options ) { // phpcs:ignore -- matches the camelCase used across this service.
+		if ( ! is_array( $options ) ) {
+			return $options;
+		}
+
+		foreach ( array( 'seopress_xml_sitemap_post_types_list', 'seopress_xml_sitemap_taxonomies_list' ) as $key ) {
+			if ( isset( $options[ $key ] ) ) {
+				$options[ $key ] = $this->normalizeIncludeList( $options[ $key ] );
+			}
+		}
+
+		return $options;
 	}
 
 	/**

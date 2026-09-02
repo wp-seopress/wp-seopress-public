@@ -278,6 +278,9 @@ class ContentAnalysis implements ExecuteHooks {
 					case 401:
 						$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
 						break;
+					case 'redirected':
+						$default_response['title'] = __( 'This URL redirects outside your site. Turn off the redirect to get the Google preview and content analysis.', 'wp-seopress' );
+						break;
 					case 'blocked':
 						$default_response['title'] = __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
 						break;

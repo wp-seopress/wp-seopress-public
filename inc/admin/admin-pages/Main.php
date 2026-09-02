@@ -27,6 +27,7 @@ if ( function_exists( 'seopress_admin_header' ) ) {
 		// its lazy sections.
 	?>
 	<div class="seopress-php-header"></div>
+	<?php seopress_admin_notices_anchor(); ?>
 	<div id="seopress-admin-settings-root"></div>
 	<?php
 		// "Settings saved" snackbar — must stay inside #seopress-content

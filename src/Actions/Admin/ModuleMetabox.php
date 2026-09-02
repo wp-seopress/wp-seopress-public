@@ -102,7 +102,7 @@ class ModuleMetabox implements ExecuteHooks {
 	 */
 	public function renderClassicOpenerMetabox() {
 		?>
-		<div id="seopress-js-module-seo-metabox-embed"></div>
+		<div id="seopress-js-module-seo-metabox-embed" class="wp-exclude-emoji"></div>
 		<?php
 	}
 
@@ -325,6 +325,49 @@ class ModuleMetabox implements ExecuteHooks {
 	}
 
 	/**
+	 * Tags offered by the picker next to the title and meta description fields.
+	 *
+	 * The picker must only advertise tags this screen can actually resolve.
+	 * Titles, meta descriptions and social tags are rendered by the legacy
+	 * str_replace() pass whose arrays are built in
+	 * inc/functions/variables/dynamic-variables.php, while this list comes from
+	 * the modern src/Tags registry that powers the schemas. Tags living only in
+	 * the modern registry were offered here with a friendly label and then
+	 * shipped to the page as raw `%%...%%` text; they stay available to the
+	 * schemas, which resolve them properly.
+	 *
+	 * Public so the integration suite can assert on the real list rather than
+	 * on a copy of it.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @return array
+	 */
+	public function getPickerTags() { // phpcs:ignore -- mirrors the naming of the surrounding class.
+		return seopress_get_service( 'TagsToString' )->getTagsAvailable(
+			array(
+				'without_classes'     => array(
+					'\SEOPress\Tags\PostThumbnailUrlHeight',
+					'\SEOPress\Tags\PostThumbnailUrlWidth',
+					// Resolved by the schemas only, never by the render path
+					// behind these fields. See #1941.
+					'\SEOPress\Tags\AuthorUrl',
+					'\SEOPress\Tags\WooCommerce\GetRegularPrice',
+					'\SEOPress\Tags\WooCommerce\PriceValidDate',
+					// %%wc_get_price%% now resolves, as an alias of
+					// %%wc_single_price%%, so the templates already saved with
+					// it keep working. Aliases are not advertised on their own
+					// row here, the same way %%sitename%%, %%excerpt%% and
+					// %%date%% are not: two rows yielding the same price would
+					// only be a different kind of lie.
+					'\SEOPress\Tags\WooCommerce\GetPrice',
+				),
+				'without_classes_pos' => array( '\SEOPress\Tags\Schema', '\SEOPressPro\Tags\Schema' ),
+			)
+		);
+	}
+
+	/**
 	 * Enqueue module.
 	 *
 	 * @param array $args_localize The arguments localize.
@@ -343,8 +386,15 @@ class ModuleMetabox implements ExecuteHooks {
 			return;
 		}
 
-		// Bricks builder compatibility.
-		if ( function_exists( 'bricks_is_builder_call' ) && bricks_is_builder_call() === true ) {
+		// Bricks builder compatibility: never inject the metabox into the
+		// builder canvas. Only applied outside wp-admin, because
+		// bricks_is_builder_call() trusts the HTTP referer: any request
+		// arriving from a `?bricks=run` URL is reported as a builder call,
+		// including the edit screen reached through the builder's own
+		// "back to WordPress" link. That referer survives normal reloads,
+		// so the metabox stayed blank until a hard refresh dropped it. An
+		// admin screen is never a builder render.
+		if ( ! is_admin() && function_exists( 'bricks_is_builder_call' ) && bricks_is_builder_call() === true ) {
 			return;
 		}
 
@@ -376,7 +426,11 @@ class ModuleMetabox implements ExecuteHooks {
 		if ( post_type_supports( get_post_type( $post ), 'custom-fields' ) ) {
 			wp_enqueue_script( 'seopress-pre-publish-checklist', SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js', array(), SEOPRESS_VERSION, true );
 		}
-		if ( $is_gutenberg ) {
+		// The sidebar panel and its score both describe the post being
+		// edited, so they need a real post. is_block_editor() is also true on
+		// screens that have none (the site editor, for one), where the global
+		// $post stays null and dereferencing it only raised notices.
+		if ( $is_gutenberg && $post instanceof \WP_Post ) {
 			// Check if metabox is disabled for this post type.
 			if ( '1' === seopress_get_service( 'TitleOption' )->getSingleCptEnable( $post->post_type ) ) {
 				return;
@@ -422,16 +476,7 @@ class ModuleMetabox implements ExecuteHooks {
 		}
 		$value = wp_create_nonce( 'seopress_rest' );
 
-		$tags = seopress_get_service( 'TagsToString' )->getTagsAvailable(
-			array(
-				'without_classes'     => array(
-					'\SEOPress\Tags\PostThumbnailUrlHeight',
-					'\SEOPress\Tags\PostThumbnailUrlWidth',
-
-				),
-				'without_classes_pos' => array( '\SEOPress\Tags\Schema', '\SEOPressPro\Tags\Schema' ),
-			)
-		);
+		$tags = $this->getPickerTags();
 
 		$get_locale = get_locale();
 		if ( ! empty( $get_locale ) ) {
@@ -504,6 +549,15 @@ class ModuleMetabox implements ExecuteHooks {
 				'SITEURL'                   => site_url(),
 				'ADMIN_URL_TITLES'          => admin_url( 'admin.php?page=seopress-titles#tab=tab_seopress_titles_single' ),
 				'ADMIN_URL_ARCHIVES_TITLES' => admin_url( 'admin.php?page=seopress-titles#tab=tab_seopress_titles_archives' ),
+				// Where the role restrictions that can empty this metabox live.
+				// Only sent to users who can actually act on it, which is also
+				// what the empty state branches on: they get the setting named
+				// plus the button, everyone else gets the explanation without
+				// a menu path they could not follow anyway, and which a
+				// white-labelled install may have renamed or removed.
+				'ADMIN_URL_SECURITY'        => current_user_can( seopress_capability( 'manage_options', 'security' ) )
+					? admin_url( 'admin.php?page=seopress-advanced#tab=tab_seopress_advanced_security' )
+					: '',
 				'TAGS'                      => array_values( $tags ),
 				'REST_URL'                  => rest_url(),
 				'NONCE'                     => wp_create_nonce( 'wp_rest' ),

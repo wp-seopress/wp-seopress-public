@@ -33,6 +33,22 @@ class AdvancedSettings implements ExecuteHooks {
 	protected $int_meta_keys = array();
 
 	/**
+	 * Meta keys the Advanced > Security role restrictions apply to, mapped to
+	 * the restriction area that governs them.
+	 *
+	 * Collected by the register_*_meta() helpers so
+	 * discard_restricted_meta_write() covers each key automatically rather
+	 * than through a list that would drift, then passed through
+	 * `seopress_restricted_meta_keys` so PRO registers its own keys into the
+	 * same mechanism instead of duplicating the drop logic.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @var array<string, string> Meta key => `GLOBAL` or `CONTENT_ANALYSIS`.
+	 */
+	protected $restricted_meta_keys = array();
+
+	/**
 	 * The Advanced Settings register.
 	 *
 	 * Every meta key registered here is exposed to Gutenberg via the standard
@@ -95,6 +111,8 @@ class AdvancedSettings implements ExecuteHooks {
 		// Content analysis tab. Sanitizer mirrors
 		// TargetKeywords::processPut() so the value stored through Gutenberg
 		// matches the dedicated PUT endpoint and the Classic Editor fallback.
+		$this->restricted_meta_keys['_seopress_analysis_target_kw'] = 'CONTENT_ANALYSIS';
+
 		register_post_meta(
 			'',
 			'_seopress_analysis_target_kw',
@@ -109,6 +127,21 @@ class AdvancedSettings implements ExecuteHooks {
 
 		// WP 7 compatibility: coerce empty integer metas before validation.
 		add_filter( 'rest_request_before_callbacks', array( $this, 'tolerate_empty_int_metas' ), 10, 3 );
+
+		// Advanced > Security role restrictions, applied to the value rather
+		// than to the request, so a restricted user can still save the post.
+		// add_post_metadata is covered too: without it, XML-RPC's
+		// set_custom_fields() could write the restricted keys back through
+		// add_post_meta(), which never reaches update_post_metadata.
+		add_filter( 'add_post_metadata', array( $this, 'discard_restricted_meta_write' ), 10, 3 );
+		add_filter( 'update_post_metadata', array( $this, 'discard_restricted_meta_write' ), 10, 3 );
+		add_filter( 'delete_post_metadata', array( $this, 'discard_restricted_meta_write' ), 10, 3 );
+
+		// Same restriction on the meta-id based paths, which carry a meta_id
+		// instead of a post id and are the other half of what
+		// set_custom_fields() uses.
+		add_filter( 'update_post_metadata_by_mid', array( $this, 'discard_restricted_meta_write_by_mid' ), 10, 2 );
+		add_filter( 'delete_post_metadata_by_mid', array( $this, 'discard_restricted_meta_write_by_mid' ), 10, 2 );
 	}
 
 	/**
@@ -120,6 +153,8 @@ class AdvancedSettings implements ExecuteHooks {
 	 * @return void
 	 */
 	protected function register_string_meta( $key ) {
+		$this->restricted_meta_keys[ $key ] = 'GLOBAL';
+
 		register_post_meta(
 			'',
 			$key,
@@ -141,6 +176,8 @@ class AdvancedSettings implements ExecuteHooks {
 	 * @return void
 	 */
 	protected function register_url_meta( $key ) {
+		$this->restricted_meta_keys[ $key ] = 'GLOBAL';
+
 		register_post_meta(
 			'',
 			$key,
@@ -165,7 +202,8 @@ class AdvancedSettings implements ExecuteHooks {
 	 * @return void
 	 */
 	protected function register_int_meta( $key ) {
-		$this->int_meta_keys[] = $key;
+		$this->int_meta_keys[]              = $key;
+		$this->restricted_meta_keys[ $key ] = 'GLOBAL';
 
 		register_post_meta(
 			'',
@@ -278,19 +316,141 @@ class AdvancedSettings implements ExecuteHooks {
 	 * @return  bool   $allowed The allowed.
 	 */
 	public function meta_auth( $allowed, $meta_key, $id ) {
-		// Enforce the Advanced > Security role restrictions on the Gutenberg
-		// native save path (core/editor persists these registered metas via
-		// /wp/v2/posts). The target keyword meta belongs to the Content
-		// Analysis area; every other key here belongs to the SEO metabox.
-		if ( function_exists( 'seopress_metabox_role_is_blocked' ) ) {
-			$area = '_seopress_analysis_target_kw' === $meta_key
-				? 'CONTENT_ANALYSIS'
-				: 'GLOBAL';
-			if ( seopress_metabox_role_is_blocked( $area ) ) {
-				return false;
-			}
+		// Deliberately does not enforce the Advanced > Security role
+		// restrictions. Denying here fails the whole request rather than the
+		// field: core/editor sends every registered meta as one object as soon
+		// as any of them changes, so a restricted user who merely typed a meta
+		// title could no longer save the post at all, with an error naming an
+		// internal meta key. The restriction is applied in
+		// discard_restricted_meta_write() instead, which drops the value and
+		// lets the save through.
+		return current_user_can( 'edit_post', $id );
+	}
+
+	/**
+	 * The restricted key map, resolved on first use.
+	 *
+	 * Filtered here rather than in hooks() so PRO's callback is registered by
+	 * the time it runs: both plugins declare their metas from hooks() and the
+	 * order between them is not guaranteed.
+	 *
+	 * @return array<string, string> Meta key => restriction area.
+	 */
+	protected function get_restricted_meta_keys() {
+		static $resolved = null;
+
+		if ( null !== $resolved ) {
+			return $resolved;
 		}
 
-		return current_user_can( 'edit_posts', $id );
+		/**
+		 * Meta keys the Advanced > Security role restrictions apply to.
+		 *
+		 * PRO registers its own metabox keys here so a single implementation
+		 * of the drop logic covers both plugins.
+		 *
+		 * @since 10.2.0
+		 *
+		 * @param array<string, string> $keys Meta key => restriction area,
+		 *                                    `GLOBAL` or `CONTENT_ANALYSIS`.
+		 */
+		$resolved = (array) apply_filters( 'seopress_restricted_meta_keys', $this->restricted_meta_keys );
+
+		return $resolved;
+	}
+
+	/**
+	 * Whether the current role may not write the given key on the given post.
+	 *
+	 * @param int    $object_id Post ID the meta belongs to.
+	 * @param string $meta_key  Meta key being written.
+	 *
+	 * @return bool
+	 */
+	protected function is_restricted_meta_write( $object_id, $meta_key ) {
+		$restricted = $this->get_restricted_meta_keys();
+
+		if ( ! isset( $restricted[ $meta_key ] ) ) {
+			return false;
+		}
+
+		if ( ! function_exists( 'seopress_metabox_role_is_blocked' ) ) {
+			return false;
+		}
+
+		// The restriction governs the SEO metabox, so it only applies to post
+		// types that display it. Several of these keys are shared: each entry
+		// of the Redirections manager is a `seopress_404` post storing its
+		// settings under the very same `_seopress_redirections_*` keys, and
+		// dropping those writes would silently discard bulk actions, quick
+		// edits and CSV imports on a feature this restriction never covered.
+		$post_types = apply_filters( 'seopress_metaboxe_seo', seopress_get_service( 'WordPressData' )->getPostTypes() );
+
+		if ( ! isset( $post_types[ get_post_type( $object_id ) ] ) ) {
+			return false;
+		}
+
+		return seopress_metabox_role_is_blocked( $restricted[ $meta_key ] );
+	}
+
+	/**
+	 * Silently drop a write to a meta the current role may not change.
+	 *
+	 * Short-circuits `add_metadata()`, `update_metadata()` and
+	 * `delete_metadata()` by returning a non-null value, so the stored value is
+	 * left alone and the request that carried it still succeeds. That is the
+	 * whole point: the role restriction is meant to keep a user out of a
+	 * feature, not out of the publish button.
+	 *
+	 * @param null|bool $check     Short-circuit value, null to proceed.
+	 * @param int       $object_id Post ID.
+	 * @param string    $meta_key  Meta key being written.
+	 *
+	 * @return null|bool `true` to report the write as handled, null to proceed.
+	 */
+	public function discard_restricted_meta_write( $check, $object_id, $meta_key ) {
+		if ( null !== $check ) {
+			return $check;
+		}
+
+		if ( ! $this->is_restricted_meta_write( $object_id, $meta_key ) ) {
+			return $check;
+		}
+
+		// Reported as handled, so REST does not treat the untouched value as a
+		// failed update and turn it into an error.
+		return true;
+	}
+
+	/**
+	 * Same restriction for the meta-id based paths.
+	 *
+	 * `update_metadata_by_mid()` and `delete_metadata_by_mid()` carry a meta id
+	 * rather than a post id, and no meta key at all on the delete side, so both
+	 * have to be resolved before the usual check. XML-RPC's
+	 * `set_custom_fields()` is the caller that matters here: unlike the Classic
+	 * Editor custom fields box it does not consult `is_protected_meta()`.
+	 *
+	 * @param null|bool $check   Short-circuit value, null to proceed.
+	 * @param int       $meta_id Meta row ID.
+	 *
+	 * @return null|bool `true` to report the write as handled, null to proceed.
+	 */
+	public function discard_restricted_meta_write_by_mid( $check, $meta_id ) {
+		if ( null !== $check ) {
+			return $check;
+		}
+
+		$meta = get_metadata_by_mid( 'post', $meta_id );
+
+		if ( ! $meta || ! isset( $meta->meta_key, $meta->post_id ) ) {
+			return $check;
+		}
+
+		if ( ! $this->is_restricted_meta_write( (int) $meta->post_id, $meta->meta_key ) ) {
+			return $check;
+		}
+
+		return true;
 	}
 }

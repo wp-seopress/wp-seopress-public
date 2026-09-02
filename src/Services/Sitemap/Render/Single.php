@@ -57,27 +57,14 @@ class Single {
 			);
 
 			add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
-			add_action(
-				'the_post',
-				function ( $post ) {
-					$language = apply_filters(
-						'wpml_element_language_code',
-						null,
-						array(
-							'element_id'   => $post->ID,
-							'element_type' => 'page',
-						)
-					);
-					do_action( 'wpml_switch_language', $language );
-				}
-			);
+			add_action( 'the_post', 'seopress_sitemap_switch_wpml_language' );
 		}
 
 		add_filter(
 			'seopress_sitemaps_single_url',
 			function ( $url, $post ) {
 				// Exclude custom canonical from sitemaps.
-				if ( get_post_meta( $post->ID, '_seopress_robots_canonical', true ) && htmlspecialchars( urldecode( get_permalink( $post->ID ) ) ) !== get_post_meta( $post->ID, '_seopress_robots_canonical', true ) ) {
+				if ( get_post_meta( $post->ID, '_seopress_robots_canonical', true ) && htmlspecialchars( urldecode( get_permalink( $post->ID ) ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) !== get_post_meta( $post->ID, '_seopress_robots_canonical', true ) ) {
 					return null;
 				}
 

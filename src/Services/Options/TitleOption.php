@@ -6,12 +6,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Compose\UseArchivePostType;
 use SEOPress\Constants\Options;
 
 /**
  * TitleOption
  */
 class TitleOption {
+
+	use UseArchivePostType;
 
 	/**
 	 * The getOption function.
@@ -477,8 +480,7 @@ class TitleOption {
 	 * @return string
 	 */
 	public function getArchivesCPTTitle() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$queried_object = get_queried_object();
-		$current_cpt    = null !== $queried_object ? $queried_object->name : '';
+		$current_cpt = $this->getCurrentArchivePostType();
 
 		$option = $this->searchOptionByKey( 'seopress_titles_archive_titles' );
 
@@ -497,8 +499,7 @@ class TitleOption {
 	 * @return string
 	 */
 	public function getArchivesCPTDesc() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$queried_object = get_queried_object();
-		$current_cpt    = null !== $queried_object ? $queried_object->name : '';
+		$current_cpt = $this->getCurrentArchivePostType();
 
 		$option = $this->searchOptionByKey( 'seopress_titles_archive_titles' );
 
@@ -517,8 +518,7 @@ class TitleOption {
 	 * @return string
 	 */
 	public function getArchivesCPTNoIndex() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$queried_object = get_queried_object();
-		$current_cpt    = null !== $queried_object ? $queried_object->name : '';
+		$current_cpt = $this->getCurrentArchivePostType();
 
 		$option = $this->searchOptionByKey( 'seopress_titles_archive_titles' );
 		if ( ! isset( $option[ $current_cpt ]['noindex'] ) ) {
@@ -536,8 +536,7 @@ class TitleOption {
 		 * @return string
 		 */
 	public function getArchivesCPTNoFollow() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$queried_object = get_queried_object();
-		$current_cpt    = null !== $queried_object ? $queried_object->name : '';
+		$current_cpt = $this->getCurrentArchivePostType();
 
 		$option = $this->searchOptionByKey( 'seopress_titles_archive_titles' );
 		if ( ! isset( $option[ $current_cpt ]['nofollow'] ) ) {

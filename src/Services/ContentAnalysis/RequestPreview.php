@@ -93,33 +93,16 @@ class RequestPreview {
 		// A 30 s ceiling means two open editors can saturate a small
 		// worker pool — capped at 10 s so the metabox can surface a
 		// degraded state instead of letting the Suspense fallback hang.
+		// `redirection` is 0 on purpose: the hops are followed by
+		// followSafely(), which refuses to leave the site. Letting WP_Http
+		// follow them would carry the administrator's cookies to wherever the
+		// response points, and the redirect target is attacker-controlled (a
+		// SEOPress redirection stored on a post the attacker owns).
 		$args = array(
-			'redirection' => 2,
+			'redirection' => 0,
 			'timeout'     => 10,
 			'sslverify'   => false,
 		);
-
-		// Get cookies.
-		$cookies = array();
-		if ( isset( $_COOKIE ) ) {
-			foreach ( $_COOKIE as $name => $value ) {
-				if ( 'PHPSESSID' !== $name ) {
-					if ( is_array( $value ) ) {
-						$value = implode( '|', $value );
-					}
-					$cookies[] = new \WP_Http_Cookie(
-						array(
-							'name'  => $name,
-							'value' => $value,
-						)
-					);
-				}
-			}
-		}
-
-		if ( ! empty( $cookies ) ) {
-			$args['cookies'] = $cookies;
-		}
 
 		// Present the loop-back as a real browser. The default WP_Http user
 		// agent ("WordPress/x.y; https://...") is a frequent trigger for the
@@ -128,8 +111,6 @@ class RequestPreview {
 		$args['user-agent']        = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36';
 		$args['headers']           = isset( $args['headers'] ) && is_array( $args['headers'] ) ? $args['headers'] : array();
 		$args['headers']['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8';
-
-		$args = apply_filters( 'seopress_real_preview_remote', $args );
 
 		$link = $this->getLinkRequest( $id, $taxname );
 
@@ -151,6 +132,23 @@ class RequestPreview {
 
 		$is_self = $this->isSelfHostedLink( $link );
 
+		// Bound to the host being called, never domainless. WordPress Requests
+		// treats a cookie with no domain as matching every host, so the
+		// previous set followed any cross-host redirect out of the site.
+		$cookies = $this->buildCookies( wp_parse_url( $link, PHP_URL_HOST ) );
+		if ( ! empty( $cookies ) ) {
+			$args['cookies'] = $cookies;
+		}
+
+		// Applied last, as it always was, so a page builder or a security
+		// plugin can still inspect and change the whole argument set —
+		// `cookies` included. Building the jar after it would silently
+		// override any filter that removes or replaces the session.
+		// `redirection` is the one exception: followSafely() forces it back to
+		// 0 because a filter must not be able to hand the redirect chain back
+		// to WP_Http, which cannot be restricted to the site.
+		$args = apply_filters( 'seopress_real_preview_remote', $args );
+
 		try {
 			$response = $this->requestPreview( $link, $args, $is_self, $id, $taxname );
 
@@ -167,6 +165,18 @@ class RequestPreview {
 				return array(
 					'success' => false,
 					'code'    => $code_response,
+				);
+			}
+
+			// A redirect that is still a redirect here is one followSafely()
+			// declined to follow: it left the site. Its body is the server's
+			// own "301 Moved Permanently" stub, not the post — analyzing it
+			// would score an empty page and persist that as the post's
+			// analysis. Surface it as a failure instead.
+			if ( $code_response >= 300 && $code_response < 400 ) {
+				return array(
+					'success' => false,
+					'code'    => 'redirected',
 				);
 			}
 
@@ -254,7 +264,7 @@ class RequestPreview {
 		// Public-first: load the post's own URL, the path that works on a
 		// normal host and behind a host-level WAF alike. This is the only path
 		// a non-CDN host ever takes, so its behavior is unchanged.
-		$response = wp_remote_get( $link, $args );
+		$response = $this->followSafely( $link, $args );
 
 		if ( ! $is_self || ! $this->looksBlocked( $response ) ) {
 			return $response;
@@ -284,6 +294,319 @@ class RequestPreview {
 		set_transient( $transient, self::LOOPBACK_NONE, 10 * MINUTE_IN_SECONDS );
 
 		return $response;
+	}
+
+	/**
+	 * Build the loop-back cookie jar, scoped to the host being called.
+	 *
+	 * The preview is fetched with the editor's own session so a draft, a
+	 * password-protected post or a members-only page renders as they see it.
+	 * That means the administrator's authentication cookies travel with the
+	 * request, and where they are allowed to travel is the whole question.
+	 *
+	 * They used to be created without a domain. WordPress Requests treats a
+	 * domainless cookie as matching every host, so any redirect the fetched
+	 * page returned carried the administrator session with it — and the
+	 * redirect target is attacker-controlled: a user who can edit their own
+	 * post can store a SEOPress redirection on it, then wait for an
+	 * administrator to open that post in the editor. Reported as #1937.
+	 *
+	 * Scoping each cookie to the host actually being called is what stops
+	 * that: Requests then declines to send them anywhere else, whatever the
+	 * response says. followSafely() refuses the cross-origin hop as well, so
+	 * neither layer alone has to be perfect.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param string $host The host the request is being sent to.
+	 *
+	 * @return \WP_Http_Cookie[]
+	 */
+	private function buildCookies( $host ) {
+		$host = is_string( $host ) ? strtolower( trim( $host ) ) : '';
+
+		if ( '' === $host || empty( $_COOKIE ) ) {
+			return array();
+		}
+
+		$cookies = array();
+
+		foreach ( $_COOKIE as $name => $value ) { // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Values are forwarded verbatim to our own host; sanitizing would corrupt session tokens.
+			if ( 'PHPSESSID' === $name ) {
+				continue;
+			}
+
+			if ( is_array( $value ) ) {
+				$value = implode( '|', $value );
+			}
+
+			$cookies[] = new \WP_Http_Cookie(
+				array(
+					'name'      => $name,
+					'value'     => $value,
+					'domain'    => $host,
+					'path'      => '/',
+					// Not optional. WP_Http::normalize_cookies() forwards
+					// `host_only` verbatim into the Requests cookie, and
+					// WP_Http_Cookie leaves the property null unless it is
+					// given. array_merge() then overwrites Requests' own
+					// `host-only => true` default with that null, and
+					// Cookie::domain_matches() tests it with `=== true`, so
+					// null falls through to suffix matching: a cookie scoped
+					// to example.org would still be sent to any subdomain,
+					// evil.example.org included.
+					'host_only' => true,
+				)
+			);
+		}
+
+		return $cookies;
+	}
+
+	/**
+	 * Perform the request, following redirects only while they stay on the
+	 * site that was asked for.
+	 *
+	 * WP_Http follows redirects itself, but it cannot be told "only within
+	 * this site", and the destination here is attacker-controlled. So the hops
+	 * are walked here instead: isSameSiteHop() decides, and anything it
+	 * refuses is handed back as the redirect response it is, so the caller can
+	 * report an unusable preview rather than analyse the server's redirect
+	 * stub.
+	 *
+	 * The cookie scoping in buildCookies() already prevents the session from
+	 * leaving the site. This is the second half: it also stops the server
+	 * being used to reach hosts it was never meant to reach, which is the
+	 * server-side request forgery part of the same report.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param string $url  The URL to fetch.
+	 * @param array  $args The wp_remote_get arguments.
+	 *
+	 * @return array|\WP_Error
+	 */
+	private function followSafely( $url, $args ) {
+		$max      = 2;
+		$args     = is_array( $args ) ? $args : array();
+		$response = null;
+
+		// Never let WP_Http follow on our behalf: the hops are checked here.
+		// Forced after the seopress_real_preview_remote filter on purpose — a
+		// filter must not be able to hand the chain back to WP_Http.
+		$args['redirection'] = 0;
+
+		for ( $hop = 0; $hop <= $max; $hop++ ) {
+			$response = wp_remote_get( $url, $args );
+
+			if ( is_wp_error( $response ) ) {
+				return $response;
+			}
+
+			$code = (int) wp_remote_retrieve_response_code( $response );
+
+			if ( ! in_array( $code, array( 301, 302, 303, 307, 308 ), true ) ) {
+				return $response;
+			}
+
+			$location = wp_remote_retrieve_header( $response, 'location' );
+
+			if ( empty( $location ) || ! is_string( $location ) ) {
+				return $response;
+			}
+
+			$next = $this->resolveLocation( $url, $location );
+
+			if ( '' === $next || ! $this->isSameSiteHop( $url, $next ) ) {
+				// Off-site: stop here and let the caller decide. The body of a
+				// redirect is not the post, so it is never analysed.
+				return $response;
+			}
+
+			$url = $next;
+
+			// The cookies are host-only, so a hop that legitimately changes
+			// host (the www canonicalisation) has to have them re-bound to the
+			// new host: left on the old one they would simply not be sent, and
+			// a draft would come back as a 404. Only hops isSameSiteHop() has
+			// already accepted get here.
+			if ( isset( $args['cookies'] ) ) {
+				$args['cookies'] = $this->buildCookies( wp_parse_url( $url, PHP_URL_HOST ) );
+			}
+		}
+
+		return $response;
+	}
+
+	/**
+	 * Whether a redirect may be followed: does it stay on the site it started
+	 * from?
+	 *
+	 * Strict origin equality was too strict to ship. The two most ordinary
+	 * canonical redirects on the web both change the origin — http to https,
+	 * and www to non-www (or back) — and refusing them broke the content
+	 * analysis on every site whose home_url() is not already the canonical
+	 * form, silently, by handing the server's "301 Moved Permanently" stub to
+	 * the analyser.
+	 *
+	 * So the rule is: same host up to the `www.` prefix, no scheme downgrade,
+	 * and a port that is either unchanged or the default of the target scheme.
+	 * `www.` is the only prefix allowed — an arbitrary subdomain is not the
+	 * same site, and this is the check that keeps the administrator session
+	 * from walking to one.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param string $from The URL that returned the redirect.
+	 * @param string $to   The absolute URL it points to.
+	 *
+	 * @return bool
+	 */
+	private function isSameSiteHop( $from, $to ) {
+		$from_parsed = wp_parse_url( (string) $from );
+		$to_parsed   = wp_parse_url( (string) $to );
+
+		if ( empty( $from_parsed['host'] ) || empty( $to_parsed['host'] ) ) {
+			return false;
+		}
+
+		$from_scheme = isset( $from_parsed['scheme'] ) ? strtolower( $from_parsed['scheme'] ) : 'http';
+		$to_scheme   = isset( $to_parsed['scheme'] ) ? strtolower( $to_parsed['scheme'] ) : 'http';
+
+		if ( ! in_array( $to_scheme, array( 'http', 'https' ), true ) ) {
+			return false;
+		}
+
+		// http -> https is the ordinary upgrade. https -> http is a downgrade
+		// and is not something we replay a session over.
+		if ( $from_scheme !== $to_scheme && ! ( 'http' === $from_scheme && 'https' === $to_scheme ) ) {
+			return false;
+		}
+
+		$from_port = isset( $from_parsed['port'] ) ? (int) $from_parsed['port'] : ( 'https' === $from_scheme ? 443 : 80 );
+		$to_port   = isset( $to_parsed['port'] ) ? (int) $to_parsed['port'] : ( 'https' === $to_scheme ? 443 : 80 );
+
+		// Unchanged, or the default of the target scheme (which is what the
+		// 80 -> 443 upgrade looks like). Any other port is a different service
+		// on the same machine, not this site.
+		$to_default_port = 'https' === $to_scheme ? 443 : 80;
+
+		if ( $to_port !== $from_port && $to_port !== $to_default_port ) {
+			return false;
+		}
+
+		$from_host = $this->baseHost( $from_parsed['host'] );
+		$to_host   = $this->baseHost( $to_parsed['host'] );
+
+		if ( '' === $to_host ) {
+			return false;
+		}
+
+		if ( $from_host === $to_host ) {
+			return true;
+		}
+
+		/**
+		 * Extra hosts the preview fetch is allowed to be redirected to.
+		 *
+		 * Only for a site that legitimately serves its own content from
+		 * another domain — a multilingual install with one domain per
+		 * language is the usual case. The editor's session travels to whatever
+		 * is listed here, so list only hosts you own.
+		 *
+		 * @since 10.2.0
+		 *
+		 * @param array  $hosts Additional allowed redirect hosts. Default empty.
+		 * @param string $from  The URL that returned the redirect.
+		 * @param string $to    The absolute URL it points to.
+		 */
+		$allowed = apply_filters( 'seopress_real_preview_allowed_redirect_hosts', array(), $from, $to );
+
+		foreach ( (array) $allowed as $host ) {
+			if ( $this->baseHost( $host ) === $to_host ) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * A host reduced to what identifies the site: lowercased, without its
+	 * trailing root dot and without the `www.` prefix.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param string $host The host.
+	 *
+	 * @return string
+	 */
+	private function baseHost( $host ) {
+		$host = strtolower( trim( (string) $host ) );
+		$host = rtrim( $host, '.' );
+
+		if ( 0 === strpos( $host, 'www.' ) ) {
+			$host = substr( $host, 4 );
+		}
+
+		return $host;
+	}
+
+	/**
+	 * Turn a Location header into an absolute URL against the URL it came
+	 * from, so a relative hop is compared on the same footing as an absolute
+	 * one.
+	 *
+	 * @since 10.2.0
+	 *
+	 * @param string $base     The URL that returned the redirect.
+	 * @param string $location The raw Location header.
+	 *
+	 * @return string Empty when the location cannot be resolved.
+	 */
+	private function resolveLocation( $base, $location ) {
+		$location = trim( $location );
+
+		if ( '' === $location ) {
+			return '';
+		}
+
+		$parsed = wp_parse_url( $base );
+
+		if ( empty( $parsed['host'] ) ) {
+			return '';
+		}
+
+		$scheme = isset( $parsed['scheme'] ) ? $parsed['scheme'] : 'http';
+		$root   = $scheme . '://' . $parsed['host'];
+
+		if ( isset( $parsed['port'] ) ) {
+			$root .= ':' . (int) $parsed['port'];
+		}
+
+		// Protocol-relative: keep the scheme, take the rest as given. Checked
+		// before the absolute test below, not after: wp_parse_url() reports a
+		// host for "//host/path" too, so an absolute-looking but scheme-less
+		// URL would be handed back as is, read as http, and a
+		// "//same-host/path" hop on an https site would then look like a
+		// downgrade and be refused.
+		if ( 0 === strpos( $location, '//' ) ) {
+			return $scheme . ':' . $location;
+		}
+
+		// Already absolute.
+		if ( wp_parse_url( $location, PHP_URL_HOST ) ) {
+			return $location;
+		}
+
+		if ( 0 === strpos( $location, '/' ) ) {
+			return $root . $location;
+		}
+
+		$path = isset( $parsed['path'] ) ? $parsed['path'] : '/';
+		$path = substr( $path, 0, strrpos( $path, '/' ) + 1 );
+
+		return $root . $path . $location;
 	}
 
 	/**
@@ -377,7 +700,17 @@ class RequestPreview {
 		// An origin that is not reachable locally must fail fast.
 		$args['timeout'] = min( isset( $args['timeout'] ) ? (int) $args['timeout'] : 10, 5 );
 
-		return wp_remote_get( $this->replaceHost( $parsed, $ip ), $args );
+		$target = $this->replaceHost( $parsed, $ip );
+
+		// The connection goes to the IP, so the cookies have to be scoped to
+		// it: bound to the public host they would simply not be sent, and left
+		// domainless they would follow a redirect anywhere.
+		$cookies = $this->buildCookies( wp_parse_url( $target, PHP_URL_HOST ) );
+		if ( ! empty( $cookies ) ) {
+			$args['cookies'] = $cookies;
+		}
+
+		return $this->followSafely( $target, $args );
 	}
 
 	/**

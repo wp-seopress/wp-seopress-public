@@ -13,8 +13,8 @@ namespace SEOPress\Vendor\phpseclib3\Crypt\DSA;
 use SEOPress\Vendor\phpseclib3\Crypt\Common;
 use SEOPress\Vendor\phpseclib3\Crypt\DSA;
 use SEOPress\Vendor\phpseclib3\Crypt\DSA\Formats\Signature\ASN1 as ASN1Signature;
-use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 use SEOPress\Vendor\phpseclib3\Exception\BadConfigurationException;
+use SEOPress\Vendor\phpseclib3\Math\BigInteger;
 /**
  * DSA Private Key
  *

@@ -35,6 +35,13 @@ class Headers {
 			return;
 		}
 
+		// Nothing to send once the response has started. This is normal under
+		// WP-CLI and PHPUnit, where the bootstrap has already produced output,
+		// and header() would only raise a warning that buries the real ones.
+		if ( headers_sent() ) {
+			return;
+		}
+
 		foreach ( $headers as $key => $header ) {
 			header( $key . ':' . $header );
 		}

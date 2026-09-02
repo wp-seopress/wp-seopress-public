@@ -15,6 +15,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 class I18nUniversalMetabox {
 
 	/**
+	 * Weekday names in the site language, Monday first, matching the day
+	 * order used by the opening hours fields.
+	 *
+	 * @return array<int, string>
+	 */
+	protected function getWeekdays() {
+		global $wp_locale;
+
+		$days = array();
+
+		// get_weekday() is Sunday-indexed; the opening hours start on Monday.
+		foreach ( array( 1, 2, 3, 4, 5, 6, 0 ) as $index ) {
+			$days[] = $wp_locale instanceof \WP_Locale ? $wp_locale->get_weekday( $index ) : '';
+		}
+
+		return $days;
+	}
+
+	/**
 	 * The getTranslations function.
 	 *
 	 * @return array
@@ -37,6 +56,18 @@ class I18nUniversalMetabox {
 				'choose_image'            => __( 'Choose an image', 'wp-seopress' ),
 				'opening_hours_morning'   => __( 'Open in the morning?', 'wp-seopress' ),
 				'opening_hours_afternoon' => __( 'Open in the afternoon?', 'wp-seopress' ),
+				'opening_hours_closed'    => __( 'Closed all the day?', 'wp-seopress' ),
+				'opening_hours_days'      => $this->getWeekdays(),
+				// Accessible names for the time dropdowns, which carry no
+				// visible label of their own.
+				'opening_hours_morning_slot'   => __( 'Morning', 'wp-seopress' ),
+				'opening_hours_afternoon_slot' => __( 'Afternoon', 'wp-seopress' ),
+				'opening_hours_opens_hour'     => __( 'Opening hour', 'wp-seopress' ),
+				'opening_hours_opens_minutes'  => __( 'Opening minutes', 'wp-seopress' ),
+				'opening_hours_closes_hour'    => __( 'Closing hour', 'wp-seopress' ),
+				'opening_hours_closes_minutes' => __( 'Closing minutes', 'wp-seopress' ),
+				/* translators: 1: weekday, e.g. Monday. 2: time slot, e.g. Morning. 3: field, e.g. Opening hour. */
+				'opening_hours_field_label'    => __( '%1$s, %2$s: %3$s', 'wp-seopress' ),
 				'thumbnail'               => __( 'Thumbnail', 'wp-seopress' ),
 				'x'                       => __( 'x', 'wp-seopress' ),
 				'search_tag'              => __( 'Search a tag', 'wp-seopress' ),
@@ -521,6 +552,36 @@ class I18nUniversalMetabox {
 				),
 			),
 			'layouts'        => array(
+				// Empty state of a metabox emptied by the Advanced, Security
+				// role restrictions. The title and description are shown to
+				// everyone: they only say the screen was emptied on purpose,
+				// which is what the three bug reports were missing. The
+				// "_where" strings name the menu and the settings, so they go
+				// only to users who can open that screen (ADMIN_URL_SECURITY
+				// is empty for the others): pointing an author at a menu they
+				// cannot reach helps nobody, and a white-labelled install may
+				// have renamed or removed it.
+				'main'              => array(
+					'no_access_title'           => __( 'This metabox is restricted', 'wp-seopress' ),
+					'no_access_description'     => __(
+						'Your user role has been prevented from editing SEO data, so there is nothing to show here. This is a setting, not an error.',
+						'wp-seopress'
+					),
+					'no_access_where'           => __(
+						'It comes from the role restrictions in SEO, Advanced, Security: "SEO metaboxes" and "Content Analysis". Unticking your role there brings this panel back.',
+						'wp-seopress'
+					),
+					'no_access_section_title'   => __( 'This section is restricted', 'wp-seopress' ),
+					'no_access_section_where'   => __(
+						'Your role has been prevented from editing this section in SEO, Advanced, Security. The other sections in the menu are still available.',
+						'wp-seopress'
+					),
+					'no_access_cta'             => __( 'Open security settings', 'wp-seopress' ),
+					'no_access_ask_admin'     => __(
+						'This comes from a role restriction set on this site. Contact your site administrator if you need access.',
+						'wp-seopress'
+					),
+				),
 				'meta_robot'        => array(
 					/* translators: %s documentation URL */
 					'title'                                => __(
@@ -528,7 +589,7 @@ class I18nUniversalMetabox {
 						'wp-seopress'
 					),
 					'robots_index_description'             => __(
-						'Do not display this page in search engine results / XML - HTML sitemaps',
+						'Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>',
 						'wp-seopress'
 					),
 					'robots_index_tooltip_title'           => __( '"noindex" robots meta tag', 'wp-seopress' ),
@@ -540,7 +601,7 @@ class I18nUniversalMetabox {
 						'Search engines will not index this URL in the search results.',
 						'wp-seopress'
 					),
-					'robots_follow_description'            => __( 'Do not follow links for this page', 'wp-seopress' ),
+					'robots_follow_description'            => __( 'Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress' ),
 					'robots_follow_tooltip_title'          => __( '"nofollow" robots meta tag', 'wp-seopress' ),
 					'robots_follow_tooltip_description_1'  => __(
 						'By checking this option, you will add a meta robots tag with the value "nofollow".',
@@ -551,7 +612,7 @@ class I18nUniversalMetabox {
 						'wp-seopress'
 					),
 					'robots_snippet_description'           => __(
-						'Do not display a description in search results for this page',
+						'Do not display a description in search results for this page <strong>(nosnippet)</strong>',
 						'wp-seopress'
 					),
 					'robots_snippet_tooltip_title'         => __( '"nosnippet" robots meta tag', 'wp-seopress' ),
@@ -559,7 +620,7 @@ class I18nUniversalMetabox {
 						'By checking this option, you will add a meta robots tag with the value "nosnippet".',
 						'wp-seopress'
 					),
-					'robots_imageindex_description'        => __( 'Do not index images for this page', 'wp-seopress' ),
+					'robots_imageindex_description'        => __( 'Do not index images for this page <strong>(noimageindex)</strong>', 'wp-seopress' ),
 					'robots_imageindex_tooltip_title'      => __( '"noimageindex" robots meta tag', 'wp-seopress' ),
 					'robots_imageindex_tooltip_description_1' => __(
 						'By checking this option, you will add a meta robots tag with the value "noimageindex".',

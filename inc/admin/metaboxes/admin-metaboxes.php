@@ -387,7 +387,7 @@ function seopress_display_seo_metaboxe() {
 		}
 
 		if ( 'attachment' !== get_post_type( $post_id ) ) {
-			$seo_tabs = isset( $_POST['seo_tabs'] ) ? json_decode( stripslashes( htmlspecialchars_decode( $_POST['seo_tabs'] ) ), true ) : array();
+			$seo_tabs = isset( $_POST['seo_tabs'] ) ? json_decode( stripslashes( htmlspecialchars_decode( $_POST['seo_tabs'], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) ), true ) : array();
 
 			if ( json_last_error() !== JSON_ERROR_NONE ) {
 				return $post_id;

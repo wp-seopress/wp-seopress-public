@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Helpers\ContentAnalysis;
+
 /**
  * DomAnalysis
  */
@@ -14,6 +16,12 @@ class DomAnalysis {
 	/**
 	 * The getMatches function.
 	 *
+	 * Both sides go through the same normalization before being compared:
+	 * entities are resolved, the typographic characters WordPress substitutes
+	 * at render time are folded back onto their ASCII form, then accents are
+	 * stripped. Without it a keyword typed with a straight apostrophe could
+	 * never match the typographic one wptexturize() puts on the page.
+	 *
 	 * @param string $content The content.
 	 * @param array  $target_keywords The target keywords.
 	 *
@@ -21,10 +29,21 @@ class DomAnalysis {
 	 */
 	public function getMatches( $content, $target_keywords ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$data = array();
-		foreach ( $target_keywords as $kw ) {
-			$kw = remove_accents( wp_specialchars_decode( $kw ) );
 
-			if ( preg_match_all( '@(?<![\w-])' . preg_quote( $kw, '@' ) . '(?![\w-])@is', remove_accents( $content ), $matches ) ) {
+		if ( empty( $target_keywords ) ) {
+			return null;
+		}
+
+		$normalized_content = remove_accents( ContentAnalysis::normalizeTypography( $content ) );
+
+		foreach ( $target_keywords as $kw ) {
+			$kw = remove_accents( ContentAnalysis::normalizeTypography( $kw ) );
+
+			if ( '' === trim( $kw ) ) {
+				continue;
+			}
+
+			if ( preg_match_all( '@(?<![\w-])' . preg_quote( $kw, '@' ) . '(?![\w-])@is', $normalized_content, $matches ) ) {
 				$data[ $kw ][] = $matches[0];
 			}
 		}
@@ -58,7 +77,7 @@ class DomAnalysis {
 			$target_keywords = '';
 		}
 
-		$target_keywords = array_filter( explode( ',', remove_accents( strtolower( $target_keywords ) ) ) );
+		$target_keywords = array_filter( explode( ',', remove_accents( ContentAnalysis::toLowercase( $target_keywords ) ) ) );
 
 		return apply_filters( 'seopress_content_analysis_target_keywords', $target_keywords, $options['id'] );
 	}
@@ -167,6 +186,19 @@ class DomAnalysis {
 
 		if ( ! empty( $target_keywords ) ) {
 			$matches = $this->getMatches( $slug, $target_keywords );
+
+			// Same fallback as the analysis report, so the metabox and the
+			// report cannot disagree on whether a keyword is in the permalink:
+			// try the slug readings of the keywords when the keywords
+			// themselves did not line up.
+			if ( null === $matches ) {
+				$slug_variants = ContentAnalysis::getSlugVariants( $target_keywords );
+
+				if ( ! empty( $slug_variants ) ) {
+					$matches = $this->getMatches( $slug, $slug_variants );
+				}
+			}
+
 			if ( null !== $matches ) {
 				$keys = array_keys( $matches );
 				foreach ( $keys as $key => $value ) {
