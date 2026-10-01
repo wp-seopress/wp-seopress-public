@@ -38,7 +38,7 @@ printf( '<?xml-stylesheet type="text/xsl" href="%s"?>', esc_url( $home_url . 'si
 
 $urlset = '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">';
 
-echo apply_filters( 'seopress_sitemaps_urlset', $urlset );
+echo apply_filters( 'seopress_sitemaps_urlset', $urlset ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered markup, third parties are expected to return HTML.
 
 // Archive link.
 if ( get_post_type_archive_link( $path ) && 0 === $offset ) {
@@ -90,21 +90,27 @@ if ( get_post_type_archive_link( $path ) && 0 === $offset ) {
 					foreach ( $language_list as $key => $language_infos ) {
 						if ( $original_language !== $language_infos['language_code'] ) {
 
-							// Switch Language.
-							do_action( 'wpml_switch_language', $language_infos['language_code'] );
+							// Switch Language. Closed with the token below rather
+							// than by naming the language we came from: on WPML
+							// 5.0 a language code only opens a scope, so restoring
+							// by name would stack a pair of them per language and
+							// never come back.
+							$wpml_scope = seopress_wpml_open_language_switch( $language_infos['language_code'] );
 
-							if ( is_plugin_active( 'woocommerce/woocommerce.php' ) && 'product' === $path ) {
-								if ( function_exists( 'wc_get_page_id' ) ) {
-									$shop_id = wc_get_page_id( 'shop' );
+							try {
+								if ( is_plugin_active( 'woocommerce/woocommerce.php' ) && 'product' === $path ) {
+									if ( function_exists( 'wc_get_page_id' ) ) {
+										$shop_id = wc_get_page_id( 'shop' );
 
-									$seopress_queue_archive_link( get_permalink( $shop_id ), $shop_id );
+										$seopress_queue_archive_link( get_permalink( $shop_id ), $shop_id );
+									}
+								} else {
+									$seopress_queue_archive_link( get_post_type_archive_link( $path ) );
 								}
-							} else {
-								$seopress_queue_archive_link( get_post_type_archive_link( $path ) );
+							} finally {
+								// Restore language to the original.
+								seopress_wpml_close_language_switch( $wpml_scope );
 							}
-
-							// Restore language to the original.
-							do_action( 'wpml_switch_language', $original_language );
 						}
 					}
 				}
@@ -226,7 +232,7 @@ if ( get_post_type_archive_link( $path ) && 0 === $offset ) {
 
 			$sitemap_url = apply_filters( 'seopress_sitemaps_no_archive_link', $sitemap_url, $path );
 
-			echo apply_filters( 'seopress_sitemaps_url', $sitemap_url, $seopress_url );
+			echo apply_filters( 'seopress_sitemaps_url', $sitemap_url, $seopress_url ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered markup, third parties are expected to return HTML.
 		}
 	}
 }
@@ -453,8 +459,11 @@ foreach ( $postslist as $post ) {
 
 					// WooCommerce img.
 					if ( ! empty( $product ) && is_object( $product ) && ! empty( $product_img ) ) {
-						foreach ( $product_img as $product_attachment_id ) {
-							$seopress_image_loc = '<![CDATA[' . esc_attr( wp_filter_nohtml_kses( wp_get_attachment_url( $product_attachment_id ) ) ) . ']]>';
+						// Only the IDs that still resolve to an image: a gallery keeps
+						// the IDs of attachments deleted from the Media Library, and
+						// those used to be published as an empty <image:loc>. See #1951.
+						foreach ( seopress_sitemap_attachment_image_urls( $product_img ) as $product_image_url ) {
+							$seopress_image_loc = '<![CDATA[' . esc_attr( wp_filter_nohtml_kses( $product_image_url ) ) . ']]>';
 
 							$seopress_url['images'][] = array(
 								'src' => $seopress_image_loc,
@@ -488,7 +497,7 @@ foreach ( $postslist as $post ) {
 		$sitemap_data .= '</url>';
 	}
 
-	echo apply_filters( 'seopress_sitemaps_url', $sitemap_data, $seopress_url );
+	echo apply_filters( 'seopress_sitemaps_url', $sitemap_data, $seopress_url ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered markup, third parties are expected to return HTML.
 }
 wp_reset_postdata();
 ?>

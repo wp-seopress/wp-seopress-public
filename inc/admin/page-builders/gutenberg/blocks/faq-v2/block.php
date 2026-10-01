@@ -84,6 +84,38 @@ function seopress_block_faq_v2_strip_leaked_schema( $block_content ) {
 }
 
 /**
+ * Group sibling questions using the native details accordion behavior.
+ *
+ * @param string $block_content Rendered FAQ markup.
+ * @return string
+ */
+function seopress_block_faq_v2_single_open( $block_content ) {
+	$processor = new WP_HTML_Tag_Processor( $block_content );
+	$group     = wp_unique_id( 'seopress-faq-group-' );
+	$depth     = 0;
+	$has_open  = false;
+
+	while ( $processor->next_tag( array( 'tag_name' => 'DETAILS', 'tag_closers' => 'visit' ) ) ) {
+		if ( $processor->is_tag_closer() ) {
+			$depth = max( 0, $depth - 1 );
+			continue;
+		}
+		++$depth;
+		if ( 1 !== $depth ) {
+			continue;
+		}
+		$processor->set_attribute( 'name', $group );
+		if ( null !== $processor->get_attribute( 'open' ) ) {
+			if ( $has_open ) {
+				$processor->remove_attribute( 'open' );
+			}
+			$has_open = true;
+		}
+	}
+	return $processor->get_updated_html();
+}
+
+/**
  * Append the FAQ JSON-LD to the rendered block.
  *
  * The schema used to be part of the block's saved markup. WordPress strips
@@ -111,6 +143,10 @@ function seopress_block_faq_v2_render_schema( $block_content, $block ) {
 	$block_content = seopress_block_faq_v2_strip_leaked_schema( $block_content );
 
 	$attributes = isset( $block['attrs'] ) && is_array( $block['attrs'] ) ? $block['attrs'] : array();
+
+	if ( true === ( $attributes['singleOpen'] ?? false ) ) {
+		$block_content = seopress_block_faq_v2_single_open( $block_content );
+	}
 
 	// printSchema defaults to true in block.json, so an absent key means enabled.
 	if ( isset( $attributes['printSchema'] ) && ! $attributes['printSchema'] ) {

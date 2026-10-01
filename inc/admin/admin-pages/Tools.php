@@ -13,11 +13,11 @@ $this->options = get_option( 'seopress_import_export_option_name' );
 $docs = seopress_get_docs_links();
 
 if ( function_exists( 'seopress_admin_header' ) ) {
-	echo seopress_admin_header();
+	seopress_admin_header();
 }
 ?>
 <div class="seopress-option seopress-php-header">
-	<?php echo $this->feature_title( null ); ?>
+	<?php echo $this->feature_title( null ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?>
 </div>
 
 <?php seopress_admin_notices_anchor(); ?>

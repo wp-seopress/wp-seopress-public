@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Image;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\SocialTwitter\Specifications\Image\AbstractImageSpecification;
 

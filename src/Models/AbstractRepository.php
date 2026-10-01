@@ -2,6 +2,8 @@
 
 namespace SEOPress\Models;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Models\Table\Table;
 
 /**

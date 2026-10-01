@@ -19,11 +19,8 @@ abstract class RobotSettings {
 	 * @return array
 	 */
 	protected static function getRobotPrimaryCats( $id, $post_type ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		$cats = get_categories();
-
-		if ( 'product' === $post_type ) {
-			$cats = get_the_terms( $id, 'product_cat' );
-		}
+		$taxonomy = 'product' === $post_type ? 'product_cat' : 'category';
+		$cats = $id ? get_the_terms( $id, $taxonomy ) : array();
 
 		$cats = apply_filters( 'seopress_primary_category_list', $cats );
 

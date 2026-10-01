@@ -114,11 +114,6 @@ class TitleDescriptionMeta implements ExecuteHooks {
 				continue;
 			}
 
-			if ( empty( $params[ $key ] ) ) {
-				delete_post_meta( $id, $value );
-				continue;
-			}
-
 			$sanitized_value = '';
 			if ( 'title' === $key ) {
 				$sanitized_value = sanitize_text_field( $params[ $key ] );
@@ -126,7 +121,12 @@ class TitleDescriptionMeta implements ExecuteHooks {
 				$sanitized_value = sanitize_textarea_field( $params[ $key ] );
 			}
 
-			update_post_meta( $id, $value, $sanitized_value );
+			if ( '' === $sanitized_value ) {
+				delete_post_meta( $id, $value );
+			} else {
+				// REST values are unslashed; metadata storage removes one slash layer.
+				update_post_meta( $id, $value, wp_slash( $sanitized_value ) );
+			}
 		}
 
 		return new \WP_REST_Response(

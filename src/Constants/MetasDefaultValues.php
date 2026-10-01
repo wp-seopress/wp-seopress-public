@@ -2,6 +2,8 @@
 
 namespace SEOPress\Constants;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Helpers\TagCompose;
 use SEOPress\Tags\PostTitle;
 use SEOPress\Tags\SiteTagline;

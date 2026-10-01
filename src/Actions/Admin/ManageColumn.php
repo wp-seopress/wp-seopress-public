@@ -550,6 +550,8 @@ class ManageColumn implements ExecuteHooksBackend {
 		);
 
 		$schema_ids         = get_posts( $args );
+		// Prime only missing metadata; WordPress handles invalidation after edits.
+		update_meta_cache( 'post', $schema_ids );
 		$matching_schema_ids = array();
 
 		foreach ( $schema_ids as $schema_id ) {

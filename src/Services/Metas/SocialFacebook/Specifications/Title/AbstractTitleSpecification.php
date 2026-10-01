@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialFacebook\Specifications\Title;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * AbstractTitleSpecification
  */

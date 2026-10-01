@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\Description\Specifications;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * AuthorSpecification
  */

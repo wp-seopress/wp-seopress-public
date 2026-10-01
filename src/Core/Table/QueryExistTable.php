@@ -22,15 +22,11 @@ class QueryExistTable {
 
 		global $wpdb;
 
-		$query = "SHOW TABLES LIKE '{$wpdb->prefix}{$table->getName()}'";
+		$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . $table->getName() ) );
 		try {
-			$result = $wpdb->query( $query ); // phpcs:ignore -- TODO: prepare and use placeholder.
+			$result = $wpdb->query( $query );
 
-			if ( 0 === $result ) {
-				return false;
-			}
-
-			return true;
+			return false !== $result && 0 < $result;
 		} catch ( \Exception $e ) {
 			return false;
 		}

@@ -717,17 +717,17 @@
         },
         {
             "name": "monolog\/monolog",
-            "version": "2.11.0",
-            "version_normalized": "2.11.0.0",
+            "version": "2.11.1",
+            "version_normalized": "2.11.1.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/Seldaek\/monolog.git",
-                "reference": "37308608e599f34a1a4845b16440047ec98a172a"
+                "reference": "bf2403f591c5a431b6e0e1170cbadd3d64499564"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/Seldaek\/monolog\/zipball\/37308608e599f34a1a4845b16440047ec98a172a",
-                "reference": "37308608e599f34a1a4845b16440047ec98a172a",
+                "url": "https:\/\/api.github.com\/repos\/Seldaek\/monolog\/zipball\/bf2403f591c5a431b6e0e1170cbadd3d64499564",
+                "reference": "bf2403f591c5a431b6e0e1170cbadd3d64499564",
                 "shasum": ""
             },
             "require": {
@@ -773,7 +773,7 @@
                 "rollbar\/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin\/elastica": "Allow sending log messages to an Elastic Search server"
             },
-            "time": "2026-01-01T13:05:00+00:00",
+            "time": "2026-09-02T07:57:24+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -806,7 +806,7 @@
             ],
             "support": {
                 "issues": "https:\/\/github.com\/Seldaek\/monolog\/issues",
-                "source": "https:\/\/github.com\/Seldaek\/monolog\/tree\/2.11.0"
+                "source": "https:\/\/github.com\/Seldaek\/monolog\/tree\/2.11.1"
             },
             "funding": [
                 {
@@ -1449,23 +1449,23 @@
         },
         {
             "name": "symfony\/polyfill-php80",
-            "version": "v1.37.0",
-            "version_normalized": "1.37.0.0",
+            "version": "v1.43.0",
+            "version_normalized": "1.43.0.0",
             "source": {
                 "type": "git",
                 "url": "https:\/\/github.com\/symfony\/polyfill-php80.git",
-                "reference": "dfb55726c3a76ea3b6459fcfda1ec2d80a682411"
+                "reference": "9c6a5d6b01ca51d486c813e9a9c0ed55f208bb74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-php80\/zipball\/dfb55726c3a76ea3b6459fcfda1ec2d80a682411",
-                "reference": "dfb55726c3a76ea3b6459fcfda1ec2d80a682411",
+                "url": "https:\/\/api.github.com\/repos\/symfony\/polyfill-php80\/zipball\/9c6a5d6b01ca51d486c813e9a9c0ed55f208bb74",
+                "reference": "9c6a5d6b01ca51d486c813e9a9c0ed55f208bb74",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2"
             },
-            "time": "2026-04-10T16:19:22+00:00",
+            "time": "2026-09-25T15:50:05+00:00",
             "type": "library",
             "extra": {
                 "thanks": {
@@ -1512,7 +1512,7 @@
                 "shim"
             ],
             "support": {
-                "source": "https:\/\/github.com\/symfony\/polyfill-php80\/tree\/v1.37.0"
+                "source": "https:\/\/github.com\/symfony\/polyfill-php80\/tree\/v1.43.0"
             },
             "funding": [
                 {

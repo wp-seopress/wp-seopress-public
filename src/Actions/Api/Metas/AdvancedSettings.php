@@ -52,7 +52,7 @@ class AdvancedSettings implements ExecuteHooks {
 	 * The Advanced Settings register.
 	 *
 	 * Every meta key registered here is exposed to Gutenberg via the standard
-	 * `/wp/v2/<type>/<id>` REST endpoint. The React metabox mirrors its Formik
+	 * `/wp/v2/<type>/<id>` REST endpoint. The React metabox mirrors its form
 	 * state into `core/editor` (see app/react/components/SyncMetaToEditor) so
 	 * a plain Block Editor "Update" persists the SEO fields without needing a
 	 * dedicated /seopress/v1 PUT. Each `sanitize_callback` mirrors the
@@ -163,7 +163,7 @@ class AdvancedSettings implements ExecuteHooks {
 				'single'            => true,
 				'type'              => 'string',
 				'auth_callback'     => array( $this, 'meta_auth' ),
-				'sanitize_callback' => 'sanitize_text_field',
+				'sanitize_callback' => '_seopress_titles_desc' === $key ? 'sanitize_textarea_field' : 'sanitize_text_field',
 			)
 		);
 	}

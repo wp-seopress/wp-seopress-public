@@ -48,6 +48,31 @@ function seopress_instant_indexing_get_api_key( $stored_key ) {
 }
 
 /**
+ * Decode the stored Google service account key.
+ *
+ * Handing setAuthConfig() the null that json_decode() returns for anything
+ * that is not JSON raises no exception: the client simply carries no
+ * credentials and every call comes back 401 CREDENTIALS_MISSING, which
+ * reads as an authentication failure rather than as a bad paste.
+ *
+ * @param string $stored_key The raw value stored in the options.
+ * @return array|null The service account document, or null if it is unusable.
+ */
+function seopress_instant_indexing_get_google_credentials( $stored_key ) {
+	if ( ! is_string( $stored_key ) || '' === trim( $stored_key ) ) {
+		return null;
+	}
+
+	$credentials = json_decode( $stored_key, true );
+
+	if ( ! is_array( $credentials ) || empty( $credentials['client_email'] ) || empty( $credentials['private_key'] ) ) {
+		return null;
+	}
+
+	return $credentials;
+}
+
+/**
  * Create the virtual Instant Indexing API key txt file
  *
  * @return void
@@ -104,7 +129,7 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 
 		// Update options.
 		if ( isset( $_POST['urls_to_submit'] ) ) {
-			$options['seopress_instant_indexing_manual_batch'] = sanitize_textarea_field( wp_unslash( $_POST['urls_to_submit'] ) );
+			$options['seopress_instant_indexing_manual_batch'] = seopress_sanitize_urls_list( wp_unslash( $_POST['urls_to_submit'] ) );
 		}
 
 		if ( isset( $_POST['indexnow_api'] ) ) {
@@ -156,7 +181,7 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 
 	$engines        = isset( $options['engines'] ) ? $options['engines'] : null;
 	$actions        = isset( $options['seopress_instant_indexing_google_action'] ) ? esc_attr( $options['seopress_instant_indexing_google_action'] ) : 'URL_UPDATED';
-	$urls           = isset( $options['seopress_instant_indexing_manual_batch'] ) ? esc_attr( $options['seopress_instant_indexing_manual_batch'] ) : '';
+	$urls           = isset( $options['seopress_instant_indexing_manual_batch'] ) ? (string) $options['seopress_instant_indexing_manual_batch'] : '';
 	$google_api_key = isset( $options['seopress_instant_indexing_google_api_key'] ) ? $options['seopress_instant_indexing_google_api_key'] : '';
 	$bing_api_key   = isset( $options['seopress_instant_indexing_bing_api_key'] ) ? $options['seopress_instant_indexing_bing_api_key'] : '';
 	$bing_url       = 'https://api.indexnow.org/indexnow/';
@@ -189,13 +214,13 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	// Prepare the URLS.
 	if ( true === $is_manual_submission ) {
 		$urls          = preg_split( '/\r\n|\r|\n/', $urls );
-		$x_source_info = 'https://www.seopress.org/10.2/true';
+		$x_source_info = 'https://www.seopress.org/10.3/true';
 
 		$urls = array_slice( $urls, 0, 100 );
 	} elseif ( false === $is_manual_submission && ! empty( $permalink ) ) {
 		$urls          = null;
 		$urls[]        = $permalink;
-		$x_source_info = 'https://www.seopress.org/10.2/false';
+		$x_source_info = 'https://www.seopress.org/10.3/false';
 	}
 
 	// Bing API.
@@ -278,12 +303,22 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	}
 
 	// Google API.
-	if ( true === $is_manual_submission ) {
-		if ( isset( $google_api_key ) && ! empty( $google_api_key ) && '1' === $engines['google'] ) {
+	// Google is only ever submitted manually: automatic submission covers
+	// IndexNow (Bing, Yandex), as the setting says. See #1940.
+	$google_enabled = ! empty( $engines['google'] ) && '1' === $engines['google'];
+
+	if ( $google_enabled && true !== $is_manual_submission ) {
+		// Say so in the log, otherwise an automatic run that only mentions
+		// Bing reads as Google having been silently skipped.
+		$log['google']['skipped'] = __( 'Automatic submission uses IndexNow only (Bing, Yandex). Submit URLs to Google manually from the General tab.', 'wp-seopress' );
+	} elseif ( $google_enabled ) {
+		$google_credentials = seopress_instant_indexing_get_google_credentials( $google_api_key );
+
+		if ( null !== $google_credentials ) {
 			try {
 				$client = new \SEOPress\Vendor\Google\Client();
 
-				$client->setAuthConfig( json_decode( $google_api_key, true ) );
+				$client->setAuthConfig( $google_credentials );
 				$client->setScopes( \SEOPress\Vendor\Google\Service\Indexing::INDEXING );
 
 				$client->setUseBatch( true );
@@ -324,11 +359,18 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 				} else {
 					$log['google']['response'] = $results;
 				}
-		} elseif ( '1' === $engines['google'] ) {
-			$log['google']['response']['error'] = array(
-				'code'    => 401,
-				'message' => __( 'Google API key is missing', 'wp-seopress' ),
-			);
+		} else {
+			// An empty field is a setup step not taken, anything else is a
+			// paste that went wrong: they call for different fixes.
+			$log['google']['response']['error'] = '' === trim( (string) $google_api_key )
+				? array(
+					'code'    => 401,
+					'message' => __( 'Google API key is missing', 'wp-seopress' ),
+				)
+				: array(
+					'code'    => 400,
+					'message' => __( 'The Google API key is not a valid service account JSON file. Paste the whole file, from the opening brace to the closing one.', 'wp-seopress' ),
+				);
 		}
 	}
 
@@ -350,7 +392,7 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
  */
 function seopress_instant_indexing_post() {
 	check_ajax_referer( 'seopress_instant_indexing_post_nonce' );
-	require_once WP_PLUGIN_DIR . '/wp-seopress/vendor/autoload.php';
+	require_once SEOPRESS_PLUGIN_DIR_PATH . 'vendor/autoload.php';
 	if ( current_user_can( seopress_capability( 'manage_options', PagesAdmin::INSTANT_INDEXING ) ) && is_admin() ) {
 		seopress_instant_indexing_fn();
 	}

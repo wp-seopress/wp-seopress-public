@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialTwitter;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Helpers\Metas\SocialSettings;
 
 /**

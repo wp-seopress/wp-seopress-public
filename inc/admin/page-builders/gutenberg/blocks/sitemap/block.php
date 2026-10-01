@@ -26,3 +26,29 @@ function seopress_sitemap_block( $attributes, $content, $block ) {
 	}
 	return $html;
 }
+
+add_action( 'enqueue_block_editor_assets', 'seopress_sitemap_block_editor_data' );
+/**
+ * Hand the registered post types to the block editor.
+ *
+ * The editor can only list post types exposed to the REST API, so it cannot
+ * tell a post type that stopped existing from one registered without
+ * `show_in_rest`. The front end drops the former only, so the editor gets the
+ * same list to warn about post types the block still names but nothing
+ * registers any more.
+ *
+ * @return void
+ */
+function seopress_sitemap_block_editor_data() {
+	$handle = generate_block_asset_handle( 'wpseopress/sitemap', 'editorScript' );
+
+	if ( ! wp_script_is( $handle, 'registered' ) ) {
+		return;
+	}
+
+	wp_add_inline_script(
+		$handle,
+		'window.seopressSitemapBlock = ' . wp_json_encode( array( 'postTypes' => array_values( get_post_types() ) ) ) . ';',
+		'before'
+	);
+}

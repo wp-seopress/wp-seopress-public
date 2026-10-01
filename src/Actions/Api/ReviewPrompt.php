@@ -8,6 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 use SEOPress\Core\Hooks\ExecuteHooks;
 use SEOPress\Helpers\InstallDate;
+use SEOPress\Helpers\WhiteLabel;
 
 /**
  * REST endpoint backing the "Rate SEOPress 5 stars" prompt.
@@ -144,16 +145,23 @@ class ReviewPrompt implements ExecuteHooks {
 			return false;
 		}
 
+		// White Label: there is no way to ask for a review without naming the
+		// product — the wordpress.org link alone gives it away — so the prompt
+		// is suppressed rather than renamed. Kept as the filter default so an
+		// explicit opt-in still wins.
+		$show = ! WhiteLabel::isEnabled();
+
 		/**
-		 * Filter whether the 5-star review prompt is shown. PRO White Label
-		 * (or any site owner) can hook this to suppress it entirely.
+		 * Filter whether the 5-star review prompt is shown.
+		 *
+		 * Defaults to false while White Label is on.
 		 *
 		 * @since 10.0.0
 		 *
 		 * @param bool $show    Whether to show the prompt.
 		 * @param int  $user_id Current user ID.
 		 */
-		return (bool) apply_filters( 'seopress_show_review_prompt', true, $user_id );
+		return (bool) apply_filters( 'seopress_show_review_prompt', $show, $user_id );
 	}
 
 	/**

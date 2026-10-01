@@ -154,15 +154,19 @@ class ToolsSettings implements ExecuteHooks {
 	 * @return \WP_REST_Response
 	 */
 	public function processCleanContentScans( \WP_REST_Request $request ) {
+		if ( ! $this->permissionCheck( $request ) ) {
+			return new \WP_Error( 'rest_forbidden', __( 'You are not allowed to delete content scans.', 'wp-seopress' ), array( 'status' => 403 ) );
+		}
+
 		global $wpdb;
 
 		// Delete cache option.
 		delete_option( 'seopress_content_analysis_api_in_progress' );
 
-		// Clean post metas.
-		$wpdb->query(
-			"DELETE FROM `{$wpdb->prefix}postmeta` WHERE `meta_key` IN ( '_seopress_analysis_data', '_seopress_content_analysis_api', '_seopress_analysis_data_oxygen', '_seopress_content_analysis_api_in_progress')"
-		);
+		// Use the metadata API so warm and persistent caches lose the deleted values.
+		foreach ( array( '_seopress_analysis_data', '_seopress_content_analysis_api', '_seopress_analysis_data_oxygen', '_seopress_content_analysis_api_in_progress' ) as $meta_key ) {
+			delete_post_meta_by_key( $meta_key );
+		}
 
 		// Clean custom table if it exists.
 		if ( $wpdb->get_var( "SHOW TABLES LIKE '{$wpdb->prefix}seopress_content_analysis'" ) === $wpdb->prefix . 'seopress_content_analysis' ) {

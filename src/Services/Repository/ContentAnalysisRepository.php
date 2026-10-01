@@ -110,9 +110,9 @@ class ContentAnalysisRepository extends AbstractRepository {
 
 		$table_name = esc_sql( $this->getTableName() );
 
-		$sql = $wpdb->prepare( "SELECT id FROM {$table_name} WHERE post_id = %d", $post_id );
+		$sql = $wpdb->prepare( "SELECT id FROM {$table_name} WHERE post_id = %d", $post_id ); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name escaped with esc_sql() above, it cannot be bound.
 
-		$result = $wpdb->get_results( $sql );
+		$result = $wpdb->get_results( $sql ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $sql is the prepared statement built on the line above.
 
 		return ! empty( $result );
 	}
@@ -166,6 +166,56 @@ class ContentAnalysisRepository extends AbstractRepository {
 	}
 
 	/**
+	 * Read the latest analysis score of several posts in one query.
+	 *
+	 * getContentAnalysis() answers for a single post, which would mean one
+	 * query per row for a listing. Site-wide abilities page through up to a
+	 * hundred posts at a time, so they read the whole page at once here.
+	 *
+	 * @since 10.3.0
+	 *
+	 * @param array $post_ids The post IDs to read.
+	 *
+	 * @return array Post ID => the stored score value (usually an array of impacts).
+	 */
+	public function getScoresForPostIds( $post_ids ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		global $wpdb;
+
+		$post_ids = array_values( array_unique( array_filter( array_map( 'intval', (array) $post_ids ) ) ) );
+
+		if ( empty( $post_ids ) ) {
+			return array();
+		}
+
+		$placeholders = implode( ', ', array_fill( 0, count( $post_ids ), '%d' ) );
+
+		$sql = $wpdb->prepare(
+			"SELECT post_id, score, analysis_date
+			 FROM {$this->getTableName()}
+			 WHERE post_id IN ( {$placeholders} )
+			 ORDER BY analysis_date ASC",
+			$post_ids
+		);
+
+		$rows = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $sql is the prepared statement built above; only %d placeholders are interpolated.
+
+		if ( empty( $rows ) ) {
+			return array();
+		}
+
+		$scores = array();
+
+		// Ascending order means the newest analysis of a post overwrites the
+		// older ones, which mirrors the "ORDER BY analysis_date DESC LIMIT 1"
+		// of the single-post read.
+		foreach ( $rows as $row ) {
+			$scores[ (int) $row['post_id'] ] = maybe_unserialize( $row['score'] );
+		}
+
+		return $scores;
+	}
+
+	/**
 	 * The getContentAnalysis function.
 	 *
 	 * @param int   $post_id The post id.
@@ -197,7 +247,7 @@ class ContentAnalysisRepository extends AbstractRepository {
 			$post_id
 		);
 
-		$result = $wpdb->get_results( $sql, ARRAY_A );
+		$result = $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter -- $sql is the prepared statement built above, columns are matched against an allow-list.
 
 		if ( empty( $result ) ) {
 			return null;

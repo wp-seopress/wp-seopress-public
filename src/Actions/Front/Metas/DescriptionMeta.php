@@ -78,9 +78,9 @@ class DescriptionMeta implements ExecuteHooksFrontend {
 			return;
 		}
 
-		$html  = '<meta name="description" content="' . $content . '">';
+		$html  = '<meta name="description" content="' . esc_attr( $content ) . '">';
 		$html .= "\n";
-		echo $html; // phpcs:ignore -- TODO: escape properly.
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Description escaped above.
 	}
 
 	/**

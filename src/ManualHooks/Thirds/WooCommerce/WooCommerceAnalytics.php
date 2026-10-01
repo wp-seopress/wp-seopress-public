@@ -44,12 +44,20 @@ class WooCommerceAnalytics {
 	 * @return void
 	 */
 	public function hooks() {
+		if ( ! defined( 'SEOPRESS_PRO_VERSION' ) ) {
+			return;
+		}
+
 		if ( ! seopress_get_service( 'WooCommerceActivate' )->isActive() ) {
 			return;
 		}
 
 		if ( '1' !== seopress_get_toggle_option( 'google-analytics' ) ) {
 			return;
+		}
+
+		if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getBeginCheckout() ) {
+			add_filter( 'seopress_gtag_before_closing_script', array( new \SEOPress\Thirds\WooCommerce\CheckoutAnalytics(), 'append_event' ) );
 		}
 
 		$add_to_cart_option = seopress_get_service( 'GoogleAnalyticsOption' )->getAddToCart();

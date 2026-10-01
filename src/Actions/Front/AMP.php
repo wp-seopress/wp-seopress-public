@@ -2,6 +2,8 @@
 
 namespace SEOPress\Actions\Front;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Core\Hooks\ExecuteHooksFrontend;
 use SEOPress\ManualHooks\Thirds\WooCommerce\WooCommerceAnalytics;
 

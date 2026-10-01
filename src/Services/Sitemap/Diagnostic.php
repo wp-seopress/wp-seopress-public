@@ -42,10 +42,18 @@ class Diagnostic {
 	 *
 	 * Probing runs extra loopback requests, so cap the count and total time to
 	 * keep the diagnostic fast and bounded.
+	 *
+	 * The timeout matches the one fetch() uses for the index: a sub-sitemap is
+	 * the same loopback to the same host, and giving it half the budget only
+	 * meant it failed first on a slow moment.
+	 *
+	 * The budget is checked before each probe rather than during one, so it
+	 * bounds when new probes start, not total elapsed time. It is sized to
+	 * leave room for one timed-out probe and its retry.
 	 */
 	const SUBSITEMAP_MAX         = 25;
-	const SUBSITEMAP_TIMEOUT_SEC = 8;
-	const SUBSITEMAP_BUDGET_SEC  = 25;
+	const SUBSITEMAP_TIMEOUT_SEC = 15;
+	const SUBSITEMAP_BUDGET_SEC  = 45;
 
 	/**
 	 * Documentation links, lazily loaded.
@@ -653,7 +661,7 @@ class Diagnostic {
 				continue;
 			}
 
-			$checks[] = $this->checkSubSitemap( $group, $loc );
+			$checks[] = $this->checkSubSitemap( $group, $loc, $deadline );
 			++$count;
 		}
 
@@ -676,12 +684,14 @@ class Diagnostic {
 	/**
 	 * Probe a single sub-sitemap and condense the result into one check.
 	 *
-	 * @param string $group The group name (post type, taxonomy, author...).
-	 * @param string $url   The sub-sitemap URL.
+	 * @param string $group    The group name (post type, taxonomy, author...).
+	 * @param string $url      The sub-sitemap URL.
+	 * @param float  $deadline When the probing budget runs out, as a microtime
+	 *                         value. Governs whether a failed probe is retried.
 	 *
 	 * @return array
 	 */
-	private function checkSubSitemap( $group, $url ) {
+	private function checkSubSitemap( $group, $url, $deadline = 0.0 ) {
 		$id    = 'subsitemap_' . $group;
 		$label = sprintf(
 			/* translators: %s: sub-sitemap group name (post type, taxonomy, author...). */
@@ -690,6 +700,15 @@ class Diagnostic {
 		);
 
 		$fetch = $this->fetch( $url, self::SUBSITEMAP_TIMEOUT_SEC );
+
+		// A transport failure is not an answer, it is the absence of one: a
+		// loopback that lost a race with a load spike looks exactly like a
+		// broken sitemap here. Ask a second time before believing it, as long
+		// as the budget covers another full timeout. An HTTP status is a real
+		// answer and is never retried.
+		if ( ! $fetch['ok'] && microtime( true ) + self::SUBSITEMAP_TIMEOUT_SEC <= $deadline ) {
+			$fetch = $this->fetch( $url, self::SUBSITEMAP_TIMEOUT_SEC );
+		}
 
 		if ( ! $fetch['ok'] || $fetch['code'] >= 400 ) {
 			// A 404 on a sub-sitemap is almost always stale rewrite rules, so
@@ -707,7 +726,11 @@ class Diagnostic {
 						__( 'Returns HTTP %d.', 'wp-seopress' ),
 						$fetch['code']
 					)
-					: __( 'Could not be reached.', 'wp-seopress' ),
+					: sprintf(
+						/* translators: %s: error message returned by the HTTP request. */
+						__( 'Could not be reached: %s', 'wp-seopress' ),
+						$fetch['error']
+					),
 				$this->doc( array( 'sitemaps', 'error', '404' ) ),
 				$is_404 ? 'flush_permalinks' : ''
 			);

@@ -36,20 +36,20 @@ function seopress_clarity_build_js() {
 	//
 	// SEOPress cookie consent system grants BOTH analytics_storage AND ad_storage when user accepts.
 	// This aligns with Google Consent Mode v2 implementation in options-google-analytics.php.
-	$consent = '';
+	//
+	// Clarity's stub is defined a few lines above, so the signal is passed
+	// inline rather than from the consent block at the top of the head, which
+	// runs long before window.clarity exists. On a page render the value is a
+	// cookie test the browser evaluates itself: the served HTML then says the
+	// same thing to everyone and survives a full-page cache.
+	$state = seopress_user_consent_state();
 
-	$update = ( ! empty( $_POST['consent'] ) && 'update' === $_POST['consent'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
-
-	if ( true === $update ) {
-		if ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
-			$consent = "window.clarity('consent');";
-		} elseif ( isset( $_COOKIE['seopress-user-consent-close'] ) && '1' === $_COOKIE['seopress-user-consent-close'] ) {
-			$consent = "window.clarity('consent', false);";
-		}
-	} elseif ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
+	if ( 'accept' === $state ) {
 		$consent = "window.clarity('consent');";
-	} else {
+	} elseif ( 'decline' === $state ) {
 		$consent = "window.clarity('consent', false);";
+	} else {
+		$consent = "window.clarity('consent', " . seopress_user_consent_js_test() . ');';
 	}
 
 	/**

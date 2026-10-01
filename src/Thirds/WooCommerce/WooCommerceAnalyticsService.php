@@ -94,16 +94,17 @@ class WooCommerceAnalyticsService {
                 }
 
                 document.addEventListener('click', function(event){
-                    const namedItem = event.target.attributes.getNamedItem('data-product_id')
-                    if(!event.target.matches('.ajax_add_to_cart')){
+                    const button = event.target.closest ? event.target.closest('.ajax_add_to_cart') : null;
+                    if(!button){
                         return;
                     }
 
+                    const namedItem = button.attributes.getNamedItem('data-product_id');
                     var item_id = null;
 
                     if(!namedItem){
                         try{
-                            item_id = getParameterByName('add-to-cart', new URL(event.target.href).search)
+                            item_id = getParameterByName('add-to-cart', new URL(button.href).search)
                         }
                         catch(e){}
                     }
@@ -111,7 +112,7 @@ class WooCommerceAnalyticsService {
                         item_id = namedItem.value
                     }
 
-                    if(item_id != " . $items_purchased['item_id'] . "){
+                    if(item_id !== " . wp_json_encode( (string) $product->get_id() ) . "){
                         return;
                     }
 
@@ -123,7 +124,7 @@ class WooCommerceAnalyticsService {
         ';
 		$js = apply_filters( 'seopress_gtag_ec_add_to_cart_archive_ev', $js );
 
-		echo $js;
+		echo $js; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 	}
 
 	/**
@@ -183,7 +184,7 @@ class WooCommerceAnalyticsService {
 
 		$js = apply_filters( 'seopress_gtag_ec_add_to_cart_single_ev', $js );
 
-		echo $js;
+		echo $js; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 	}
 
 	/**
@@ -276,7 +277,7 @@ class WooCommerceAnalyticsService {
 
 		$js = apply_filters( 'seopress_gtag_ec_remove_from_cart_checkout_ev', $js, $final );
 
-		echo $js;
+		echo $js; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 	}
 
 	/**
@@ -308,6 +309,6 @@ class WooCommerceAnalyticsService {
 
 		$js = apply_filters( 'seopress_gtag_ec_single_view_details_ev', $js );
 
-		echo $js;
+		echo $js; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 	}
 }

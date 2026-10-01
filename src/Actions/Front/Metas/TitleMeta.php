@@ -91,15 +91,16 @@ class TitleMeta implements ExecuteHooksFrontend {
 	/**
 	 * The Title Meta render.
 	 *
+	 * @param string $title Title supplied by earlier filters.
+	 *
 	 * @since 4.4.0
 	 *
 	 * @return string
 	 */
-	public function render() {
-		$default_hook = function_exists( 'seopress_get_service' );
+	public function render( $title = '' ) {
 
 		if ( apply_filters( 'seopress_old_pre_get_document_title', true ) ) {
-			return;
+			return $title;
 		}
 
 		$context = seopress_get_service( 'ContextPage' )->getContext();

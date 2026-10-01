@@ -90,6 +90,9 @@ class Organization extends JsonSchemaValue implements GetJsonData {
 			$schema = seopress_get_service( 'JsonSchemaGenerator' )->getJsonFromSchema( ContactPoint::NAME, $context, array( 'remove_empty' => true ) );
 			if ( count( $schema ) > 1 ) {
 				$data['contactPoint'][] = $schema;
+				if ( isset( $schema['telephone'] ) && '' !== $schema['telephone'] ) {
+					$data['telephone'] = $schema['telephone'];
+				}
 			}
 		} else {
 			// Remove Organization-specific keys.
@@ -106,6 +109,10 @@ class Organization extends JsonSchemaValue implements GetJsonData {
 					unset( $data[ $organization_only_key ] );
 				}
 			}
+		}
+
+		if ( RichSnippetType::SUB_TYPE !== $type_schema ) {
+			$data['@id'] = \SEOPress\Helpers\SchemaEntityId::for_home( $is_person ? 'person' : 'organization' );
 		}
 
 		return apply_filters( 'seopress_get_json_data_organization', $data );

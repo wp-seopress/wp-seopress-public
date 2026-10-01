@@ -73,29 +73,13 @@ class Single {
 					return null;
 				}
 
-				// Exclude hidden languages.
-				// @credits WPML compatibility team.
-				if ( function_exists( 'icl_object_id' ) && defined( 'ICL_SITEPRESS_VERSION' ) ) { // WPML.
-					global $sitepress, $sitepress_settings;
+				// Skip entries WPML no longer serves, whether their language was
+				// hidden or removed from the site without its content being
+				// deleted. Both helpers are no-ops without WPML.
+				if ( isset( $post->ID ) ) {
+					$language_code = seopress_wpml_get_element_language( $post->ID, $post->post_type );
 
-					// Check that at least ID is set in post object.
-					if ( ! isset( $post->ID ) ) {
-						return $url;
-					}
-
-					// Get list of hidden languages.
-					$hidden_languages = $sitepress->get_setting( 'hidden_languages', array() );
-
-					// If there are no hidden languages return original URL.
-					if ( empty( $hidden_languages ) ) {
-						return $url;
-					}
-
-					// Get language information for post.
-					$language_info = $sitepress->post_translations()->get_element_lang_code( $post->ID );
-
-					// If language code is one of the hidden languages return null to skip the post.
-					if ( in_array( $language_info, $hidden_languages, true ) ) {
+					if ( seopress_wpml_is_language_excluded( $language_code ) ) {
 						return null;
 					}
 				}

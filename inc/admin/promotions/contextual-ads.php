@@ -117,7 +117,7 @@ function seopress_get_contextual_promotion( $context ) {
 			'id'          => 'ctx-instant-indexing',
 			'icon'        => 'superhero',
 			'title'       => __( 'Instant Indexing for Google', 'wp-seopress' ),
-			'body'        => __( 'Automatically submit your pages to Google\'s Indexing API for faster crawling.', 'wp-seopress' ),
+			'body'        => __( 'Submit your pages to Google\'s Indexing API for faster crawling.', 'wp-seopress' ),
 			'cta_text'    => __( 'Learn more', 'wp-seopress' ),
 			'cta_url'     => $docs['addons']['pro'],
 		),

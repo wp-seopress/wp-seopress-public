@@ -145,8 +145,10 @@ class RobotSettings implements ExecuteHooks {
 			if ( ! empty( $custom_date ) ) {
 				$timestamp = strtotime( $custom_date );
 				if ( $timestamp ) {
-					// Use date() instead of gmdate() since post_modified stores site-local time.
-				$date_local = date( 'Y-m-d H:i:s', $timestamp );
+					// post_modified stores site-local time. WordPress pins the PHP
+					// default timezone to UTC, so gmdate() formats the timestamp
+					// exactly as date() would, without depending on it.
+					$date_local = gmdate( 'Y-m-d H:i:s', $timestamp );
 					$date_gmt   = get_gmt_from_date( $date_local );
 
 					global $wpdb;

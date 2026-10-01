@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialFacebook\Specifications\Image;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\SocialFacebook\Specifications\Image\AbstractImageSpecification;
 

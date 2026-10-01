@@ -31,14 +31,13 @@ function seopress_primary_category_select( $echo = true, $with_description = tru
 
 	$cats    = 'product' == $typenow && seopress_get_service( 'WooCommerceActivate' )->isActive() ? get_the_terms( $post, 'product_cat' ) : get_categories();
 	$cats    = apply_filters( 'seopress_primary_category_list', $cats );
-	$options = '';
+	$options = sprintf(
+		'<option value="none" %s>%s</option>',
+		selected( 'none', $seopress_robots_primary_cat, false ),
+		__( 'None (will disable this feature)', 'wp-seopress' )
+	);
 
-	if ( ! empty( $cats ) ) {
-		$options .= sprintf(
-			'<option value="none" %s>%s</option>',
-			selected( 'none', $seopress_robots_primary_cat, false ),
-			__( 'None (will disable this feature)', 'wp-seopress' )
-		);
+	if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
 		foreach ( $cats as $category ) {
 			$options .= sprintf(
 				'<option value="%s" %s>%s</option>',
@@ -69,7 +68,7 @@ function seopress_primary_category_select( $echo = true, $with_description = tru
 	}
 
 	if ( $echo ) {
-		echo $html;
+		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped.
 	}
 	return $html;
 }
@@ -159,6 +158,7 @@ function seopress_enqueue_primary_category_injector() {
 			SEOPRESS_VERSION,
 			true
 		);
+		wp_set_script_translations( 'seopress-primary-category', 'wp-seopress', WP_LANG_DIR . '/plugins' );
 		return;
 	}
 
@@ -394,12 +394,12 @@ function seopress_display_seo_metaboxe() {
 			}
 
 			if ( in_array( 'title-tab', $seo_tabs, true ) ) {
-				if ( ! empty( $_POST['seopress_titles_title'] ) ) {
+				if ( isset( $_POST['seopress_titles_title'] ) && '' !== $_POST['seopress_titles_title'] ) {
 					update_post_meta( $post_id, '_seopress_titles_title', sanitize_text_field( $_POST['seopress_titles_title'] ) );
 				} else {
 					delete_post_meta( $post_id, '_seopress_titles_title' );
 				}
-				if ( ! empty( $_POST['seopress_titles_desc'] ) ) {
+				if ( isset( $_POST['seopress_titles_desc'] ) && '' !== $_POST['seopress_titles_desc'] ) {
 					update_post_meta( $post_id, '_seopress_titles_desc', sanitize_textarea_field( $_POST['seopress_titles_desc'] ) );
 				} else {
 					delete_post_meta( $post_id, '_seopress_titles_desc' );
@@ -690,7 +690,7 @@ function seopress_display_ca_metaboxe() {
 
 if ( is_user_logged_in() ) {
 	if ( is_super_admin() ) {
-		echo seopress_display_seo_metaboxe();
+		seopress_display_seo_metaboxe();
 	} else {
 		global $wp_roles;
 		$user = wp_get_current_user();
@@ -703,10 +703,10 @@ if ( is_user_logged_in() ) {
 				if ( array_key_exists( $seopress_user_role, seopress_get_service( 'AdvancedOption' )->getSecurityMetaboxRole() ) ) {
 					// Do nothing.
 				} else {
-					echo seopress_display_seo_metaboxe();
+					seopress_display_seo_metaboxe();
 				}
 			} else {
-				echo seopress_display_seo_metaboxe();
+				seopress_display_seo_metaboxe();
 			}
 		}
 	}

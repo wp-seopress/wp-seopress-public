@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * GetImageInContent
  */

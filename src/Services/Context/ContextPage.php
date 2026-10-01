@@ -121,7 +121,7 @@ class ContextPage {
 		if ( 'posts' === $show_on_front && $id === $page_on_front ) {
 			$this->setIsFrontPage( true );
 			return;
-		} elseif ( 'page' === $show_on_front && $id === $page_on_front
+		} elseif ( 'page' === $show_on_front && \SEOPress\Helpers\StaticPages::matches( $id )
 		) {
 			$this->setIsFrontPage( true );
 			return;
@@ -205,12 +205,15 @@ class ContextPage {
 	 * @return array
 	 */
 	public function buildContextDefault() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		global $post;
 		global $product;
 
 		$context = $this->getEmptyContext();
 
-		$context['post']    = $post;
+		// Not the global $post: this context is built on wp_head, after page
+		// builders have rendered their query loops, and a builder that does not
+		// restore the global would hand every schema and every dynamic variable
+		// the last post of the loop. See seopress_get_the_post().
+		$context['post']    = seopress_get_the_post();
 		$context['product'] = $product;
 		$context['paged']   = get_query_var( 'paged' );
 

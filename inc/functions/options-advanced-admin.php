@@ -124,6 +124,37 @@ if ( seopress_get_service( 'AdvancedOption' )->getAppearanceCaMetaboxe() === '1'
 	add_action( 'init', 'seopress_advanced_appearance_ca_metaboxe_hook', 999 );
 }
 
+/**
+ * Apply the seopress_bulk_actions filter to a set of bulk actions before they are registered.
+ *
+ * @since 10.3
+ *
+ * @param array  $actions Bulk actions to register, as $callback => $handler. $handler is null when
+ *                        the action has no PHP handler.
+ * @param string $key     Post type or taxonomy name, 'attachment' for the media library.
+ *
+ * @return array
+ */
+function seopress_get_filtered_bulk_actions( $actions, $key ) {
+	/**
+	 * Filters the bulk actions SEOPress registers on a WordPress list table.
+	 *
+	 * Removing an entry removes both the bulk action and its handler, so the action cannot be
+	 * triggered by a crafted request. Return an empty array to remove them all on the screen.
+	 *
+	 * Applies to public post types, taxonomies and the media library only. The SEOPress list
+	 * tables (Redirections, Bot) are not affected.
+	 *
+	 * @since 10.3
+	 *
+	 * @param array  $actions Bulk actions, as $callback => $handler.
+	 * @param string $key     Post type or taxonomy name, 'attachment' for the media library.
+	 */
+	$actions = apply_filters( 'seopress_bulk_actions', $actions, $key );
+
+	return is_array( $actions ) ? $actions : array();
+}
+
 // Bulk actions.
 global $pagenow;
 if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
@@ -136,9 +167,14 @@ if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
 	 * @return void
 	 */
 	function add_bulk_action_filters( $key, $actions ) {
+		$actions = seopress_get_filtered_bulk_actions( $actions, $key );
+
 		foreach ( $actions as $action => $handler ) {
 			add_filter( 'bulk_actions-edit-' . $key, $action );
-			add_filter( 'handle_bulk_actions-edit-' . $key, $handler, 10, 3 );
+
+			if ( null !== $handler ) {
+				add_filter( 'handle_bulk_actions-edit-' . $key, $handler, 10, 3 );
+			}
 		}
 	}
 
@@ -592,17 +628,17 @@ if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
 		if ( ! empty( $post_ids ) ) {
 			$urls    = '';
 			$options = get_option( 'seopress_instant_indexing_option_name' );
-			$check   = isset( $options['seopress_instant_indexing_manual_batch'] ) ? esc_attr( $options['seopress_instant_indexing_manual_batch'] ) : null;
+			$check   = isset( $options['seopress_instant_indexing_manual_batch'] ) ? (string) $options['seopress_instant_indexing_manual_batch'] : '';
 
 			foreach ( $post_ids as $post_id ) {
 				// Perform action for each post/term.
-				$urls .= esc_url( get_the_permalink( $post_id ) ) . "\n";
+				$urls .= esc_url_raw( get_the_permalink( $post_id ) ) . "\n";
 			}
 
 			$urls = $check . "\n" . $urls;
 
 			$urls = implode( "\n", array_unique( explode( "\n", $urls ) ) );
-			$options['seopress_instant_indexing_manual_batch'] = $urls;
+			$options['seopress_instant_indexing_manual_batch'] = seopress_sanitize_urls_list( $urls );
 
 			update_option( 'seopress_instant_indexing_option_name', $options );
 		}
@@ -641,7 +677,20 @@ if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
 }
 
 if ( 'upload.php' === $pagenow ) {
-	add_filter( 'bulk_actions-upload', 'seopress_bulk_actions_alt_text' );
+	$media_actions = seopress_get_filtered_bulk_actions(
+		array(
+			'seopress_bulk_actions_alt_text' => 'seopress_bulk_actions_alt_text_handler',
+		),
+		'attachment'
+	);
+
+	foreach ( $media_actions as $action => $handler ) {
+		add_filter( 'bulk_actions-upload', $action );
+
+		if ( null !== $handler ) {
+			add_filter( 'handle_bulk_actions-upload', $handler, 10, 3 );
+		}
+	}
 
 	/**
 	 * Bulk action to generate alt text for images
@@ -655,8 +704,6 @@ if ( 'upload.php' === $pagenow ) {
 
 		return $bulk_actions;
 	}
-
-	add_filter( 'handle_bulk_actions-upload', 'seopress_bulk_actions_alt_text_handler', 10, 3 );
 
 	/**
 	 * Bulk action to generate alt text for images

@@ -60,8 +60,9 @@ class Image {
 			}
 
 			$data[ $key ] = array(
-				'src' => $img_src,
-				'alt' => $img->getAttribute( 'alt' ),
+				'src'     => $img_src,
+				'alt'     => $img->getAttribute( 'alt' ),
+				'has_alt' => $img->hasAttribute( 'alt' ),
 			);
 		}
 

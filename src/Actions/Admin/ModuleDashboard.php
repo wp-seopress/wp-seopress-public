@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
+use SEOPress\Helpers\WhiteLabel;
 
 /**
  * Enqueue the React-powered SEOPress dashboard on the seopress-option page.
@@ -72,6 +73,11 @@ class ModuleDashboard implements ExecuteHooks {
 			'IMPROVEMENTS'    => $this->getImprovementsPayload(),
 			'HIDDEN_BLOCKS'   => $this->getHiddenBlocks(),
 			'OUTDATED_PRO'    => $this->getOutdatedProNotice(),
+			'WHITE_LABEL'     => array(
+				'enabled'       => WhiteLabel::isEnabled(),
+				'pluginName'    => WhiteLabel::pluginName(),
+				'proPluginName' => WhiteLabel::proPluginName(),
+			),
 		);
 	}
 
@@ -117,25 +123,20 @@ class ModuleDashboard implements ExecuteHooks {
 	 * Intro section payload (header with plugin name + tagline).
 	 *
 	 * Mirrors inc/admin/blocks/intro.php including the white-label rules
-	 * (constant SEOPRESS_WL_ADMIN_HEADER and the PRO ToggleWhiteLabel +
-	 * WhiteLabelListTitle overrides).
+	 * (constant SEOPRESS_WL_ADMIN_HEADER, plus the name and logo handled by
+	 * the WhiteLabel helper).
 	 *
 	 * @return array
 	 */
 	private function getIntroPayload() {
 		$visible = ! ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && false === SEOPRESS_WL_ADMIN_HEADER );
 
-		$plugin_name = 'SEOPress';
-		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
-			$toggle_service = seopress_get_service( 'ToggleOption' );
-			if ( method_exists( $toggle_service, 'getToggleWhiteLabel' ) && '1' === $toggle_service->getToggleWhiteLabel() ) {
-				if ( function_exists( 'seopress_pro_get_service' )
-					&& method_exists( seopress_pro_get_service( 'OptionPro' ), 'getWhiteLabelListTitle' )
-					&& seopress_pro_get_service( 'OptionPro' )->getWhiteLabelListTitle() ) {
-					$plugin_name = (string) seopress_pro_get_service( 'OptionPro' )->getWhiteLabelListTitle();
-				}
-			}
-		}
+		$plugin_name = WhiteLabel::pluginName();
+
+		// The logo is the loudest identity leak of the whole Dashboard and has
+		// no white-label substitute, so it is dropped rather than swapped.
+		// Intro.jsx already renders the header without it.
+		$logo_url = WhiteLabel::isEnabled() ? '' : SEOPRESS_ASSETS_DIR . '/img/logo-seopress.svg';
 
 		// SEOPRESS_VERSION is the literal "{VERSION}" placeholder until the
 		// release build script substitutes it. Suppress it in that case so the
@@ -149,7 +150,7 @@ class ModuleDashboard implements ExecuteHooks {
 			'visible'    => $visible,
 			'pluginName' => $plugin_name,
 			'version'    => $version,
-			'logoUrl'    => SEOPRESS_ASSETS_DIR . '/img/logo-seopress.svg',
+			'logoUrl'    => $logo_url,
 			'tagline'    => __( 'Your control center for SEO.', 'wp-seopress' ),
 		);
 	}
@@ -222,15 +223,7 @@ class ModuleDashboard implements ExecuteHooks {
 	private function getTasksPayload() {
 		$wl_admin = ! ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && false === SEOPRESS_WL_ADMIN_HEADER );
 
-		$wl_pro = false;
-		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
-			$toggle_service = seopress_get_service( 'ToggleOption' );
-			if ( method_exists( $toggle_service, 'getToggleWhiteLabel' ) && '1' === $toggle_service->getToggleWhiteLabel() ) {
-				$wl_pro = true;
-			}
-		}
-
-		if ( ! $wl_admin || $wl_pro ) {
+		if ( ! $wl_admin || WhiteLabel::isEnabled() ) {
 			return array( 'visible' => false );
 		}
 
@@ -408,15 +401,24 @@ class ModuleDashboard implements ExecuteHooks {
 			}
 		}
 
+		// White Label: both CTAs resolve to seopress.org. Integrations.jsx only
+		// renders a CTA when it has a URL, so emptying them hides the buttons.
+		$all_url     = isset( $docs['integrations']['all'] ) ? $docs['integrations']['all'] : '';
+		$contact_url = isset( $docs['contact'] ) ? $docs['contact'] : '';
+		if ( WhiteLabel::isEnabled() ) {
+			$all_url     = '';
+			$contact_url = '';
+		}
+
 		return array(
 			'visible'              => true,
 			'title'                => __( 'Integrations', 'wp-seopress' ),
 			'subtitle'             => __( 'You\'re using these plugins / themes on your site. We provide advanced integrations with them to improve your SEO.', 'wp-seopress' ),
 			'items'                => $active,
-			'allIntegrationsUrl'   => isset( $docs['integrations']['all'] ) ? $docs['integrations']['all'] : '',
+			'allIntegrationsUrl'   => $all_url,
 			'allIntegrationsLabel' => __( 'See all', 'wp-seopress' ),
 			'emptyText'            => __( 'Currently, no specific integration found for your site. Contact us if you have any doubts about the compatibility between your plugins/themes and our products.', 'wp-seopress' ),
-			'contactUrl'           => isset( $docs['contact'] ) ? $docs['contact'] : '',
+			'contactUrl'           => $contact_url,
 			'contactCta'           => __( 'Request an integration', 'wp-seopress' ),
 		);
 	}
@@ -433,15 +435,7 @@ class ModuleDashboard implements ExecuteHooks {
 	private function getPromotionsPayload() {
 		$wl_admin = ! ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && false === SEOPRESS_WL_ADMIN_HEADER );
 
-		$wl_pro = false;
-		if ( is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ) ) {
-			$toggle_service = seopress_get_service( 'ToggleOption' );
-			if ( method_exists( $toggle_service, 'getToggleWhiteLabel' ) && '1' === $toggle_service->getToggleWhiteLabel() ) {
-				$wl_pro = true;
-			}
-		}
-
-		if ( ! $wl_admin || $wl_pro ) {
+		if ( ! $wl_admin || WhiteLabel::isEnabled() ) {
 			return array( 'visible' => false );
 		}
 
@@ -565,6 +559,8 @@ class ModuleDashboard implements ExecuteHooks {
 			return array( 'visible' => false );
 		}
 
+		$white_label = WhiteLabel::isEnabled();
+
 		$raw = array();
 		foreach ( $generated as $key => $entry ) {
 			// `generateAllNotifications()` appends an `$args['impact']`
@@ -578,6 +574,12 @@ class ModuleDashboard implements ExecuteHooks {
 				continue;
 			}
 			if ( isset( $entry['status'] ) && false === $entry['status'] ) {
+				continue;
+			}
+			// White Label: asking the client to rate the plugin on
+			// wordpress.org defeats the point — the tip names the product in
+			// its own title and its CTA is the public listing.
+			if ( $white_label && isset( $entry['id'] ) && 'notice-review' === $entry['id'] ) {
 				continue;
 			}
 			if ( empty( $entry['title'] ) ) {
@@ -606,13 +608,24 @@ class ModuleDashboard implements ExecuteHooks {
 				$link_external = ! empty( $entry['link']['external'] );
 			}
 
+			// White Label: a tip is still useful advice, but its "Learn more"
+			// CTA points at seopress.org (or the wordpress.org listing), which
+			// names the product. Keep the tip, drop the giveaway link.
+			if ( $white_label && WhiteLabel::isVendorUrl( $link_url ) ) {
+				$link_url      = '';
+				$link_label    = '';
+				$link_external = false;
+			}
+
 			$items[] = array(
 				'id'           => isset( $entry['id'] ) ? sanitize_key( $entry['id'] ) : '',
 				// React renders title/desc via dangerouslySetInnerHTML so they can
 				// keep inline formatting (links, <strong>). wp_kses_post() at the
 				// boundary closes the XSS path without changing the rendered look.
-				'title'        => isset( $entry['title'] ) ? wp_kses_post( (string) $entry['title'] ) : '',
-				'desc'         => isset( $entry['desc'] ) ? wp_kses_post( (string) $entry['desc'] ) : '',
+				// rebrand() runs inside that boundary, so the White Label name it
+				// injects is sanitized too rather than landing after the fence.
+				'title'        => isset( $entry['title'] ) ? wp_kses_post( WhiteLabel::rebrand( (string) $entry['title'] ) ) : '',
+				'desc'         => isset( $entry['desc'] ) ? wp_kses_post( WhiteLabel::rebrand( (string) $entry['desc'] ) ) : '',
 				'impact'       => $impact_key,
 				'linkUrl'      => esc_url_raw( $link_url ),
 				'linkLabel'    => sanitize_text_field( $link_label ),

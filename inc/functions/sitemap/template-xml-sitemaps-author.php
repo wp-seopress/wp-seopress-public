@@ -79,4 +79,4 @@ function seopress_xml_sitemap_author() {
 
 	return $seopress_sitemaps;
 }
-echo seopress_xml_sitemap_author();
+echo seopress_xml_sitemap_author(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- XML document assembled above.

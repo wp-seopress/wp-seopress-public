@@ -51,8 +51,22 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
-		if ( isset( $_GET['et_fb'], $_GET['app_window'] ) && '1' === $_GET['app_window'] ) { // phpcs:ignore
-			$response = false;
+		/*
+		 * Divi Visual Builder. Divi 5 splits the builder across two documents:
+		 * the top window (`et_fb=1`) hosts the builder application and takes
+		 * over the DOM, and the `app_window=1` iframe renders the page being
+		 * edited. The beacon used to be suppressed in the iframe and left in
+		 * the top window, which is the wrong way round: it ended up visible
+		 * nowhere. Load it where the page is. Divi 4 has no iframe and no
+		 * `app_window`, so its single builder window keeps the beacon. See #1888.
+		 */
+		if ( isset( $_GET['et_fb'] ) ) { // phpcs:ignore
+			$is_app_window = isset( $_GET['app_window'] ) && '1' === $_GET['app_window']; // phpcs:ignore
+			$is_divi_5     = function_exists( 'et_builder_d5_enabled' ) && et_builder_d5_enabled();
+
+			if ( $is_divi_5 && ! $is_app_window ) {
+				$response = false;
+			}
 		}
 
 		if ( isset( $_GET['mp_preview'] ) ) { // MailerPress preview.
@@ -94,11 +108,11 @@ class EnqueueModuleMetabox {
 			$response = false;
 		}
 
-		if ( get_the_ID() === (int) get_option( 'page_on_front' ) ) {
+		if ( \SEOPress\Helpers\StaticPages::matches( get_the_ID() ) ) {
 			$response = true;
 		}
 
-		if ( get_the_ID() === (int) get_option( 'page_for_posts' ) ) {
+		if ( \SEOPress\Helpers\StaticPages::matches( get_the_ID(), 'page_for_posts' ) ) {
 			$response = true;
 		}
 

@@ -826,7 +826,7 @@ class SEOPRESS_Admin_Setup_Wizard {
 		$seopress_social_option['seopress_social_accounts_instagram'] = isset( $_POST['knowledge_insta'] ) ? sanitize_text_field( wp_unslash( $_POST['knowledge_insta'] ) ) : '';
 		$seopress_social_option['seopress_social_accounts_youtube']   = isset( $_POST['knowledge_yt'] ) ? sanitize_text_field( wp_unslash( $_POST['knowledge_yt'] ) ) : '';
 		$seopress_social_option['seopress_social_accounts_linkedin']  = isset( $_POST['knowledge_li'] ) ? sanitize_text_field( wp_unslash( $_POST['knowledge_li'] ) ) : '';
-		$seopress_social_option['seopress_social_accounts_extra']     = isset( $_POST['knowledge_extra'] ) ? sanitize_textarea_field( wp_unslash( $_POST['knowledge_extra'] ) ) : '';
+		$seopress_social_option['seopress_social_accounts_extra']     = isset( $_POST['knowledge_extra'] ) ? seopress_sanitize_urls_list( wp_unslash( $_POST['knowledge_extra'] ) ) : '';
 
 		// Save options.
 		update_option( 'seopress_social_option_name', $seopress_social_option, false );

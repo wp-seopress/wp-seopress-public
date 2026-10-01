@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Settings;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * ExportSettings
  */

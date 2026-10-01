@@ -229,33 +229,33 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 								$alt_site_title = ! empty( seopress_get_service( 'TitleOption' )->getHomeSiteTitleAlt() ) ? seopress_get_service( 'TitleOption' )->getHomeSiteTitleAlt() : get_bloginfo( 'name' );
 
 								if ( get_the_title() ) {
-									$gp_title     = '<div class="snippet-title-default" style="display:none">' . get_the_title() . ' - ' . get_bloginfo( 'name' ) . '</div>';
+									$gp_title     = '<div class="snippet-title-default" style="display:none">' . esc_html( get_the_title() ) . ' - ' . get_bloginfo( 'name' ) . '</div>';
 									$gp_permalink = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars( urldecode( get_permalink() ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) . '</div>';
 								} elseif ( $tag ) {
 									if ( false === is_wp_error( get_term_link( $tag ) ) ) {
-										$gp_title     = '<div class="snippet-title-default" style="display:none">' . $tag->name . ' - ' . get_bloginfo( 'name' ) . '</div>';
+										$gp_title     = '<div class="snippet-title-default" style="display:none">' . esc_html( $tag->name ) . ' - ' . get_bloginfo( 'name' ) . '</div>';
 										$gp_permalink = '<div class="snippet-permalink"><span class="snippet-sitename">' . $alt_site_title . '</span>' . htmlspecialchars( urldecode( get_term_link( $tag ) ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) . '</div>';
 									}
 								}
 
 								$siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="26" width="26" alt="favicon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABs0lEQVR4AWL4//8/RRjO8Iucx+noO0MWUDo16FYABMGP6ZfUcRnWtm27jVPbtm3bttuH2t3eFPcY9pLz7NxiLjCyVd87pKnHyqXyxtCs8APd0rnyxiu4qSeA3QEDrAwBDrT1s1Rc/OrjLZwqVmOSu6+Lamcpp2KKMA9PH1BYXMe1mUP5qotvXTywsOEEYHXxrY+3cqk6TMkYpNr2FeoY3KIr0RPtn9wQ2unlA+GMkRw6+9TFw4YTwDUzx/JVvARj9KaedXRO8P5B1Du2S32smzqUrcKGEyA+uAgQjKX7zf0boWHGfn71jIKj2689gxp7OAGShNcBUmLMPVjZuiKcA2vuWHHDCQxMCz629kXAIU4ApY15QwggAFbfOP9DhgBJ+nWVJ1AZAfICAj1pAlY6hCADZnveQf7bQIwzVONGJonhLIlS9gr5mFg44Xd+4S3XHoGNPdJl1INIwKyEgHckEhgTe1bGiFY9GSFBYUwLh1IkiJUbY407E7syBSFxKTszEoiE/YdrgCEayDmtaJwCI9uu8TKMuZSVfSa4BpGgzvomBR/INhLGzrqDotp01ZR8pn/1L0JN9d9XNyx0AAAAAElFTkSuQmCC"></div>';
 								if ( get_site_icon_url( 32 ) ) {
-									$siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="26" src="' . get_site_icon_url( 32 ) . '" width="26" alt="favicon"/></div>';
+									$siteicon = '<div class="snippet-favicon"><img aria-hidden="true" height="26" src="' . esc_url( get_site_icon_url( 32 ) ) . '" width="26" alt="favicon"/></div>';
 								}
 								?>
 
 								<div class="wrap-snippet">
-									<div class="wrap-m-icon-permalink"><?php echo $siteicon . $gp_permalink; ?></div>
+									<div class="wrap-m-icon-permalink"><?php echo $siteicon . $gp_permalink; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?></div>
 									<div class="snippet-title"></div>
 									<div class="snippet-title-custom" style="display:none"></div>
 
 									<div class="wrap-snippet-mobile">
 										<div class="wrap-meta-desc">
 											<?php
-											echo $gp_title;
+											echo $gp_title; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped.
 
 											if ( 'post-new.php' === $pagenow || 'post.php' === $pagenow ) {
-												echo seopress_display_date_snippet();
+												echo seopress_display_date_snippet(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped.
 											}
 											?>
 
@@ -289,7 +289,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 								<?php echo esc_attr( $disabled['robots_index'] ); ?>/>
 								<?php
 									echo wp_kses_post( __( 'Do not display this page in search engine results / XML - HTML sitemaps <strong>(noindex)</strong>', 'wp-seopress' ) );
-									echo seopress_tooltip( esc_html__( '"noindex" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "noindex". <br>Search engines will not index this URL in the search results.', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="noindex" />' ) );
+									echo seopress_tooltip( esc_html__( '"noindex" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "noindex". <br>Search engines will not index this URL in the search results.', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="noindex" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 								?>
 							</label>
 						</p>
@@ -300,7 +300,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 								<?php echo esc_attr( $disabled['robots_follow'] ); ?>/>
 								<?php
 									echo wp_kses_post( __( 'Do not follow links for this page <strong>(nofollow)</strong>', 'wp-seopress' ) );
-									echo seopress_tooltip( esc_html__( '"nofollow" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "nofollow". <br>Search engines will not follow links from this URL.', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="nofollow" />' ) );
+									echo seopress_tooltip( esc_html__( '"nofollow" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "nofollow". <br>Search engines will not follow links from this URL.', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="nofollow" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 								?>
 							</label>
 						</p>
@@ -310,7 +310,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									id="seopress_robots_imageindex_meta" value="yes" <?php echo checked( $seopress_robots_imageindex, 'yes', false ); ?>
 								<?php echo esc_attr( $disabled['imageindex'] ); ?>/>
 								<?php echo wp_kses_post( __( 'Do not index images for this page <strong>(noimageindex)</strong>', 'wp-seopress' ) ); ?>
-								<?php echo seopress_tooltip( esc_html__( '"noimageindex" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="noimageindex" />' ) ); ?>
+								<?php echo seopress_tooltip( esc_html__( '"noimageindex" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "noimageindex". <br> Note that your images can always be indexed if they are linked from other pages.', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="noimageindex" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post(). ?>
 							</label>
 						</p>
 						<p>
@@ -319,14 +319,14 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									value="yes" <?php echo checked( $seopress_robots_snippet, 'yes', false ); ?>
 								<?php echo esc_attr( $disabled['snippet'] ); ?>/>
 								<?php echo wp_kses_post( __( 'Do not display a description in search results for this page <strong>(nosnippet)</strong>', 'wp-seopress' ) ); ?>
-								<?php echo seopress_tooltip( esc_html__( '"nosnippet" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "nosnippet".', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="nosnippet" />' ) ); ?>
+								<?php echo seopress_tooltip( esc_html__( '"nosnippet" robots meta tag', 'wp-seopress' ), wp_kses_post( __( 'By checking this option, you will add a meta robots tag with the value "nosnippet".', 'wp-seopress' ) ), esc_html( '<meta name="robots" content="nosnippet" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post(). ?>
 							</label>
 						</p>
 						<p>
 							<label for="seopress_robots_canonical_meta">
 								<?php
 									esc_attr_e( 'Canonical URL', 'wp-seopress' );
-									echo seopress_tooltip( esc_html__( 'Canonical URL', 'wp-seopress' ), wp_kses_post( __( 'A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. <br>For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. <br>Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color). The canonical can be in a different domain than a duplicate.', 'wp-seopress' ) ), esc_html( '<link rel="canonical" href="https://www.example.com/my-post-url/" />' ) );
+									echo seopress_tooltip( esc_html__( 'Canonical URL', 'wp-seopress' ), wp_kses_post( __( 'A canonical URL is the URL of the page that Google thinks is most representative from a set of duplicate pages on your site. <br>For example, if you have URLs for the same page (for example: example.com?dress=1234 and example.com/dresses/1234), Google chooses one as canonical. <br>Note that the pages do not need to be absolutely identical; minor changes in sorting or filtering of list pages do not make the page unique (for example, sorting by price or filtering by item color). The canonical can be in a different domain than a duplicate.', 'wp-seopress' ) ), esc_html( '<link rel="canonical" href="https://www.example.com/my-post-url/" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 								?>
 							</label>
 							<input id="seopress_robots_canonical_meta" type="text" name="seopress_robots_canonical"
@@ -362,7 +362,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 										value="yes" <?php echo checked( $seopress_robots_freeze_modified_date, 'yes', false ); ?> />
 									<?php
 										echo wp_kses_post( __( 'Freeze the last modified date <strong>(recommended for minor updates)</strong>', 'wp-seopress' ) );
-										echo seopress_tooltip( esc_html__( 'Freeze last modified date', 'wp-seopress' ), wp_kses_post( __( 'Enable this option to prevent the last modified date from being updated when you save this post. <br>This is recommended for minor updates like fixing typos, formatting changes, or copyright updates that don\'t constitute significant content changes. <br>Google recommends only updating the lastmod date for significant content updates.', 'wp-seopress' ) ), '' );
+										echo seopress_tooltip( esc_html__( 'Freeze last modified date', 'wp-seopress' ), wp_kses_post( __( 'Enable this option to prevent the last modified date from being updated when you save this post. <br>This is recommended for minor updates like fixing typos, formatting changes, or copyright updates that don\'t constitute significant content changes. <br>Google recommends only updating the lastmod date for significant content updates.', 'wp-seopress' ) ), '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 									?>
 								</label>
 							</p>
@@ -410,7 +410,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									<label for="seopress_social_fb_title_meta">
 										<?php
 											esc_html_e( 'Facebook Title', 'wp-seopress' );
-											echo seopress_tooltip( esc_html__( 'Facebook Title', 'wp-seopress' ), esc_html__( 'The Facebook title for sharing. If empty, the meta title will be used.', 'wp-seopress' ), esc_html( '<meta property="og:title" content="Your title here" />' ) );
+											echo seopress_tooltip( esc_html__( 'Facebook Title', 'wp-seopress' ), esc_html__( 'The Facebook title for sharing. If empty, the meta title will be used.', 'wp-seopress' ), esc_html( '<meta property="og:title" content="Your title here" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 										?>
 									</label>
 
@@ -427,7 +427,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									<label for="seopress_social_fb_desc_meta">
 										<?php
 											esc_html_e( 'Facebook description', 'wp-seopress' );
-											echo seopress_tooltip( esc_html__( 'Facebook description', 'wp-seopress' ), esc_html__( 'The Facebook description for sharing. If empty, the meta description will be used.', 'wp-seopress' ), esc_html( '<meta property="og:description" content="Your description here" />' ) );
+											echo seopress_tooltip( esc_html__( 'Facebook description', 'wp-seopress' ), esc_html__( 'The Facebook description for sharing. If empty, the meta description will be used.', 'wp-seopress' ), esc_html( '<meta property="og:description" content="Your description here" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 										?>
 									</label>
 
@@ -528,7 +528,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 												<?php bloginfo( 'name' ); ?>
 											</div>
 											<?php } elseif ( $tag ) { ?>
-											<div class="snippet-fb-title-default" style="display:none"><?php echo $tag->name; ?> -
+											<div class="snippet-fb-title-default" style="display:none"><?php echo esc_html( $tag->name ); ?> -
 												<?php bloginfo( 'name' ); ?>
 											</div>
 											<?php } ?>
@@ -547,7 +547,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									<label for="seopress_social_twitter_title_meta">
 										<?php
 											esc_html_e( 'X Title', 'wp-seopress' );
-											echo seopress_tooltip( esc_html__( 'X Title', 'wp-seopress' ), esc_html__( 'The X (Twitter) title for sharing. If empty, the meta title will be used.', 'wp-seopress' ), esc_html( '<meta name="twitter:title" content="Your title here" />' ) );
+											echo seopress_tooltip( esc_html__( 'X Title', 'wp-seopress' ), esc_html__( 'The X (Twitter) title for sharing. If empty, the meta title will be used.', 'wp-seopress' ), esc_html( '<meta name="twitter:title" content="Your title here" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 										?>
 									</label>
 
@@ -564,7 +564,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 									<label for="seopress_social_twitter_desc_meta">
 										<?php
 											esc_html_e( 'X Description', 'wp-seopress' );
-											echo seopress_tooltip( esc_html__( 'X Description', 'wp-seopress' ), esc_html__( 'The X (Twitter) description for sharing. If empty, the meta description will be used.', 'wp-seopress' ), esc_html( '<meta name="twitter:description" content="Your description here" />' ) );
+											echo seopress_tooltip( esc_html__( 'X Description', 'wp-seopress' ), esc_html__( 'The X (Twitter) description for sharing. If empty, the meta description will be used.', 'wp-seopress' ), esc_html( '<meta name="twitter:description" content="Your description here" />' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Callers pass strings already escaped with esc_html__() / wp_kses_post().
 										?>
 									</label>
 
@@ -649,7 +649,7 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 												<?php bloginfo( 'name' ); ?>
 											</div>
 											<?php } elseif ( $tag ) { ?>
-											<div class="snippet-twitter-title-default" style="display:none"><?php echo $tag->name; ?> -
+											<div class="snippet-twitter-title-default" style="display:none"><?php echo esc_html( $tag->name ); ?> -
 												<?php bloginfo( 'name' ); ?>
 											</div>
 											<?php } ?>
@@ -855,4 +855,4 @@ if ( 'term.php' === $pagenow || 'edit-tags.php' === $pagenow ) { ?>
 </tr>
 <?php } ?>
 <input type="hidden" id="seo_tabs" name="seo_tabs"
-	value="<?php echo htmlspecialchars( wp_json_encode( array_keys( $seo_tabs ) ), ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ); ?>">
+	value="<?php echo esc_attr( wp_json_encode( array_keys( $seo_tabs ) ) ); ?>">

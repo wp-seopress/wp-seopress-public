@@ -19,7 +19,7 @@ class FacebookImageOptionMeta {
 		if ( function_exists( 'is_shop' ) && is_shop() ) {
 			$value = get_post_meta( get_option( 'woocommerce_shop_page_id' ), '_seopress_social_fb_img', true );
 		} else {
-			$value = get_post_meta( get_the_ID(), '_seopress_social_fb_img', true );
+			$value = get_post_meta( seopress_get_the_id(), '_seopress_social_fb_img', true );
 		}
 
 		if ( empty( $value ) && '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookImgDefault() ) {
@@ -36,13 +36,15 @@ class FacebookImageOptionMeta {
 	 * @return string
 	 */
 	public function getAttachmentId() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$post_id = seopress_get_the_id();
+
 		if ( function_exists( 'is_shop' ) && is_shop() ) {
 			$value = get_post_meta( get_option( 'woocommerce_shop_page_id' ), '_seopress_social_fb_img_attachment_id', true );
 		} else {
-			$value = get_post_meta( get_the_ID(), '_seopress_social_fb_img_attachment_id', true );
+			$value = get_post_meta( $post_id, '_seopress_social_fb_img_attachment_id', true );
 		}
 
-		if ( empty( $value ) && '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookImgDefault() && empty( get_post_meta( get_the_ID(), '_seopress_social_fb_img', true ) ) ) {
+		if ( empty( $value ) && '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookImgDefault() && empty( get_post_meta( $post_id, '_seopress_social_fb_img', true ) ) ) {
 			$options = get_option( 'seopress_social_option_name' );
 			$value   = isset( $options['seopress_social_facebook_img_attachment_id'] ) ? $options['seopress_social_facebook_img_attachment_id'] : null;
 		}

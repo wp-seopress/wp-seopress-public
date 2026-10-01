@@ -93,6 +93,17 @@ class ContainerSeopress implements ManageContainer {
 	}
 
 	/**
+	 * Register precomputed service names without autoloading their classes.
+	 *
+	 * @param array $definitions Service names mapped to class names.
+	 * @return self
+	 */
+	public function set_service_definitions( array $definitions ) {
+		$this->services = array_merge( $this->services, $definitions );
+		return $this;
+	}
+
+	/**
 	 * Set a service.
 	 *
 	 * @param string $service The service.

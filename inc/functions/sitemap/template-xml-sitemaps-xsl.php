@@ -193,4 +193,4 @@ function seopress_xml_sitemap_index_xsl() {
 
 	return $seopress_sitemaps_xsl;
 }
-echo seopress_xml_sitemap_index_xsl();
+echo seopress_xml_sitemap_index_xsl(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- XML document assembled above.

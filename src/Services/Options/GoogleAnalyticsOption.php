@@ -478,6 +478,15 @@ class GoogleAnalyticsOption {
 	}
 
 	/**
+	 * Get the optional checkout-start event toggle.
+	 *
+	 * @return string
+	 */
+	public function getBeginCheckout() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		return $this->searchOptionByKey( 'seopress_google_analytics_begin_checkout' );
+	}
+
+	/**
 	 * Get option for "Add to cart event"
 	 *
 	 * @since 5.8.0
@@ -520,6 +529,49 @@ class GoogleAnalyticsOption {
 	 */
 	public function getGA4() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		return $this->searchOptionByKey( 'seopress_google_analytics_ga4' );
+	}
+
+	/**
+	 * Validate comma-separated hostnames without silently broadening URL paths.
+	 *
+	 * @param mixed $value Stored or submitted list.
+	 * @return array|\WP_Error
+	 */
+	public static function parse_linker_domains( $value ) {
+		if ( ! is_string( $value ) ) {
+			return new \WP_Error( 'invalid_linker_domains', __( 'Enter domain names separated by commas, without URLs or paths.', 'wp-seopress' ) );
+		}
+		$domains = array();
+		foreach ( explode( ',', $value ) as $domain ) {
+			$domain = strtolower( trim( $domain ) );
+			if ( '' === $domain ) {
+				continue;
+			}
+			if ( strlen( $domain ) > 253 || false === strpos( $domain, '.' ) || ! filter_var( $domain, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME ) ) {
+				return new \WP_Error( 'invalid_linker_domains', __( 'Enter domain names separated by commas, without URLs or paths.', 'wp-seopress' ) );
+			}
+			$domains[] = $domain;
+		}
+		return array_values( array_unique( $domains ) );
+	}
+
+	/**
+	 * Explicit linker settings only; unset options retain Google's defaults.
+	 *
+	 * @return array
+	 */
+	public function get_linker_configuration() {
+		$options = $this->getOption();
+		$linker = array();
+		$domains = self::parse_linker_domains( $options['seopress_google_analytics_linker_domains'] ?? '' );
+		if ( ! is_wp_error( $domains ) && ! empty( $domains ) ) {
+			$linker['domains'] = $domains;
+		}
+		$incoming = $options['seopress_google_analytics_linker_accept_incoming'] ?? '';
+		if ( in_array( $incoming, array( '1', '0' ), true ) ) {
+			$linker['accept_incoming'] = '1' === $incoming;
+		}
+		return $linker;
 	}
 
 	/**

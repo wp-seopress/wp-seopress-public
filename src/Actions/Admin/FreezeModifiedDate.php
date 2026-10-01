@@ -41,6 +41,9 @@ class FreezeModifiedDate implements ExecuteHooks {
 	 */
 	private $original_dates = array();
 
+	/** Normal update dates to restore when REST clears date settings after insertion. */
+	private $pending_dates = array();
+
 	/**
 	 * The FreezeModifiedDate hooks.
 	 *
@@ -119,14 +122,22 @@ class FreezeModifiedDate implements ExecuteHooks {
 			return $data;
 		}
 
-		$freeze = $this->isFreezeEnabled( $post_id );
+		$freeze      = $this->isFreezeEnabled( $post_id );
+		$custom_date = $this->getCustomDate( $post_id );
 
 		// The cross-request transient (used to bridge Gutenberg's two-phase save
 		// to a later classic metabox POST) is written once, in maybeRestoreDate(),
 		// after the post and its meta are saved. Setting it here as well would
 		// duplicate that write on every REST save, so we only capture the dates.
-		if ( 'yes' !== $freeze ) {
+		if ( 'yes' !== $freeze && '' === $custom_date ) {
 			return $data;
+		}
+
+		if ( ! isset( $this->pending_dates[ $post_id ] ) ) {
+			$this->pending_dates[ $post_id ] = array(
+				'post_modified' => $data['post_modified'],
+				'post_modified_gmt' => $data['post_modified_gmt'],
+			);
 		}
 
 		// In non-REST context (classic metabox Request 2), the dates from get_post()
@@ -141,8 +152,7 @@ class FreezeModifiedDate implements ExecuteHooks {
 			}
 		}
 
-		// If a custom date is set, use it instead of original dates.
-		$custom_date = $this->getCustomDate( $post_id );
+		// A custom date overrides normal modification time, independently of freeze.
 		if ( $custom_date ) {
 			$data['post_modified']     = $custom_date;
 			$data['post_modified_gmt'] = get_gmt_from_date( $custom_date );
@@ -210,9 +220,19 @@ class FreezeModifiedDate implements ExecuteHooks {
 			return;
 		}
 
-		$freeze = $this->isFreezeEnabled( $post_id );
+		$freeze      = $this->isFreezeEnabled( $post_id );
+		$custom_date = $this->getCustomDate( $post_id );
 
-		if ( 'yes' !== $freeze ) {
+		if ( 'yes' !== $freeze && '' === $custom_date ) {
+			// REST saves registered meta after wp_insert_post_data. If date settings
+			// were cleared in that save, undo the earlier preservation.
+			if ( isset( $this->pending_dates[ $post_id ] ) ) {
+				global $wpdb;
+				$wpdb->update( $wpdb->posts, $this->pending_dates[ $post_id ], array( 'ID' => $post_id ), array( '%s', '%s' ), array( '%d' ) );
+				clean_post_cache( $post_id );
+				$post->post_modified = $this->pending_dates[ $post_id ]['post_modified'];
+				$post->post_modified_gmt = $this->pending_dates[ $post_id ]['post_modified_gmt'];
+			}
 			// In REST context, save dates to transient before discarding.
 			// A subsequent metabox POST may need them.
 			if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
@@ -223,7 +243,7 @@ class FreezeModifiedDate implements ExecuteHooks {
 				);
 			}
 
-			unset( $this->original_dates[ $post_id ] );
+			unset( $this->original_dates[ $post_id ], $this->pending_dates[ $post_id ] );
 			return;
 		}
 
@@ -239,7 +259,6 @@ class FreezeModifiedDate implements ExecuteHooks {
 		}
 
 		// If a custom date is set, use it instead of frozen dates.
-		$custom_date = $this->getCustomDate( $post_id );
 		if ( $custom_date ) {
 			$frozen = array(
 				'post_modified'     => $custom_date,
@@ -263,7 +282,10 @@ class FreezeModifiedDate implements ExecuteHooks {
 		);
 
 		clean_post_cache( $post_id );
-		unset( $this->original_dates[ $post_id ] );
+		// Keep the REST response's existing post object aligned with the database.
+		$post->post_modified = $frozen['post_modified'];
+		$post->post_modified_gmt = $frozen['post_modified_gmt'];
+		unset( $this->original_dates[ $post_id ], $this->pending_dates[ $post_id ] );
 	}
 
 	/**
@@ -314,15 +336,15 @@ class FreezeModifiedDate implements ExecuteHooks {
 			return;
 		}
 
-		$freeze = $this->isFreezeEnabled( $product_id );
+		$freeze      = $this->isFreezeEnabled( $product_id );
+		$custom_date = $this->getCustomDate( $product_id );
 
-		if ( 'yes' !== $freeze ) {
-			unset( $this->original_dates[ $product_id ] );
+		if ( 'yes' !== $freeze && '' === $custom_date ) {
+			unset( $this->original_dates[ $product_id ], $this->pending_dates[ $product_id ] );
 			return;
 		}
 
 		// If a custom date is set, use it instead of frozen dates.
-		$custom_date = $this->getCustomDate( $product_id );
 		if ( $custom_date ) {
 			$frozen = array(
 				'post_modified'     => $custom_date,
@@ -346,7 +368,7 @@ class FreezeModifiedDate implements ExecuteHooks {
 		);
 
 		clean_post_cache( $product_id );
-		unset( $this->original_dates[ $product_id ] );
+		unset( $this->original_dates[ $product_id ], $this->pending_dates[ $product_id ] );
 	}
 
 	/**
@@ -370,7 +392,11 @@ class FreezeModifiedDate implements ExecuteHooks {
 	private function isFreezeEnabled( $post_id ) {
 		$is_classic_editor = isset( $_POST['seopress_cpt_nonce'] );
 
-		if ( $is_classic_editor ) {
+		$submitted = $this->get_universal_submitted_value( $post_id, '_seopress_robots_freeze_modified_date' );
+
+		if ( null !== $submitted ) {
+			$value = $submitted;
+		} elseif ( $is_classic_editor ) {
 			$value = ! empty( $_POST['seopress_robots_freeze_modified_date'] ) ? 'yes' : '';
 		} else {
 			$value = get_post_meta( $post_id, '_seopress_robots_freeze_modified_date', true );
@@ -404,6 +430,11 @@ class FreezeModifiedDate implements ExecuteHooks {
 			? ( ! empty( $_POST['seopress_robots_custom_modified_date'] ) ? sanitize_text_field( wp_unslash( $_POST['seopress_robots_custom_modified_date'] ) ) : '' )
 			: get_post_meta( $post_id, '_seopress_robots_custom_modified_date', true );
 
+		$submitted = $this->get_universal_submitted_value( $post_id, '_seopress_robots_custom_modified_date' );
+		if ( null !== $submitted ) {
+			$custom = $submitted;
+		}
+
 		if ( empty( $custom ) ) {
 			return '';
 		}
@@ -419,4 +450,23 @@ class FreezeModifiedDate implements ExecuteHooks {
 
 		return $datetime->format( 'Y-m-d H:i:s' );
 	}
+
+	/**
+	 * Read Classic universal-metabox changes before save_post persists the meta.
+	 * Null means the field was not submitted through an authorized form.
+	 */
+	private function get_universal_submitted_value( $post_id, $key ) {
+		if ( ! isset( $_POST['seopress_metabox_classic_fallback_nonce'] )
+			|| ! is_string( $_POST['seopress_metabox_classic_fallback_nonce'] )
+			|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['seopress_metabox_classic_fallback_nonce'] ) ), 'seopress_metabox_classic_fallback' )
+			|| ! array_key_exists( $key, $_POST ) || ! is_scalar( $_POST[ $key ] )
+			|| ! current_user_can( 'edit_post', $post_id ) || seopress_metabox_role_is_blocked( 'GLOBAL' ) ) {
+			return null;
+		}
+		if ( isset( $_POST['post_ID'] ) && $post_id !== absint( $_POST['post_ID'] ) ) {
+			return null;
+		}
+		return sanitize_text_field( wp_unslash( (string) $_POST[ $key ] ) );
+	}
+
 }

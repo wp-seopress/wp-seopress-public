@@ -4,13 +4,15 @@
  * Plugin URI: https://www.seopress.org/
  * Description: One of the best SEO plugins for WordPress.
  * Author: The SEO Guys at SEOPress
- * Version: 10.2
+ * Version: 10.3
  * Author URI: https://www.seopress.org/
  * License: GPLv3 or later
  * Text Domain: wp-seopress
  * Domain Path: /languages
  * Requires PHP: 7.4
  * Requires at least: 6.5
+ * WC requires at least: 7.0
+ * WC tested up to: 11.0
  *
  * @package SEOPress
  */
@@ -37,7 +39,7 @@ defined( 'ABSPATH' ) || exit( 'Please don’t call the plugin directly. Thanks :
 /**
  * Define constants
  */
-define( 'SEOPRESS_VERSION', '10.2' );
+define( 'SEOPRESS_VERSION', '10.3' );
 define( 'SEOPRESS_AUTHOR', 'Benjamin Denis' );
 define( 'SEOPRESS_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SEOPRESS_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
@@ -48,6 +50,30 @@ define( 'SEOPRESS_TEMPLATE_JSON_SCHEMAS', SEOPRESS_TEMPLATE_DIR . '/json-schemas
 define( 'SEOPRESS_PATH_PUBLIC', SEOPRESS_PLUGIN_DIR_PATH . 'public' );
 define( 'SEOPRESS_URL_PUBLIC', SEOPRESS_PLUGIN_DIR_URL . 'public' );
 define( 'SEOPRESS_URL_ASSETS', SEOPRESS_PLUGIN_DIR_URL . 'assets' );
+
+/**
+ * Declare WooCommerce feature compatibility.
+ *
+ * SEOPress reads product data but never writes an order and never renders
+ * anything inside the cart or the checkout, so both features are supported.
+ * WooCommerce assumes the opposite until told otherwise, and lists every
+ * plugin that stays silent as incompatible on its own settings screen, which
+ * is what pushes a store owner to keep HPOS turned off.
+ *
+ * `before_woocommerce_init` is the only hook where this can be declared: it
+ * fires before WooCommerce decides whether the features can be enabled.
+ */
+add_action(
+	'before_woocommerce_init',
+	function () {
+		if ( ! class_exists( \Automattic\WooCommerce\Utilities\FeaturesUtil::class ) ) {
+			return;
+		}
+
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'cart_checkout_blocks', __FILE__, true );
+	}
+);
 
 /**
  * Kernel
@@ -257,6 +283,7 @@ function seopress_plugins_loaded( $hook ) { // phpcs:ignore
 	}
 
 	// Load options, sanitization and admin bar.
+	require_once $plugin_dir . 'inc/functions/user-consent-state.php';
 	require_once $plugin_dir . 'inc/functions/options.php';
 	require_once $plugin_dir . 'inc/admin/sanitize/Sanitize.php';
 	require_once $plugin_dir . 'inc/admin/admin-bar/admin-bar.php';

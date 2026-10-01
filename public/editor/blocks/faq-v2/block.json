@@ -26,6 +26,10 @@
     "printSchema": {
       "type": "boolean",
       "default": true
+    },
+    "singleOpen": {
+      "type": "boolean",
+      "default": false
     }
   },
   "supports": {

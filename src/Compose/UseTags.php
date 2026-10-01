@@ -2,6 +2,8 @@
 
 namespace SEOPress\Compose;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Helpers\TagCompose;
 use SEOPress\Models\GetTagValue;
 

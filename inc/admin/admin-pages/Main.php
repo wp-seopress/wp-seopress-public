@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 $this->options = get_option( 'seopress_option_name' );
 $current_tab   = '';
 if ( function_exists( 'seopress_admin_header' ) ) {
-	echo seopress_admin_header();
+	seopress_admin_header();
 }
 ?>
 

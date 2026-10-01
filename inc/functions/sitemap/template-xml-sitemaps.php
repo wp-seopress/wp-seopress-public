@@ -38,53 +38,24 @@ add_filter(
 
 add_action( 'the_post', 'seopress_sitemap_switch_wpml_language' );
 
-/**
- * Polylang: remove hidden languages
- *
- * @param array $args Arguments.
- * @return array Arguments.
- */
-function seopress_pll_exclude_hidden_lang( $args ) {
-	if ( defined( 'POLYLANG_VERSION' ) && function_exists( 'PLL' ) && isset( PLL()->model ) ) {
-		$languages = PLL()->model->get_languages_list();
-		if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
-			$args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
+if ( ! function_exists( 'seopress_pll_exclude_hidden_lang' ) ) {
+	/**
+	 * Polylang: remove hidden languages.
+	 *
+	 * Defined in both sitemap templates, which normally serve different routes.
+	 * The guard is what lets the two be loaded in a single process.
+	 *
+	 * @param array $args Arguments.
+	 * @return array Arguments.
+	 */
+	function seopress_pll_exclude_hidden_lang( $args ) {
+		if ( defined( 'POLYLANG_VERSION' ) && function_exists( 'PLL' ) && isset( PLL()->model ) ) {
+			$languages = PLL()->model->get_languages_list();
+			if ( wp_list_filter( $languages, array( 'active' => false ) ) ) {
+				$args['lang'] = wp_list_pluck( wp_list_filter( $languages, array( 'active' => false ), 'NOT' ), 'slug' );
+			}
 		}
-	}
-	return $args;
-}
-
-/**
- * WPML: remove hidden languages
- *
- * @param string $url URL.
- * @return string URL.
- */
-function seopress_wpml_exclude_hidden_lang( $url ) {
-	// @credits WPML compatibility team
-	if ( function_exists( 'get_setting' ) && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ) { // WPML.
-		global $sitepress, $sitepress_settings;
-
-		// Check that at least ID is set in post object.
-		if ( ! isset( $post->ID ) ) {
-			return $url;
-		}
-
-		// Get list of hidden languages.
-		$hidden_languages = $sitepress->get_setting( 'hidden_languages', array() );
-
-		// If there are no hidden languages return original URL.
-		if ( empty( $hidden_languages ) ) {
-			return $url;
-		}
-
-		// Get language information for post.
-		$language_info = $sitepress->post_translations()->get_element_lang_code( $post->ID );
-
-		// If language code is one of the hidden languages return null to skip the post.
-		if ( in_array( $language_info, $hidden_languages, true ) ) {
-			return null;
-		}
+		return $args;
 	}
 }
 
@@ -132,7 +103,7 @@ function seopress_xml_sitemap_index() {
 
 						$args = apply_filters( 'seopress_sitemaps_index_post_types_query', $args, $cpt_key );
 
-						$count_posts = count( get_posts( $args ) );
+						$count_posts = \SEOPress\Helpers\SitemapPostCount::get_count( $args );
 
 						// Max posts per paginated sitemap.
 						$max = 1000;

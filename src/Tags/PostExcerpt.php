@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Helpers\Shortcodes;
 use SEOPress\Models\GetTagValue;
 
 /**
@@ -57,7 +58,7 @@ class PostExcerpt implements GetTagValue {
 				stripslashes_deep(
 					wp_filter_nohtml_kses(
 						wp_strip_all_tags(
-							strip_shortcodes( $value ),
+							Shortcodes::stripTags( $value ),
 							true
 						)
 					)

@@ -473,7 +473,7 @@ function seopress_get_docs_links() {
 		'facebook_gr' => 'https://www.facebook.com/groups/seopress/',
 		'youtube'     => 'https://www.youtube.com/seopress',
 		'twitter'     => 'https://x.com/wp_seopress',
-		'review'      => 'https://wordpress.org/support/plugin/wp-seopress/reviews/?filter=5#new-post',
+		'review'      => 'https://wordpress.org/support/plugin/wp-seopress/reviews/',
 	);
 
 	return $docs;

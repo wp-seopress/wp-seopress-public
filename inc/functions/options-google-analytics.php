@@ -10,6 +10,12 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 /**
  * Cookies user consent scripts
  *
+ * Printed first thing in the head, identically for every visitor: the defaults
+ * deny everything, and the browser immediately upgrades them from its own
+ * cookie. Reading the cookie server-side here is what used to break behind a
+ * full-page cache, because the answer of whoever primed the cache was then
+ * served to everyone. See inc/functions/user-consent-state.php.
+ *
  * @return void
  */
 function seopress_cookies_user_consent_scripts() {
@@ -21,14 +27,16 @@ function seopress_cookies_user_consent_scripts() {
 		return;
 	}
 
-	if ( isset( $_COOKIE['seopress-user-consent-accept'] ) ) {
-		return;
-	}
-
 	$js = '
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }';
+
+	// Configure the early consent stub before its own initialization command.
+	$linker = seopress_get_service( 'GoogleAnalyticsOption' )->get_linker_configuration();
+	if ( ! empty( $linker ) ) {
+		$js .= "gtag('set', 'linker', " . wp_json_encode( $linker, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ) . ");\n";
+	}
 
 	// Default.
 	$consent = "
@@ -40,35 +48,20 @@ function seopress_cookies_user_consent_scripts() {
         'wait_for_update': 500,
       }); \n";
 
-	if ( isset( $_COOKIE['seopress-user-consent-close'] ) && '1' === $_COOKIE['seopress-user-consent-close'] ) {
-		$consent = "
-        gtag('consent', 'default', {
-            'ad_user_data': 'denied',
-            'ad_personalization': 'denied',
-            'ad_storage': 'denied',
-            'analytics_storage': 'denied',
-            'wait_for_update': 500,
-          }); \n";
-	}
-
 	$consent = apply_filters( 'seopress_user_consent', $consent );
 
 	$js .= $consent;
 
-	$js .= "gtag('js', new Date()); \n";
+	// Synchronous, on the very next line, so the update lands well inside the
+	// wait_for_update window above.
+	$js .= 'if (' . seopress_user_consent_js_test() . ") {\n" . seopress_user_consent_gtag_update( true ) . "}\n";
 
-	// Measurement ID.
-	if ( '' !== seopress_get_service( 'GoogleAnalyticsOption' )->getGA4() ) {
-		$seopress_gtag_ga4 = "gtag('config', '" . seopress_get_service( 'GoogleAnalyticsOption' )->getGA4() . "');";
-		$seopress_gtag_ga4 = apply_filters( 'seopress_gtag_ga4', $seopress_gtag_ga4 );
-		$js               .= $seopress_gtag_ga4;
-		$js               .= "\n";
-	}
+	$js .= "gtag('js', new Date()); \n";
 
 	$js .=
 	'</script>';
 
-	echo $js;
+	echo $js; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 }
 
 /**
@@ -114,7 +107,7 @@ function seopress_cookies_user_consent_html() {
 
 	$user_msg = apply_filters( 'seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn, $backdrop );
 
-	echo $user_msg . $backdrop;
+	echo $user_msg . $backdrop; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Consent banner markup assembled above, filterable by third parties.
 }
 
 /**
@@ -141,7 +134,7 @@ function seopress_cookies_edit_choice_html() {
 
 	$user_msg = apply_filters( 'seopress_rgpd_edit_message', $user_msg, $edit_cookie_btn );
 
-	echo $user_msg;
+	echo $user_msg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Consent banner markup assembled above, filterable by third parties.
 }
 
 /**
@@ -168,7 +161,7 @@ function seopress_cookies_user_consent_styles() {
 	// Full-width bar mode vs Modal mode.
 	if ( $is_full_width ) {
 		// Full-width bar mode (improved traditional style).
-		$styles .= 'left: 0;right: 0;width: 100%;padding: 18px 24px;';
+		$styles .= 'left: 0;right: 0;width: 100%;max-width: 100vw;padding: 18px 24px;';
 	} else {
 		// Modal mode (new modern style).
 		$styles .= 'padding: 24px 28px;max-width:100%;';
@@ -486,7 +479,70 @@ function seopress_cookies_user_consent_styles() {
 
 	$styles = apply_filters( 'seopress_rgpd_full_message_styles', $styles );
 
-	echo $styles;
+	echo $styles; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Inline stylesheet assembled above.
+}
+
+/**
+ * Everything the browser needs to start the deferred trackers itself.
+ *
+ * Built as if consent had been granted, whoever is asking for the page: the
+ * result is embedded inert and only ever executed by a browser holding the
+ * acceptance cookie, so it is the same for every visitor and safe to cache.
+ *
+ * @return array The tracking snippets, keyed by where they belong.
+ */
+function seopress_user_consent_payload() {
+	seopress_user_consent_building_payload( true );
+
+	$payload = array(
+		'gtag_js'        => seopress_google_analytics_js( false ),
+		'matomo_js'      => seopress_matomo_js( false ),
+		'clarity_js'     => seopress_clarity_js( false ),
+		'custom'         => apply_filters( 'seopress_custom_tracking', '' ),
+		'head_js'        => seopress_google_analytics_head_code( false ),
+		'body_js'        => seopress_google_analytics_body_code( false ),
+		'matomo_body_js' => seopress_matomo_body_js( false ),
+		'footer_js'      => seopress_google_analytics_footer_code( false ),
+	);
+
+	seopress_user_consent_building_payload( false );
+
+	/**
+	 * Filter the tracking snippets held back until the visitor accepts.
+	 *
+	 * @since 10.3.0
+	 *
+	 * @param array $payload The snippets, keyed by where they belong.
+	 */
+	$payload = apply_filters( 'seopress_user_consent_payload', $payload );
+
+	// Builders return null when their tracker is off; nothing to hand over.
+	return array_filter( (array) $payload );
+}
+
+/**
+ * Print the deferred trackers as an inert JSON island.
+ *
+ * The alternative, asking admin-ajax for them on every page view, is one
+ * uncached PHP request per page for every visitor who accepted -- on a site
+ * running a page cache, precisely what the cache was installed to avoid.
+ *
+ * @return void
+ */
+function seopress_cookies_user_consent_payload_html() {
+	// Auto-accept prints the trackers on every page already: nothing is deferred.
+	if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getHalfDisable() ) {
+		return;
+	}
+
+	$payload = seopress_user_consent_payload();
+
+	if ( empty( $payload ) ) {
+		return;
+	}
+
+	// JSON_HEX_TAG keeps a "</script>" inside a snippet from closing the block.
+	echo '<script type="application/json" id="seopress-user-consent-payload">' . wp_json_encode( $payload, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ) . '</script>' . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- wp_json_encode with JSON_HEX_TAG cannot break out of the block.
 }
 
 /**
@@ -503,7 +559,11 @@ function seopress_cookies_user_consent_render() {
 	add_action( $hook, 'seopress_cookies_user_consent_html' );
 	add_action( $hook, 'seopress_cookies_edit_choice_html' );
 	add_action( $hook, 'seopress_cookies_user_consent_styles' );
-	add_action( 'wp_head', 'seopress_cookies_user_consent_scripts' );
+
+	// Ahead of anything that pushes to window.dataLayer, so the queue and the
+	// consent defaults exist before the first gtag() call reaches them.
+	add_action( 'wp_head', 'seopress_cookies_user_consent_scripts', 1 );
+	add_action( 'wp_head', 'seopress_cookies_user_consent_payload_html', 2 );
 }
 
 if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getDisable() ) {
@@ -541,9 +601,11 @@ function seopress_google_analytics_js( $echo ) {
 
 		$seopress_google_analytics_html = "\n";
 
-		if ( ! isset( $_COOKIE['seopress-user-consent-close'] ) ) {
-			$seopress_google_analytics_html .=
-			"<script async src='https://www.googletagmanager.com/gtag/js?id=" . $tracking_id . "'></script>";
+		$consent_state = seopress_user_consent_state();
+
+		if ( 'decline' !== $consent_state ) {
+			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Vendor tracking snippet: the loader must sit inline, right before the gtag() config block printed below.
+			$seopress_google_analytics_html .= '<script async src="' . esc_url( 'https://www.googletagmanager.com/gtag/js?id=' . $tracking_id ) . '"></script>';
 		}
 
 		$seopress_google_analytics_html .= '<script>
@@ -551,41 +613,28 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}';
 
 		// Consent mode v2.
+		//
+		// Nothing here on a page render: the defaults belong to the block
+		// printed at the top of the head, which every visitor gets, and the
+		// browser updates them from its own cookie. This snippet only carries
+		// a decision when it is built for a browser that already has one --
+		// the deferred payload, or the admin-ajax endpoints.
 		$consent = '';
 
-		$update = ( ! empty( $_POST['consent'] ) && $_POST['consent'] === 'update' ) ? true : false;
-
-		if ( true === $update ) {
-			if ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
-				$consent = "gtag('consent', 'update', {
-                    'ad_storage': 'granted',
-                    'ad_user_data': 'granted',
-                    'ad_personalization': 'granted',
-                    'analytics_storage': 'granted'
-                });";
-			}
-			if ( isset( $_COOKIE['seopress-user-consent-close'] ) && '1' === $_COOKIE['seopress-user-consent-close'] ) {
-				$consent = "gtag('consent', 'update', {
-                    'ad_storage': 'denied',
-                    'ad_user_data': 'denied',
-                    'ad_personalization': 'denied',
-                    'analytics_storage': 'denied'
-                });";
-			}
-		} elseif ( isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'] ) {
-			$consent = "
-            gtag('consent', 'default', {
-                'ad_storage': 'granted',
-                'ad_user_data': 'granted',
-                'ad_personalization': 'granted',
-                'analytics_storage': 'granted',
-                'wait_for_update': 500,
-            }); \n";
+		if ( 'accept' === $consent_state ) {
+			$consent = seopress_user_consent_gtag_update( true );
+		} elseif ( 'decline' === $consent_state ) {
+			$consent = seopress_user_consent_gtag_update( false );
 		}
 
 		$consent = apply_filters( 'seopress_user_consent', $consent );
 
 		$seopress_google_analytics_html .= $consent;
+
+		$linker = seopress_get_service( 'GoogleAnalyticsOption' )->get_linker_configuration();
+		if ( ! empty( $linker ) ) {
+			$seopress_google_analytics_html .= "gtag('set', 'linker', " . wp_json_encode( $linker, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT ) . ");\n";
+		}
 
 		$seopress_google_analytics_html .= "gtag('js', new Date());\n";
 
@@ -598,7 +647,7 @@ function gtag(){dataLayer.push(arguments);}';
 
 		$features = '';
 
-		if ( ! isset( $_COOKIE['seopress-user-consent-close'] ) ) {
+		if ( 'decline' !== $consent_state ) {
 			// Dimensions.
 			$seopress_google_analytics_config['cd']['cd_hook'] = apply_filters( 'seopress_gtag_cd_hook_cf', isset( $seopress_google_analytics_config['cd']['cd_hook'] ) );
 			if ( ! has_filter( 'seopress_gtag_cd_hook_cf' ) ) {
@@ -630,9 +679,9 @@ function gtag(){dataLayer.push(arguments);}';
 			if ( ! empty( $cd_author_option ) ) {
 				if ( 'none' !== $cd_author_option ) {
 					if ( is_singular() ) {
-						$seopress_google_analytics_config['cd']['cd_author'] = "'" . $cd_author_option . "': 'cd_author',";
+						$seopress_google_analytics_config['cd']['cd_author'] = seopress_js_string( $cd_author_option ) . ": 'cd_author',";
 
-						$seopress_google_analytics_event['cd_author'] = "gtag('event', '" . __( 'Authors', 'wp-seopress' ) . "', {'cd_author': '" . get_the_author() . "', 'non_interaction': true});";
+						$seopress_google_analytics_event['cd_author'] = "gtag('event', " . seopress_js_string( __( 'Authors', 'wp-seopress' ) ) . ", {'cd_author': " . seopress_js_string( get_the_author() ) . ", 'non_interaction': true});";
 
 						$seopress_google_analytics_config['cd']['cd_author'] = apply_filters( 'seopress_gtag_cd_author_cf', $seopress_google_analytics_config['cd']['cd_author'] );
 
@@ -646,12 +695,13 @@ function gtag(){dataLayer.push(arguments);}';
 						$categories = get_the_category();
 
 						if ( ! empty( $categories ) ) {
-							$get_first_category = esc_html( $categories[0]->name );
+							// Encoded at the point of use; esc_html() here produced entities a <script> never decodes.
+							$get_first_category = $categories[0]->name;
 						}
 
-						$seopress_google_analytics_config['cd']['cd_categories'] = "'" . $cd_category_option . "': 'cd_categories',";
+						$seopress_google_analytics_config['cd']['cd_categories'] = seopress_js_string( $cd_category_option ) . ": 'cd_categories',";
 
-						$seopress_google_analytics_event['cd_categories'] = "gtag('event', '" . __( 'Categories', 'wp-seopress' ) . "', {'cd_categories': '" . $get_first_category . "', 'non_interaction': true});";
+						$seopress_google_analytics_event['cd_categories'] = "gtag('event', " . seopress_js_string( __( 'Categories', 'wp-seopress' ) ) . ", {'cd_categories': " . seopress_js_string( $get_first_category ) . ", 'non_interaction': true});";
 
 						$seopress_google_analytics_config['cd']['cd_categories'] = apply_filters( 'seopress_gtag_cd_categories_cf', $seopress_google_analytics_config['cd']['cd_categories'] );
 
@@ -667,16 +717,16 @@ function gtag(){dataLayer.push(arguments);}';
 						$seopress_comma_count = count( $tags );
 						$get_tags             = '';
 						foreach ( $tags as $key => $value ) {
-							$get_tags .= esc_html( $value->name );
+							$get_tags .= $value->name;
 							if ( $key < $seopress_comma_count - 1 ) {
 								$get_tags .= ', ';
 							}
 						}
 					}
 
-					$seopress_google_analytics_config['cd']['cd_tags'] = "'" . $cd_tag_option . "': 'cd_tags',";
+					$seopress_google_analytics_config['cd']['cd_tags'] = seopress_js_string( $cd_tag_option ) . ": 'cd_tags',";
 
-					$seopress_google_analytics_event['cd_tags'] = "gtag('event', '" . __( 'Tags', 'wp-seopress' ) . "', {'cd_tags': '" . $get_tags . "', 'non_interaction': true});";
+					$seopress_google_analytics_event['cd_tags'] = "gtag('event', " . seopress_js_string( __( 'Tags', 'wp-seopress' ) ) . ", {'cd_tags': " . seopress_js_string( $get_tags ) . ", 'non_interaction': true});";
 
 					$seopress_google_analytics_config['cd']['cd_tags'] = apply_filters( 'seopress_gtag_cd_tags_cf', $seopress_google_analytics_config['cd']['cd_tags'] );
 
@@ -686,9 +736,9 @@ function gtag(){dataLayer.push(arguments);}';
 
 			if ( ! empty( $cd_post_type_option ) && 'none' !== $cd_post_type_option ) {
 				if ( is_single() ) {
-					$seopress_google_analytics_config['cd']['cd_cpt'] = "'" . $cd_post_type_option . "': 'cd_cpt',";
+					$seopress_google_analytics_config['cd']['cd_cpt'] = seopress_js_string( $cd_post_type_option ) . ": 'cd_cpt',";
 
-					$seopress_google_analytics_event['cd_cpt'] = "gtag('event', '" . __( 'Post types', 'wp-seopress' ) . "', {'cd_cpt': '" . get_post_type() . "', 'non_interaction': true});";
+					$seopress_google_analytics_event['cd_cpt'] = "gtag('event', " . seopress_js_string( __( 'Post types', 'wp-seopress' ) ) . ", {'cd_cpt': " . seopress_js_string( get_post_type() ) . ", 'non_interaction': true});";
 
 					$seopress_google_analytics_config['cd']['cd_cpt'] = apply_filters( 'seopress_gtag_cd_cpt_cf', $seopress_google_analytics_config['cd']['cd_cpt'] );
 
@@ -698,9 +748,9 @@ function gtag(){dataLayer.push(arguments);}';
 
 			if ( ! empty( $cd_logged_in_user_option ) && 'none' !== $cd_logged_in_user_option ) {
 				if ( wp_get_current_user()->ID ) {
-					$seopress_google_analytics_config['cd']['cd_logged_in'] = "'" . $cd_logged_in_user_option . "': 'cd_logged_in',";
+					$seopress_google_analytics_config['cd']['cd_logged_in'] = seopress_js_string( $cd_logged_in_user_option ) . ": 'cd_logged_in',";
 
-					$seopress_google_analytics_event['cd_logged_in'] = "gtag('event', '" . __( 'Connected users', 'wp-seopress' ) . "', {'cd_logged_in': '" . wp_get_current_user()->ID . "', 'non_interaction': true});";
+					$seopress_google_analytics_event['cd_logged_in'] = "gtag('event', " . seopress_js_string( __( 'Connected users', 'wp-seopress' ) ) . ", {'cd_logged_in': " . seopress_js_string( wp_get_current_user()->ID ) . ", 'non_interaction': true});";
 
 					$seopress_google_analytics_config['cd']['cd_logged_in'] = apply_filters( 'seopress_gtag_cd_logged_in_cf', $seopress_google_analytics_config['cd']['cd_logged_in'] );
 
@@ -726,7 +776,7 @@ function gtag(){dataLayer.push(arguments);}';
     var links = document.querySelectorAll('a');
     for (let i = 0; i < links.length; i++) {
         links[i].addEventListener('click', function(e) {
-            var n = this.href.includes('" . wp_parse_url( get_home_url(), PHP_URL_HOST ) . "');
+            var n = this.href.includes(" . seopress_js_string( wp_parse_url( get_home_url(), PHP_URL_HOST ) ) . ");
             if (n == false) {
                 gtag('event', 'click', {'event_category': 'external links','event_label' : this.href});
             }
@@ -832,17 +882,17 @@ function gtag(){dataLayer.push(arguments);}';
 
 		// Measurement ID.
 		if ( '' !== seopress_get_service( 'GoogleAnalyticsOption' )->getGA4() ) {
-			$seopress_gtag_ga4               = "\n gtag('config', '" . seopress_get_service( 'GoogleAnalyticsOption' )->getGA4() . "' " . $features . ');';
+			$seopress_gtag_ga4               = "\n gtag('config', " . seopress_js_string( seopress_get_service( 'GoogleAnalyticsOption' )->getGA4() ) . " " . $features . ');';
 			$seopress_gtag_ga4               = apply_filters( 'seopress_gtag_ga4', $seopress_gtag_ga4 );
 			$seopress_google_analytics_html .= $seopress_gtag_ga4;
 			$seopress_google_analytics_html .= "\n";
 		}
 
 		// Ads.
-		if ( ! isset( $_COOKIE['seopress-user-consent-close'] ) ) {
+		if ( 'decline' !== $consent_state ) {
 			$ads_options = seopress_get_service( 'GoogleAnalyticsOption' )->getAds();
 			if ( ! empty( $ads_options ) ) {
-				$seopress_gtag_ads               = "\n gtag('config', '" . $ads_options . "');";
+				$seopress_gtag_ads               = "\n gtag('config', " . seopress_js_string( $ads_options ) . ");";
 				$seopress_gtag_ads               = apply_filters( 'seopress_gtag_ads', $seopress_gtag_ads );
 				$seopress_google_analytics_html .= $seopress_gtag_ads;
 				$seopress_google_analytics_html .= "\n";
@@ -869,7 +919,7 @@ function gtag(){dataLayer.push(arguments);}';
 		$seopress_google_analytics_html = apply_filters( 'seopress_gtag_html', $seopress_google_analytics_html );
 
 		if ( true === $echo ) {
-			echo $seopress_google_analytics_html;
+			echo $seopress_google_analytics_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 		} else {
 			return $seopress_google_analytics_html;
 		}
@@ -895,7 +945,7 @@ function seopress_google_analytics_js_arguments() {
 function seopress_custom_tracking_hook() {
 	$data['custom'] = '';
 	$data['custom'] = apply_filters( 'seopress_custom_tracking', $data['custom'] );
-	echo $data['custom'];
+	echo $data['custom']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered markup, third parties are expected to return HTML.
 }
 
 /**
@@ -917,7 +967,7 @@ function seopress_google_analytics_body_code( $echo ) {
 
 	$seopress_html_body = apply_filters( 'seopress_custom_body_tracking', $seopress_html_body );
 	if ( true === $echo ) {
-		echo "\n" . $seopress_html_body;
+		echo "\n" . $seopress_html_body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 	} else {
 		return "\n" . $seopress_html_body;
 	}
@@ -953,7 +1003,7 @@ function seopress_google_analytics_footer_code( $echo ) {
 
 	$seopress_html_footer = apply_filters( 'seopress_custom_footer_tracking', $seopress_html_footer );
 	if ( true === $echo ) {
-		echo "\n" . $seopress_html_footer;
+		echo "\n" . $seopress_html_footer; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 	} else {
 		return "\n" . $seopress_html_footer;
 	}
@@ -990,7 +1040,7 @@ function seopress_google_analytics_head_code( $echo ) {
 	$seopress_html_head = apply_filters( 'seopress_gtag_after_additional_tracking_html', $seopress_html_head );
 
 	if ( true === $echo ) {
-		echo "\n" . $seopress_html_head;
+		echo "\n" . $seopress_html_head; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Third-party tracking snippet, printed verbatim on purpose.
 	} else {
 		return "\n" . $seopress_html_head;
 	}

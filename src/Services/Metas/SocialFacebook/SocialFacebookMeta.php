@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialFacebook;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Helpers\Metas\SocialSettings;
 
 /**

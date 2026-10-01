@@ -185,7 +185,8 @@ class TagsToString {
 			}
 
 			$value = $this->getValueFromTag( $tag, $context );
-			if ( ! $value ) {
+			// Zero is a real value (for example a free offer), not a missing tag.
+			if ( ! $value && ! is_numeric( $value ) ) {
 				$string = str_replace( $tags[0][ $key ], '', $string );
 			} else {
 				$string = str_replace( $tags[0][ $key ], $value, $string );

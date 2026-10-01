@@ -18,7 +18,10 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 function seopress_get_dynamic_variables( $variables, $post, $is_oembed ) {
 	// Init.
 	if ( isset( $is_oembed ) && false === $is_oembed ) {
-		global $post;
+		// Not the global $post: page builders leave their query loop's last post
+		// in it while wp_head is being built, which would describe a loop item
+		// instead of the requested page. See seopress_get_the_post().
+		$post = seopress_get_the_post();
 	}
 	global $term;
 	global $wp_query;
@@ -159,10 +162,10 @@ function seopress_get_dynamic_variables( $variables, $post, $is_oembed ) {
 
 	// Post Excerpt.
 	if ( '' !== $seopress_excerpt && isset( $post ) && is_object( $post ) && isset( $post->ID ) && true !== post_password_required( $post->ID ) ) {
-		$seopress_get_the_excerpt = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( $seopress_excerpt ), true ) ) ) ), $seopress_excerpt_length );
+		$seopress_get_the_excerpt = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( SEOPress\Helpers\Shortcodes::stripTags( $seopress_excerpt ), true ) ) ) ), $seopress_excerpt_length );
 	} elseif ( isset( $post ) && is_object( $post ) && isset( $post->ID ) && true !== post_password_required( $post->ID ) ) {
 		if ( '' !== get_post_field( 'post_content', $post->ID ) ) {
-			$seopress_get_the_excerpt = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_post_field( 'post_content', $post->ID ), true ) ) ) ) ), $seopress_excerpt_length );
+			$seopress_get_the_excerpt = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( SEOPress\Helpers\Shortcodes::stripTags( get_post_field( 'post_content', $post->ID ) ) ) ) ) ), $seopress_excerpt_length );
 		} else {
 			$seopress_get_the_excerpt = null;
 		}
@@ -173,7 +176,7 @@ function seopress_get_dynamic_variables( $variables, $post, $is_oembed ) {
 	// Post Content.
 	if ( isset( $post ) && is_object( $post ) && isset( $post->ID ) && true !== post_password_required( $post->ID ) ) {
 		if ( '' !== get_post_field( 'post_content', $post->ID ) ) {
-			$seopress_content = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_post_field( 'post_content', $post->ID ), true ) ) ) ) ), $seopress_excerpt_length );
+			$seopress_content = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( SEOPress\Helpers\Shortcodes::stripTags( get_post_field( 'post_content', $post->ID ) ) ) ) ) ), $seopress_excerpt_length );
 		} else {
 			$seopress_content = null;
 		}

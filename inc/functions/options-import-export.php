@@ -96,16 +96,18 @@ function seopress_clean_content_scans() {
 
 	global $wpdb;
 
-	// Clean our post metas.
-	$sql = 'DELETE FROM `' . $wpdb->prefix . 'postmeta` WHERE `meta_key` IN ( \'_seopress_analysis_data\', \'_seopress_content_analysis_api\', \'_seopress_analysis_data_oxygen\', \'_seopress_content_analysis_api_in_progress\')';
-	$sql = $wpdb->prepare( $sql );
-	$wpdb->query( $sql );
+	// Clean our post metas. The meta keys are hardcoded, so there is nothing to
+	// bind here: calling prepare() without a placeholder triggers a
+	// _doing_it_wrong() notice in WordPress.
+	$wpdb->query( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- One-off cleanup of our own post metas, no cache to invalidate.
+		"DELETE FROM {$wpdb->postmeta} WHERE meta_key IN ( '_seopress_analysis_data', '_seopress_content_analysis_api', '_seopress_analysis_data_oxygen', '_seopress_content_analysis_api_in_progress' )"
+	);
 
 	// Clean custom table if it exists.
-	if ( $wpdb->get_var( "SHOW TABLES LIKE '{$wpdb->prefix}seopress_content_analysis'" ) === $wpdb->prefix . 'seopress_content_analysis' ) {
-		$sql = 'DELETE FROM `' . $wpdb->prefix . 'seopress_content_analysis`';
-		$sql = $wpdb->prepare( $sql );
-		$wpdb->query( $sql );
+	$table_analysis = $wpdb->prefix . 'seopress_content_analysis';
+
+	if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $table_analysis ) ) ) === $table_analysis ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Schema lookup on our own table.
+		$wpdb->query( "DELETE FROM `{$table_analysis}`" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name built from $wpdb->prefix, nothing to bind.
 	}
 
 	wp_safe_redirect( admin_url( 'admin.php?page=seopress-import-export' ) );

@@ -56,7 +56,7 @@ abstract class VersionCompatibility {
 				'compatible' => false,
 				'message'    => sprintf(
 					/* translators: 1: required version, 2: current version */
-					__( 'This feature requires SEOPress PRO version %1$s or higher. Current version: %2$s. Please update SEOPress PRO.', 'wp-seopress-pro' ),
+					__( 'This feature requires SEOPress PRO version %1$s or higher. Current version: %2$s. Please update SEOPress PRO.', 'wp-seopress' ),
 					$min_pro_version,
 					$pro_version
 				),

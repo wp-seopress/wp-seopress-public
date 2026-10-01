@@ -1539,6 +1539,11 @@
 }
 
 /* Confirm Modal */
+/* PRO ▸ AI: the connection test result, which sat flush against the API key row. */
+.seopress-ai-test-result {
+	margin-top: 8px;
+}
+
 .seopress-confirm-modal {
     max-width: 480px !important;
 }
@@ -2023,5 +2028,485 @@
 	padding: 8px 12px;
 	font-size: 13px;
 	line-height: 1.5;
+}
+
+/* MCP tab
+-------------------------------------------------- */
+.seopress-mcp-copy {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	max-width: 100%;
+}
+
+.seopress-mcp-copy--block {
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.seopress-mcp-snippet {
+	flex: 1 1 auto;
+	max-width: 100%;
+	margin: 0;
+	padding: 10px 12px;
+	overflow-x: auto;
+	font-size: 12px;
+	line-height: 1.6;
+	white-space: pre-wrap;
+	word-break: break-all;
+	background: #f6f7f7;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+}
+
+/* The block already is the grey surface. WP admin gives every <code> a
+   background of its own, which would draw a second grey rectangle inside the
+   first one, so it is cleared here. */
+.seopress-mcp-snippet code {
+	padding: 0;
+	margin: 0;
+	font-size: inherit;
+	line-height: inherit;
+	color: inherit;
+	background: none;
+}
+
+.seopress-mcp-snippet:focus-visible {
+	outline: 2px solid var(--wp-admin-theme-color);
+	outline-offset: 1px;
+}
+
+/* Every notice on this tab, so none of them sits flush against the table or
+   the section that follows it. Scoped to direct children so the field rows keep
+   the spacing the rest of the settings already give a notice inside a control. */
+.seopress-mcp-tab > .components-notice {
+	margin: 0 0 16px;
+}
+
+/* One column, full width. The readiness panel sits high on the page instead of
+   in a narrow aside: the state of the site is still the first thing read, and
+   a long check message no longer wraps into a 320px ribbon. */
+.seopress-mcp-diagnostics {
+	margin: 0 0 24px;
+}
+
+.seopress-mcp-diagnostics .components-panel__body-title button {
+	align-items: flex-start;
+}
+
+.seopress-mcp-diagnostics-title {
+	display: grid;
+	grid-template-columns: auto minmax(0, 1fr);
+	gap: 2px 10px;
+	text-align: left;
+}
+
+.seopress-mcp-diagnostics-title .seopress-mcp-check-status {
+	grid-row: 1 / span 2;
+	margin-top: 6px;
+}
+
+.seopress-mcp-diagnostics-heading {
+	font-weight: 500;
+}
+
+.seopress-mcp-diagnostics-summary {
+	font-size: 12px;
+	font-weight: 400;
+	color: #50575e;
+}
+
+.seopress-mcp-diagnostics--ok .seopress-mcp-diagnostics-summary {
+	color: var(--colorSuccess, #4ab866);
+}
+
+.seopress-mcp-diagnostics--skipped .seopress-mcp-diagnostics-summary,
+.seopress-mcp-diagnostics--warning .seopress-mcp-diagnostics-summary {
+	color: var(--colorWarning, #ffba00);
+}
+
+.seopress-mcp-diagnostics--fail .seopress-mcp-diagnostics-summary {
+	color: var(--colorAlert, #eb0f00);
+}
+
+.seopress-mcp-diagnostics--ok .seopress-mcp-diagnostics-title .seopress-mcp-check-status {
+	background: var(--colorSuccess, #4ab866);
+}
+
+.seopress-mcp-diagnostics--skipped .seopress-mcp-diagnostics-title .seopress-mcp-check-status,
+.seopress-mcp-diagnostics--warning .seopress-mcp-diagnostics-title .seopress-mcp-check-status {
+	background: var(--colorWarning, #ffba00);
+}
+
+.seopress-mcp-diagnostics--fail .seopress-mcp-diagnostics-title .seopress-mcp-check-status {
+	background: var(--colorAlert, #eb0f00);
+}
+
+.seopress-mcp-diagnostics-intro {
+	margin-top: 0;
+	color: #50575e;
+}
+
+.seopress-mcp-client__extra {
+	margin-top: 16px;
+	padding-top: 12px;
+	border-top: 1px solid #f0f0f1;
+}
+
+/* The banner is a Notice, so it carries its own colour, border and spacing.
+   All that is left is the list inside it. */
+.seopress-mcp-banner {
+	margin: 0 0 16px;
+}
+
+.seopress-mcp-banner__clients {
+	margin: 4px 0;
+	padding: 0;
+	list-style: none;
+}
+
+.seopress-mcp-banner__clients li {
+	margin: 0 0 2px;
+}
+
+/* Wide enough for the toggle and its focus ring, and no wider: the column is
+   a control, not a reading column. */
+.seopress-mcp-tools__served {
+	width: 80px;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.seopress-mcp-tools__served .components-form-toggle {
+	vertical-align: middle;
+}
+
+.seopress-mcp-tool--off code,
+.seopress-mcp-tool--off strong,
+.seopress-mcp-tool--off .seopress-mcp-tool-description {
+	opacity: 0.55;
+}
+
+.seopress-mcp-section {
+	margin-bottom: 8px;
+}
+
+.seopress-mcp-create {
+	display: flex;
+	/* The row holds a labelled field and a button. Aligning on the end puts the
+	   button on the field's own baseline whatever the label wraps to, which a
+	   fixed margin could not do. The help text is a sibling below the row, so
+	   nothing taller than the input can drag the button down with it. */
+	align-items: flex-end;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-bottom: 4px;
+}
+
+.seopress-mcp-create-help {
+	margin: 0 0 12px;
+	color: #757575;
+	font-size: 12px;
+	font-style: normal;
+}
+
+.seopress-mcp-create .components-base-control {
+	flex: 1 1 220px;
+	margin-bottom: 0;
+}
+
+.seopress-mcp-loading {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.seopress-mcp-empty {
+	color: #646970;
+	font-style: italic;
+}
+
+.seopress-mcp-discovery {
+	margin: 24px 0 4px;
+	border: 1px solid #dcdcde;
+	border-radius: 2px;
+	padding: 8px 12px;
+}
+
+.seopress-mcp-discovery > summary {
+	cursor: pointer;
+	font-weight: 500;
+}
+
+.seopress-mcp-discovery > summary:focus-visible {
+	outline: 2px solid var(--wp-admin-theme-color, #2271b1);
+	outline-offset: 1px;
+}
+
+.seopress-mcp-checks {
+	margin: 0 0 16px;
+	padding: 0;
+	list-style: none;
+}
+
+.seopress-mcp-check {
+	/* flex-start, not stretch: the dot has to sit on the first line of the
+	   label, and a label that wraps must not push it to the middle. */
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 10px 0;
+	border-bottom: 1px solid #f0f0f1;
+	--seopress-mcp-dot-size: 10px;
+	--seopress-mcp-dot-line-height: 1.4em;
+}
+
+.seopress-mcp-check:last-child {
+	border-bottom: 0;
+}
+
+.seopress-mcp-check-status {
+	flex: 0 0 auto;
+	width: var(--seopress-mcp-dot-size, 10px);
+	height: var(--seopress-mcp-dot-size, 10px);
+	/* Centred on the first line rather than nudged by a magic number, so it
+	   survives a font-size or line-height change. */
+	margin-top: calc((var(--seopress-mcp-dot-line-height, 1.4em) - var(--seopress-mcp-dot-size, 10px)) / 2);
+	border-radius: 50%;
+	background: #c3c4c7;
+}
+
+.seopress-mcp-check--ok .seopress-mcp-check-status {
+	background: var(--colorSuccess, #4ab866);
+}
+
+.seopress-mcp-check--warning .seopress-mcp-check-status {
+	background: var(--colorWarning, #ffba00);
+}
+
+.seopress-mcp-check--fail .seopress-mcp-check-status {
+	background: var(--colorAlert, #eb0f00);
+}
+
+.seopress-mcp-check-body {
+	flex: 1 1 auto;
+}
+
+.seopress-mcp-check-message {
+	margin: 2px 0 0;
+	color: #50575e;
+}
+
+/* Plain inline, with no margin of its own: as an inline-block with a top
+   margin this grew the first line downward, and the status dot, which is
+   centred on the line height the row was told to expect, stayed where it was.
+   The last check was the visible one because it is the only one whose detail
+   sits on the same line as its label. */
+.seopress-mcp-check-detail {
+	display: inline;
+	margin: 0 0 0 6px;
+	padding: 0;
+	font-size: 11px;
+	line-height: inherit;
+	vertical-align: baseline;
+	color: #646970;
+	background: transparent;
+}
+
+.seopress-mcp-check-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px 16px;
+	margin: 6px 0 0;
+}
+
+.seopress-mcp-check-links a {
+	font-size: 13px;
+}
+
+/* ---------- MCP guided steps ---------- */
+
+.seopress-mcp-steps {
+	list-style: none;
+	margin: 0 0 24px;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.seopress-mcp-step {
+	position: relative;
+	margin: 0;
+	padding: 0 0 24px 44px;
+}
+
+/* The rail that ties the numbers together, stopping at the last step. */
+.seopress-mcp-step::before {
+	content: "";
+	position: absolute;
+	top: 32px;
+	bottom: 0;
+	left: 13px;
+	width: 2px;
+	background: #e0e0e0;
+}
+
+.seopress-mcp-step:last-child {
+	padding-bottom: 0;
+}
+
+.seopress-mcp-step:last-child::before {
+	display: none;
+}
+
+/* The number is taken out of flow and pinned to the step's left gutter, so a
+   heading that wraps stays flush with its own summary. */
+.seopress-mcp-step__number {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 28px;
+	height: 28px;
+	border-radius: 50%;
+	background: var(--wp-admin-theme-color, #2271b1);
+	color: #fff;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.seopress-mcp-step__heading {
+	min-width: 0;
+}
+
+.seopress-mcp-step__title {
+	margin: 4px 0 0;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.seopress-mcp-step__summary {
+	margin: 4px 0 0;
+	color: #50575e;
+	max-width: 70ch;
+}
+
+.seopress-mcp-step__body {
+	margin-top: 16px;
+}
+
+.seopress-mcp-instructions {
+	margin: 0 0 16px;
+	padding-left: 20px;
+	max-width: 70ch;
+}
+
+.seopress-mcp-instructions li {
+	margin: 0 0 6px;
+}
+
+.seopress-mcp-locations {
+	margin: 0 0 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.seopress-mcp-location {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 4px 10px;
+}
+
+.seopress-mcp-location dt {
+	flex: 0 0 auto;
+	min-width: 120px;
+	font-weight: 600;
+}
+
+.seopress-mcp-location dd {
+	margin: 0;
+	min-width: 0;
+}
+
+.seopress-mcp-location code {
+	word-break: break-all;
+	background: #f0f0f1;
+}
+
+.seopress-mcp-clients {
+	margin: 0;
+}
+
+.seopress-mcp-clients .components-tab-panel__tabs {
+	flex-wrap: wrap;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.seopress-mcp-client {
+	padding-top: 16px;
+}
+
+.seopress-mcp-client__summary {
+	margin: 0 0 12px;
+	max-width: 70ch;
+}
+
+.seopress-mcp-client__fallback {
+	margin-top: 16px;
+}
+
+.seopress-mcp-client .components-notice {
+	margin: 0 0 16px;
+}
+
+.seopress-mcp-client .components-notice .seopress-mcp-instructions {
+	margin-bottom: 0;
+}
+
+.seopress-mcp-create-error {
+	display: block;
+	margin-top: 4px;
+}
+
+.seopress-mcp-tools {
+	margin: 0 0 16px;
+}
+
+.seopress-mcp-tools th,
+.seopress-mcp-tools td {
+	vertical-align: top;
+}
+
+.seopress-mcp-tool-description {
+	display: block;
+	margin-top: 2px;
+	color: #646970;
+}
+
+.seopress-mcp-access {
+	display: inline-block;
+	padding: 1px 8px;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.6;
+	border-radius: 9px;
+	white-space: nowrap;
+}
+
+.seopress-mcp-access--read {
+	color: #1e4620;
+	background: rgba(74, 184, 102, 0.18);
+}
+
+.seopress-mcp-access--write {
+	color: #6b2200;
+	background: rgba(235, 15, 0, 0.14);
 }
 

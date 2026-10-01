@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\Title\Specifications;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * NotFound404Specification
  */

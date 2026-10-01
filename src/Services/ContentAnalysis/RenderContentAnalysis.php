@@ -34,12 +34,12 @@ class RenderContentAnalysis {
 						if ( in_array( 'medium', $impact, true ) || in_array( 'high', $impact, true ) ) {
 							$score = false;
 							?>
-				<p class="notgood"><?php echo $svg; ?> <span><?php echo esc_html__( 'Should be improved', 'wp-seopress' ) . $tooltip; ?></span></p>
+				<p class="notgood"><?php echo $svg; ?> <span><?php echo esc_html__( 'Should be improved', 'wp-seopress' ) . $tooltip; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?></span></p>
 									<?php
 						} else {
 							$score = true;
 							?>
-				<p class="good"><?php echo $svg; ?> <span><?php echo esc_html__( 'Good', 'wp-seopress' ) . $tooltip; ?></span></p>
+				<p class="good"><?php echo $svg; ?> <span><?php echo esc_html__( 'Good', 'wp-seopress' ) . $tooltip; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?></span></p>
 									<?php
 						}
 					} else {

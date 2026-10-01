@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\Title;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * TitleMeta
  */

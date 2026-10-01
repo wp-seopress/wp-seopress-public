@@ -16,11 +16,11 @@ $this->options = get_option( 'seopress_advanced_option_name' );
  * @return void
  */
 if ( function_exists( 'seopress_admin_header' ) ) {
-	echo seopress_admin_header();
+	seopress_admin_header();
 }
 ?>
 <div class="seopress-option seopress-php-header">
-	<?php echo $this->feature_title( 'advanced' ); ?>
+	<?php echo $this->feature_title( 'advanced' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?>
 </div>
 
 <?php seopress_admin_notices_anchor(); ?>

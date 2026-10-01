@@ -6,8 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Actions\Abilities\McpServer;
 use SEOPress\Core\Hooks\ExecuteHooks;
 use SEOPress\Helpers\PagesAdmin;
+use SEOPress\Helpers\WhiteLabel;
 
 /**
  * Module settings for React admin pages.
@@ -443,6 +445,7 @@ class ModuleSettings implements ExecuteHooks {
 			'SEOPRESS_SETTINGS_DATA',
 			array(
 				'REST_URL'            => rest_url(),
+				'MCP_ENDPOINT'        => McpServer::endpoint_url(),
 				'NONCE'               => wp_create_nonce( 'wp_rest' ),
 				'PAGE_TYPE'           => $page_config['type'],
 				'OPTION_NAME'         => $page_config['option'],
@@ -477,6 +480,7 @@ class ModuleSettings implements ExecuteHooks {
 			'MIGRATION_NONCES'    => $this->getMigrationNonces(),
 			'TOOLS_TABS'          => $this->getToolsTabs(),
 			'TOOLS_EXTRA_RESET_ACTIONS' => apply_filters( 'seopress_react_tools_reset_actions', array() ),
+			'EXPORT_CATEGORIES'         => $this->getExportCategories(),
 			'IS_PRO_ACTIVE'             => is_plugin_active( 'wp-seopress-pro/seopress-pro.php' ),
 			'LICENSE_NOTICE'            => $this->getLicenseNotice(),
 			'IS_WOOCOMMERCE_ACTIVE'     => is_plugin_active( 'woocommerce/woocommerce.php' ),
@@ -486,6 +490,14 @@ class ModuleSettings implements ExecuteHooks {
 			'PROMO_NONCE'         => wp_create_nonce( 'seopress_dismiss_promotion_nonce' ),
 			'EXTRA_API_ENDPOINTS' => apply_filters( 'seopress_settings_api_endpoints', array() ),
 			'INITIAL_SETTINGS'    => $this->getInitialSettings( $page_config['option'] ),
+			// White Label state, so React screens can substitute the product
+			// name instead of hardcoding it. Always present, so components
+			// never have to guard for an older PRO.
+			'WHITE_LABEL'         => array(
+				'enabled'       => WhiteLabel::isEnabled(),
+				'pluginName'    => WhiteLabel::pluginName(),
+				'proPluginName' => WhiteLabel::proPluginName(),
+			),
 			'REVIEW_PROMPT'       => array(
 				'show'       => \SEOPress\Actions\Api\ReviewPrompt::should_show(),
 				'reviewUrl'  => isset( $docs_links['external']['review'] ) ? $docs_links['external']['review'] : '',
@@ -618,6 +630,55 @@ class ModuleSettings implements ExecuteHooks {
 			'siteseo'          => wp_create_nonce( 'seopress_siteseo_migrate_nonce' ),
 			'surerank'         => wp_create_nonce( 'seopress_surerank_migrate_nonce' ),
 		);
+	}
+
+	/**
+	 * The site-specific categories the export screen offers to leave out of a
+	 * reusable configuration.
+	 *
+	 * The list is built in PHP rather than in the React tab, because
+	 * `ExportSettings::getSiteSpecificCategories()` is filterable: PRO and
+	 * third parties register their own client-specific fields on
+	 * `seopress_export_site_specific_categories`, and a category the screen
+	 * does not offer is a category nobody can ever exclude — the export
+	 * completes, every box is ticked, and the fields ship anyway.
+	 *
+	 * Shipped with every settings page rather than only with Tools: the
+	 * screens are one SPA, and a user who lands on Titles and navigates to
+	 * Tools never triggers a second page load.
+	 *
+	 * @return array List of { key, label } in the order they are declared.
+	 */
+	private function getExportCategories() {
+		$service = seopress_get_service( 'ExportSettings' );
+
+		if ( ! is_object( $service ) || ! method_exists( $service, 'getSiteSpecificCategories' ) ) {
+			return array();
+		}
+
+		$categories = $service->getSiteSpecificCategories();
+
+		if ( ! is_array( $categories ) ) {
+			return array();
+		}
+
+		$list = array();
+
+		foreach ( $categories as $key => $category ) {
+			// A category with no label cannot be rendered as a checkbox, and
+			// one nobody can tick would be worse than one that is not offered:
+			// the screen would imply it is covered.
+			if ( ! is_array( $category ) || empty( $category['label'] ) || ! is_string( $category['label'] ) ) {
+				continue;
+			}
+
+			$list[] = array(
+				'key'   => (string) $key,
+				'label' => $category['label'],
+			);
+		}
+
+		return $list;
 	}
 
 	/**

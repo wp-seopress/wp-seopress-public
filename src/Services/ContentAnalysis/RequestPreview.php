@@ -130,14 +130,23 @@ class RequestPreview {
 			$link = str_replace( $parsed['path'], $encoded_path, $link );
 		}
 
-		$is_self = $this->isSelfHostedLink( $link );
+		// Apply the same trust policy to the initial URL as to redirects. A
+		// filtered preview URL can already point outside the site.
+		$is_site_url = $this->isSameSiteHop( home_url(), $link ) || $this->isSameSiteHop( site_url(), $link );
+		$is_self     = $is_site_url && $this->isSelfHostedLink( $link );
 
-		// Bound to the host being called, never domainless. WordPress Requests
-		// treats a cookie with no domain as matching every host, so the
-		// previous set followed any cross-host redirect out of the site.
-		$cookies = $this->buildCookies( wp_parse_url( $link, PHP_URL_HOST ) );
-		if ( ! empty( $cookies ) ) {
-			$args['cookies'] = $cookies;
+		// Verify public HTTPS requests before sending the editor's session.
+		// Local installations with self-signed certificates can explicitly opt
+		// out using the core filter; external hosts are always verified.
+		$args['sslverify'] = $is_site_url
+			? (bool) apply_filters( 'https_local_ssl_verify', true ) // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core filter.
+			: true;
+
+		if ( $is_site_url ) {
+			$cookies = $this->buildCookies( wp_parse_url( $link, PHP_URL_HOST ) );
+			if ( ! empty( $cookies ) ) {
+				$args['cookies'] = $cookies;
+			}
 		}
 
 		// Applied last, as it always was, so a page builder or a security
@@ -190,9 +199,26 @@ class RequestPreview {
 				);
 			}
 
+			// An error page or partial response is not the post's rendered HTML.
+			// Leave the previous analysis intact until a complete page is available.
+			if ( 200 !== $code_response ) {
+				return array(
+					'success' => false,
+					'code'    => 'http_error',
+				);
+			}
+
+			$body = wp_remote_retrieve_body( $response );
+			if ( '' === trim( $body ) ) {
+				return array(
+					'success' => false,
+					'code'    => 'empty',
+				);
+			}
+
 			return array(
 				'success' => true,
-				'body'    => wp_remote_retrieve_body( $response ),
+				'body'    => $body,
 			);
 		} catch ( \Exception $e ) {
 			return array(
@@ -507,20 +533,24 @@ class RequestPreview {
 		}
 
 		/**
-		 * Extra hosts the preview fetch is allowed to be redirected to.
+		 * Extra hosts the preview fetch is allowed to be sent or redirected to.
 		 *
 		 * Only for a site that legitimately serves its own content from
-		 * another domain — a multilingual install with one domain per
-		 * language is the usual case. The editor's session travels to whatever
-		 * is listed here, so list only hosts you own.
+		 * another domain. The per-language domains configured in WPML or
+		 * Polylang are included by default, since their permalinks already
+		 * point there. The editor's session travels to whatever is listed
+		 * here, so list only hosts you own.
 		 *
 		 * @since 10.2.0
+		 * @since 10.3.0 Also applied to the initial preview URL, with $from set
+		 *               to home_url() or site_url(). Defaults to the language
+		 *               domains of WPML and Polylang.
 		 *
-		 * @param array  $hosts Additional allowed redirect hosts. Default empty.
-		 * @param string $from  The URL that returned the redirect.
-		 * @param string $to    The absolute URL it points to.
+		 * @param array  $hosts Additional allowed hosts.
+		 * @param string $from  The URL that returned the redirect, or the site URL for the initial request.
+		 * @param string $to    The absolute URL being requested.
 		 */
-		$allowed = apply_filters( 'seopress_real_preview_allowed_redirect_hosts', array(), $from, $to );
+		$allowed = apply_filters( 'seopress_real_preview_allowed_redirect_hosts', $this->languageDomainHosts(), $from, $to );
 
 		foreach ( (array) $allowed as $host ) {
 			if ( $this->baseHost( $host ) === $to_host ) {
@@ -529,6 +559,54 @@ class RequestPreview {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Hosts of the per-language domains configured in WPML or Polylang.
+	 *
+	 * With one domain per language, get_preview_post_link() already returns a
+	 * URL on the language's own domain. Those domains are part of this site,
+	 * so the preview keeps the editor's session there: without it a draft on
+	 * a secondary language would come back as a 404.
+	 *
+	 * @since 10.3.0
+	 *
+	 * @return string[]
+	 */
+	private function languageDomainHosts() {
+		$urls = array();
+
+		// WPML: negotiation type 2 is "a different domain per language".
+		if ( 2 === (int) apply_filters( 'wpml_setting', 0, 'language_negotiation_type' ) ) {
+			$domains = apply_filters( 'wpml_setting', array(), 'language_domains' );
+			if ( is_array( $domains ) ) {
+				$urls = array_merge( $urls, array_values( $domains ) );
+			}
+		}
+
+		// Polylang: force_lang 3 is "a different domain per language".
+		$polylang = get_option( 'polylang' );
+		if ( is_array( $polylang ) && isset( $polylang['force_lang'] ) && 3 === (int) $polylang['force_lang'] && ! empty( $polylang['domains'] ) && is_array( $polylang['domains'] ) ) {
+			$urls = array_merge( $urls, array_values( $polylang['domains'] ) );
+		}
+
+		$hosts = array();
+
+		foreach ( $urls as $url ) {
+			if ( ! is_string( $url ) || '' === trim( $url ) ) {
+				continue;
+			}
+
+			// WPML stores bare domains, Polylang full URLs.
+			$url  = false === strpos( $url, '://' ) ? 'http://' . trim( $url ) : trim( $url );
+			$host = wp_parse_url( $url, PHP_URL_HOST );
+
+			if ( ! empty( $host ) ) {
+				$hosts[] = strtolower( $host );
+			}
+		}
+
+		return array_values( array_unique( $hosts ) );
 	}
 
 	/**

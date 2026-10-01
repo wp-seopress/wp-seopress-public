@@ -78,22 +78,23 @@ abstract class Kernel {
 							continue;
 						}
 
-						$class = new $class();
+						// Check the interface before construction: constructors may
+						// resolve services that this request will never use.
 						switch ( true ) {
-							case $class instanceof ExecuteHooksBackend:
+							case is_a( $class, ExecuteHooksBackend::class, true ):
 								if ( is_admin() ) {
-									$class->hooks();
+									( new $class() )->hooks();
 								}
 								break;
 
-							case $class instanceof ExecuteHooksFrontend:
+							case is_a( $class, ExecuteHooksFrontend::class, true ):
 								if ( ! is_admin() ) {
-									$class->hooks();
+									( new $class() )->hooks();
 								}
 								break;
 
-							case $class instanceof ExecuteHooks:
-								$class->hooks();
+							case is_a( $class, ExecuteHooks::class, true ):
+								( new $class() )->hooks();
 								break;
 						}
 					} catch ( \Throwable $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
@@ -159,9 +160,52 @@ abstract class Kernel {
 	 * @return void
 	 */
 	public static function buildContainer() { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
-		self::buildClasses( self::$data['root'] . '/src/Services', 'services', 'Services\\' );
+		$map = self::get_release_container_map();
+		if ( null !== $map ) {
+			self::getContainer()->set_service_definitions( $map['services'] );
+		} else {
+			self::buildClasses( self::$data['root'] . '/src/Services', 'services', 'Services\\' );
+		}
+
+		// These integrations include procedural hook registration at file load.
 		self::buildClasses( self::$data['root'] . '/src/Thirds', 'services', 'Thirds\\' );
-		self::buildClasses( self::$data['root'] . '/src/Actions', 'actions', 'Actions\\' );
+
+		if ( null !== $map ) {
+			foreach ( $map['actions'] as $action ) {
+				self::getContainer()->setAction( $action );
+			}
+		} else {
+			self::buildClasses( self::$data['root'] . '/src/Actions', 'actions', 'Actions\\' );
+		}
+	}
+
+	/**
+	 * Use a matching release map, or discover classes normally in a checkout.
+	 *
+	 * @return array|null
+	 */
+	private static function get_release_container_map() {
+		$file = self::$data['root'] . '/src/Core/container-map.php';
+		if ( ! is_file( $file ) ) {
+			return null;
+		}
+		try {
+			$map = require $file;
+			if ( ! is_array( $map ) || 1 !== ( $map['format'] ?? null ) ||
+				! defined( 'SEOPRESS_VERSION' ) || SEOPRESS_VERSION !== ( $map['version'] ?? null ) ||
+				empty( $map['services'] ) || empty( $map['actions'] ) || ! is_array( $map['services'] ) || ! is_array( $map['actions'] ) ) {
+				return null;
+			}
+			foreach ( array_merge( array_values( $map['services'] ), array_values( $map['actions'] ) ) as $class ) {
+				if ( ! is_string( $class ) || '' === $class ) {
+					return null;
+				}
+			}
+			return $map;
+		} catch ( \Throwable $error ) {
+			// A stale or partially written release must retain directory discovery.
+			return null;
+		}
 	}
 
 	/**

@@ -58,7 +58,10 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_social_facebook_link_ownership_id',
 		'seopress_social_facebook_app_id',
 		'seopress_google_analytics_ga4',
+		'seopress_google_analytics_linker_domains',
+		'seopress_google_analytics_linker_accept_incoming',
 		'seopress_google_analytics_download_tracking',
+		'seopress_google_analytics_not_found_tracking',
 		'seopress_google_analytics_opt_out_msg',
 		'seopress_google_analytics_opt_out_msg_ok',
 		'seopress_google_analytics_opt_out_msg_close',
@@ -66,6 +69,8 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_google_analytics_other_tracking',
 		'seopress_google_analytics_other_tracking_body',
 		'seopress_google_analytics_other_tracking_footer',
+		'seopress_google_analytics_view_item_list',
+		'seopress_google_analytics_select_item',
 		'seopress_google_analytics_ads',
 		'seopress_google_analytics_matomo_id',
 		'seopress_google_analytics_matomo_site_id',
@@ -135,7 +140,7 @@ function seopress_sanitize_options_fields( $input ) {
 				$input[ $value ] = isset( $options[ $value ] ) ? $options[ $value ] : '';
 			}
 		} elseif ( ( ! empty( $input['seopress_instant_indexing_manual_batch'] ) && 'seopress_instant_indexing_manual_batch' === $value ) || ( ! empty( $input['seopress_social_accounts_extra'] ) && 'seopress_social_accounts_extra' === $value ) ) {
-			$input[ $value ] = sanitize_textarea_field( $input[ $value ] );
+			$input[ $value ] = seopress_sanitize_urls_list( $input[ $value ] );
 		} elseif ( ( ! empty( $input['seopress_social_accounts_facebook'] ) && 'seopress_social_accounts_facebook' === $value ) || ( ! empty( $input['seopress_social_accounts_pinterest'] ) && 'seopress_social_accounts_pinterest' === $value ) || ( ! empty( $input['seopress_social_accounts_instagram'] ) && 'seopress_social_accounts_instagram' === $value ) || ( ! empty( $input['seopress_social_accounts_youtube'] ) && 'seopress_social_accounts_youtube' === $value ) || ( ! empty( $input['seopress_social_accounts_linkedin'] ) && 'seopress_social_accounts_linkedin' === $value ) ) {
 			$input[ $value ] = sanitize_url( $input[ $value ] );
 		} elseif ( ( ! empty( $input['seopress_social_knowledge_email'] ) && 'seopress_social_knowledge_email' === $value ) ) {
@@ -176,7 +181,7 @@ function seopress_sanitize_options_fields( $input ) {
 				// around the separator and around tokens survive. Line breaks
 				// and control characters are dropped.
 				$stripped        = preg_replace( '@<(script|style)[^>]*?>.*?</\1>@si', '', (string) $input[ $value ] );
-				$stripped        = strip_tags( $stripped );
+				$stripped        = strip_tags( $stripped ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- wp_strip_all_tags() trims, which would drop the spaces this branch preserves.
 				$stripped        = preg_replace( '/[\r\n\t]+/', '', $stripped );
 				$input[ $value ] = preg_replace( '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $stripped );
 			} else {
@@ -195,6 +200,28 @@ function seopress_sanitize_options_fields( $input ) {
 				$input[ $value ] = esc_attr( $input[ $value ] );
 			}
 		}
+	}
+
+	// The MCP tool switches are a list of ability names, and this function
+	// hands everything it does not name back untouched, so the list has to be
+	// cleaned here or an arbitrary structure would be written to the option.
+	if ( isset( $input['seopress_advanced_abilities_api_mcp_disabled'] ) ) {
+		$names = array();
+
+		foreach ( (array) $input['seopress_advanced_abilities_api_mcp_disabled'] as $name ) {
+			if ( ! is_string( $name ) || '' === $name ) {
+				continue;
+			}
+
+			// An ability name is a namespace and a slug: seopress/get-post.
+			// Anything that is not one cannot match an ability, so keeping it
+			// would only leave junk in the option.
+			if ( 1 === preg_match( '#^[a-z0-9-]+/[a-z0-9-]+$#', $name ) ) {
+				$names[] = $name;
+			}
+		}
+
+		$input['seopress_advanced_abilities_api_mcp_disabled'] = array_values( array_unique( $names ) );
 	}
 
 	return $input;

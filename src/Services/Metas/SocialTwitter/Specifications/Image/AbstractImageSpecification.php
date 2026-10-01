@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Image;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * AbstractImageSpecification
  */

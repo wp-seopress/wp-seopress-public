@@ -182,7 +182,7 @@ class DomFilterContent {
 		}
 
 		$data['id_homepage'] = array(
-			'value' => get_option( 'page_on_front' ),
+			'value' => \SEOPress\Helpers\StaticPages::matches( $id ) ? (int) $id : get_option( 'page_on_front' ),
 		);
 
 		return $data;

@@ -144,7 +144,7 @@ function seopress_register_blocks() {
 	add_filter( 'render_block', 'seopress_block_faq_v2_render_schema', 10, 2 );
 
 	// Google Preferred Sources Block.
-	register_block_type(
+	$preferred_source = register_block_type(
 		SEOPRESS_PATH_PUBLIC . '/editor/blocks/preferred-source',
 		array(
 			'render_callback' => 'seopress_preferred_source_block',
@@ -161,6 +161,22 @@ function seopress_register_blocks() {
 					'type'    => 'boolean',
 					'default' => true,
 				),
+				// custom: our button, Google flow opened in place. google: the official
+				// Google button. link: a plain deeplink, without any third party script.
+				// Empty on blocks saved before this option existed, which keep rendering
+				// the plain link; new blocks get "custom" from the default inserter variation.
+				'mode'       => array(
+					'type'    => 'string',
+					'default' => '',
+				),
+				'theme'      => array(
+					'type'    => 'string',
+					'default' => 'auto',
+				),
+				'lang'       => array(
+					'type'    => 'string',
+					'default' => '',
+				),
 				// Resolved server-side so the editor can render the button without a ServerSideRender round-trip.
 				'siteDomain' => array(
 					'type'    => 'string',
@@ -169,7 +185,12 @@ function seopress_register_blocks() {
 			),
 		)
 	);
-	wp_set_script_translations( 'wpseopress/preferred-source', 'wp-seopress' );
+	// block.json is what registers the view script, but WordPress would then load
+	// it on every page holding the block. The render callback enqueues it itself,
+	// only for the modes that talk to Google, and for the shortcode.
+	if ( $preferred_source instanceof WP_Block_Type ) {
+		$preferred_source->view_script_handles = array();
+	}
 
 	// Google Preferred Sources shortcode (shares the block renderer).
 	add_shortcode( 'seopress_preferred_source', 'seopress_preferred_source_shortcode' );

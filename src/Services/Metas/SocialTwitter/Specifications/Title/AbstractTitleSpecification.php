@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialTwitter\Specifications\Title;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * AbstractTitleSpecification
  */

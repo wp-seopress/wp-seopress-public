@@ -72,8 +72,10 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
 
 		// A user meta can hold an array (multi value meta, ACF repeater...).
 		// esc_attr() would cast it and output the literal string "Array".
-		$value = is_scalar( $raw_value ) ? esc_attr( (string) $raw_value ) : '';
+		// Same treatment as post meta: an array renders its scalar entries
+		// rather than nothing. See seopress_custom_field_to_string().
+		$value = esc_attr( seopress_custom_field_to_string( $raw_value ) );
 
-		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context );
+		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context, $raw_value );
 	}
 }

@@ -20,19 +20,20 @@ class GoogleAnalytics implements ExecuteHooksFrontend {
 	 * @return void
 	 */
 	public function hooks(): void {
-		$ga_option_service   = seopress_get_service( 'GoogleAnalyticsOption' );
-		$disable_option      = $ga_option_service->getDisable();
-		$half_disable_option = $ga_option_service->getHalfDisable();
+		$ga_option_service = seopress_get_service( 'GoogleAnalyticsOption' );
 
-		// Check user consent or GA disable setting.
-		if (
-			'1' === $half_disable_option ||
-			( $this->isUserConsentGiven() && '1' === $disable_option ) ||
-			'1' !== $disable_option
-		) {
-			if ( ! $this->shouldExcludeCurrentUser( $ga_option_service ) ) {
-				add_action( 'init', array( $this, 'analytics' ) );
-			}
+		/*
+		 * Deliberately not gated on the consent cookie.
+		 *
+		 * These hooks print gtag('event', ...) calls and nothing else. They
+		 * queue in window.dataLayer and reach Google no earlier than the
+		 * tracking library itself, which stays behind the consent gate. Gating
+		 * them here would instead make the rendered page differ per visitor,
+		 * and a full-page cache would serve one visitor's answer to everyone
+		 * -- the bug this whole consent path was rebuilt to close.
+		 */
+		if ( ! $this->shouldExcludeCurrentUser( $ga_option_service ) ) {
+			add_action( 'init', array( $this, 'analytics' ) );
 		}
 	}
 
@@ -76,15 +77,5 @@ class GoogleAnalytics implements ExecuteHooksFrontend {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Checks if user consent has been given.
-	 *
-	 * @since 4.4.0
-	 * @return bool True if consent is given, false otherwise.
-	 */
-	private function isUserConsentGiven(): bool {
-		return isset( $_COOKIE['seopress-user-consent-accept'] ) && '1' === $_COOKIE['seopress-user-consent-accept'];
 	}
 }

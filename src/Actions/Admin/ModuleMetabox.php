@@ -110,7 +110,7 @@ class ModuleMetabox implements ExecuteHooks {
 	 * Persist SEO meta from the Classic Editor post form when the React
 	 * metabox cannot reach the REST API. The React tabs render hidden
 	 * inputs (associated with `<form id="post">` via the HTML `form`
-	 * attribute) that mirror their Formik state, so a normal post save
+	 * attribute) that mirror their form state, so a normal post save
 	 * still carries the values even if the REST PUTs to `/seopress/v1/...`
 	 * are blocked. Skipped during autosave/revision/REST and gated by a
 	 * dedicated nonce. The list of meta keys is filterable so the Pro
@@ -185,7 +185,8 @@ class ModuleMetabox implements ExecuteHooks {
 			if ( null === $value || '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
 				delete_post_meta( $post_id, $meta_key );
 			} else {
-				update_post_meta( $post_id, $meta_key, $value );
+				// The form was unslashed above; preserve literal slashes through metadata storage.
+				update_post_meta( $post_id, $meta_key, wp_slash( $value ) );
 			}
 		}
 	}
@@ -216,6 +217,8 @@ class ModuleMetabox implements ExecuteHooks {
 			'_seopress_robots_snippet'             => 'text',
 			'_seopress_robots_primary_cat'         => 'text',
 			'_seopress_robots_breadcrumbs'         => 'text',
+			'_seopress_robots_freeze_modified_date' => 'text',
+			'_seopress_robots_custom_modified_date' => 'text',
 			// Redirections (per-post) tab.
 			'_seopress_redirections_value'         => 'url',
 			'_seopress_redirections_enabled'       => 'text',
@@ -368,6 +371,42 @@ class ModuleMetabox implements ExecuteHooks {
 	}
 
 	/**
+	 * The dependencies webpack computed for a built script.
+	 *
+	 * `@wordpress/dependency-extraction-webpack-plugin` writes the exact list
+	 * of `wp-*` handles each bundle imports into an `.asset.php` next to it.
+	 * Hand-written lists next to it go stale in one direction only: a new
+	 * import is added to the JavaScript and nobody remembers the PHP. WordPress
+	 * then has no reason to load the package first, and whether it does is left
+	 * to whatever else the page enqueues. On a site with a page builder that
+	 * pulls the editor packages in late, our script runs before `wp-plugins`
+	 * exists and throws.
+	 *
+	 * ModuleAdminHeader, CommandPalette and ModuleSettings already read these
+	 * files; this screen was the one that did not.
+	 *
+	 * @since 10.3.0
+	 *
+	 * @param string $relative_path Path of the .asset.php, relative to the plugin root.
+	 * @param array  $fallback      Dependencies to use when the file is missing.
+	 *
+	 * @return array
+	 */
+	private function getScriptDependencies( $relative_path, $fallback = array() ) {
+		$asset_file = SEOPRESS_PLUGIN_DIR_PATH . $relative_path;
+
+		if ( ! file_exists( $asset_file ) ) {
+			return $fallback;
+		}
+
+		$asset = require $asset_file;
+
+		return isset( $asset['dependencies'] ) && is_array( $asset['dependencies'] )
+			? $asset['dependencies']
+			: $fallback;
+	}
+
+	/**
 	 * Enqueue module.
 	 *
 	 * @param array $args_localize The arguments localize.
@@ -411,20 +450,40 @@ class ModuleMetabox implements ExecuteHooks {
 			}
 		}
 
-		$dependencies = array( 'react', 'react-dom', 'wp-components' );
+		// The build knows what this bundle imports; the hand-written list did
+		// not, and left `wp-api-fetch` and `wp-element` undeclared.
+		$dependencies = $this->getScriptDependencies(
+			'public/metaboxe.asset.php',
+			array( 'react', 'react-dom', 'wp-components' )
+		);
+
+		// Only on the block editor, and not a bundle import: the metabox opens
+		// the SEOPress sidebar panel through it.
 		if ( $is_gutenberg ) {
-			$dependencies = array_merge( $dependencies, array( 'wp-edit-post', 'wp-plugins' ) );
+			foreach ( array( 'wp-edit-post', 'wp-plugins' ) as $editor_handle ) {
+				if ( ! in_array( $editor_handle, $dependencies, true ) ) {
+					$dependencies[] = $editor_handle;
+				}
+			}
 		}
 
 		wp_enqueue_media();
 		wp_enqueue_style( 'wp-components' );
 		wp_enqueue_style( 'seopress-metabox', SEOPRESS_URL_PUBLIC . '/metaboxe.css', array( 'wp-components' ), SEOPRESS_VERSION );
 		wp_enqueue_script( 'seopress-metabox', SEOPRESS_URL_PUBLIC . '/metaboxe.js', $dependencies, SEOPRESS_VERSION, true );
+		wp_set_script_translations( 'seopress-metabox', 'wp-seopress', WP_LANG_DIR . '/plugins' );
 
 		global $post;
 
 		if ( post_type_supports( get_post_type( $post ), 'custom-fields' ) ) {
-			wp_enqueue_script( 'seopress-pre-publish-checklist', SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js', array(), SEOPRESS_VERSION, true );
+			wp_enqueue_script(
+				'seopress-pre-publish-checklist',
+				SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js',
+				$this->getScriptDependencies( 'public/editor/pre-publish-checklist/index.asset.php', array( 'wp-i18n' ) ),
+				SEOPRESS_VERSION,
+				true
+			);
+			wp_set_script_translations( 'seopress-pre-publish-checklist', 'wp-seopress', WP_LANG_DIR . '/plugins' );
 		}
 		// The sidebar panel and its score both describe the post being
 		// edited, so they need a real post. is_block_editor() is also true on
@@ -436,7 +495,17 @@ class ModuleMetabox implements ExecuteHooks {
 				return;
 			}
 
-			wp_enqueue_script( 'seopress-sidebar-panel', SEOPRESS_URL_PUBLIC . '/editor/sidebar-panel/index.js', array( 'wp-plugins', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n' ), SEOPRESS_VERSION, true );
+			wp_enqueue_script(
+				'seopress-sidebar-panel',
+				SEOPRESS_URL_PUBLIC . '/editor/sidebar-panel/index.js',
+				$this->getScriptDependencies(
+					'public/editor/sidebar-panel/index.asset.php',
+					array( 'wp-plugins', 'wp-editor', 'wp-element', 'wp-components', 'wp-i18n' )
+				),
+				SEOPRESS_VERSION,
+				true
+			);
+			wp_set_script_translations( 'seopress-sidebar-panel', 'wp-seopress', WP_LANG_DIR . '/plugins' );
 
 			// Get score data for the current post.
 			$score       = seopress_get_service( 'ContentAnalysisDatabase' )->getData( $post->ID, array( 'score' ) );

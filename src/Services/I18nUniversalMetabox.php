@@ -843,11 +843,14 @@ class I18nUniversalMetabox {
 					'ignored_count_plural'           => /* translators: %d number of ignored checks, plural */ __( '%d checks ignored on this page', 'wp-seopress' ),
 				),
 				'schemas_manual'    => array(
-					'description'     => __( 'It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results.', 'wp-seopress' ),
-					'remove'          => __( 'Delete schema', 'wp-seopress' ),
-					'add'             => __( 'Add a schema', 'wp-seopress' ),
-					'validate_schema' => __( 'Validate my schema', 'wp-seopress' ),
+					'description'      => __( 'It is recommended to enter as many properties as possible to maximize the chances of getting a rich snippet in Google search results.', 'wp-seopress' ),
+					'select_data_type' => __( 'Select your data type', 'wp-seopress' ),
+					'remove'           => __( 'Delete schema', 'wp-seopress' ),
+					'add'              => __( 'Add a schema', 'wp-seopress' ),
+					'validate_schema'  => __( 'Validate my schema', 'wp-seopress' ),
 					'validate_schema_unpublished' => __( 'Publish this post first to validate its schema. Google can only test a live, public URL.', 'wp-seopress' ),
+					'validate_schema_org'         => __( 'Schema Markup Validator', 'wp-seopress' ),
+					'validate_schema_hint'        => __( 'The Schema Markup Validator checks schema.org markup. Google’s test only reports supported rich result types; a missing type there does not mean your markup is absent.', 'wp-seopress' ),
 				),
 				'schemas_automatic' => array(
 					'description'     => __( 'These schemas are automatically applied to this post based on rules defined in your Schemas library. You can override values per post here, or disable individual schemas.', 'wp-seopress' ),
@@ -861,6 +864,8 @@ class I18nUniversalMetabox {
 					'type_label'      => __( 'Type:', 'wp-seopress' ),
 					'validate_schema' => __( 'Validate my schema', 'wp-seopress' ),
 					'validate_schema_unpublished' => __( 'Publish this post first to validate its schema. Google can only test a live, public URL.', 'wp-seopress' ),
+					'validate_schema_org'         => __( 'Schema Markup Validator', 'wp-seopress' ),
+					'validate_schema_hint'        => __( 'The Schema Markup Validator checks schema.org markup. Google’s test only reports supported rich result types; a missing type there does not mean your markup is absent.', 'wp-seopress' ),
 				),
 				'social'            => array(
 					'title'          => /* translators: %s post title */ __(

@@ -70,12 +70,29 @@ class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
 			$raw_value = '';
 		}
 
-		// A custom field can hold an array (multi value meta, ACF repeater...).
-		// strip_shortcodes() only accepts a string and would fatal on anything else.
-		$raw_value = is_scalar( $raw_value ) ? (string) $raw_value : '';
+		$stored = $raw_value;
+
+		// A custom field can hold an array: ACF Relationship, Post Object with
+		// several values, Checkbox, Select multiple, Gallery, Repeater. Render
+		// the entries that can be rendered instead of dropping the value, and
+		// never hand anything but a string to strip_shortcodes(), which fatals
+		// on an array.
+		$raw_value = seopress_custom_field_to_string( $raw_value );
 
 		$value = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( $raw_value ) ) ) ) ), $length );
 
-		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context );
+		/**
+		 * Filter the resolved value of a single custom-field variable.
+		 *
+		 * The stored value is passed as the third argument so a site can build
+		 * a structured result, a list of schema @id references for instance,
+		 * without reading the meta a second time. It is whatever the database
+		 * holds: a string, an array, or anything else a plugin stored there.
+		 *
+		 * @param string $value     Rendered value.
+		 * @param array  $context   Resolution context.
+		 * @param mixed  $stored    Stored meta value, before rendering.
+		 */
+		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context, $stored );
 	}
 }

@@ -73,7 +73,11 @@ class PrintHeadJsonSchema implements ExecuteHooksFrontend {
 			),
 			$context
 		);
-		?><script type="application/ld+json"><?php echo apply_filters( 'seopress_schemas_organization_html', $jsons[0] ); // phpcs:ignore -- TODO: escape properly. ?></script>
+		$json = apply_filters( 'seopress_schemas_organization_html', $jsons[0] );
+		// Escape after the filter: literal less-than signs can close the script
+		// or enter HTML comment parsing states. JSON decoding restores the value.
+		$json = str_replace( '<', '\\u003C', (string) $json );
+		?><script type="application/ld+json"><?php echo $json; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Less-than signs are JSON-escaped above. ?></script>
 		<?php
 	}
 }

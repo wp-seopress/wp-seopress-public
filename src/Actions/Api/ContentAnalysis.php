@@ -287,6 +287,12 @@ class ContentAnalysis implements ExecuteHooks {
 					case 'unreachable':
 						$default_response['title'] = __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
 						break;
+					case 'http_error':
+						$default_response['title'] = __( 'The page returned an HTTP error or an incomplete response. Your previous content analysis has been kept. Please try again when the page is available.', 'wp-seopress' );
+						break;
+					case 'empty':
+						$default_response['title'] = __( 'The page returned no content. Your previous content analysis has been kept. Please check the page and try again.', 'wp-seopress' );
+						break;
 				}
 
 				return new \WP_REST_Response( $default_response );

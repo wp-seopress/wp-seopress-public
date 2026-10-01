@@ -86,6 +86,18 @@ class AnalyticsSettings implements ExecuteHooks {
 			);
 		}
 
+		if ( array_key_exists( 'seopress_google_analytics_linker_domains', $new_options ) ) {
+			$domains = \SEOPress\Services\Options\GoogleAnalyticsOption::parse_linker_domains( $new_options['seopress_google_analytics_linker_domains'] );
+			if ( is_wp_error( $domains ) ) {
+				$domains->add_data( array( 'status' => 400 ) );
+				return $domains;
+			}
+			$new_options['seopress_google_analytics_linker_domains'] = implode( ', ', $domains );
+		}
+		if ( isset( $new_options['seopress_google_analytics_linker_accept_incoming'] ) && ! in_array( $new_options['seopress_google_analytics_linker_accept_incoming'], array( '', '1', '0' ), true ) ) {
+			return new \WP_Error( 'invalid_linker_incoming', __( 'Choose a valid incoming linker setting.', 'wp-seopress' ), array( 'status' => 400 ) );
+		}
+
 		// Sanitize using the same function as PHP form saves.
 		$sanitized_options = seopress_sanitize_options_fields( $new_options );
 

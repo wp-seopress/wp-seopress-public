@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialFacebook\Specifications\Description;
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * AbstractDescriptionSpecification
  */

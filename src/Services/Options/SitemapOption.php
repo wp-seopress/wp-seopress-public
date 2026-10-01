@@ -95,6 +95,31 @@ class SitemapOption {
 			foreach ( self::INTERNAL_POST_TYPES as $internal_post_type ) {
 				unset( $post_types[ $internal_post_type ] );
 			}
+
+			// Unticking a post type only clears its `include` flag, so the key
+			// survives forever — including after the plugin that registered the
+			// post type is uninstalled. Its posts stay in the database, and
+			// WP_Query happily returns them because it filters on the
+			// `post_type` column without checking that anything registered it.
+			// The HTML sitemap then listed those orphans with permalinks that
+			// 404, since the rewrite rules are gone too.
+			//
+			// Two callers already guarded against this on their own
+			// (Actions\Sitemap\Render and the XML index template); four others,
+			// here and in PRO, did not. Filtering once here is what stops the
+			// next caller repeating it.
+			//
+			// Only once `init` has run: post types are registered on that hook,
+			// so filtering before it would drop every custom post type from a
+			// caller that asked early, which is a far worse failure than the one
+			// being fixed.
+			if ( did_action( 'init' ) ) {
+				foreach ( array_keys( $post_types ) as $post_type ) {
+					if ( ! post_type_exists( $post_type ) ) {
+						unset( $post_types[ $post_type ] );
+					}
+				}
+			}
 		}
 
 		return $this->normalizeIncludeList( $post_types );

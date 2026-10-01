@@ -182,16 +182,18 @@ class GetContent {
 			foreach ( array_count_values( $data['json_schemas'] ) as $key => $value ) {
 				$html = null;
 				if ( $value > 1 ) {
-					if ( 'Review' !== $key ) {
-						$html                          = '<span class="impact high">' . __( 'duplicated schema - x', 'wp-seopress' ) . $value . '</span>';
+					if ( ! in_array( $key, array( 'Review', 'Person' ), true ) ) {
+						/* translators: %d: Number of schema entities of the same type. */
+						$html = '<span class="impact high">' . esc_html( sprintf( __( 'duplicated schema - x%d', 'wp-seopress' ), $value ) ) . '</span>';
+						$issue_desc[] = array( $key, $value );
 						$analyzes['schemas']['impact'] = 'high';
 					} else {
-						$html = ' <span class="impact">' . __( 'x', 'wp-seopress' ) . $value . '</span>';
+						/* translators: %d: Number of schema entities of the same type. */
+						$html = ' <span class="impact">' . esc_html( sprintf( __( 'x%d', 'wp-seopress' ), $value ) ) . '</span>';
 					}
 
-					$issue_desc[] = array( $key, $value );
 				}
-				$desc .= '<li><span class="dashicons dashicons-minus"></span>' . $key . $html . '</li>';
+				$desc .= '<li><span class="dashicons dashicons-minus"></span>' . esc_html( $key ) . $html . '</li>';
 			}
 			$desc                       .= '</ul>';
 			$analyzes['schemas']['desc'] = $desc;
@@ -300,7 +302,7 @@ class GetContent {
 			$desc                                    .= '</ul>';
 			$analyzes['keywords_permalink']['desc']   = $desc;
 			$analyzes['keywords_permalink']['impact'] = 'good';
-		} elseif ( get_option( 'page_on_front' ) == $post->ID ) {
+		} elseif ( \SEOPress\Helpers\StaticPages::matches( $post->ID ) ) {
 				$analyzes['keywords_permalink']['desc']   = '<p><span class="dashicons dashicons-yes"></span>' . __( 'This is your homepage. This check doesn\'t apply here because there is no slug.', 'wp-seopress' ) . '</p>';
 				$analyzes['keywords_permalink']['impact'] = 'good';
 		} else {
@@ -1248,13 +1250,18 @@ class GetContent {
 		$without_alt = array();
 		if ( ! empty( $data['images'] ) ) {
 			foreach ( $data['images'] as $image ) {
-				if ( ! empty( $image['alt'] ) ) {
+				// An explicit empty alt marks a decorative image. Older collectors
+				// without presence metadata retain their previous behavior.
+				$has_alt = isset( $image['has_alt'] ) ? $image['has_alt'] : ! empty( $image['alt'] );
+				if ( $has_alt ) {
 					$with_alt[] = $image['src'];
 				} else {
 					$without_alt[] = $image['src'];
 				}
 			}
 		}
+
+		$without_alt = array_values( array_unique( $without_alt ) );
 
 		if ( ! empty( $without_alt ) ) {
 			$desc = '<div class="wrap-analysis-img">';
@@ -1295,7 +1302,7 @@ class GetContent {
 			$issue['issue_desc'] = $issue_desc;
 		} elseif ( ! empty( $with_alt ) && empty( $without_alt ) ) {
 			$analyzes['img_alt']['impact'] = 'good';
-			$analyzes['img_alt']['desc']   = '<p><span class="dashicons dashicons-yes"></span>' . __( 'All alternative tags are filled in. Good work!', 'wp-seopress' ) . '</p>';
+			$analyzes['img_alt']['desc']   = '<p><span class="dashicons dashicons-yes"></span>' . __( 'All images have an alt attribute. Empty alternative text is allowed for decorative images.', 'wp-seopress' ) . '</p>';
 		} elseif ( empty( $with_alt ) && empty( $without_alt ) ) {
 			$analyzes['img_alt']['impact'] = 'medium';
 			$analyzes['img_alt']['desc']   = '<p><span class="dashicons dashicons-no-alt"></span>' . __( 'We could not find any image in your content. Content with media is a plus for your SEO.', 'wp-seopress' ) . '</p>';
@@ -1411,14 +1418,9 @@ class GetContent {
 		$issue['issue_type'] = 'internal_links';
 		$emitted_names       = array();
 
-		$desc = '<p>' . __( 'Internal links are important for SEO and user experience. Always try to link your content together, with quality link anchors.', 'wp-seopress' ) . '</p>';
+		$desc = '<p>' . __( 'This check finds links pointing to this page from your other content. Link your content together with descriptive link text.', 'wp-seopress' ) . '</p>';
 
-		// Bricks compatibility.
-		$theme = wp_get_theme();
-		if ( defined( 'BRICKS_DB_EDITOR_MODE' ) && ( 'bricks' === $theme->template || 'Bricks' === $theme->parent_theme ) ) {
-			$analyzes['internal_links']['impact'] = 'good';
-			$desc                                .= '<p><span class="dashicons dashicons-no-alt"></span>' . __( 'Unfortunately, this analysis can‘t work with Bricks Builder because of the way your content is stored in your database.', 'wp-seopress' ) . '</p>';
-		} elseif ( isset( $data['internal_links'] ) && is_array( $data['internal_links'] ) && ! empty( $data['internal_links'] ) ) {
+		if ( isset( $data['internal_links'] ) && is_array( $data['internal_links'] ) && ! empty( $data['internal_links'] ) ) {
 			$count = count( $data['internal_links'] );
 
 			$desc .= '<p>' . /* translators: %s internal links */ sprintf( __( 'We found %s internal links to this page.', 'wp-seopress' ), $count ) . '</p>';
@@ -1705,6 +1707,20 @@ class GetContent {
 					break;
 				}
 			}
+		}
+
+		// A Bricks single template can hold all content for a post type while
+		// individual posts have no builder metadata. Resolve its assignment
+		// without changing Bricks' active templates or the global query.
+		if ( ! $is_builder && is_callable( array( '\\Bricks\\Database', 'get_all_templates_by_type' ) ) && is_callable( array( '\\Bricks\\Database', 'find_template_id' ) ) ) {
+			$template_id = \Bricks\Database::find_template_id(
+				\Bricks\Database::get_all_templates_by_type(),
+				'content',
+				'content',
+				$post->ID,
+				'single'
+			);
+			$is_builder = $template_id && 'content' === get_post_meta( $template_id, '_bricks_template_type', true ) && ! empty( get_post_meta( $template_id, '_bricks_page_content_2', true ) );
 		}
 
 		/**

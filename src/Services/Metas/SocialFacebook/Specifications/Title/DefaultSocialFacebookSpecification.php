@@ -2,6 +2,8 @@
 
 namespace SEOPress\Services\Metas\SocialFacebook\Specifications\Title;
 
+defined( 'ABSPATH' ) || exit;
+
 use SEOPress\Helpers\Metas\SocialSettings;
 use SEOPress\Services\Metas\SocialFacebook\Specifications\Title\AbstractTitleSpecification;
 

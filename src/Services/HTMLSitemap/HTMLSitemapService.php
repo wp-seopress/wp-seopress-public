@@ -117,6 +117,16 @@ class HTMLSitemapService {
 				unset( $post_types_list[ $internal_post_type ] );
 			}
 
+			// Same bypass, same fix for post types nothing registers any more:
+			// getPostTypesList() drops them, but a block or shortcode naming one
+			// explicitly (e.g. after the plugin that registered it was removed)
+			// would still list its orphaned posts, whose permalinks 404.
+			foreach ( array_keys( (array) $post_types_list ) as $post_type ) {
+				if ( ! post_type_exists( $post_type ) ) {
+					unset( $post_types_list[ $post_type ] );
+				}
+			}
+
 			// Nothing left to list: emit nothing rather than an empty wrapper.
 			if ( empty( $post_types_list ) ) {
 				return $html;
@@ -336,8 +346,9 @@ class HTMLSitemapService {
 			$args_cat_query = apply_filters( 'seopress_sitemaps_html_cat_query', $args_cat_query );
 			return get_categories( $args_cat_query );
 		} elseif ( 'product' === $cpt_key ) {
-			$args_cat_query = apply_filters( 'seopress_sitemaps_html_product_cat_query', $args_cat_query );
-			return get_terms( $product_cat_slug, $args_cat_query );
+			$args_cat_query             = apply_filters( 'seopress_sitemaps_html_product_cat_query', $args_cat_query );
+			$args_cat_query['taxonomy'] = $product_cat_slug;
+			return get_terms( $args_cat_query );
 		}
 
 		return apply_filters( 'seopress_sitemaps_html_hierarchical_terms_query', $cpt_key, $args_cat_query );

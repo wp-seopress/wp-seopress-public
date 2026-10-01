@@ -75,7 +75,7 @@ function seopress_block_faq_render_frontend( $attributes ) {
 	$entities = array();
 
 	ob_start(); ?>
-	<?php echo $list_style_tag; ?>
+	<?php echo $list_style_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?>
 		<?php
 		foreach ( $attributes['faqs'] as $faq ) :
 			$i = wp_rand();
@@ -100,7 +100,7 @@ function seopress_block_faq_render_frontend( $attributes ) {
 				if ( ! isset( $css ) ) {
 					$css = '<style>.wpseopress-hide {display: none;}.wpseopress-accordion-button{width:100%}</style>';
 					$css = apply_filters( 'seopress_faq_block_inline_css', $css );
-					echo $css;
+					echo $css; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Inline stylesheet assembled above.
 				}
 			}
 
@@ -116,19 +116,19 @@ function seopress_block_faq_render_frontend( $attributes ) {
 				$image_url = $image[0];
 			}
 			?>
-				<?php echo $list_item_style; ?>
+				<?php echo $list_item_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?>
 					<?php if ( $accordion ) { ?>
-						<div id="wpseopress-faq-title-<?php echo $i; ?>" class="wpseopress-wrap-faq-question">
-							<button class="wpseopress-accordion-button" type="button" aria-expanded="false" aria-controls="wpseopress-faq-answer-<?php echo $i; ?>">
+						<div id="wpseopress-faq-title-<?php echo esc_attr( $i ); ?>" class="wpseopress-wrap-faq-question">
+							<button class="wpseopress-accordion-button" type="button" aria-expanded="false" aria-controls="wpseopress-faq-answer-<?php echo esc_attr( $i ); ?>">
 					<?php } ?>
-					<?php echo $title_tag . wp_kses_post( $faq['question'] ) . $title_close_tag; ?>
+					<?php echo $title_tag . wp_kses_post( $faq['question'] ) . $title_close_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped. ?>
 					<?php if ( $accordion ) { ?>
 							</button>
 						</div>
 					<?php } ?>
 
 					<?php if ( $accordion ) { ?>
-						<div id="wpseopress-faq-answer-<?php echo $i; ?>" class="wpseopress-faq-answer wpseopress-hide" aria-labelledby="wpseopress-faq-title-<?php echo $i; ?>">
+						<div id="wpseopress-faq-answer-<?php echo esc_attr( $i ); ?>" class="wpseopress-faq-answer wpseopress-hide" aria-labelledby="wpseopress-faq-title-<?php echo esc_attr( $i ); ?>">
 					<?php } else { ?>
 						<div class="wpseopress-faq-answer">
 					<?php } ?>
@@ -142,11 +142,11 @@ function seopress_block_faq_render_frontend( $attributes ) {
 						<?php endif; ?>
 					</div>
 				<?php
-				echo $list_item_style_closing_tag;
+				echo $list_item_style_closing_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped.
 				?>
 			<?php endforeach; ?>
 	<?php
-	echo $list_style_close_tag;
+	echo $list_style_close_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped.
 
 	// FAQ Schema.
 	if ( (bool) $attributes['isProActive'] && (int) $attributes['showFAQScheme'] ) {
@@ -167,7 +167,7 @@ function seopress_block_faq_render_frontend( $attributes ) {
 		if ( false !== $json ) {
 			$schema = '<script type="application/ld+json">' . $json . '</script>';
 
-			echo apply_filters( 'seopress_schemas_faq_html', $schema );
+			echo apply_filters( 'seopress_schemas_faq_html', $schema ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Filtered markup, third parties are expected to return HTML.
 		}
 	}
 	$html = apply_filters( 'seopress_faq_block_html', ob_get_clean() );

@@ -1,0 +1,95 @@
+/* GA4 events for rendered WooCommerce archive cards. */
+(function () {
+    'use strict';
+    if (window.seopressProductListsLoaded) return;
+    window.seopressProductListsLoaded = true;
+    var seen = new WeakMap();
+    var pending = false;
+    var selector = 'li.product, .wc-block-product';
+
+    function allowed() {
+        var config = window.seopressProductListTracking;
+        return config && typeof window.gtag === 'function' && (!config.requiresConsent ||
+            document.cookie.split(';').some(function (cookie) {
+                return cookie.trim() === 'seopress-user-consent-accept=1';
+            }));
+    }
+
+    function cards() {
+        var result = new Map();
+        document.querySelectorAll('.seopress-product-list-data').forEach(function (marker) {
+            var card = marker.closest(selector);
+            if (!card || result.has(card) || !card.getClientRects().length ||
+                window.getComputedStyle(card).visibility === 'hidden') return;
+            try {
+                var data = JSON.parse(marker.getAttribute('data-seopress-item'));
+                if (!data.item || !data.item.item_id || !data.url) return;
+                data.item.index = result.size;
+                result.set(card, data);
+            } catch (error) { /* Ignore malformed third-party markup. */ }
+        });
+        return result;
+    }
+
+    function scan() {
+        pending = false;
+        if (!allowed() || typeof window.seopressProductListTracking.view !== 'function') return;
+        var groups = new Map();
+        cards().forEach(function (data, card) {
+            if (seen.get(card) === JSON.stringify([data.item_list_id, data.item.item_id])) return;
+            var key = JSON.stringify([data.currency, data.item_list_id, data.item_list_name]);
+            if (!groups.has(key)) groups.set(key, []);
+            groups.get(key).push({ card: card, data: data });
+        });
+        groups.forEach(function (entries) {
+            for (var offset = 0; offset < entries.length; offset += 200) {
+                var batch = entries.slice(offset, offset + 200);
+                var data = batch[0].data;
+                window.seopressProductListTracking.view({
+                    currency: data.currency,
+                    item_list_id: data.item_list_id,
+                    item_list_name: data.item_list_name,
+                    items: batch.map(function (entry) { return entry.data.item; })
+                });
+                batch.forEach(function (entry) { seen.set(entry.card, JSON.stringify([entry.data.item_list_id, entry.data.item.item_id])); });
+            }
+        });
+    }
+
+    function schedule() {
+        if (pending) return;
+        pending = true;
+        window.requestAnimationFrame(scan);
+    }
+
+    function start() {
+        new MutationObserver(schedule).observe(document.body, {
+            childList: true, subtree: true, attributes: true, attributeFilter: ['hidden', 'style', 'class', 'data-seopress-item']
+        });
+        document.addEventListener('click', function (event) {
+            if (!allowed() || typeof window.seopressProductListTracking.select !== 'function') return;
+            var link = event.target.closest && event.target.closest('a[href]');
+            if (!link || link.matches('.add_to_cart_button, .ajax_add_to_cart')) return;
+            var card = link.closest(selector);
+            if (!card) return;
+            var data = cards().get(card);
+            if (!data) return;
+            var target = new URL(link.href, document.baseURI);
+            var product = new URL(data.url, document.baseURI);
+            // Query parameters identify products when plain permalinks are used.
+            if (target.origin !== product.origin || target.pathname !== product.pathname ||
+                target.search !== product.search) return;
+            window.seopressProductListTracking.select({
+                currency: data.currency,
+                item_list_id: data.item_list_id,
+                item_list_name: data.item_list_name,
+                items: [data.item]
+            });
+        });
+        document.addEventListener('seopress.consent', schedule);
+        schedule();
+    }
+    window.addEventListener('seopress:product-list-tracking', schedule);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+    else start();
+}());

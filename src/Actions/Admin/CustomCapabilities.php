@@ -31,6 +31,11 @@ class CustomCapabilities implements ExecuteHooks {
 	 * @return void
 	 */
 	public function hooks() {
+		add_filter( 'pre_update_option_seopress_advanced_option_name', array( $this, 'preserve_explicit_revocations' ), 10, 2 );
+		add_action( 'update_option_seopress_advanced_option_name', array( $this, 'addCapabilities' ) );
+		add_action( 'add_option_seopress_advanced_option_name', array( $this, 'addCapabilities' ) );
+		add_action( 'delete_option', array( $this, 'revoke_managed_capabilities_on_reset' ) );
+
 		if ( '1' !== seopress_get_toggle_option( 'advanced' ) ) {
 			return;
 		}
@@ -80,39 +85,69 @@ class CustomCapabilities implements ExecuteHooks {
 			}
 		}
 
-		$options = seopress_get_service( 'AdvancedOption' )->getOption();
-		if ( ! $options ) {
+		$this->sync_configured_roles( seopress_get_service( 'AdvancedOption' )->getOption() );
+	}
+
+	/** Apply only areas explicitly managed through the settings. */
+	private function sync_configured_roles( $options ) {
+		if ( ! is_array( $options ) ) {
 			return;
 		}
-		$needle = 'seopress_advanced_security_metaboxe';
-
-		foreach ( $pages as $key => $page_value ) {
-			$page_for_capability = PagesAdmin::getPageByCapability( $page_value );
-			$capability          = PagesAdmin::getCapabilityByPage( $page_for_capability );
-
-			$option_key = sprintf( '%s_%s', $needle, $page_for_capability );
-			if ( ! \array_key_exists( $option_key, $options ) ) {
-				// Remove all cap for a specific role if option not set.
-				foreach ( $roles->role_objects as $key_role => $role ) {
-					if ( 'administrator' === $key_role ) {
-						continue;
-					}
-
-					if ( null === $capability ) {
-						continue;
-					}
-
-					$role->remove_cap( \sprintf( 'seopress_manage_%s', $capability ) );
+		foreach ( PagesAdmin::getPages() as $area ) {
+			$page = PagesAdmin::getPageByCapability( $area );
+			$capability = PagesAdmin::getCapabilityByPage( $page );
+			$key = 'seopress_advanced_security_metaboxe_' . $page;
+			if ( null === $capability || ! array_key_exists( $key, $options ) ) {
+				continue;
+			}
+			$selected = is_array( $options[ $key ] ) ? $options[ $key ] : array();
+			foreach ( wp_roles()->role_objects as $name => $role ) {
+				if ( 'administrator' === $name ) {
+					continue;
 				}
-			} else {
-				foreach ( $roles->role_objects as $key_role => $role ) {
-					if ( ! \array_key_exists( $role->name, $options[ $option_key ] ) && 'administrator' !== $key_role ) {
-						$role->remove_cap( \sprintf( 'seopress_manage_%s', $capability ) );
-					} else {
-						$role->add_cap( \sprintf( 'seopress_manage_%s', $capability ), true );
-					}
+				if ( isset( $selected[ $name ] ) && in_array( $selected[ $name ], array( '1', 1, true ), true ) ) {
+					$role->add_cap( 'seopress_manage_' . $capability, true );
+				} else {
+					$role->remove_cap( 'seopress_manage_' . $capability );
 				}
 			}
+		}
+	}
+
+	/**
+	 * A cleared legacy checkbox group disappears from the submitted array.
+	 * Keep that explicit revocation distinct from an area never configured here.
+	 *
+	 * @param mixed $options New settings.
+	 * @param mixed $previous Previously saved settings.
+	 * @return mixed
+	 */
+	public function preserve_explicit_revocations( $options, $previous ) {
+		if ( ! is_array( $options ) || ! is_array( $previous ) ) {
+			return $options;
+		}
+		foreach ( PagesAdmin::getPages() as $area ) {
+			$page = PagesAdmin::getPageByCapability( $area );
+			$key = 'seopress_advanced_security_metaboxe_' . $page;
+			if ( null !== PagesAdmin::getCapabilityByPage( $page ) && array_key_exists( $key, $previous ) && ! array_key_exists( $key, $options ) ) {
+				$options[ $key ] = array();
+			}
+		}
+		return $options;
+	}
+
+	/**
+	 * Explicit settings resets revoke only the areas this UI managed.
+	 *
+	 * @param string $option Option about to be deleted.
+	 */
+	public function revoke_managed_capabilities_on_reset( $option ) {
+		if ( 'seopress_advanced_option_name' !== $option ) {
+			return;
+		}
+		$options = get_option( $option );
+		if ( is_array( $options ) ) {
+			$this->sync_configured_roles( array_fill_keys( array_keys( $options ), array() ) );
 		}
 	}
 
