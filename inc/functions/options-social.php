@@ -880,7 +880,7 @@ add_action( 'wp_head', 'seopress_social_fb_img_hook', 1 );
  * OG Facebook Link Ownership ID
  */
 function seopress_social_facebook_link_ownership_id_hook() {
-	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookLinkOwnership() ) {
+	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookLinkOwnership() ) ) {
 		$seopress_social_link_ownership_id = '<meta property="fb:pages" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialFacebookLinkOwnership() ) . '">';
 
 		echo $seopress_social_link_ownership_id . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Meta tag assembled above, its values escaped at build time; third parties filter the whole tag.
@@ -893,7 +893,7 @@ add_action( 'wp_head', 'seopress_social_facebook_link_ownership_id_hook', 1 );
  * OG Facebook App ID
  */
 function seopress_social_facebook_app_id_hook() {
-	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookAppID() ) {
+	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookAppID() ) ) {
 		$seopress_social_app_id = '<meta property="fb:app_id" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialFacebookAppID() ) . '">';
 
 		if ( ! is_404() ) {
