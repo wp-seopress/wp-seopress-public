@@ -133,8 +133,8 @@ class EnqueueModuleMetabox {
 
 		// The Advanced ▸ Security role restrictions ("SEO metaboxes" and
 		// "Content Analysis") are enforced inside the React universal
-		// metabox itself: ModuleMetabox localizes USER_ROLES and
-		// ROLES_BLOCKED (GLOBAL / CONTENT_ANALYSIS) so the blocked tabs are
+		// metabox itself: ModuleMetabox localizes ROLES_BLOCKED_FOR_USER
+		// (GLOBAL / CONTENT_ANALYSIS) so the blocked tabs are
 		// hidden client-side. We therefore never fall back to the legacy
 		// PHP metabox just because a role is checked here — the universal
 		// metabox stays loaded regardless of those checkboxes.

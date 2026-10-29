@@ -171,14 +171,18 @@ class RankMath implements ExecuteHooksBackend {
 				}
 			}
 
-			$rank_math_primary_product_cat = get_post_meta( $post->ID, 'rank_math_primary_product_cat', true );
-			if ( ! empty( $rank_math_primary_product_cat ) ) {
-				update_post_meta( $post->ID, '_seopress_robots_primary_cat', $rank_math_primary_product_cat );
-			}
+			// Primary term, for every taxonomy that has one. Rank Math stores
+			// one `rank_math_primary_{taxonomy}` per taxonomy, so reading only
+			// category and product_cat threw away everything a site had set on
+			// its own taxonomies.
+			$taxonomies = \SEOPress\Helpers\Metas\PrimaryTerm::get_taxonomies( get_post_type( $post->ID ) );
 
-			$rank_math_primary_category = get_post_meta( $post->ID, 'rank_math_primary_category', true );
-			if ( ! empty( $rank_math_primary_category ) ) {
-				update_post_meta( $post->ID, '_seopress_robots_primary_cat', $rank_math_primary_category );
+			foreach ( array_keys( $taxonomies ) as $taxonomy ) {
+				$primary_term = absint( get_post_meta( $post->ID, 'rank_math_primary_' . $taxonomy, true ) );
+
+				if ( $primary_term > 0 ) {
+					\SEOPress\Helpers\Metas\PrimaryTerm::save( $post->ID, $taxonomy, $primary_term );
+				}
 			}
 		}
 
@@ -670,12 +674,6 @@ class RankMath implements ExecuteHooksBackend {
 	 */
 	public function process() {
 		check_ajax_referer( 'seopress_rk_migrate_nonce', '_ajax_nonce', true );
-		if ( ! is_admin() ) {
-			wp_send_json_error();
-
-			return;
-		}
-
 		if ( ! current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) { // phpcs:ignore
 			wp_send_json_error();
 

@@ -77,7 +77,9 @@ class DomAnalysis {
 			$target_keywords = '';
 		}
 
-		$target_keywords = array_filter( explode( ',', remove_accents( ContentAnalysis::toLowercase( $target_keywords ) ) ) );
+		// Rows stored before the meta was sanitized (10.0) can keep the space
+		// typed after each comma.
+		$target_keywords = array_filter( array_map( 'trim', explode( ',', remove_accents( ContentAnalysis::toLowercase( $target_keywords ) ) ) ) );
 
 		return apply_filters( 'seopress_content_analysis_target_keywords', $target_keywords, $options['id'] );
 	}
@@ -85,14 +87,23 @@ class DomAnalysis {
 	/**
 	 * The getScore function.
 	 *
+	 * Returns every check's impact, keyed by check. Up to 10.3.x the impacts
+	 * were deduplicated and reindexed, which told the posts list column whether
+	 * anything was wrong but not how much: a page failing one check and a page
+	 * failing eight both came back as the same handful of values. Keeping the
+	 * keys costs nothing and lets the column count the checks that passed.
+	 *
+	 * The set of values is unchanged, so the `in_array()` reads this value has
+	 * always been subjected to behave exactly as before.
+	 *
 	 * @param object $post The post.
 	 *
-	 * @return array
+	 * @return array Check key => impact.
 	 */
 	public function getScore( $post ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 		$analyzes = seopress_get_service( 'GetContentAnalysis' )->getAnalyzes( $post );
-		$impact   = array_unique( array_values( wp_list_pluck( $analyzes, 'impact' ) ) );
-		return $impact;
+
+		return \SEOPress\Helpers\ContentAnalysis::getImpactMap( $analyzes );
 	}
 
 	/**
@@ -168,17 +179,7 @@ class DomAnalysis {
 		}
 
 		// Keywords in permalink.
-		$slug = urldecode( $post->post_name );
-
-		if ( is_plugin_active( 'permalink-manager-pro/permalink-manager.php' ) ) {
-			global $permalink_manager_uris;
-			if ( ! empty( $permalink_manager_uris ) && ! empty( $options ) && is_array( $options ) && array_key_exists( 'id', $options ) ) {
-				$slug = isset( $permalink_manager_uris[ $options['id'] ] ) ? $permalink_manager_uris[ $options['id'] ] : '';
-				$slug = urldecode( $slug );
-			}
-		}
-
-		$slug = str_replace( '-', ' ', $slug );
+		$slug = ContentAnalysis::getPermalinkSlug( $post );
 
 		$data['kws_permalink'] = array(
 			'matches' => array(),

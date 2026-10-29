@@ -53,8 +53,9 @@ function seopress_cookies_user_consent_scripts() {
 	$js .= $consent;
 
 	// Synchronous, on the very next line, so the update lands well inside the
-	// wait_for_update window above.
-	$js .= 'if (' . seopress_user_consent_js_test() . ") {\n" . seopress_user_consent_gtag_update( true ) . "}\n";
+	// wait_for_update window above. Each signal follows the category it belongs
+	// to, read from the visitor's own cookie.
+	$js .= seopress_user_consent_gtag_update_js();
 
 	$js .= "gtag('js', new Date()); \n";
 
@@ -70,8 +71,14 @@ function seopress_cookies_user_consent_scripts() {
  * @return void
  */
 function seopress_cookies_user_consent_html() {
+	$granular = seopress_get_service( 'GoogleAnalyticsOption' )->is_granular_consent_enabled();
+
 	if ( ! empty( seopress_get_service( 'GoogleAnalyticsOption' )->getOptOutMsg() ) ) {
 		$msg = seopress_get_service( 'GoogleAnalyticsOption' )->getOptOutMsg();
+	} elseif ( $granular && get_option( 'wp_page_for_privacy_policy' ) ) {
+		$msg = __( 'This site uses cookies for analytics and advertising. Accept them all, decline them all, or choose which ones you allow. Learn more in our <a href="[seopress_privacy_page]">privacy policy</a>.', 'wp-seopress' );
+	} elseif ( $granular ) {
+		$msg = __( 'This site uses cookies for analytics and advertising. Accept them all, decline them all, or choose which ones you allow.', 'wp-seopress' );
 	} elseif ( get_option( 'wp_page_for_privacy_policy' ) ) {
 		$msg = __( 'This site uses cookies for analytics and to improve your experience. By clicking Accept, you consent to our use of cookies. Learn more in our <a href="[seopress_privacy_page]">privacy policy</a>.', 'wp-seopress' );
 	} else {
@@ -87,19 +94,35 @@ function seopress_cookies_user_consent_html() {
 
 	$consent_btn = seopress_get_service( 'GoogleAnalyticsOption' )->getOptOutMessageOk();
 	if ( empty( $consent_btn ) || ! $consent_btn ) {
-		$consent_btn = __( 'Accept', 'wp-seopress' );
+		$consent_btn = $granular ? __( 'Accept all', 'wp-seopress' ) : __( 'Accept', 'wp-seopress' );
 	}
 
 	$close_btn = seopress_get_service( 'GoogleAnalyticsOption' )->getOptOutMessageClose();
 	if ( empty( $close_btn ) || ! $close_btn ) {
-		$close_btn = __( 'Decline', 'wp-seopress' );
+		$close_btn = $granular ? __( 'Decline all', 'wp-seopress' ) : __( 'Decline', 'wp-seopress' );
+	}
+
+	$categories_html = '';
+	$granular_btns   = '';
+
+	if ( $granular ) {
+		$categories_html = seopress_cookies_user_consent_categories_html();
+
+		$customize_btn = seopress_get_service( 'GoogleAnalyticsOption' )->getOptOutMessageCustomize();
+		if ( empty( $customize_btn ) ) {
+			$customize_btn = __( 'Customize', 'wp-seopress' );
+		}
+
+		$granular_btns = '
+            <button type="button" id="seopress-user-consent-customize" aria-expanded="false" aria-controls="seopress-user-consent-categories">' . esc_html( $customize_btn ) . '</button>
+            <button type="button" id="seopress-user-consent-save" class="seopress-user-consent-hide">' . esc_html__( 'Save my choices', 'wp-seopress' ) . '</button>';
 	}
 
 	$user_msg = '<div data-nosnippet class="seopress-user-consent seopress-user-message seopress-user-consent-hide">
-        <p>' . $msg . '</p>
+        <p>' . $msg . '</p>' . $categories_html . '
         <p>
             <button id="seopress-user-consent-accept" type="button">' . $consent_btn . '</button>
-            <button type="button" id="seopress-user-consent-close">' . $close_btn . '</button>
+            <button type="button" id="seopress-user-consent-close">' . $close_btn . '</button>' . $granular_btns . '
         </p>
     </div>';
 
@@ -108,6 +131,45 @@ function seopress_cookies_user_consent_html() {
 	$user_msg = apply_filters( 'seopress_rgpd_full_message', $user_msg, $msg, $consent_btn, $close_btn, $backdrop );
 
 	echo $user_msg . $backdrop; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Consent banner markup assembled above, filterable by third parties.
+}
+
+/**
+ * The per-category choices, folded inside the banner until asked for.
+ *
+ * Every box starts unchecked: the browser checks the ones the visitor granted
+ * when they reopen their choices, so the cached HTML is the same for everyone.
+ *
+ * @since 10.4.0
+ *
+ * @return string
+ */
+function seopress_cookies_user_consent_categories_html() {
+	$html = '
+        <fieldset id="seopress-user-consent-categories" class="seopress-user-consent-categories seopress-user-consent-hide">
+            <legend>' . esc_html__( 'Choose which cookies you allow', 'wp-seopress' ) . '</legend>';
+
+	foreach ( seopress_user_consent_categories() as $slug => $category ) {
+		$id = 'seopress-user-consent-category-' . $slug;
+
+		$text = '<span class="seopress-user-consent-category-text"><strong>' . esc_html( $category['label'] ) . '</strong>
+                    <span id="' . esc_attr( $id ) . '-desc">' . esc_html( $category['description'] ) . '</span></span>';
+
+		if ( 'necessary' === $slug ) {
+			$html .= '
+            <div class="seopress-user-consent-category">' . $text . '
+                <span class="seopress-user-consent-category-always">' . esc_html__( 'Always active', 'wp-seopress' ) . '</span>
+            </div>';
+			continue;
+		}
+
+		$html .= '
+            <label class="seopress-user-consent-category" for="' . esc_attr( $id ) . '">' . $text . '
+                <input type="checkbox" id="' . esc_attr( $id ) . '" name="seopress-user-consent-category" value="' . esc_attr( $slug ) . '" aria-describedby="' . esc_attr( $id ) . '-desc">
+            </label>';
+	}
+
+	return $html . '
+        </fieldset>';
 }
 
 /**
@@ -376,7 +438,7 @@ function seopress_cookies_user_consent_styles() {
 	$styles .= '}';
 
 	// Secondary button (Decline).
-	$styles .= '#seopress-user-consent-close{';
+	$styles .= '#seopress-user-consent-close,#seopress-user-consent-save{';
 	$styles .= 'border: 2px solid #d1d5db !important;';
 
 	// Background secondary button.
@@ -398,7 +460,7 @@ function seopress_cookies_user_consent_styles() {
 	$styles .= '}';
 
 	// Secondary button hover.
-	$styles .= '#seopress-user-consent-close:hover{';
+	$styles .= '#seopress-user-consent-close:hover,#seopress-user-consent-save:hover{';
 
 	// Background secondary button hover.
 	$bg_secondary_btn_hover = seopress_get_service( 'GoogleAnalyticsOption' )->getCbBtnSecBgHov();
@@ -424,6 +486,30 @@ function seopress_cookies_user_consent_styles() {
 	$styles .= '.seopress-user-consent.seopress-user-message p:last-child {flex-direction: column;}';
 	$styles .= '.seopress-user-consent button {width: 100%;min-width: auto;}';
 	$styles .= '}';
+
+	// Per-category choices.
+	if ( seopress_get_service( 'GoogleAnalyticsOption' )->is_granular_consent_enabled() ) {
+		$accent = ! empty( $btn_bg_color ) ? $btn_bg_color : '#1a1a1a';
+		$muted  = ! empty( $txt_color ) ? $txt_color : '#646970';
+
+		// Unfolded, the choices need the full width, whatever the bar layout.
+		$styles .= '.seopress-user-consent.seopress-user-message.seopress-user-consent-expanded{flex-direction:column;align-items:stretch;max-height:calc(100vh - 40px);overflow-y:auto;}';
+		$styles .= '.seopress-user-consent.seopress-user-message.seopress-user-consent-expanded p:first-child{flex:none;margin:0 0 16px 0;}';
+		$styles .= '.seopress-user-consent-expanded p:last-child{justify-content:center;flex-wrap:wrap;}';
+		$styles .= '.seopress-user-consent-categories{border:0;margin:0 0 16px 0;padding:0;min-width:0;text-align:left;}';
+		$styles .= '.seopress-user-consent-categories legend{padding:0;margin:0 0 8px 0;font-size:16px;font-weight:600;color:inherit;}';
+		$styles .= '.seopress-user-consent-category{display:flex;gap:12px;align-items:flex-start;justify-content:space-between;padding:12px 0;border-top:1px solid rgba(0,0,0,.1);font-size:15px;line-height:1.5;cursor:pointer;}';
+		$styles .= 'div.seopress-user-consent-category{cursor:default;}';
+		$styles .= '.seopress-user-consent-category:first-of-type{border-top:0;}';
+		$styles .= '.seopress-user-consent-category-text{display:flex;flex-direction:column;gap:2px;}';
+		$styles .= '.seopress-user-consent-category-text span,.seopress-user-consent-category-always{font-size:13px;opacity:.85;color:' . $muted . ';}';
+		$styles .= '.seopress-user-consent-category-always{white-space:nowrap;}';
+		$styles .= '.seopress-user-consent-category input{width:20px;height:20px;margin:2px 0 0 0;flex-shrink:0;cursor:pointer;accent-color:' . $accent . ';}';
+		$styles .= '.seopress-user-consent-category input:focus-visible{outline:2px solid ' . $accent . ';outline-offset:2px;}';
+		$styles .= '#seopress-user-consent-customize{background:none;border:none;box-shadow:none;transform:none;min-width:0;padding:12px 8px;text-decoration:underline;color:inherit;}';
+		$styles .= '#seopress-user-consent-customize:hover{background:none;color:inherit;box-shadow:none;transform:none;text-decoration:none;}';
+		$styles .= '.seopress-user-consent button:focus-visible{outline:2px solid ' . $accent . ';outline-offset:2px;}';
+	}
 
 	$cb_backdrop = seopress_get_service( 'GoogleAnalyticsOption' )->getCbBackdrop();
 	if ( ! empty( $cb_backdrop ) ) {
@@ -619,12 +705,15 @@ function gtag(){dataLayer.push(arguments);}';
 		// browser updates them from its own cookie. This snippet only carries
 		// a decision when it is built for a browser that already has one --
 		// the deferred payload, or the admin-ajax endpoints.
+		//
+		// The payload runs in any browser that granted at least one category,
+		// so it reads which ones from the cookie rather than assuming all.
 		$consent = '';
 
-		if ( 'accept' === $consent_state ) {
-			$consent = seopress_user_consent_gtag_update( true );
-		} elseif ( 'decline' === $consent_state ) {
-			$consent = seopress_user_consent_gtag_update( false );
+		if ( seopress_user_consent_building_payload() ) {
+			$consent = seopress_user_consent_gtag_update_js();
+		} elseif ( 'unknown' !== $consent_state ) {
+			$consent = seopress_user_consent_gtag_update_for( seopress_user_consent_granted_categories() );
 		}
 
 		$consent = apply_filters( 'seopress_user_consent', $consent );
@@ -790,14 +879,14 @@ function gtag(){dataLayer.push(arguments);}';
 
 			// Downloads tracking.
 			if ( ! empty( seopress_get_service( 'GoogleAnalyticsOption' )->getDownloadTrackingEnable() ) ) {
-				$download_tracking_option = seopress_get_service( 'GoogleAnalyticsOption' )->getDownloadTracking();
+				$download_tracking_option = seopress_tracking_patterns_regex( seopress_get_service( 'GoogleAnalyticsOption' )->getDownloadTracking(), '/.' );
 				if ( ! empty( $download_tracking_option ) ) {
 					$seopress_google_analytics_click_event['download_tracking'] =
 					"window.addEventListener('load', function () {
         var donwload_links = document.querySelectorAll('a');
         for (let j = 0; j < donwload_links.length; j++) {
             donwload_links[j].addEventListener('click', function(e) {
-                var down = this.href.match(/.*\.(" . $download_tracking_option . ")(\?.*)?$/);
+                var down = this.href.match(new RegExp(" . seopress_js_string( '.*\\.(' . $download_tracking_option . ')(\\?.*)?$' ) . ", 'i'));
                 if (down != null) {
                     gtag('event', 'click', {'event_category': 'downloads','event_label' : this.href});
                 }
@@ -812,14 +901,14 @@ function gtag(){dataLayer.push(arguments);}';
 
 			// Affiliate tracking.
 			if ( ! empty( seopress_get_service( 'GoogleAnalyticsOption' )->getAffiliateTrackingEnable() ) ) {
-				$affiliate_tracking_option = seopress_get_service( 'GoogleAnalyticsOption' )->getAffiliateTracking();
+				$affiliate_tracking_option = seopress_tracking_patterns_regex( seopress_get_service( 'GoogleAnalyticsOption' )->getAffiliateTracking() );
 				if ( ! empty( $affiliate_tracking_option ) ) {
 					$seopress_google_analytics_click_event['outbound_tracking'] =
 					"window.addEventListener('load', function () {
         var outbound_links = document.querySelectorAll('a');
         for (let k = 0; k < outbound_links.length; k++) {
             outbound_links[k].addEventListener('click', function(e) {
-                var out = this.href.match(/(?:\/" . $affiliate_tracking_option . "\/)/gi);
+                var out = this.href.match(new RegExp(" . seopress_js_string( '/(?:' . $affiliate_tracking_option . ')/' ) . ", 'gi'));
                 if (out != null) {
                     gtag('event', 'click', {'event_category': 'outbound/affiliate','event_label' : this.href});
                 }

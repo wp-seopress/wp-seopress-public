@@ -73,10 +73,54 @@ class PrintHeadJsonSchema implements ExecuteHooksFrontend {
 			),
 			$context
 		);
-		$json = apply_filters( 'seopress_schemas_organization_html', $jsons[0] );
+
+		/**
+		 * Single `@graph` output: hand the node to the collector rather than
+		 * printing it.
+		 *
+		 * Through the same chain as the block, so `seopress_get_json_data_organization`,
+		 * `seopress_json_schema_generator_get_jsons_encoded` and
+		 * `seopress_schemas_organization_html` all still fire. The last one is
+		 * the documented way to suppress the Knowledge Graph: an empty answer
+		 * drops the node here as it drops the block below, and a changed
+		 * payload is decoded back into the node.
+		 *
+		 * @since 10.4.0
+		 */
+		$graph = seopress_get_service( 'SchemaGraph' );
+		if ( is_object( $graph ) && $graph->is_enabled() ) {
+			$encoded = isset( $jsons[0] ) && is_string( $jsons[0] ) ? $jsons[0] : '';
+			$node    = '' !== $encoded ? json_decode( $encoded, true ) : null;
+
+			if ( is_array( $node ) ) {
+				$node = $graph->filter_block( 'seopress_schemas_organization_html', $node, $encoded, true );
+			}
+
+			if ( is_array( $node ) ) {
+				$graph->add_node( $node );
+			}
+
+			return;
+		}
+
+		// Cast once, on the filtered value: an integrator returning an array
+		// would otherwise raise the same notice twice.
+		$json = (string) apply_filters( 'seopress_schemas_organization_html', $jsons[0] );
+
+		// The filter receives the payload, not the whole block, unlike its
+		// WebSite counterpart which is handed the <script> element itself. So
+		// suppressing the node through it has to be handled here: anything
+		// that is empty once trimmed prints nothing at all, rather than an
+		// empty <script type="application/ld+json"></script> that validators
+		// flag. `null` and `false`, which `__return_false` and friends return,
+		// are covered by the cast above.
+		if ( '' === trim( $json ) ) {
+			return;
+		}
+
 		// Escape after the filter: literal less-than signs can close the script
 		// or enter HTML comment parsing states. JSON decoding restores the value.
-		$json = str_replace( '<', '\\u003C', (string) $json );
+		$json = str_replace( '<', '\\u003C', $json );
 		?><script type="application/ld+json"><?php echo $json; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Less-than signs are JSON-escaped above. ?></script>
 		<?php
 	}

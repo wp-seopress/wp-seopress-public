@@ -437,6 +437,7 @@ class I18nUniversalMetabox {
 					'overview'         => __( 'Overview', 'wp-seopress' ),
 					'inspect_url'      => __( 'Inspect with Google', 'wp-seopress' ),
 					'internal_linking' => __( 'Internal Linking', 'wp-seopress' ),
+					'indexing_history' => __( 'Indexing history', 'wp-seopress' ),
 					'schema_manual'    => __( 'Manual', 'wp-seopress' ),
 					'schema_automatic' => __( 'Automatic', 'wp-seopress' ),
 				),
@@ -799,6 +800,10 @@ class I18nUniversalMetabox {
 						'wp-seopress'
 					),
 					'title_severity'                 => /* translators: %s degree of severity, eg: low */ __( 'Degree of severity: %s', 'wp-seopress' ),
+					'severity_high'                  => _x( 'high', 'content analysis severity', 'wp-seopress' ),
+					'severity_medium'                => _x( 'medium', 'content analysis severity', 'wp-seopress' ),
+					'severity_low'                   => _x( 'low', 'content analysis severity', 'wp-seopress' ),
+					'severity_good'                  => _x( 'good', 'content analysis severity', 'wp-seopress' ),
 					'target_keywords'                => __( 'Target keywords', 'wp-seopress' ),
 					'target_keywords_description'    => __(
 						'Separate target keywords by pressing Enter.',
@@ -836,7 +841,7 @@ class I18nUniversalMetabox {
 					'already_used_plural'            => /* translators: %d number of times a target keyword is used, plural form only */ __( 'is already used %d times', 'wp-seopress' ),
 					'btn_ignore_issue'               => __( 'Ignore for this page', 'wp-seopress' ),
 					'btn_restore_issue'              => __( 'Restore this check', 'wp-seopress' ),
-					'ignore_hint'                    => __( 'This check stops being verified on this page, future content of the same type included.', 'wp-seopress' ),
+					'ignore_hint'                    => __( 'This check is skipped on this page only, including after you edit it again. Other pages are not affected.', 'wp-seopress' ),
 					'ignored_badge'                  => __( 'Ignored', 'wp-seopress' ),
 					'show_ignored'                   => __( 'Show ignored', 'wp-seopress' ),
 					'ignored_count_singular'         => /* translators: %d number of ignored checks, singular */ __( '%d check ignored on this page', 'wp-seopress' ),

@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Helpers\Metas\PrimaryTerm;
 use SEOPress\Models\GetTagValue;
 
 /**
@@ -38,8 +39,9 @@ class PostCategory implements GetTagValue {
 		}
 
 		if ( $context['is_single'] && $context['has_category'] && isset( $context['post']->ID ) ) {
-			$terms = get_the_terms( $context['post']->ID, 'category' );
-			$value = $terms[0]->name;
+			// The primary category, else the first one, like %%_ct_category%%.
+			$term  = PrimaryTerm::get_display_term( $context['post']->ID, 'category' );
+			$value = $term instanceof \WP_Term ? $term->name : '';
 			/**
 			 * Filter Post Category
 			 *

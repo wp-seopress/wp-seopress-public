@@ -151,10 +151,18 @@ class ReviewPrompt implements ExecuteHooks {
 		// explicit opt-in still wins.
 		$show = ! WhiteLabel::isEnabled();
 
+		// A top banner promotion (Black Friday for example) already takes the
+		// top of the screen: keep a single notice there. The prompt comes back
+		// once the promotion leaves the feed or the user dismisses it.
+		if ( $show && self::has_top_banner() ) {
+			$show = false;
+		}
+
 		/**
 		 * Filter whether the 5-star review prompt is shown.
 		 *
-		 * Defaults to false while White Label is on.
+		 * Defaults to false while White Label is on or while a top banner
+		 * promotion is displayed.
 		 *
 		 * @since 10.0.0
 		 *
@@ -175,5 +183,28 @@ class ReviewPrompt implements ExecuteHooks {
 	 */
 	private static function is_old_enough() {
 		return InstallDate::daysSince() >= self::MIN_INSTALL_DAYS;
+	}
+
+	/**
+	 * Whether a top banner promotion is displayed to the current user.
+	 *
+	 * Same source as the admin header banner (see ModuleAdminHeader), so both
+	 * agree on campaigns, conditions and dismissals.
+	 *
+	 * @return bool
+	 */
+	private static function has_top_banner() {
+		// The constant hides the SEOPress chrome, banner included. Return
+		// early so an expired feed cache does not trigger a remote request.
+		if ( defined( 'SEOPRESS_WL_ADMIN_HEADER' ) && false === SEOPRESS_WL_ADMIN_HEADER ) {
+			return false;
+		}
+
+		$service = seopress_get_service( 'PromotionService' );
+		if ( ! $service || ! method_exists( $service, 'getPromotion' ) ) {
+			return false;
+		}
+
+		return null !== $service->getPromotion( 'top_banner' );
 	}
 }

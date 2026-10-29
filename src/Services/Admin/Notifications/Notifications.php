@@ -573,6 +573,59 @@ class Notifications {
 			}
 		}
 
+		// A whole content type set to noindex hides every entry of it at once,
+		// and nothing else surfaces it: one toggle in Titles & metas or one
+		// checkbox in the wizard is enough. Only types with published content
+		// count, an empty custom post type set to noindex is harmless. Skipped
+		// when the whole site is noindexed: "Your site is not visible" above
+		// already reports that cause.
+		$noindexed_types = array();
+		$site_noindexed  = '1' === seopress_get_service( 'TitleOption' )->getTitleNoIndex() || '1' !== get_option( 'blog_public' );
+		$single_titles   = seopress_get_service( 'TitleOption' )->searchOptionByKey( 'seopress_titles_single_titles' );
+		if ( ! $site_noindexed && is_array( $single_titles ) ) {
+			foreach ( seopress_get_service( 'WordPressData' )->getPostTypes() as $post_type_key => $post_type_obj ) {
+				if ( ! isset( $single_titles[ $post_type_key ]['noindex'] ) || '1' !== (string) $single_titles[ $post_type_key ]['noindex'] ) {
+					continue;
+				}
+				$counts = wp_count_posts( $post_type_key );
+				if ( empty( $counts->publish ) ) {
+					continue;
+				}
+				$noindexed_types[] = isset( $post_type_obj->labels->name ) ? $post_type_obj->labels->name : $post_type_key;
+			}
+		}
+
+		if ( ! empty( $noindexed_types ) ) {
+			$status = false;
+			if ( '1' !== seopress_get_service( 'NoticeOption' )->getNoticeNoIndexContentTypes() ) {
+				++$alerts_high;
+				$status = true;
+			}
+
+			$list = '<ul>';
+			foreach ( $noindexed_types as $label ) {
+				$list .= '<li>' . esc_html( $label ) . '</li>';
+			}
+			$list .= '</ul>';
+
+			$args[] = array(
+				'id'         => 'notice-noindex-content-types',
+				'title'      => __( 'Some of your content is hidden from search engines!', 'wp-seopress' ),
+				'desc'       => '<p>' . __( 'These content types are set to noindex: none of their entries can appear in search results. Dismiss this alert if this is intended.', 'wp-seopress' ) . '</p>' . $list,
+				'impact'     => array(
+					'high' => __( 'High impact', 'wp-seopress' ),
+				),
+				'link'       => array(
+					'en'       => admin_url( 'admin.php?page=seopress-titles#tab=tab_seopress_titles_single' ),
+					'title'    => __( 'Review these settings', 'wp-seopress' ),
+					'external' => false,
+				),
+				'deleteable' => true,
+				'wrap'       => false,
+				'status'     => $status,
+			);
+		}
+
 		if ( '' === get_option( 'blogname' ) ) {
 			++$alerts_high;
 			$args[] = array(

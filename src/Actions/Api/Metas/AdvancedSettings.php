@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
+use SEOPress\Helpers\Metas\PrimaryTerm;
 
 
 /**
@@ -78,7 +79,7 @@ class AdvancedSettings implements ExecuteHooks {
 		$this->register_string_meta( '_seopress_robots_follow' );
 		$this->register_string_meta( '_seopress_robots_imageindex' );
 		$this->register_string_meta( '_seopress_robots_snippet' );
-		$this->register_string_meta( '_seopress_robots_primary_cat' );
+		$this->register_primary_term_meta( PrimaryTerm::LEGACY_META_KEY );
 		$this->register_string_meta( '_seopress_robots_breadcrumbs' );
 		$this->register_string_meta( '_seopress_robots_freeze_modified_date' );
 		$this->register_string_meta( '_seopress_robots_custom_modified_date' );
@@ -125,6 +126,24 @@ class AdvancedSettings implements ExecuteHooks {
 			)
 		);
 
+		// One primary term meta key per taxonomy, resolved on `init` because
+		// custom taxonomies are not registered yet on `plugins_loaded`.
+		//
+		// And again on `rest_api_init`, which runs after the whole of `init`:
+		// a taxonomy registered at a later priority, or on `registered_post_type`,
+		// otherwise had no REST meta, so the Block Editor wrote a key the route
+		// silently dropped and the choice was lost on reload.
+		add_action( 'init', array( $this, 'register_primary_term_metas' ), 20 );
+		add_action( 'rest_api_init', array( $this, 'register_primary_term_metas' ) );
+
+		// A taxonomy without a primary term key of its own on a post reads the
+		// legacy value when it holds one of its terms, on every surface.
+		add_filter( 'default_post_metadata', array( PrimaryTerm::class, 'inherit_legacy_value' ), 20, 4 );
+
+		// The per-taxonomy keys depend on the site's taxonomies, so they
+		// cannot be listed in wpml-config.xml next to the legacy one.
+		add_filter( 'wpml_config_array', array( PrimaryTerm::class, 'add_wpml_config' ) );
+
 		// WP 7 compatibility: coerce empty integer metas before validation.
 		add_filter( 'rest_request_before_callbacks', array( $this, 'tolerate_empty_int_metas' ), 10, 3 );
 
@@ -142,6 +161,178 @@ class AdvancedSettings implements ExecuteHooks {
 		// set_custom_fields() uses.
 		add_filter( 'update_post_metadata_by_mid', array( $this, 'discard_restricted_meta_write_by_mid' ), 10, 2 );
 		add_filter( 'delete_post_metadata_by_mid', array( $this, 'discard_restricted_meta_write_by_mid' ), 10, 2 );
+
+		// Collapse duplicate rows of a single key before it is written, after
+		// the role restriction had its say.
+		add_filter( 'update_post_metadata', array( $this, 'collapse_duplicate_meta_rows' ), 20, 5 );
+
+		// `show_in_rest` is there for the Block Editor, but core prints the
+		// metas in every /wp/v2 response, including the one anyone can read on
+		// a published post.
+		foreach ( get_post_types() as $post_type ) {
+			$this->register_rest_meta_visibility( $post_type );
+		}
+		add_action( 'registered_post_type', array( $this, 'register_rest_meta_visibility' ) );
+	}
+
+	/**
+	 * Filter the `meta` field of a post type's REST responses.
+	 *
+	 * Core has no filter common to all post types, and the metas are
+	 * registered for all of them, attachments included. Hooked for every
+	 * type rather than the ones in REST today: `show_in_rest` may still be
+	 * switched on later, and the filter costs nothing where it never runs.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param string $post_type Post type name.
+	 *
+	 * @return void
+	 */
+	public function register_rest_meta_visibility( $post_type ) {
+		add_filter( "rest_prepare_{$post_type}", array( $this, 'hide_rest_meta' ), 10, 2 );
+	}
+
+	/**
+	 * Remove the SEO metas from a /wp/v2 response the user may not see them in.
+	 *
+	 * A user who may not edit the post gets none of them, whatever the
+	 * context: the target keywords, a redirection that is not enabled or the
+	 * analysis settings are not public, and what a visitor may see is already
+	 * rendered by the head tags and the `seopress/v1/posts` headless route.
+	 *
+	 * A user who may edit the post, the Block Editor's case, keeps them,
+	 * except the keys the Advanced > Security restrictions keep the role from
+	 * writing, as the metabox read routes refuse them. The Block Editor does
+	 * not send back a key it did not receive, so the post still saves.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param \WP_REST_Response $response The response.
+	 * @param \WP_Post          $post     The post.
+	 *
+	 * @return \WP_REST_Response
+	 */
+	public function hide_rest_meta( $response, $post ) {
+		if ( ! $response instanceof \WP_REST_Response || ! $post instanceof \WP_Post ) {
+			return $response;
+		}
+
+		$data = $response->get_data();
+
+		if ( empty( $data['meta'] ) || ! is_array( $data['meta'] ) ) {
+			return $response;
+		}
+
+		$can_edit   = current_user_can( 'edit_post', $post->ID );
+		$restricted = $this->get_restricted_meta_keys();
+		$public     = array();
+		$blocked    = array();
+
+		// A revision or an autosave is restricted as the post it belongs to.
+		$post_type = 'revision' === $post->post_type && $post->post_parent ? get_post_type( $post->post_parent ) : $post->post_type;
+
+		if ( ! $can_edit ) {
+			/**
+			 * SEO meta keys /wp/v2 still shows to users who may not edit the
+			 * post, visitors included.
+			 *
+			 * For a headless front end that read raw metas from the core
+			 * routes. The `seopress/v1/posts/<id>` route returns the values
+			 * as they are rendered, and needs no such opening.
+			 *
+			 * @since 10.4.0
+			 *
+			 * @param string[] $keys Meta keys, none by default.
+			 * @param \WP_Post $post The post.
+			 */
+			$public = (array) apply_filters( 'seopress_rest_public_meta_keys', array(), $post );
+		}
+
+		$changed = false;
+
+		foreach ( array_keys( $data['meta'] ) as $meta_key ) {
+			$meta_key = (string) $meta_key;
+
+			if ( $can_edit ) {
+				// Resolved once per area, not once per key.
+				$area = isset( $restricted[ $meta_key ] ) ? $restricted[ $meta_key ] : null;
+
+				if ( null !== $area && ! isset( $blocked[ $area ] ) ) {
+					$blocked[ $area ] = self::role_is_blocked_on( $post_type, $area );
+				}
+
+				$hide = null !== $area && $blocked[ $area ];
+			} else {
+				$is_seo_meta = isset( $restricted[ $meta_key ] ) || 0 === strpos( $meta_key, '_seopress_' );
+				$hide        = $is_seo_meta && ! in_array( $meta_key, $public, true );
+			}
+
+			if ( $hide ) {
+				unset( $data['meta'][ $meta_key ] );
+				$changed = true;
+			}
+		}
+
+		if ( $changed ) {
+			$response->set_data( $data );
+		}
+
+		return $response;
+	}
+
+	/**
+	 * Expose one `_seopress_robots_primary_term_{taxonomy}` meta per
+	 * taxonomy offering a primary term selector, so the Block Editor can
+	 * read and write it through the standard `/wp/v2/<type>/<id>` route.
+	 *
+	 * The legacy `_seopress_robots_primary_cat` key is skipped: it is
+	 * already registered above.
+	 *
+	 * Registering a key twice is a no-op in core, so running on both hooks
+	 * costs nothing.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return void
+	 */
+	public function register_primary_term_metas() {
+		foreach ( PrimaryTerm::get_meta_keys() as $key ) {
+			if ( PrimaryTerm::LEGACY_META_KEY === $key ) {
+				continue;
+			}
+
+			$this->register_primary_term_meta( $key );
+		}
+	}
+
+	/**
+	 * Register a primary term meta key: a term id, or an empty string.
+	 *
+	 * `sanitize_text_field` let the Block Editor picker, SyncMetaToEditor and
+	 * any `/wp/v2` client store `none` or free text, where the robots route
+	 * and the Classic Editor store a term id or nothing.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param string $key Meta key.
+	 *
+	 * @return void
+	 */
+	protected function register_primary_term_meta( $key ) {
+		$this->restricted_meta_keys[ $key ] = 'GLOBAL';
+
+		register_post_meta(
+			'',
+			$key,
+			array(
+				'show_in_rest'      => true,
+				'single'            => true,
+				'type'              => 'string',
+				'auth_callback'     => array( $this, 'meta_auth' ),
+				'sanitize_callback' => array( PrimaryTerm::class, 'sanitize_term_id' ),
+			)
+		);
 	}
 
 	/**
@@ -374,7 +565,25 @@ class AdvancedSettings implements ExecuteHooks {
 			return false;
 		}
 
-		if ( ! function_exists( 'seopress_metabox_role_is_blocked' ) ) {
+		return self::role_is_blocked_on( get_post_type( $object_id ), $restricted[ $meta_key ] );
+	}
+
+	/**
+	 * Whether the Advanced > Security restrictions keep the current role out
+	 * of the given area on the given post type.
+	 *
+	 * The single rule behind the dropped writes, the metas left out of
+	 * /wp/v2 and the editor panels that read them.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param string|false $post_type Post type name.
+	 * @param string       $area      `GLOBAL` or `CONTENT_ANALYSIS`.
+	 *
+	 * @return bool
+	 */
+	public static function role_is_blocked_on( $post_type, $area ) {
+		if ( ! is_string( $post_type ) || ! function_exists( 'seopress_metabox_role_is_blocked' ) ) {
 			return false;
 		}
 
@@ -386,11 +595,11 @@ class AdvancedSettings implements ExecuteHooks {
 		// edits and CSV imports on a feature this restriction never covered.
 		$post_types = apply_filters( 'seopress_metaboxe_seo', seopress_get_service( 'WordPressData' )->getPostTypes() );
 
-		if ( ! isset( $post_types[ get_post_type( $object_id ) ] ) ) {
+		if ( ! isset( $post_types[ $post_type ] ) ) {
 			return false;
 		}
 
-		return seopress_metabox_role_is_blocked( $restricted[ $meta_key ] );
+		return seopress_metabox_role_is_blocked( $area );
 	}
 
 	/**
@@ -452,5 +661,73 @@ class AdvancedSettings implements ExecuteHooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Keep a single row for a single SEOPress key when it is written.
+	 *
+	 * Every key registered here is `single`, but a migration, an import or a
+	 * duplication plugin can leave two rows for the same key. Core's REST
+	 * meta handler only skips an unchanged value when one row exists: with
+	 * two identical rows it calls update_metadata(), the UPDATE changes
+	 * nothing, and the whole Block Editor save fails with "Could not update
+	 * the meta value of _seopress_titles_desc in database.". Since
+	 * core/editor sends every registered meta on save, a duplicated field
+	 * the user never touched was enough to break it.
+	 *
+	 * The first row is kept, as get_post_meta( $id, $key, true ) reads it,
+	 * and the others are deleted. When the kept row already holds the value,
+	 * the write is reported as done, so REST does not turn it into an error.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param null|bool $check      Short-circuit value, null to proceed.
+	 * @param int       $object_id  Post ID.
+	 * @param string    $meta_key   Meta key being written.
+	 * @param mixed     $meta_value New value, already unslashed and sanitized.
+	 * @param mixed     $prev_value Previous value to match, empty for all rows.
+	 *
+	 * @return null|bool `true` when the value is already stored, null to proceed.
+	 */
+	public function collapse_duplicate_meta_rows( $check, $object_id, $meta_key, $meta_value, $prev_value ) {
+		if ( null !== $check || ! empty( $prev_value ) ) {
+			return $check;
+		}
+
+		if ( ! isset( $this->restricted_meta_keys[ $meta_key ] ) ) {
+			return $check;
+		}
+
+		$stored = get_metadata_raw( 'post', $object_id, $meta_key );
+
+		if ( ! is_array( $stored ) || count( $stored ) < 2 ) {
+			return $check;
+		}
+
+		global $wpdb;
+
+		$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery
+			$wpdb->prepare(
+				"SELECT meta_id, meta_value FROM {$wpdb->postmeta} WHERE post_id = %d AND meta_key = %s ORDER BY meta_id ASC",
+				$object_id,
+				$meta_key
+			)
+		);
+
+		if ( count( $rows ) < 2 ) {
+			return $check;
+		}
+
+		$kept = array_shift( $rows );
+
+		foreach ( $rows as $row ) {
+			delete_metadata_by_mid( 'post', (int) $row->meta_id );
+		}
+
+		if ( (string) maybe_serialize( $meta_value ) === (string) $kept->meta_value ) {
+			return true;
+		}
+
+		return $check;
 	}
 }

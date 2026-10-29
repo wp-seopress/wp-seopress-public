@@ -104,6 +104,28 @@ if ( '1' !== seopress_get_service( 'TitleOption' )->getNoSiteLinksSearchBox() ) 
 		$jsonld .= '</script>';
 		$jsonld .= "\n";
 
+		/**
+		 * Single `@graph` output: register the node instead of printing it.
+		 *
+		 * `seopress_schemas_website` above fires as always.
+		 * `seopress_schemas_website_html` receives the whole `<script>`
+		 * element, which no longer exists once the nodes are merged, so of
+		 * what it can do only suppression is honoured: an empty answer drops
+		 * the node, anything else keeps it unchanged.
+		 *
+		 * @since 10.4.0
+		 */
+		$graph = seopress_get_service( 'SchemaGraph' );
+		if ( is_object( $graph ) && $graph->is_enabled() ) {
+			$node = $graph->filter_block( 'seopress_schemas_website_html', $website_schema, $jsonld, false );
+
+			if ( is_array( $node ) ) {
+				$graph->add_node( $node );
+			}
+
+			return;
+		}
+
 		$jsonld = apply_filters( 'seopress_schemas_website_html', $jsonld );
 
 		echo $jsonld; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- JSON-LD block, payload encoded with wp_json_encode() above.
@@ -518,9 +540,9 @@ function seopress_social_fb_title_hook() {
 
 			foreach ( $matches['1'] as $key => $value ) {
 				if ( is_singular() ) {
-					$seopress_titles_cf_template_replace_array[] = null !== $post ? wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_post_meta( $post->ID, $value, true ), true ) ) ) ) ), $seopress_excerpt_length ) : '';
+					$seopress_titles_cf_template_replace_array[] = null !== $post ? wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'post', $post->ID, $value ), true ) ) ) ) ), $seopress_excerpt_length ) : '';
 				} elseif ( is_tax() || is_category() || is_tag() ) {
-					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_term_meta( get_queried_object()->{'term_id'}, $value, true ), true ) ) ) ) ), $seopress_excerpt_length );
+					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'term', get_queried_object()->{'term_id'}, $value ), true ) ) ) ) ), $seopress_excerpt_length );
 				}
 			}
 		}
@@ -530,7 +552,8 @@ function seopress_social_fb_title_hook() {
 			$seopress_social_og_title = str_replace( $seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_og_title );
 		}
 
-		$seopress_social_og_title = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_og_title );
+		// The tag is escaped already: escape what the variables bring in too.
+		$seopress_social_og_title = \SEOPress\Helpers\Metas\AttributeVariables::replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_og_title );
 
 		// Hook on post OG title - 'seopress_social_og_title'.
 		if ( has_filter( 'seopress_social_og_title' ) ) {
@@ -657,9 +680,9 @@ function seopress_social_fb_desc_hook() {
 
 			foreach ( $matches['1'] as $key => $value ) {
 				if ( is_singular() ) {
-					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_post_meta( $post->ID, $value, true ), true ) ) ) ) ), $seopress_excerpt_length );
+					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'post', $post->ID, $value ), true ) ) ) ) ), $seopress_excerpt_length );
 				} elseif ( is_tax() || is_category() || is_tag() ) {
-					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_term_meta( get_queried_object()->{'term_id'}, $value, true ), true ) ) ) ) ), $seopress_excerpt_length );
+					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'term', get_queried_object()->{'term_id'}, $value ), true ) ) ) ) ), $seopress_excerpt_length );
 				}
 			}
 		}
@@ -669,7 +692,8 @@ function seopress_social_fb_desc_hook() {
 			$seopress_social_og_desc = str_replace( $seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_og_desc );
 		}
 
-		$seopress_social_og_desc = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_og_desc );
+		// The tag is escaped already: escape what the variables bring in too.
+		$seopress_social_og_desc = \SEOPress\Helpers\Metas\AttributeVariables::replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_og_desc );
 
 		// Hook on post OG description - 'seopress_social_og_desc'.
 		if ( has_filter( 'seopress_social_og_desc' ) ) {
@@ -853,7 +877,7 @@ function seopress_social_fb_img_hook() {
 			// object. Passing `$post->ID` made the lookup depend on the archive
 			// holding at least one post, and warned when it held none.
 			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_get_service( 'SocialOption' )->getSocialFacebookImgCpt() );
-		} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookImg() ) {// Default OG:IMAGE from global settings.
+		} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookImg() ) ) {// Default OG:IMAGE from global settings. A key never saved reads null and must reach the site icon below.
 
 			$seopress_social_og_thumb .= seopress_social_fb_img_size_from_url( seopress_get_service( 'SocialOption' )->getSocialFacebookImg() );
 		} elseif ( ! empty( get_option( 'site_icon' ) ) ) { // Site icon.
@@ -880,7 +904,7 @@ add_action( 'wp_head', 'seopress_social_fb_img_hook', 1 );
  * OG Facebook Link Ownership ID
  */
 function seopress_social_facebook_link_ownership_id_hook() {
-	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookLinkOwnership() ) {
+	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookLinkOwnership() ) ) {
 		$seopress_social_link_ownership_id = '<meta property="fb:pages" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialFacebookLinkOwnership() ) . '">';
 
 		echo $seopress_social_link_ownership_id . "\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Meta tag assembled above, its values escaped at build time; third parties filter the whole tag.
@@ -893,7 +917,7 @@ add_action( 'wp_head', 'seopress_social_facebook_link_ownership_id_hook', 1 );
  * OG Facebook App ID
  */
 function seopress_social_facebook_app_id_hook() {
-	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && '' !== seopress_get_service( 'SocialOption' )->getSocialFacebookAppID() ) {
+	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialFacebookOGEnable() && ! empty( seopress_get_service( 'SocialOption' )->getSocialFacebookAppID() ) ) {
 		$seopress_social_app_id = '<meta property="fb:app_id" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialFacebookAppID() ) . '">';
 
 		if ( ! is_404() ) {
@@ -929,8 +953,10 @@ add_action( 'wp_head', 'seopress_social_twitter_card_summary_hook', 1 );
  * Twitter Site
  */
 function seopress_social_twitter_card_site_hook() {
-	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCard() && '' !== seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() ) {
-		$seopress_social_twitter_card_site = '<meta name="twitter:site" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() ) . '">';
+	$site_handle = \SEOPress\Helpers\XHandle::extract( seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() );
+
+	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCard() && '' !== $site_handle ) {
+		$seopress_social_twitter_card_site = '<meta name="twitter:site" content="@' . esc_attr( $site_handle ) . '">';
 
 		// Hook on post Twitter card site - 'seopress_social_twitter_card_site'.
 		if ( has_filter( 'seopress_social_twitter_card_site' ) ) {
@@ -954,20 +980,19 @@ function seopress_social_twitter_card_creator_hook() {
 	if ( '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCard() && get_the_author_meta( 'twitter' ) ) {
 		// WordPress core does not constrain the format of the "twitter"/"x"
 		// user-meta field, so authors commonly paste a full profile URL
-		// instead of a bare handle. Extract the handle, then strip a
-		// leading @, before emitting "@handle" to avoid output like
-		// `@https://x.com/handle`.
-		$author_handle = (string) get_the_author_meta( 'twitter' );
-		if ( preg_match( '#(?:twitter|x)\.com/+@?([^/?\#\s]+)#i', $author_handle, $match ) ) {
-			$author_handle = $match[1];
-		}
-		$author_handle = ltrim( trim( $author_handle ), '@' );
+		// instead of a bare handle. Extract the handle before emitting
+		// "@handle" to avoid output like `@https://x.com/handle`.
+		$author_handle = \SEOPress\Helpers\XHandle::extract( get_the_author_meta( 'twitter' ) );
 
 		if ( '' !== $author_handle ) {
 			$seopress_social_twitter_card_creator .= '<meta name="twitter:creator" content="@' . esc_attr( $author_handle ) . '">';
 		}
-	} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCard() && '' !== seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() ) {
-		$seopress_social_twitter_card_creator .= '<meta name="twitter:creator" content="' . esc_attr( seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() ) . '">';
+	} elseif ( '1' === seopress_get_service( 'SocialOption' )->getSocialTwitterCard() ) {
+		$site_handle = \SEOPress\Helpers\XHandle::extract( seopress_get_service( 'SocialOption' )->getSocialAccountsTwitter() );
+
+		if ( '' !== $site_handle ) {
+			$seopress_social_twitter_card_creator .= '<meta name="twitter:creator" content="@' . esc_attr( $site_handle ) . '">';
+		}
 	}
 	// Hook on post Twitter card creator - 'seopress_social_twitter_card_creator'.
 	if ( has_filter( 'seopress_social_twitter_card_creator' ) ) {
@@ -1089,9 +1114,9 @@ function seopress_social_twitter_title_hook() {
 
 			foreach ( $matches['1'] as $key => $value ) {
 				if ( is_singular() ) {
-					$seopress_titles_cf_template_replace_array[] = null !== $post ? wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_post_meta( $post->ID, $value, true ), true ) ) ) ) ), $seopress_excerpt_length ) : '';
+					$seopress_titles_cf_template_replace_array[] = null !== $post ? wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'post', $post->ID, $value ), true ) ) ) ) ), $seopress_excerpt_length ) : '';
 				} elseif ( is_tax() || is_category() || is_tag() ) {
-					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_term_meta( get_queried_object()->{'term_id'}, $value, true ), true ) ) ) ) ), $seopress_excerpt_length );
+					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'term', get_queried_object()->{'term_id'}, $value ), true ) ) ) ) ), $seopress_excerpt_length );
 				}
 			}
 		}
@@ -1101,7 +1126,8 @@ function seopress_social_twitter_title_hook() {
 			$seopress_social_twitter_card_title = str_replace( $seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_twitter_card_title );
 		}
 
-		$seopress_social_twitter_card_title = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_twitter_card_title );
+		// The tag is escaped already: escape what the variables bring in too.
+		$seopress_social_twitter_card_title = \SEOPress\Helpers\Metas\AttributeVariables::replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_twitter_card_title );
 
 		// Hook on post Twitter card title - 'seopress_social_twitter_card_title'.
 		if ( has_filter( 'seopress_social_twitter_card_title' ) ) {
@@ -1229,9 +1255,9 @@ function seopress_social_twitter_desc_hook() {
 
 			foreach ( $matches['1'] as $key => $value ) {
 				if ( is_singular() ) {
-					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_post_meta( $post->ID, $value, true ), true ) ) ) ) ), $seopress_excerpt_length );
+					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'post', $post->ID, $value ), true ) ) ) ) ), $seopress_excerpt_length );
 				} elseif ( is_tax() || is_category() || is_tag() ) {
-					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( get_term_meta( get_queried_object()->{'term_id'}, $value, true ), true ) ) ) ) ), $seopress_excerpt_length );
+					$seopress_titles_cf_template_replace_array[] = wp_trim_words( esc_attr( stripslashes_deep( wp_filter_nohtml_kses( wp_strip_all_tags( strip_shortcodes( seopress_get_meta_tag_value( 'term', get_queried_object()->{'term_id'}, $value ), true ) ) ) ) ), $seopress_excerpt_length );
 				}
 			}
 		}
@@ -1241,7 +1267,8 @@ function seopress_social_twitter_desc_hook() {
 			$seopress_social_twitter_card_desc = str_replace( $seopress_titles_cf_template_variables_array, $seopress_titles_cf_template_replace_array, $seopress_social_twitter_card_desc );
 		}
 
-		$seopress_social_twitter_card_desc = str_replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_twitter_card_desc );
+		// The tag is escaped already: escape what the variables bring in too.
+		$seopress_social_twitter_card_desc = \SEOPress\Helpers\Metas\AttributeVariables::replace( $seopress_titles_template_variables_array, $seopress_titles_template_replace_array, $seopress_social_twitter_card_desc );
 
 		// Hook on post Twitter card description - 'seopress_social_twitter_card_desc'.
 		if ( has_filter( 'seopress_social_twitter_card_desc' ) ) {

@@ -57,8 +57,24 @@ class InternalLinks {
 			$ids   = array_merge( $ids, $items->posts );
 		}
 
-		foreach ( array_unique( $ids ) as $id ) {
+		/**
+		 * Filter the IDs of the posts linking to the analysed post. Lets a page
+		 * builder that stores its links in its own tables add them.
+		 *
+		 * @since 10.4.0
+		 *
+		 * @param int[]  $ids       IDs of the posts linking to the analysed post.
+		 * @param int    $post_id   The analysed post ID.
+		 * @param string $permalink The analysed post permalink.
+		 */
+		$ids = apply_filters( 'seopress_content_analysis_internal_links_ids', $ids, $post_id, $permalink );
+		$ids = is_array( $ids ) ? array_diff( array_unique( array_map( 'absint', $ids ) ), array( 0, $post_id ) ) : array();
+
+		foreach ( $ids as $id ) {
 			$post_type_object = get_post_type_object( get_post_type( $id ) );
+			if ( ! $post_type_object ) {
+				continue;
+			}
 			$data[] = array(
 				'id'             => $id,
 				'edit_post_link' => admin_url( sprintf( $post_type_object->_edit_link . '&action=edit', $id ) ),

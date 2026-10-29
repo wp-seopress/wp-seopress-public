@@ -52,7 +52,7 @@ class RedirectionSettings implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'GLOBAL' ) );
 				},
 			)
 		);
@@ -94,7 +94,7 @@ class RedirectionSettings implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'GLOBAL' ) );
 				},
 			)
 		);
@@ -208,6 +208,20 @@ class RedirectionSettings implements ExecuteHooks {
 		$id     = $request->get_param( 'id' );
 		$metas  = RedirectionSettingsHelper::getMetaKeys( $id );
 		$params = $request->get_params();
+
+		// Saving would silently keep the previous target (see
+		// seopress_discard_refused_redirection_target()): say why instead.
+		if ( isset( $params['_seopress_redirections_value'] ) && is_string( $params['_seopress_redirections_value'] )
+			&& ! seopress_redirection_target_is_allowed(
+				sanitize_url( $params['_seopress_redirections_value'] ),
+				(string) get_post_meta( $id, '_seopress_redirections_value', true )
+			) ) {
+			return new \WP_Error(
+				'seopress_redirection_external_target',
+				__( 'You are not allowed to redirect this content to another website. Use a URL on this site, or ask an administrator.', 'wp-seopress' ),
+				array( 'status' => 403 )
+			);
+		}
 
 		try {
 			$data_keys_save = array(

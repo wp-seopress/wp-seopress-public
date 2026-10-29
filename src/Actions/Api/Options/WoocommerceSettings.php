@@ -31,6 +31,10 @@ class WoocommerceSettings implements ExecuteHooks {
 	 * @return boolean
 	 */
 	public function permissionCheck( \WP_REST_Request $request ) {
+		// edit_posts on purpose, not manage_options: the metabox reads this
+		// route for anyone who edits content, to explain on the shop page that
+		// its title comes from the product archive settings. It only returns
+		// the shop and cart page ids, which are public.
 		return current_user_can( 'edit_posts' );
 	}
 

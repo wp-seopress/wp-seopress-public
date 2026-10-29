@@ -157,12 +157,6 @@ class SiteSEO implements ExecuteHooksBackend {
 	 */
 	public function process() {
 		check_ajax_referer( 'seopress_siteseo_migrate_nonce', '_ajax_nonce', true );
-		if ( ! is_admin() ) {
-			wp_send_json_error();
-
-			return;
-		}
-
 		if ( ! current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) { // phpcs:ignore
 			wp_send_json_error();
 

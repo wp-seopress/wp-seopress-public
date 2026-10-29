@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Actions\Api\Metas\AdvancedSettings;
 use SEOPress\Core\Hooks\ExecuteHooks;
 
 /**
@@ -182,7 +183,15 @@ class ModuleMetabox implements ExecuteHooks {
 			$raw   = wp_unslash( $_POST[ $meta_key ] ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput
 			$value = $this->sanitizeFallbackValue( $raw, $sanitizer );
 
-			if ( null === $value || '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
+			$primary_taxonomy = class_exists( '\SEOPress\Helpers\Metas\PrimaryTerm' )
+				? \SEOPress\Helpers\Metas\PrimaryTerm::get_taxonomy_from_meta_key( $meta_key )
+				: null;
+
+			if ( null !== $primary_taxonomy && '' === $value ) {
+				// "None" on a taxonomy with its own key also drops the legacy
+				// value it would otherwise inherit.
+				\SEOPress\Helpers\Metas\PrimaryTerm::clear( $post_id, $primary_taxonomy );
+			} elseif ( null === $value || '' === $value || ( is_array( $value ) && empty( $value ) ) ) {
 				delete_post_meta( $post_id, $meta_key );
 			} else {
 				// The form was unslashed above; preserve literal slashes through metadata storage.
@@ -242,6 +251,20 @@ class ModuleMetabox implements ExecuteHooks {
 				return sanitize_text_field( implode( ',', $parts ) );
 			},
 		);
+
+		// Advanced tab, one primary term per taxonomy. Only the legacy key was
+		// listed, so on a taxonomy with no Classic box of its own
+		// (`meta_box_cb => false`) a choice made in this tab was lost on
+		// update. A term id or nothing, like the REST route: `0` included,
+		// which was stored where the route deletes it.
+		if ( class_exists( '\SEOPress\Helpers\Metas\PrimaryTerm' ) ) {
+			$primary_term = array( '\SEOPress\Helpers\Metas\PrimaryTerm', 'sanitize_term_id' );
+
+			$keys['_seopress_robots_primary_cat'] = $primary_term;
+			foreach ( \SEOPress\Helpers\Metas\PrimaryTerm::get_meta_keys() as $primary_key ) {
+				$keys[ $primary_key ] = $primary_term;
+			}
+		}
 
 		// Social tab — per-platform keys, sanitizer derived from the field type.
 		if ( class_exists( '\SEOPress\Helpers\Metas\SocialSettings' ) ) {
@@ -475,7 +498,10 @@ class ModuleMetabox implements ExecuteHooks {
 
 		global $post;
 
-		if ( post_type_supports( get_post_type( $post ), 'custom-fields' ) ) {
+		// The checklist reads the SEO metas from the post's REST record, which
+		// leaves them out for a role kept out of the SEO metabox: it would
+		// report a meta title or description as missing when it is set.
+		if ( post_type_supports( get_post_type( $post ), 'custom-fields' ) && ! AdvancedSettings::role_is_blocked_on( get_post_type( $post ), 'GLOBAL' ) ) {
 			wp_enqueue_script(
 				'seopress-pre-publish-checklist',
 				SEOPRESS_URL_PUBLIC . '/editor/pre-publish-checklist/index.js',
@@ -509,24 +535,7 @@ class ModuleMetabox implements ExecuteHooks {
 
 			// Get score data for the current post.
 			$score       = seopress_get_service( 'ContentAnalysisDatabase' )->getData( $post->ID, array( 'score' ) );
-			$score_color = '#94a3b8'; // Default gray.
-
-			if ( ! empty( $score ) && is_array( $score ) ) {
-				// Flatten the score array.
-				$score_flat = array();
-				foreach ( $score as $item ) {
-					if ( is_array( $item ) ) {
-						$score_flat = array_merge( $score_flat, $item );
-					}
-				}
-
-				// Both 'high' and 'medium' mean "should be improved" (orange/yellow).
-				if ( in_array( 'high', $score_flat, true ) || in_array( 'medium', $score_flat, true ) ) {
-					$score_color = '#f59e0b'; // Orange - should be improved.
-				} else {
-					$score_color = '#16a34a'; // Green - good.
-				}
-			}
+			$score_color = self::getToolbarScoreColor( $score, $post->ID );
 
 			// Default to showing the score text; let the user opt out via
 			// the new "SEO score in editor toolbar" setting. The legacy
@@ -672,6 +681,15 @@ class ModuleMetabox implements ExecuteHooks {
 					'GLOBAL'           => $settings_advanced->getSecurityMetaboxRole(),
 					'CONTENT_ANALYSIS' => $settings_advanced->getSecurityMetaboxRoleContentAnalysis(),
 				),
+				// The server's own decision, which the tabs follow. Recomputed
+				// client-side from USER_ROLES, it hid the tabs from an
+				// administrator who also held a blocked role (added by a
+				// forum or ads plugin), although the REST endpoints let them
+				// through. Nested so the booleans are not cast to strings.
+				'ROLES_BLOCKED_FOR_USER'    => array(
+					'GLOBAL'           => seopress_metabox_role_is_blocked( 'GLOBAL' ),
+					'CONTENT_ANALYSIS' => seopress_metabox_role_is_blocked( 'CONTENT_ANALYSIS' ),
+				),
 				'OPTIONS'                   => array(
 					/**
 					 * Filter whether the AI generation buttons are exposed in the
@@ -709,6 +727,8 @@ class ModuleMetabox implements ExecuteHooks {
 					'VIDEO_SITEMAP'    => apply_filters( 'seopress_active_video_sitemap', false ),
 					'INSPECT_URL'      => apply_filters( 'seopress_active_inspect_url', false ),
 					'INTERNAL_LINKING' => apply_filters( 'seopress_active_internal_linking', false ),
+					// Read-only list of the Instant Indexing submissions of this post.
+					'INDEXING_HISTORY' => '1' === seopress_get_toggle_option( 'instant-indexing' ),
 					'SCHEMA_MANUAL'    => apply_filters( 'seopress_active_schemas', false ),
 					'SCHEMA_AUTOMATIC' => apply_filters( 'seopress_active_schemas_automatic_universal_metabox', false ),
 				),
@@ -873,5 +893,37 @@ class ModuleMetabox implements ExecuteHooks {
 		$data = apply_filters( 'seopress_content_analysis_response', $data, $post_id );
 
 		return ! empty( $data ) ? $data : null;
+	}
+
+	/**
+	 * The colour of the SEOPress button in the block editor toolbar.
+	 *
+	 * Read from the same counts as the posts list column, ignored checks left
+	 * out, so a post showing 16/16 in green in the column is not "Has SEO
+	 * issues" in the toolbar. A score stored by 10.3.x or earlier has no
+	 * per-check detail and falls back to its impacts.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param mixed $score   The stored data, as ContentAnalysisDatabase::getData( $id, array( 'score' ) ) returns it.
+	 * @param int   $post_id The post.
+	 *
+	 * @return string Hex colour: gray when never analysed, green when good, orange otherwise.
+	 */
+	public static function getToolbarScoreColor( $score, $post_id ) { // phpcs:ignore -- camelCase is the convention for this class.
+		if ( empty( $score ) || ! is_array( $score ) ) {
+			return '#94a3b8';
+		}
+
+		$score_flat = array();
+		foreach ( $score as $item ) {
+			if ( is_array( $item ) ) {
+				$score_flat = array_merge( $score_flat, $item );
+			}
+		}
+
+		$summary = \SEOPress\Helpers\ContentAnalysis::getScoreSummary( $score_flat, \SEOPress\Helpers\ContentAnalysis::getIgnoredChecks( $post_id ) );
+
+		return \SEOPress\Helpers\ContentAnalysis::isGoodVerdict( $score_flat, $summary ) ? '#16a34a' : '#f59e0b';
 	}
 }

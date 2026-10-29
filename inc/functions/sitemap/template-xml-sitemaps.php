@@ -23,19 +23,6 @@ if ( 2 == apply_filters( 'wpml_setting', false, 'language_negotiation_type' ) ) 
 	add_filter( 'wpml_get_home_url', 'seopress_remove_wpml_home_url_filter', 20, 5 );
 }
 
-add_filter(
-	'seopress_sitemaps_index_cpt_query',
-	function ( $args ) {
-		global $sitepress, $sitepress_settings;
-
-		$sitepress_settings['auto_adjust_ids'] = 0;
-		remove_filter( 'terms_clauses', array( $sitepress, 'terms_clauses' ) );
-		remove_filter( 'category_link', array( $sitepress, 'category_link_adjust_id' ), 1 );
-
-		return $args;
-	}
-);
-
 add_action( 'the_post', 'seopress_sitemap_switch_wpml_language' );
 
 if ( ! function_exists( 'seopress_pll_exclude_hidden_lang' ) ) {
@@ -59,255 +46,258 @@ if ( ! function_exists( 'seopress_pll_exclude_hidden_lang' ) ) {
 	}
 }
 
-/**
- * XML Sitemap index template
- *
- * @return string XML Sitemap index template
- */
-function seopress_xml_sitemap_index() {
-	remove_all_filters( 'pre_get_posts' );
+if ( ! function_exists( 'seopress_xml_sitemap_index' ) ) {
+	/**
+	 * XML Sitemap index template
+	 *
+	 * @return string XML Sitemap index template
+	 */
+	function seopress_xml_sitemap_index() {
+		remove_all_filters( 'pre_get_posts' );
 
-	$home_url = home_url() . '/';
+		$home_url = home_url() . '/';
 
-	$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
+		$home_url = apply_filters( 'seopress_sitemaps_home_url', $home_url );
 
-	$seopress_sitemaps  = '<?xml version="1.0" encoding="UTF-8"?>';
-	$seopress_sitemaps .= '<?xml-stylesheet type="text/xsl" href="' . $home_url . 'sitemaps_xsl.xsl"?>';
-	$seopress_sitemaps .= "\n";
-	$seopress_sitemaps .= '<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
+		$seopress_sitemaps  = '<?xml version="1.0" encoding="UTF-8"?>';
+		$seopress_sitemaps .= '<?xml-stylesheet type="text/xsl" href="' . $home_url . 'sitemaps_xsl.xsl"?>';
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '<sitemapindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/siteindex.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">';
 
-	// CPT.
-	if ( '' !== seopress_get_service( 'SitemapOption' )->getPostTypesList() ) {
-		if ( ! empty( seopress_get_service( 'SitemapOption' )->getPostTypesList() ) ) {
-			foreach ( seopress_get_service( 'SitemapOption' )->getPostTypesList() as $cpt_key => $cpt_value ) {
-				// Skip post types that no longer exist on this site. Importing
-				// settings from another site (or a removed CPT) leaves orphaned
-				// entries in the option, which would otherwise list a sitemap for
-				// a post type that isn't registered here.
-				if ( ! post_type_exists( $cpt_key ) ) {
-					continue;
-				}
-				foreach ( $cpt_value as $_cpt_key => $_cpt_value ) {
-					if ( '1' === $_cpt_value ) {
-						$args = array(
-							'posts_per_page' => -1,
-							'post_type'      => $cpt_key,
-							'post_status'    => 'publish',
-							'fields'         => 'ids',
-							'lang'           => '',
-							'has_password'   => false,
-						);
-
-						// Polylang: exclude hidden languages.
-						$args = seopress_pll_exclude_hidden_lang( $args );
-
-						$args = apply_filters( 'seopress_sitemaps_index_post_types_query', $args, $cpt_key );
-
-						$count_posts = \SEOPress\Helpers\SitemapPostCount::get_count( $args );
-
-						// Max posts per paginated sitemap.
-						$max = 1000;
-						$max = apply_filters( 'seopress_sitemaps_max_posts_per_sitemap', $max );
-
-						if ( $count_posts >= $max ) {
-							$max_loop = $count_posts / $max;
-						} else {
-							$max_loop = 1;
-						}
-
-						// Performance optimization: Get all lastmod dates in a single query instead of one query per page.
-						// This avoids expensive OFFSET queries that become slower with each page. Updated in 9.3.0.
-						global $wpdb;
-						$cache_key_all     = 'seopress_sitemap_lastmod_all_' . $cpt_key . '_' . $max;
-						$all_lastmod_dates = get_transient( $cache_key_all );
-
-						if ( false === $all_lastmod_dates ) {
-							// Get the first post_modified for each sitemap page in one query.
-							// Then use a subquery with row numbering to get every Nth post efficiently.
-							$sql = $wpdb->prepare(
-								"SELECT post_modified
-								FROM (
-									SELECT p.post_modified,
-										@row_num := @row_num + 1 AS row_num
-									FROM $wpdb->posts p
-									LEFT JOIN $wpdb->postmeta pm_canonical ON p.ID = pm_canonical.post_id
-										AND pm_canonical.meta_key = '_seopress_robots_canonical'
-									LEFT JOIN $wpdb->postmeta pm_noindex ON p.ID = pm_noindex.post_id
-										AND pm_noindex.meta_key = '_seopress_robots_index'
-									CROSS JOIN (SELECT @row_num := 0) AS init
-									WHERE p.post_type = %s
-									AND p.post_status = 'publish'
-									AND (pm_canonical.meta_value IS NULL OR pm_canonical.meta_value = %s)
-									AND (pm_noindex.meta_value IS NULL OR pm_noindex.meta_value != 'yes')
-									ORDER BY p.post_modified DESC
-								) AS numbered_posts
-								WHERE (row_num - 1) %% %d = 0",
-								$cpt_key,
-								esc_url( get_permalink( get_the_ID() ) ),
-								$max
+		// CPT.
+		if ( '' !== seopress_get_service( 'SitemapOption' )->getPostTypesList() ) {
+			if ( ! empty( seopress_get_service( 'SitemapOption' )->getPostTypesList() ) ) {
+				foreach ( seopress_get_service( 'SitemapOption' )->getPostTypesList() as $cpt_key => $cpt_value ) {
+					// Skip post types that no longer exist on this site. Importing
+					// settings from another site (or a removed CPT) leaves orphaned
+					// entries in the option, which would otherwise list a sitemap for
+					// a post type that isn't registered here.
+					if ( ! post_type_exists( $cpt_key ) ) {
+						continue;
+					}
+					foreach ( $cpt_value as $_cpt_key => $_cpt_value ) {
+						if ( '1' === $_cpt_value ) {
+							$args = array(
+								'posts_per_page' => -1,
+								'post_type'      => $cpt_key,
+								'post_status'    => 'publish',
+								'fields'         => 'ids',
+								'lang'           => '',
+								'has_password'   => false,
 							);
 
-							$all_lastmod_dates = $wpdb->get_col( $sql ); // phpcs:ignore
+							// Polylang: exclude hidden languages.
+							$args = seopress_pll_exclude_hidden_lang( $args );
 
-							$cache_duration = apply_filters( 'seopress_sitemaps_cache_duration', 12 * HOUR_IN_SECONDS );
-							set_transient( $cache_key_all, $all_lastmod_dates, $cache_duration );
-						}
+							$args = apply_filters( 'seopress_sitemaps_index_post_types_query', $args, $cpt_key );
 
-						$paged = '';
-						$i     = '';
-						for ( $i = 0; $i < $max_loop; ++$i ) {
-							if ( $i >= 1 && $i <= $max_loop ) {
-								$paged = $i + 1;
+							$count_posts = \SEOPress\Helpers\SitemapPostCount::get_count( $args );
+
+							// Max posts per paginated sitemap.
+							$max = 1000;
+							$max = apply_filters( 'seopress_sitemaps_max_posts_per_sitemap', $max );
+
+							if ( $count_posts >= $max ) {
+								$max_loop = $count_posts / $max;
 							} else {
-								$paged = 1;
+								$max_loop = 1;
 							}
 
-							// Get lastmod date from cached array (already fetched above).
-							$last_mod_date = isset( $all_lastmod_dates[ $i ] ) ? $all_lastmod_dates[ $i ] : null;
+							// Performance optimization: Get all lastmod dates in a single query instead of one query per page.
+							// This avoids expensive OFFSET queries that become slower with each page. Updated in 9.3.0.
+							global $wpdb;
+							$cache_key_all     = 'seopress_sitemap_lastmod_all_' . $cpt_key . '_' . $max;
+							$all_lastmod_dates = get_transient( $cache_key_all );
 
-							$seopress_sitemaps .= "\n";
-							$seopress_sitemaps .= '<sitemap>';
-							$seopress_sitemaps .= "\n";
-							$seopress_sitemaps .= '<loc>';
-							$seopress_sitemaps .= $home_url . $cpt_key . '-sitemap' . $paged . '.xml';
-							$seopress_sitemaps .= '</loc>';
-							$seopress_sitemaps .= "\n";
+							if ( false === $all_lastmod_dates ) {
+								// Get the first post_modified for each sitemap page in one query.
+								// Then use a subquery with row numbering to get every Nth post efficiently.
+								$sql = $wpdb->prepare(
+									"SELECT post_modified
+									FROM (
+										SELECT p.post_modified,
+											@row_num := @row_num + 1 AS row_num
+										FROM $wpdb->posts p
+										LEFT JOIN $wpdb->postmeta pm_canonical ON p.ID = pm_canonical.post_id
+											AND pm_canonical.meta_key = '_seopress_robots_canonical'
+										LEFT JOIN $wpdb->postmeta pm_noindex ON p.ID = pm_noindex.post_id
+											AND pm_noindex.meta_key = '_seopress_robots_index'
+										CROSS JOIN (SELECT @row_num := 0) AS init
+										WHERE p.post_type = %s
+										AND p.post_status = 'publish'
+										AND (pm_canonical.meta_value IS NULL OR pm_canonical.meta_value = %s)
+										AND (pm_noindex.meta_value IS NULL OR pm_noindex.meta_value != 'yes')
+										ORDER BY p.post_modified DESC
+									) AS numbered_posts
+									WHERE (row_num - 1) %% %d = 0",
+									$cpt_key,
+									esc_url( get_permalink( get_the_ID() ) ),
+									$max
+								);
 
-							if ( $last_mod_date ) {
-								$seopress_sitemaps .= '<lastmod>';
-								$seopress_sitemaps .= esc_html( mysql2date( 'c', $last_mod_date ) );
-								$seopress_sitemaps .= '</lastmod>';
+								$all_lastmod_dates = $wpdb->get_col( $sql ); // phpcs:ignore
+
+								$cache_duration = apply_filters( 'seopress_sitemaps_cache_duration', 12 * HOUR_IN_SECONDS );
+								set_transient( $cache_key_all, $all_lastmod_dates, $cache_duration );
+							}
+
+							$paged = '';
+							$i     = '';
+							for ( $i = 0; $i < $max_loop; ++$i ) {
+								if ( $i >= 1 && $i <= $max_loop ) {
+									$paged = $i + 1;
+								} else {
+									$paged = 1;
+								}
+
+								// Get lastmod date from cached array (already fetched above).
+								$last_mod_date = isset( $all_lastmod_dates[ $i ] ) ? $all_lastmod_dates[ $i ] : null;
+
 								$seopress_sitemaps .= "\n";
-							}
+								$seopress_sitemaps .= '<sitemap>';
+								$seopress_sitemaps .= "\n";
+								$seopress_sitemaps .= '<loc>';
+								$seopress_sitemaps .= $home_url . $cpt_key . '-sitemap' . $paged . '.xml';
+								$seopress_sitemaps .= '</loc>';
+								$seopress_sitemaps .= "\n";
 
-							$seopress_sitemaps .= '</sitemap>';
+								if ( $last_mod_date ) {
+									$seopress_sitemaps .= '<lastmod>';
+									$seopress_sitemaps .= esc_html( mysql2date( 'c', $last_mod_date ) );
+									$seopress_sitemaps .= '</lastmod>';
+									$seopress_sitemaps .= "\n";
+								}
+
+								$seopress_sitemaps .= '</sitemap>';
+							}
 						}
 					}
 				}
 			}
 		}
-	}
 
-	// Taxonomies.
-	if ( '' !== seopress_get_service( 'SitemapOption' )->getTaxonomiesList() ) {
-		// Init.
-		$seopress_xml_terms_list = array();
-		if ( ! empty( seopress_get_service( 'SitemapOption' )->getTaxonomiesList() ) ) {
-			foreach ( seopress_get_service( 'SitemapOption' )->getTaxonomiesList() as $tax_key => $tax_value ) {
-				// Skip taxonomies that no longer exist on this site (orphaned
-				// entries left by importing settings or removing a taxonomy).
-				if ( ! taxonomy_exists( $tax_key ) ) {
-					continue;
-				}
+		// Taxonomies.
+		if ( '' !== seopress_get_service( 'SitemapOption' )->getTaxonomiesList() ) {
+			// Init.
+			$seopress_xml_terms_list = array();
+			if ( ! empty( seopress_get_service( 'SitemapOption' )->getTaxonomiesList() ) ) {
+				foreach ( seopress_get_service( 'SitemapOption' )->getTaxonomiesList() as $tax_key => $tax_value ) {
+					// Skip taxonomies that no longer exist on this site (orphaned
+					// entries left by importing settings or removing a taxonomy).
+					if ( ! taxonomy_exists( $tax_key ) ) {
+						continue;
+					}
 
-				foreach ( $tax_value as $_tax_key => $_tax_value ) {
-					if ( '1' === $_tax_value ) {
-						$args = array(
-							'taxonomy'   => $tax_key,
-							'hide_empty' => true,
-							'lang'       => '',
-							'fields'     => 'ids',
-							'meta_query' => array(
-								'relation' => 'OR',
-								array(
-									'key'     => '_seopress_robots_index',
-									'value'   => '',
-									'compare' => 'NOT EXISTS',
+					foreach ( $tax_value as $_tax_key => $_tax_value ) {
+						if ( '1' === $_tax_value ) {
+							$args = array(
+								'taxonomy'   => $tax_key,
+								'hide_empty' => true,
+								'lang'       => '',
+								'fields'     => 'ids',
+								'meta_query' => array(
+									'relation' => 'OR',
+									array(
+										'key'     => '_seopress_robots_index',
+										'value'   => '',
+										'compare' => 'NOT EXISTS',
+									),
+									array(
+										'key'     => '_seopress_robots_index',
+										'value'   => 'yes',
+										'compare' => '!=',
+									),
 								),
-								array(
-									'key'     => '_seopress_robots_index',
-									'value'   => 'yes',
-									'compare' => '!=',
-								),
-							),
-						);
+							);
 
-						// Polylang: exclude hidden languages.
-						$args = seopress_pll_exclude_hidden_lang( $args );
+							// Polylang: exclude hidden languages.
+							$args = seopress_pll_exclude_hidden_lang( $args );
 
-						$args = apply_filters( 'seopress_sitemaps_index_tax_query', $args, $tax_key );
+							$args = apply_filters( 'seopress_sitemaps_index_tax_query', $args, $tax_key );
 
-						$terms_data  = get_terms( $args );
-						$count_terms = 0;
-						if ( is_array( $terms_data ) && ! is_wp_error( $terms_data ) ) {
-							$count_terms = count( $terms_data );
-						}
+							// Term sitemaps list every language, so count every language.
+							$terms_data  = \SEOPress\Helpers\SitemapTermLanguages::run( $args, 'get_terms' );
+							$count_terms = 0;
+							if ( is_array( $terms_data ) && ! is_wp_error( $terms_data ) ) {
+								$count_terms = count( $terms_data );
+							}
 
-						// Max terms per paginated sitemap.
-						$max = 1000;
-						$max = apply_filters( 'seopress_sitemaps_max_terms_per_sitemap', $max );
+							// Max terms per paginated sitemap.
+							$max = 1000;
+							$max = apply_filters( 'seopress_sitemaps_max_terms_per_sitemap', $max );
 
-						if ( $count_terms >= $max ) {
-							$max_loop = $count_terms / $max;
-						} else {
-							$max_loop = 1;
-						}
-
-						$paged = '';
-						$i     = '';
-						for ( $i = 0; $i < $max_loop; ++$i ) {
-							if ( $i >= 1 && $i <= $max_loop ) {
-								$paged = $i + 1;
+							if ( $count_terms >= $max ) {
+								$max_loop = $count_terms / $max;
 							} else {
-								$paged = 1;
+								$max_loop = 1;
 							}
 
-							$seopress_sitemaps .= "\n";
-							$seopress_sitemaps .= '<sitemap>';
-							$seopress_sitemaps .= "\n";
-							$seopress_sitemaps .= '<loc>';
-							$seopress_sitemaps .= $home_url . $tax_key . '-sitemap' . $paged . '.xml';
-							$seopress_sitemaps .= '</loc>';
-							$seopress_sitemaps .= "\n";
-							$seopress_sitemaps .= '</sitemap>';
+							$paged = '';
+							$i     = '';
+							for ( $i = 0; $i < $max_loop; ++$i ) {
+								if ( $i >= 1 && $i <= $max_loop ) {
+									$paged = $i + 1;
+								} else {
+									$paged = 1;
+								}
+
+								$seopress_sitemaps .= "\n";
+								$seopress_sitemaps .= '<sitemap>';
+								$seopress_sitemaps .= "\n";
+								$seopress_sitemaps .= '<loc>';
+								$seopress_sitemaps .= $home_url . $tax_key . '-sitemap' . $paged . '.xml';
+								$seopress_sitemaps .= '</loc>';
+								$seopress_sitemaps .= "\n";
+								$seopress_sitemaps .= '</sitemap>';
+							}
 						}
 					}
 				}
 			}
 		}
-	}
 
-	// Author sitemap.
-	if ( '1' === seopress_get_service( 'SitemapOption' )->authorIsEnable() ) {
-		$seopress_sitemaps .= "\n";
-		$seopress_sitemaps .= '<sitemap>';
-		$seopress_sitemaps .= "\n";
-		$seopress_sitemaps .= '<loc>';
-		$seopress_sitemaps .= $home_url . 'author.xml';
-		$seopress_sitemaps .= '</loc>';
-		$seopress_sitemaps .= "\n";
-		$seopress_sitemaps .= '</sitemap>';
-	}
-
-	$seopress_sitemaps = apply_filters( 'seopress_sitemaps_xml_index_item', $seopress_sitemaps, $home_url );
-
-	// Custom sitemap.
-	$custom_sitemap = null;
-	$custom_sitemap = apply_filters( 'seopress_sitemaps_external_link', $custom_sitemap );
-	if ( isset( $custom_sitemap ) ) {
-		foreach ( $custom_sitemap as $key => $sitemap ) {
+		// Author sitemap.
+		if ( '1' === seopress_get_service( 'SitemapOption' )->authorIsEnable() ) {
 			$seopress_sitemaps .= "\n";
 			$seopress_sitemaps .= '<sitemap>';
 			$seopress_sitemaps .= "\n";
 			$seopress_sitemaps .= '<loc>';
-			$seopress_sitemaps .= $sitemap['sitemap_url'];
+			$seopress_sitemaps .= $home_url . 'author.xml';
 			$seopress_sitemaps .= '</loc>';
-			if ( isset( $sitemap['sitemap_last_mod'] ) ) {
-				$seopress_sitemaps .= "\n";
-				$seopress_sitemaps .= '<lastmod>';
-				$seopress_sitemaps .= $sitemap['sitemap_last_mod'];
-				$seopress_sitemaps .= '</lastmod>';
-			}
 			$seopress_sitemaps .= "\n";
 			$seopress_sitemaps .= '</sitemap>';
 		}
+
+		$seopress_sitemaps = apply_filters( 'seopress_sitemaps_xml_index_item', $seopress_sitemaps, $home_url );
+
+		// Custom sitemap.
+		$custom_sitemap = null;
+		$custom_sitemap = apply_filters( 'seopress_sitemaps_external_link', $custom_sitemap );
+		if ( isset( $custom_sitemap ) ) {
+			foreach ( $custom_sitemap as $key => $sitemap ) {
+				$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '<sitemap>';
+				$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '<loc>';
+				$seopress_sitemaps .= $sitemap['sitemap_url'];
+				$seopress_sitemaps .= '</loc>';
+				if ( isset( $sitemap['sitemap_last_mod'] ) ) {
+					$seopress_sitemaps .= "\n";
+					$seopress_sitemaps .= '<lastmod>';
+					$seopress_sitemaps .= $sitemap['sitemap_last_mod'];
+					$seopress_sitemaps .= '</lastmod>';
+				}
+				$seopress_sitemaps .= "\n";
+				$seopress_sitemaps .= '</sitemap>';
+			}
+		}
+
+		$seopress_sitemaps .= "\n";
+		$seopress_sitemaps .= '</sitemapindex>';
+
+		$seopress_sitemaps = apply_filters( 'seopress_sitemaps_xml_index', $seopress_sitemaps );
+
+		return $seopress_sitemaps;
 	}
-
-	$seopress_sitemaps .= "\n";
-	$seopress_sitemaps .= '</sitemapindex>';
-
-	$seopress_sitemaps = apply_filters( 'seopress_sitemaps_xml_index', $seopress_sitemaps );
-
-	return $seopress_sitemaps;
 }
 echo seopress_xml_sitemap_index(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- XML output is properly escaped within function.

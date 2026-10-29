@@ -157,7 +157,608 @@ function seopress_get_filtered_bulk_actions( $actions, $key ) {
 
 // Bulk actions.
 global $pagenow;
+// Declared unconditionally so they can be exercised without faking an admin
+// screen. Only the registration below is screen-dependent: these handlers used
+// to be declared inside that condition, which made them unreachable from a test
+// and is how the missing capability checks went unnoticed.
+/**
+ * No index bulk actions
+ *
+ * @param array $bulk_actions No index bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_noindex( $bulk_actions ) {
+	$bulk_actions['seopress_noindex'] = __( 'Enable noindex', 'wp-seopress' );
+
+	return $bulk_actions;
+}
+
+/**
+ * No index bulk action handler
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+/**
+ * Whether the current bulk screen lists terms rather than posts.
+ *
+ * The four robots actions are registered on both `edit.php` and
+ * `edit-tags.php`, and the handler is handed a bare list of ids with nothing
+ * saying which it is. Asking the screen is the only way to know, and it
+ * matters twice over: for the capability to check, and for the meta table to
+ * write to.
+ *
+ * @since 10.4.0
+ *
+ * @return bool
+ */
+function seopress_bulk_action_on_terms() {
+	global $pagenow;
+
+	return 'edit-tags.php' === $pagenow;
+}
+
+/**
+ * Keep only the ids the current user may actually edit.
+ *
+ * WordPress checks that the user may reach the list table; it does not check
+ * each id in the submitted set. Nothing stopped a Contributor from listing
+ * their own posts and submitting somebody else's ids, which applied noindex,
+ * nofollow, a redirect or an indexing request to content they cannot edit.
+ *
+ * @since 10.4.0
+ *
+ * @param array  $ids         Ids submitted with the bulk action.
+ * @param string $object_type 'auto' to read the screen, or 'post' to check
+ *                            posts whatever the screen says. An action that
+ *                            only ever writes post meta passes 'post', because
+ *                            a taxonomy named like a post type would otherwise
+ *                            have term ids checked with edit_term and then
+ *                            written as post meta: the cross-write this change
+ *                            removes.
+ *
+ * @return array The ids this user is allowed to act on.
+ */
+function seopress_bulk_action_editable_ids( $ids, $object_type = 'auto' ) {
+	$on_terms = 'post' !== $object_type && seopress_bulk_action_on_terms();
+	$allowed  = array();
+
+	foreach ( (array) $ids as $id ) {
+		$id = (int) $id;
+
+		if ( $id <= 0 ) {
+			continue;
+		}
+
+		$can = $on_terms
+			? current_user_can( 'edit_term', $id )
+			: current_user_can( 'edit_post', $id );
+
+		if ( $can ) {
+			$allowed[] = $id;
+		}
+	}
+
+	return $allowed;
+}
+
+/**
+ * The ids an SEO bulk action may change for the current user.
+ *
+ * Same as seopress_bulk_action_editable_ids(), and nothing at all for a role
+ * the Advanced > Security settings keep out of the SEO metabox: it may not
+ * change the same settings in bulk either. The media alt text action is not
+ * an SEO metabox setting and does not go through here.
+ *
+ * @since 10.4.0
+ *
+ * @param array  $ids         Ids submitted with the bulk action.
+ * @param string $object_type See seopress_bulk_action_editable_ids().
+ *
+ * @return array
+ */
+function seopress_bulk_action_seo_ids( $ids, $object_type = 'auto' ) {
+	if ( seopress_metabox_role_is_blocked( 'GLOBAL' ) ) {
+		return array();
+	}
+
+	return seopress_bulk_action_editable_ids( $ids, $object_type );
+}
+
+/**
+ * No index bulk action handler.
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_action_noindex_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_noindex' !== $doaction ) {
+		return $redirect_to;
+	}
+
+	$post_ids = seopress_bulk_action_seo_ids( $post_ids );
+	$on_terms = seopress_bulk_action_on_terms();
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post/term.
+		if ( $on_terms ) {
+			update_term_meta( $post_id, '_seopress_robots_index', 'yes' );
+		} else {
+			update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
+		}
+	}
+	$redirect_to = add_query_arg( 'bulk_noindex_posts', count( $post_ids ), $redirect_to );
+
+	return $redirect_to;
+}
+
+/**
+ * No index bulk action admin notice
+ *
+ * @return void
+ */
+function seopress_bulk_action_noindex_admin_notice() {
+	if ( isset( $_REQUEST['bulk_noindex_posts'] ) ) {
+		$count = intval( $_REQUEST['bulk_noindex_posts'] );
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of posts set to noindex */
+				_n(
+					'%s post to noindex.',
+					'%s posts to noindex.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
+	}
+}
+
+/**
+ * Index bulk actions
+ *
+ * @param array $bulk_actions Index bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_index( $bulk_actions ) {
+	$bulk_actions['seopress_index'] = __( 'Enable index', 'wp-seopress' );
+
+	return $bulk_actions;
+}
+
+/**
+ * Index bulk action handler
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_action_index_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_index' !== $doaction ) {
+		return $redirect_to;
+	}
+
+	$post_ids = seopress_bulk_action_seo_ids( $post_ids );
+	$on_terms = seopress_bulk_action_on_terms();
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post.
+		if ( $on_terms ) {
+			delete_term_meta( $post_id, '_seopress_robots_index', '' );
+		} else {
+			delete_post_meta( $post_id, '_seopress_robots_index', '' );
+		}
+	}
+	$redirect_to = add_query_arg( 'bulk_index_posts', count( $post_ids ), $redirect_to );
+
+	return $redirect_to;
+}
+
+/**
+ * Index bulk action admin notice
+ *
+ * @return void
+ */
+function seopress_bulk_action_index_admin_notice() {
+	if ( isset( $_REQUEST['bulk_index_posts'] ) ) {
+		$count = intval( $_REQUEST['bulk_index_posts'] );
+
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of posts set to index */
+				_n(
+					'%s post to index.',
+					'%s posts to index.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
+	}
+}
+
+/**
+ * No follow bulk actions
+ *
+ * @param array $bulk_actions No follow bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_nofollow( $bulk_actions ) {
+	$bulk_actions['seopress_nofollow'] = __( 'Enable nofollow', 'wp-seopress' );
+
+	return $bulk_actions;
+}
+
+/**
+ * No follow bulk action handler
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_action_nofollow_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_nofollow' !== $doaction ) {
+		return $redirect_to;
+	}
+
+	$post_ids = seopress_bulk_action_seo_ids( $post_ids );
+	$on_terms = seopress_bulk_action_on_terms();
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post/term.
+		if ( $on_terms ) {
+			update_term_meta( $post_id, '_seopress_robots_follow', 'yes' );
+		} else {
+			update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
+		}
+	}
+	$redirect_to = add_query_arg( 'bulk_nofollow_posts', count( $post_ids ), $redirect_to );
+
+	return $redirect_to;
+}
+
+/**
+ * No follow bulk action admin notice
+ *
+ * @return void
+ */
+function seopress_bulk_action_nofollow_admin_notice() {
+	if ( isset( $_REQUEST['bulk_nofollow_posts'] ) ) {
+		$count = intval( $_REQUEST['bulk_nofollow_posts'] );
+
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of posts set to nofollow */
+				_n(
+					'%s post to nofollow.',
+					'%s posts to nofollow.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
+	}
+}
+
+/**
+ * Follow bulk actions
+ *
+ * @param array $bulk_actions Follow bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_follow( $bulk_actions ) {
+	$bulk_actions['seopress_follow'] = __( 'Enable follow', 'wp-seopress' );
+
+	return $bulk_actions;
+}
+
+/**
+ * Follow bulk action handler
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_action_follow_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_follow' !== $doaction ) {
+		return $redirect_to;
+	}
+
+	$post_ids = seopress_bulk_action_seo_ids( $post_ids );
+	$on_terms = seopress_bulk_action_on_terms();
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post/term.
+		if ( $on_terms ) {
+			delete_term_meta( $post_id, '_seopress_robots_follow' );
+		} else {
+			delete_post_meta( $post_id, '_seopress_robots_follow' );
+		}
+	}
+	$redirect_to = add_query_arg( 'bulk_follow_posts', count( $post_ids ), $redirect_to );
+
+	return $redirect_to;
+}
+
+/**
+ * Follow bulk action admin notice
+ *
+ * @return void
+ */
+function seopress_bulk_action_follow_admin_notice() {
+	if ( isset( $_REQUEST['bulk_follow_posts'] ) ) {
+		$count = intval( $_REQUEST['bulk_follow_posts'] );
+
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of posts set to follow */
+				_n(
+					'%s post to follow.',
+					'%s posts to follow.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
+	}
+}
+
+/**
+ * Enable 301 bulk actions
+ *
+ * @param array $bulk_actions Enable 301 bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_redirect_enable( $bulk_actions ) {
+	$bulk_actions['seopress_enable'] = __( 'Enable redirection', 'wp-seopress' );
+
+	return $bulk_actions;
+}
+
+/**
+ * Enable 301 bulk action handler
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_action_redirect_enable_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_enable' !== $doaction ) {
+		return $redirect_to;
+	}
+
+	// Post ids whatever the screen is: this action writes post meta or a
+	// post permalink, never term meta. See seopress_bulk_action_editable_ids().
+	$post_ids = seopress_bulk_action_seo_ids( $post_ids, 'post' );
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post/term.
+		update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );
+	}
+	$redirect_to = add_query_arg( 'bulk_enable_redirects_posts', count( $post_ids ), $redirect_to );
+
+	return $redirect_to;
+}
+
+/**
+ * Enable 301 bulk action admin notice
+ *
+ * @return void
+ */
+function seopress_bulk_action_redirect_enable_admin_notice() {
+	if ( isset( $_REQUEST['bulk_enable_redirects_posts'] ) ) {
+		$count = intval( $_REQUEST['bulk_enable_redirects_posts'] );
+
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of redirections set to enabled */
+				_n(
+					'%s redirection enabled.',
+					'%s redirections enabled.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
+	}
+}
+
+/**
+ * Disable 301 bulk actions
+ *
+ * @param array $bulk_actions Disable 301 bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_redirect_disable( $bulk_actions ) {
+	$bulk_actions['seopress_disable'] = __( 'Disable redirection', 'wp-seopress' );
+
+	return $bulk_actions;
+}
+
+/**
+ * Disable 301 bulk action handler
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_action_redirect_disable_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_disable' !== $doaction ) {
+		return $redirect_to;
+	}
+
+	// Post ids whatever the screen is: this action writes post meta or a
+	// post permalink, never term meta. See seopress_bulk_action_editable_ids().
+	$post_ids = seopress_bulk_action_seo_ids( $post_ids, 'post' );
+	foreach ( $post_ids as $post_id ) {
+		// Perform action for each post/term.
+		update_post_meta( $post_id, '_seopress_redirections_enabled', '' );
+	}
+	$redirect_to = add_query_arg( 'bulk_disable_redirects_posts', count( $post_ids ), $redirect_to );
+
+	return $redirect_to;
+}
+
+/**
+ * Disable 301 bulk action admin notice
+ *
+ * @return void
+ */
+function seopress_bulk_action_redirect_disable_admin_notice() {
+	if ( isset( $_REQUEST['bulk_disable_redirects_posts'] ) ) {
+		$count = intval( $_REQUEST['bulk_disable_redirects_posts'] );
+
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of redirections set to disabled */
+				_n(
+					'%s redirection disabled.',
+					'%s redirections disabled.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
+	}
+}
+
+/**
+ * Add to instant indexing bulk actions
+ *
+ * @param array $bulk_actions Add to instant indexing bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_add_instant_indexing( $bulk_actions ) {
+	$bulk_actions['seopress_instant_indexing'] = __( 'Add to instant indexing queue', 'wp-seopress' );
+
+	return $bulk_actions;
+}
+
+/**
+ * Add to instant indexing bulk action handler
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_action_add_instant_indexing_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_instant_indexing' !== $doaction ) {
+		return $redirect_to;
+	}
+
+	// Post ids whatever the screen is: this action writes post meta or a
+	// post permalink, never term meta. See seopress_bulk_action_editable_ids().
+	$post_ids = seopress_bulk_action_seo_ids( $post_ids, 'post' );
+
+	if ( ! empty( $post_ids ) ) {
+		$urls    = '';
+		$options = get_option( 'seopress_instant_indexing_option_name' );
+		$check   = isset( $options['seopress_instant_indexing_manual_batch'] ) ? (string) $options['seopress_instant_indexing_manual_batch'] : '';
+
+		foreach ( $post_ids as $post_id ) {
+			// Perform action for each post/term.
+			$urls .= esc_url_raw( get_the_permalink( $post_id ) ) . "\n";
+		}
+
+		$urls = $check . "\n" . $urls;
+
+		$urls = implode( "\n", array_unique( explode( "\n", $urls ) ) );
+		$options['seopress_instant_indexing_manual_batch'] = seopress_sanitize_urls_list( $urls );
+
+		update_option( 'seopress_instant_indexing_option_name', $options );
+	}
+	$redirect_to = add_query_arg( 'bulk_add_instant_indexing', count( $post_ids ), $redirect_to );
+
+	return $redirect_to;
+}
+
+/**
+ * Add to instant indexing bulk action admin notice
+ *
+ * @return void
+ */
+function seopress_bulk_action_add_instant_indexing_admin_notice() {
+	if ( isset( $_REQUEST['bulk_add_instant_indexing'] ) ) {
+		$count = intval( $_REQUEST['bulk_add_instant_indexing'] );
+
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of posts added to instant indexing queue */
+				_n(
+					'%s post added to instant indexing queue.',
+					'%s posts added to instant indexing queue.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
+	}
+}
+
 if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
+	/*
+	 * The notices report what a bulk action just did, and the redirect it
+	 * answers with lands back on one of these two screens. Registered from the
+	 * top of the file, which loads on every admin request,
+	 * /wp-admin/index.php?bulk_noindex_posts=999 printed "999 posts to
+	 * noindex." on the dashboard. The output is escaped, so it was a false
+	 * statement rather than a hole, but a false statement all the same.
+	 */
+	foreach (
+		array(
+			'seopress_bulk_action_noindex_admin_notice',
+			'seopress_bulk_action_index_admin_notice',
+			'seopress_bulk_action_nofollow_admin_notice',
+			'seopress_bulk_action_follow_admin_notice',
+			'seopress_bulk_action_redirect_enable_admin_notice',
+			'seopress_bulk_action_redirect_disable_admin_notice',
+			'seopress_bulk_action_add_instant_indexing_admin_notice',
+		) as $seopress_bulk_notice
+	) {
+		add_action( 'admin_notices', $seopress_bulk_notice );
+	}
+
 	/**
 	 * Function to add bulk action filters.
 	 *
@@ -167,6 +768,12 @@ if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
 	 * @return void
 	 */
 	function add_bulk_action_filters( $key, $actions ) {
+		// Not offered to a role kept out of the SEO metabox; the handlers
+		// refuse it as well, see seopress_bulk_action_seo_ids().
+		if ( seopress_metabox_role_is_blocked( 'GLOBAL' ) ) {
+			return;
+		}
+
 		$actions = seopress_get_filtered_bulk_actions( $actions, $key );
 
 		foreach ( $actions as $action => $handler ) {
@@ -217,465 +824,82 @@ if ( 'edit.php' === $pagenow || 'edit-tags.php' === $pagenow ) {
 	if ( is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
 		add_bulk_action_filters( 'product', $common_actions );
 	}
+}
 
-	/**
-	 * No index bulk actions
-	 *
-	 * @param array $bulk_actions No index bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_noindex( $bulk_actions ) {
-		$bulk_actions['seopress_noindex'] = __( 'Enable noindex', 'wp-seopress' );
+/**
+ * Bulk action to generate alt text for images
+ *
+ * @param array $bulk_actions Bulk actions.
+ *
+ * @return array $bulk_actions
+ */
+function seopress_bulk_actions_alt_text( $bulk_actions ) {
+	$bulk_actions['seopress_alt_text'] = __( 'Generate alt text from filename', 'wp-seopress' );
 
-		return $bulk_actions;
-	}
+	return $bulk_actions;
+}
 
-	/**
-	 * No index bulk action handler
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_action_noindex_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_noindex' !== $doaction ) {
-			return $redirect_to;
-		}
-		foreach ( $post_ids as $post_id ) {
-			// Perform action for each post/term.
-			update_post_meta( $post_id, '_seopress_robots_index', 'yes' );
-			update_term_meta( $post_id, '_seopress_robots_index', 'yes' );
-		}
-		$redirect_to = add_query_arg( 'bulk_noindex_posts', count( $post_ids ), $redirect_to );
-
+/**
+ * Bulk action to generate alt text for images
+ *
+ * @param string $redirect_to Redirect to.
+ * @param string $doaction Do action.
+ * @param array  $post_ids Post IDs.
+ *
+ * @return string $redirect_to
+ */
+function seopress_bulk_actions_alt_text_handler( $redirect_to, $doaction, $post_ids ) {
+	if ( 'seopress_alt_text' !== $doaction ) {
 		return $redirect_to;
 	}
 
-	add_action( 'admin_notices', 'seopress_bulk_action_noindex_admin_notice' );
+	// An Author has upload_files but not edit_others_posts. With the ids
+	// unchecked, taking the bulk-media nonce from their own Media Library and
+	// posting somebody else's attachment ids overwrote those images' alt text,
+	// and their title, caption and description too when the matching auto
+	// options are on. Attachments are posts, so the check is the post one
+	// whatever the screen reports.
+	$post_ids = seopress_bulk_action_editable_ids( $post_ids, 'post' );
 
-	/**
-	 * No index bulk action admin notice
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_action_noindex_admin_notice() {
-		if ( ! empty( $_REQUEST['bulk_noindex_posts'] ) ) {
-			$count = intval( $_REQUEST['bulk_noindex_posts'] );
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of posts set to noindex */
-					_n(
-						'%s post to noindex.',
-						'%s posts to noindex.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
+	foreach ( $post_ids as $post_id ) {
+		seopress_auto_image_attr( $post_id, true );
 	}
+	$redirect_to = add_query_arg( 'bulk_alt_text', count( $post_ids ), $redirect_to );
 
-	/**
-	 * Index bulk actions
-	 *
-	 * @param array $bulk_actions Index bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_index( $bulk_actions ) {
-		$bulk_actions['seopress_index'] = __( 'Enable index', 'wp-seopress' );
+	return $redirect_to;
+}
 
-		return $bulk_actions;
-	}
+/**
+ * Bulk action to generate alt text for images
+ *
+ * @return void
+ */
+function seopress_bulk_actions_alt_text_notice() {
+	if ( isset( $_REQUEST['bulk_alt_text'] ) ) {
+		$count = intval( $_REQUEST['bulk_alt_text'] );
 
-	/**
-	 * Index bulk action handler
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_action_index_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_index' !== $doaction ) {
-			return $redirect_to;
-		}
-		foreach ( $post_ids as $post_id ) {
-			// Perform action for each post.
-			delete_post_meta( $post_id, '_seopress_robots_index', '' );
-			delete_term_meta( $post_id, '_seopress_robots_index', '' );
-		}
-		$redirect_to = add_query_arg( 'bulk_index_posts', count( $post_ids ), $redirect_to );
-
-		return $redirect_to;
-	}
-
-	add_action( 'admin_notices', 'seopress_bulk_action_index_admin_notice' );
-
-	/**
-	 * Index bulk action admin notice
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_action_index_admin_notice() {
-		if ( ! empty( $_REQUEST['bulk_index_posts'] ) ) {
-			$count = intval( $_REQUEST['bulk_index_posts'] );
-
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of posts set to index */
-					_n(
-						'%s post to index.',
-						'%s posts to index.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
-	}
-
-	/**
-	 * No follow bulk actions
-	 *
-	 * @param array $bulk_actions No follow bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_nofollow( $bulk_actions ) {
-		$bulk_actions['seopress_nofollow'] = __( 'Enable nofollow', 'wp-seopress' );
-
-		return $bulk_actions;
-	}
-
-	/**
-	 * No follow bulk action handler
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_action_nofollow_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_nofollow' !== $doaction ) {
-			return $redirect_to;
-		}
-		foreach ( $post_ids as $post_id ) {
-			// Perform action for each post/term.
-			update_post_meta( $post_id, '_seopress_robots_follow', 'yes' );
-			update_term_meta( $post_id, '_seopress_robots_follow', 'yes' );
-		}
-		$redirect_to = add_query_arg( 'bulk_nofollow_posts', count( $post_ids ), $redirect_to );
-
-		return $redirect_to;
-	}
-
-	add_action( 'admin_notices', 'seopress_bulk_action_nofollow_admin_notice' );
-
-	/**
-	 * No follow bulk action admin notice
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_action_nofollow_admin_notice() {
-		if ( ! empty( $_REQUEST['bulk_nofollow_posts'] ) ) {
-			$count = intval( $_REQUEST['bulk_nofollow_posts'] );
-
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of posts set to nofollow */
-					_n(
-						'%s post to nofollow.',
-						'%s posts to nofollow.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
-	}
-
-	/**
-	 * Follow bulk actions
-	 *
-	 * @param array $bulk_actions Follow bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_follow( $bulk_actions ) {
-		$bulk_actions['seopress_follow'] = __( 'Enable follow', 'wp-seopress' );
-
-		return $bulk_actions;
-	}
-
-	/**
-	 * Follow bulk action handler
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_action_follow_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_follow' !== $doaction ) {
-			return $redirect_to;
-		}
-		foreach ( $post_ids as $post_id ) {
-			// Perform action for each post/term.
-			delete_post_meta( $post_id, '_seopress_robots_follow' );
-			delete_term_meta( $post_id, '_seopress_robots_follow' );
-		}
-		$redirect_to = add_query_arg( 'bulk_follow_posts', count( $post_ids ), $redirect_to );
-
-		return $redirect_to;
-	}
-
-	add_action( 'admin_notices', 'seopress_bulk_action_follow_admin_notice' );
-
-	/**
-	 * Follow bulk action admin notice
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_action_follow_admin_notice() {
-		if ( ! empty( $_REQUEST['bulk_follow_posts'] ) ) {
-			$count = intval( $_REQUEST['bulk_follow_posts'] );
-
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of posts set to follow */
-					_n(
-						'%s post to follow.',
-						'%s posts to follow.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
-	}
-
-	/**
-	 * Enable 301 bulk actions
-	 *
-	 * @param array $bulk_actions Enable 301 bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_redirect_enable( $bulk_actions ) {
-		$bulk_actions['seopress_enable'] = __( 'Enable redirection', 'wp-seopress' );
-
-		return $bulk_actions;
-	}
-
-	/**
-	 * Enable 301 bulk action handler
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_action_redirect_enable_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_enable' !== $doaction ) {
-			return $redirect_to;
-		}
-		foreach ( $post_ids as $post_id ) {
-			// Perform action for each post/term.
-			update_post_meta( $post_id, '_seopress_redirections_enabled', 'yes' );
-		}
-		$redirect_to = add_query_arg( 'bulk_enable_redirects_posts', count( $post_ids ), $redirect_to );
-
-		return $redirect_to;
-	}
-
-	add_action( 'admin_notices', 'seopress_bulk_action_redirect_enable_admin_notice' );
-
-	/**
-	 * Enable 301 bulk action admin notice
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_action_redirect_enable_admin_notice() {
-		if ( ! empty( $_REQUEST['bulk_enable_redirects_posts'] ) ) {
-			$count = intval( $_REQUEST['bulk_enable_redirects_posts'] );
-
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of redirections set to enabled */
-					_n(
-						'%s redirection enabled.',
-						'%s redirections enabled.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
-	}
-
-	/**
-	 * Disable 301 bulk actions
-	 *
-	 * @param array $bulk_actions Disable 301 bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_redirect_disable( $bulk_actions ) {
-		$bulk_actions['seopress_disable'] = __( 'Disable redirection', 'wp-seopress' );
-
-		return $bulk_actions;
-	}
-
-	/**
-	 * Disable 301 bulk action handler
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_action_redirect_disable_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_disable' !== $doaction ) {
-			return $redirect_to;
-		}
-		foreach ( $post_ids as $post_id ) {
-			// Perform action for each post/term.
-			update_post_meta( $post_id, '_seopress_redirections_enabled', '' );
-		}
-		$redirect_to = add_query_arg( 'bulk_disable_redirects_posts', count( $post_ids ), $redirect_to );
-
-		return $redirect_to;
-	}
-
-	add_action( 'admin_notices', 'seopress_bulk_action_redirect_disable_admin_notice' );
-	/**
-	 * Disable 301 bulk action admin notice
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_action_redirect_disable_admin_notice() {
-		if ( ! empty( $_REQUEST['bulk_disable_redirects_posts'] ) ) {
-			$count = intval( $_REQUEST['bulk_disable_redirects_posts'] );
-
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of redirections set to disabled */
-					_n(
-						'%s redirection disabled.',
-						'%s redirections disabled.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
-	}
-
-	/**
-	 * Add to instant indexing bulk actions
-	 *
-	 * @param array $bulk_actions Add to instant indexing bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_add_instant_indexing( $bulk_actions ) {
-		$bulk_actions['seopress_instant_indexing'] = __( 'Add to instant indexing queue', 'wp-seopress' );
-
-		return $bulk_actions;
-	}
-
-	/**
-	 * Add to instant indexing bulk action handler
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_action_add_instant_indexing_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_instant_indexing' !== $doaction ) {
-			return $redirect_to;
-		}
-
-		if ( ! empty( $post_ids ) ) {
-			$urls    = '';
-			$options = get_option( 'seopress_instant_indexing_option_name' );
-			$check   = isset( $options['seopress_instant_indexing_manual_batch'] ) ? (string) $options['seopress_instant_indexing_manual_batch'] : '';
-
-			foreach ( $post_ids as $post_id ) {
-				// Perform action for each post/term.
-				$urls .= esc_url_raw( get_the_permalink( $post_id ) ) . "\n";
-			}
-
-			$urls = $check . "\n" . $urls;
-
-			$urls = implode( "\n", array_unique( explode( "\n", $urls ) ) );
-			$options['seopress_instant_indexing_manual_batch'] = seopress_sanitize_urls_list( $urls );
-
-			update_option( 'seopress_instant_indexing_option_name', $options );
-		}
-		$redirect_to = add_query_arg( 'bulk_add_instant_indexing', count( $post_ids ), $redirect_to );
-
-		return $redirect_to;
-	}
-
-	add_action( 'admin_notices', 'seopress_bulk_action_add_instant_indexing_admin_notice' );
-
-	/**
-	 * Add to instant indexing bulk action admin notice
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_action_add_instant_indexing_admin_notice() {
-		if ( ! empty( $_REQUEST['bulk_add_instant_indexing'] ) ) {
-			$count = intval( $_REQUEST['bulk_add_instant_indexing'] );
-
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of posts added to instant indexing queue */
-					_n(
-						'%s post added to instant indexing queue.',
-						'%s posts added to instant indexing queue.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
+		echo '<div id="message" class="updated fade"><p>';
+		echo esc_html(
+			sprintf(
+				/* translators: %s number of media */
+				_n(
+					'%s alternative text generated from filename.',
+					'%s alternative texts generated from filename.',
+					$count,
+					'wp-seopress'
+				),
+				number_format_i18n( $count )
+			)
+		);
+		echo '</p></div>';
 	}
 }
 
+/*
+ * Only the registration is screen-gated. The declarations above sit outside it
+ * so the handler can be called in a test, which is how the missing per-id
+ * check went unnoticed.
+ */
 if ( 'upload.php' === $pagenow ) {
 	$media_actions = seopress_get_filtered_bulk_actions(
 		array(
@@ -692,67 +916,7 @@ if ( 'upload.php' === $pagenow ) {
 		}
 	}
 
-	/**
-	 * Bulk action to generate alt text for images
-	 *
-	 * @param array $bulk_actions Bulk actions.
-	 *
-	 * @return array $bulk_actions
-	 */
-	function seopress_bulk_actions_alt_text( $bulk_actions ) {
-		$bulk_actions['seopress_alt_text'] = __( 'Generate alt text from filename', 'wp-seopress' );
-
-		return $bulk_actions;
-	}
-
-	/**
-	 * Bulk action to generate alt text for images
-	 *
-	 * @param string $redirect_to Redirect to.
-	 * @param string $doaction Do action.
-	 * @param array  $post_ids Post IDs.
-	 *
-	 * @return string $redirect_to
-	 */
-	function seopress_bulk_actions_alt_text_handler( $redirect_to, $doaction, $post_ids ) {
-		if ( 'seopress_alt_text' !== $doaction ) {
-			return $redirect_to;
-		}
-		foreach ( $post_ids as $post_id ) {
-			seopress_auto_image_attr( $post_id, true );
-		}
-		$redirect_to = add_query_arg( 'bulk_alt_text', count( $post_ids ), $redirect_to );
-
-		return $redirect_to;
-	}
-
 	add_action( 'admin_notices', 'seopress_bulk_actions_alt_text_notice' );
-
-	/**
-	 * Bulk action to generate alt text for images
-	 *
-	 * @return void
-	 */
-	function seopress_bulk_actions_alt_text_notice() {
-		if ( ! empty( $_REQUEST['bulk_alt_text'] ) ) {
-			$count = intval( $_REQUEST['bulk_alt_text'] );
-
-			echo '<div id="message" class="updated fade"><p>';
-			echo esc_html(
-				sprintf(
-					/* translators: %s number of media */
-					_n(
-						'%s alternative text generated from filename.',
-						'%s alternative texts generated from filename.',
-						$count,
-						'wp-seopress'
-					),
-					number_format_i18n( $count )
-				)
-			);
-			echo '</p></div>';
-		}
-	}
 }
 
 // Quick Edit.
@@ -768,6 +932,12 @@ if ( 'edit.php' === $pagenow ) {
 	 */
 	function seopress_bulk_quick_edit_custom_box( $column_name ) {
 		if ( is_plugin_active( 'admin-columns-pro/admin-columns-pro.php' ) ) {
+			return;
+		}
+
+		// Same areas as the metabox: no field the Advanced > Security
+		// settings hide from this role there.
+		if ( seopress_metabox_role_is_blocked( 'seopress_tkw' === $column_name ? 'CONTENT_ANALYSIS' : 'GLOBAL' ) ) {
 			return;
 		}
 
@@ -884,23 +1054,33 @@ function seopress_bulk_quick_edit_save_post( $post_id ) {
 		return $post_id;
 	}
 
-	if ( ! current_user_can( 'edit_posts', $post_id ) ) {
-		return;
-	}
-
 	$_REQUEST += array( 'seopress_title_edit_nonce' => '' );
 
 	if ( ! isset( $_REQUEST['seopress_title_edit_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['seopress_title_edit_nonce'] ) ), plugin_basename( __FILE__ ) ) ) {
 		return;
 	}
+
+	// After the nonce: save_post fires for every insert, posts of an
+	// unregistered type included, and only a Quick Edit save is checked here.
+	if ( ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+
+	// The target keywords belong to the content analysis, everything else to
+	// the SEO metabox: each is saved only when its area is open to this role.
+	if ( isset( $_REQUEST['seopress_tkw'] ) && ! seopress_metabox_role_is_blocked( 'CONTENT_ANALYSIS' ) ) {
+		update_post_meta( $post_id, '_seopress_analysis_target_kw', sanitize_text_field( wp_unslash( $_REQUEST['seopress_tkw'] ) ) );
+	}
+
+	if ( seopress_metabox_role_is_blocked( 'GLOBAL' ) ) {
+		return;
+	}
+
 	if ( isset( $_REQUEST['seopress_title'] ) ) {
 		update_post_meta( $post_id, '_seopress_titles_title', sanitize_text_field( wp_unslash( $_REQUEST['seopress_title'] ) ) );
 	}
 	if ( isset( $_REQUEST['seopress_desc'] ) ) {
 		update_post_meta( $post_id, '_seopress_titles_desc', sanitize_textarea_field( wp_unslash( $_REQUEST['seopress_desc'] ) ) );
-	}
-	if ( isset( $_REQUEST['seopress_tkw'] ) ) {
-		update_post_meta( $post_id, '_seopress_analysis_target_kw', sanitize_text_field( wp_unslash( $_REQUEST['seopress_tkw'] ) ) );
 	}
 	if ( isset( $_REQUEST['seopress_canonical'] ) ) {
 		update_post_meta( $post_id, '_seopress_robots_canonical', sanitize_url( wp_unslash( $_REQUEST['seopress_canonical'] ) ) );

@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 function seopress_squirrly_migration() {
 	check_ajax_referer( 'seopress_squirrly_migrate_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) {
 		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
 			$offset = absint( $_POST['offset'] );
 		}

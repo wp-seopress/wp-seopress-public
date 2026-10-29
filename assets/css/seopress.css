@@ -537,8 +537,11 @@ table.wp-list-table .manage_column.column-seopress_insights {
     width: 6%;
 }
 
-.post-type-product .fixed .column-seopress_score {
-    width: 50px;
+/* Ring (30px), 6px gap and a "17/17" ratio (about 46px at 1.2em bold) need
+   82px on one line, measured in Chrome. Every post type: with no width, the
+   fixed table layout let "12/17" overflow the cell at 1100px. */
+.fixed .column-seopress_score {
+    width: 90px;
 }
 
 table.fixed thead .column-seopress_nofollow,
@@ -3907,4 +3910,21 @@ details.seopress-notice > *:not(summary) {
 
 .seopress-notifications-hidden .seopress-notifications-list-title::-webkit-details-marker {
     display: none;
+}
+
+/* Keep the ring and the ratio on one line however narrow the Score column gets
+   when many columns are shown; posts and pages have no fixed width for it. */
+.column-seopress_score .analysis-score p {
+    white-space: nowrap;
+}
+
+/* Number of content analysis checks passed, next to the ring in the Score column.
+   Plain text like the other cells, not the bold 1.2em of the metabox score. */
+.column-seopress_score .analysis-score .seopress-score-ratio {
+    margin-left: 6px;
+    vertical-align: middle;
+    font-size: 13px;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
 }

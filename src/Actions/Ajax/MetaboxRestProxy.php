@@ -61,6 +61,23 @@ class MetaboxRestProxy implements ExecuteHooksBackend {
 			wp_send_json_error( array( 'message' => 'forbidden' ), 403 );
 		}
 
+		// rest_do_request() skips the authentication step of a real REST
+		// request, so a plugin that closes the REST API to some users through
+		// rest_authentication_errors would be bypassed by this transport.
+		$auth_error = $this->authentication_error();
+		if ( is_wp_error( $auth_error ) ) {
+			$error_data = $auth_error->get_error_data();
+			$status     = is_array( $error_data ) && isset( $error_data['status'] ) ? (int) $error_data['status'] : 401;
+
+			wp_send_json_error(
+				array(
+					'code'    => $auth_error->get_error_code(),
+					'message' => $auth_error->get_error_message(),
+				),
+				$status
+			);
+		}
+
 		// Several routes asked for at once: answer them from this bootstrap
 		// instead of making the browser pay for one per route (see #1851).
 		if ( isset( $_REQUEST['routes'] ) ) {
@@ -115,6 +132,36 @@ class MetaboxRestProxy implements ExecuteHooksBackend {
 		$data     = $server->response_to_data( $response, false );
 
 		wp_send_json( $data, $response->get_status() );
+	}
+
+	/**
+	 * Run the rest_authentication_errors filter as a REST request would.
+	 *
+	 * Core's cookie check is left out while the filter runs: it wants a
+	 * wp_rest nonce, which this transport does not carry, and without one it
+	 * logs the user out for the rest of the request. Its job, stopping a
+	 * forged cross-site request, is done here by the seopress_metabox_proxy
+	 * nonce checked above.
+	 *
+	 * @return \WP_Error|null|true The filtered result, an error when a plugin refuses the request.
+	 */
+	private function authentication_error() {
+		// Registers the REST API and fires rest_api_init, where most plugins
+		// hook into the filter.
+		rest_get_server();
+
+		$priority = has_filter( 'rest_authentication_errors', 'rest_cookie_check_errors' );
+		if ( false !== $priority ) {
+			remove_filter( 'rest_authentication_errors', 'rest_cookie_check_errors', $priority );
+		}
+
+		$result = apply_filters( 'rest_authentication_errors', null );
+
+		if ( false !== $priority ) {
+			add_filter( 'rest_authentication_errors', 'rest_cookie_check_errors', $priority );
+		}
+
+		return $result;
 	}
 
 	/**

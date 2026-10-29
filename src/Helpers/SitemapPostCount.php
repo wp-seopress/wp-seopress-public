@@ -11,7 +11,7 @@ class SitemapPostCount {
 			return count( get_posts( $args ) );
 		}
 
-		$args = wp_parse_args( $args, array( 'suppress_filters' => true ) );
+		$args = wp_parse_args( $args, array( 'suppress_filters' => true ) ); // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.SuppressFilters_suppress_filters -- the get_posts() default, so the count matches the get_posts() call above.
 		$args['posts_per_page'] = 1;
 		$args['nopaging'] = false;
 		$args['paged'] = 1;

@@ -57,6 +57,38 @@ class GetTerm implements ExecuteHooks {
 	 * @return array
 	 */
 	protected function getData( $id, $taxonomy = 'category' ) {
+		// Same rule as the post route: open to anyone, so it may only describe
+		// a taxonomy a visitor could already browse. A non-public taxonomy has
+		// no archive, and its term names are frequently internal. The term is
+		// checked too, so a valid taxonomy cannot be paired with any id. See
+		// SEC-01.
+		$taxonomy_object = get_taxonomy( $taxonomy );
+		$term            = get_term( (int) $id, $taxonomy );
+
+		/**
+		 * Filter whether a term may be described by the public SEO route.
+		 *
+		 * Defaults to the taxonomy being publicly queryable and the term
+		 * existing in it. Return true to expose an internal taxonomy on
+		 * purpose, for an integration that relied on the previous behaviour.
+		 *
+		 * @since 10.4.0
+		 *
+		 * @param bool   $allowed  Whether the term may be described.
+		 * @param int    $id       The term ID.
+		 * @param string $taxonomy The taxonomy.
+		 */
+		$allowed = apply_filters(
+			'seopress_api_public_term_is_readable',
+			$taxonomy_object && ! empty( $taxonomy_object->publicly_queryable ) && $term instanceof \WP_Term,
+			(int) $id,
+			$taxonomy
+		);
+
+		if ( ! $allowed ) {
+			return null;
+		}
+
 		$context = seopress_get_service( 'ContextPage' )->buildContextWithCurrentId(
 			$id,
 			array(

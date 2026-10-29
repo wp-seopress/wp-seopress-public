@@ -61,11 +61,13 @@ function seopress_sanitize_options_fields( $input ) {
 		'seopress_google_analytics_linker_domains',
 		'seopress_google_analytics_linker_accept_incoming',
 		'seopress_google_analytics_download_tracking',
+		'seopress_google_analytics_affiliate_tracking',
 		'seopress_google_analytics_not_found_tracking',
 		'seopress_google_analytics_opt_out_msg',
 		'seopress_google_analytics_opt_out_msg_ok',
 		'seopress_google_analytics_opt_out_msg_close',
 		'seopress_google_analytics_opt_out_msg_edit',
+		'seopress_google_analytics_opt_out_msg_customize',
 		'seopress_google_analytics_other_tracking',
 		'seopress_google_analytics_other_tracking_body',
 		'seopress_google_analytics_other_tracking_footer',
@@ -139,6 +141,9 @@ function seopress_sanitize_options_fields( $input ) {
 				$options         = get_option( 'seopress_google_analytics_option_name' );
 				$input[ $value ] = isset( $options[ $value ] ) ? $options[ $value ] : '';
 			}
+		} elseif ( isset( $input[ $value ] ) && in_array( $value, array( 'seopress_google_analytics_download_tracking', 'seopress_google_analytics_affiliate_tracking' ), true ) ) {
+			// Both end up in a regular expression inside the inline GA snippet.
+			$input[ $value ] = seopress_sanitize_tracking_patterns( $input[ $value ] );
 		} elseif ( ( ! empty( $input['seopress_instant_indexing_manual_batch'] ) && 'seopress_instant_indexing_manual_batch' === $value ) || ( ! empty( $input['seopress_social_accounts_extra'] ) && 'seopress_social_accounts_extra' === $value ) ) {
 			$input[ $value ] = seopress_sanitize_urls_list( $input[ $value ] );
 		} elseif ( ( ! empty( $input['seopress_social_accounts_facebook'] ) && 'seopress_social_accounts_facebook' === $value ) || ( ! empty( $input['seopress_social_accounts_pinterest'] ) && 'seopress_social_accounts_pinterest' === $value ) || ( ! empty( $input['seopress_social_accounts_instagram'] ) && 'seopress_social_accounts_instagram' === $value ) || ( ! empty( $input['seopress_social_accounts_youtube'] ) && 'seopress_social_accounts_youtube' === $value ) || ( ! empty( $input['seopress_social_accounts_linkedin'] ) && 'seopress_social_accounts_linkedin' === $value ) ) {
@@ -150,11 +155,9 @@ function seopress_sanitize_options_fields( $input ) {
 		} elseif ( isset( $input['seopress_social_knowledge_employees'] ) && 'seopress_social_knowledge_employees' === $value ) {
 			$input[ $value ] = '' !== $input[ $value ] ? absint( $input[ $value ] ) : '';
 		} elseif ( ( ! empty( $input['seopress_social_accounts_twitter'] ) && 'seopress_social_accounts_twitter' === $value ) ) {
-			$input[ $value ] = sanitize_text_field( $input[ $value ] );
-			// Ensure Twitter handle starts with @.
-			if ( strpos( $input[ $value ], '@' ) !== 0 ) {
-				$input[ $value ] = '@' . ltrim( $input[ $value ], '@' );
-			}
+			// Store "@handle", also when a full profile URL was typed.
+			$handle          = \SEOPress\Helpers\XHandle::extract( sanitize_text_field( $input[ $value ] ) );
+			$input[ $value ] = '' !== $handle ? '@' . $handle : '';
 		} elseif ( ! empty( $input[ $value ] ) ) {
 			// Title/description templates and the separator carry user-meaningful
 			// whitespace (e.g. " - " around %%sep%%, leading/trailing spaces around
@@ -180,8 +183,18 @@ function seopress_sanitize_options_fields( $input ) {
 				// strip_tags) without its trailing trim(), so user spaces
 				// around the separator and around tokens survive. Line breaks
 				// and control characters are dropped.
-				$stripped        = preg_replace( '@<(script|style)[^>]*?>.*?</\1>@si', '', (string) $input[ $value ] );
-				$stripped        = strip_tags( $stripped ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- wp_strip_all_tags() trims, which would drop the spaces this branch preserves.
+				$stripped = preg_replace( '@<(script|style)[^>]*?>.*?</\1>@si', '', (string) $input[ $value ] );
+				// strip_tags() reads a final "<" as the start of a tag and
+				// drops it, which empties a "<" separator. Nothing follows it,
+				// so it cannot open a tag: set it aside and put it back.
+				$trailing_lt = '<' === substr( $stripped, -1 );
+				if ( $trailing_lt ) {
+					$stripped = substr( $stripped, 0, -1 );
+				}
+				$stripped = strip_tags( $stripped ); // phpcs:ignore WordPress.WP.AlternativeFunctions.strip_tags_strip_tags -- wp_strip_all_tags() trims, which would drop the spaces this branch preserves.
+				if ( $trailing_lt ) {
+					$stripped .= '<';
+				}
 				$stripped        = preg_replace( '/[\r\n\t]+/', '', $stripped );
 				$input[ $value ] = preg_replace( '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/', '', $stripped );
 			} else {

@@ -201,6 +201,17 @@ class NoticeOption {
 	}
 
 	/**
+	 * Whether the "content types hidden from search engines" notice was dismissed.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return string
+	 */
+	public function getNoticeNoIndexContentTypes() { // phpcs:ignore WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid
+		return $this->searchOptionByKey( 'notice-noindex-content-types' );
+	}
+
+	/**
 	 * The getNoticeRSSUseExcerpt function.
 	 *
 	 * @since 6.0.0

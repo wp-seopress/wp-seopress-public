@@ -3,7 +3,7 @@
 defined( 'ABSPATH' ) || exit;
 return array (
   'format' => 1,
-  'version' => '10.3',
+  'version' => '10.4',
   'services' => 
   array (
     'Notifications' => '\\SEOPress\\Services\\Admin\\Notifications\\Notifications',
@@ -38,6 +38,7 @@ return array (
     'HTMLSitemapService' => '\\SEOPress\\Services\\HTMLSitemap\\HTMLSitemapService',
     'HTMLSitemapTemplate' => '\\SEOPress\\Services\\HTMLSitemap\\HTMLSitemapTemplate',
     'I18nUniversalMetabox' => '\\SEOPress\\Services\\I18nUniversalMetabox',
+    'IndexingHistory' => '\\SEOPress\\Services\\InstantIndexing\\IndexingHistory',
     'JsonSchemaGenerator' => '\\SEOPress\\Services\\JsonSchemaGenerator',
     'DescriptionMeta' => '\\SEOPress\\Services\\Metas\\Description\\DescriptionMeta',
     'AuthorDescriptionSpecification' => '\\SEOPress\\Services\\Metas\\Description\\Specifications\\AuthorSpecification',
@@ -112,6 +113,7 @@ return array (
     'TitleOption' => '\\SEOPress\\Services\\Options\\TitleOption',
     'ToggleOption' => '\\SEOPress\\Services\\Options\\ToggleOption',
     'ContentAnalysisRepository' => '\\SEOPress\\Services\\Repository\\ContentAnalysisRepository',
+    'SchemaGraph' => '\\SEOPress\\Services\\Schemas\\SchemaGraph',
     'SearchAttachment' => '\\SEOPress\\Services\\SearchAttachment',
     'SearchUrl' => '\\SEOPress\\Services\\SearchUrl',
     'ExportSettings' => '\\SEOPress\\Services\\Settings\\ExportSettings',
@@ -162,6 +164,7 @@ return array (
     '\\SEOPress\\Actions\\Api\\Diagnostics\\SitemapTest' => '\\SEOPress\\Actions\\Api\\Diagnostics\\SitemapTest',
     '\\SEOPress\\Actions\\Api\\GetPost' => '\\SEOPress\\Actions\\Api\\GetPost',
     '\\SEOPress\\Actions\\Api\\GetTerm' => '\\SEOPress\\Actions\\Api\\GetTerm',
+    '\\SEOPress\\Actions\\Api\\InstantIndexingHistory' => '\\SEOPress\\Actions\\Api\\InstantIndexingHistory',
     '\\SEOPress\\Actions\\Api\\McpConnections' => '\\SEOPress\\Actions\\Api\\McpConnections',
     '\\SEOPress\\Actions\\Api\\McpStatus' => '\\SEOPress\\Actions\\Api\\McpStatus',
     '\\SEOPress\\Actions\\Api\\Metas\\AdvancedSettings' => '\\SEOPress\\Actions\\Api\\Metas\\AdvancedSettings',
@@ -195,6 +198,7 @@ return array (
     '\\SEOPress\\Actions\\Front\\Metas\\DescriptionMeta' => '\\SEOPress\\Actions\\Front\\Metas\\DescriptionMeta',
     '\\SEOPress\\Actions\\Front\\Metas\\TitleMeta' => '\\SEOPress\\Actions\\Front\\Metas\\TitleMeta',
     '\\SEOPress\\Actions\\Front\\Schemas\\PrintHeadJsonSchema' => '\\SEOPress\\Actions\\Front\\Schemas\\PrintHeadJsonSchema',
+    '\\SEOPress\\Actions\\Front\\Schemas\\PrintSchemaGraph' => '\\SEOPress\\Actions\\Front\\Schemas\\PrintSchemaGraph',
     '\\SEOPress\\Actions\\Front\\WooCommerceProductLists' => '\\SEOPress\\Actions\\Front\\WooCommerceProductLists',
     '\\SEOPress\\Actions\\Options\\Init' => '\\SEOPress\\Actions\\Options\\Init',
     '\\SEOPress\\Actions\\Options\\OptionSaveHooks' => '\\SEOPress\\Actions\\Options\\OptionSaveHooks',

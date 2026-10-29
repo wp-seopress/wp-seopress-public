@@ -119,13 +119,15 @@ function seopress_admin_bar_links() {
 
 			$options = get_option( 'seopress_titles_option_name' );
 
+			// Toggles turned off in the settings are saved as false, not removed: read the value.
 			if ( get_current_screen()->taxonomy ) {
-				$noindex  = isset( $options['seopress_titles_single_titles'][ get_current_screen()->taxonomy ]['noindex'] );
-				$nofollow = isset( $options['seopress_titles_single_titles'][ get_current_screen()->taxonomy ]['nofollow'] );
+				$robots_options = $options['seopress_titles_tax_titles'][ get_current_screen()->taxonomy ] ?? array();
 			} else {
-				$noindex  = isset( $options['seopress_titles_single_titles'][ get_current_screen()->post_type ]['noindex'] );
-				$nofollow = isset( $options['seopress_titles_single_titles'][ get_current_screen()->post_type ]['nofollow'] );
+				$robots_options = $options['seopress_titles_single_titles'][ get_current_screen()->post_type ] ?? array();
 			}
+
+			$noindex  = '1' === (string) ( $robots_options['noindex'] ?? '' );
+			$nofollow = '1' === (string) ( $robots_options['nofollow'] ?? '' );
 
 			if ( get_current_screen()->taxonomy ) {
 				/* translators: %s taxonomy name */

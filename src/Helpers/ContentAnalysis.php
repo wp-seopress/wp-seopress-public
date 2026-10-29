@@ -121,6 +121,32 @@ abstract class ContentAnalysis {
 	}
 
 	/**
+	 * The slug the keyword-in-permalink check reads, dashes turned into spaces.
+	 *
+	 * The editor and the server both read it from here. The server used to
+	 * read the whole URL, so a keyword found in the domain or the category
+	 * base passed on the server and failed in the editor.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param \WP_Post $post The post.
+	 *
+	 * @return string The slug.
+	 */
+	public static function getPermalinkSlug( $post ) { // phpcs:ignore -- camelCase is the convention for this namespace.
+		$slug = urldecode( $post->post_name );
+
+		if ( is_plugin_active( 'permalink-manager-pro/permalink-manager.php' ) ) {
+			global $permalink_manager_uris;
+			if ( ! empty( $permalink_manager_uris ) ) {
+				$slug = isset( $permalink_manager_uris[ $post->ID ] ) ? urldecode( $permalink_manager_uris[ $post->ID ] ) : '';
+			}
+		}
+
+		return str_replace( '-', ' ', $slug );
+	}
+
+	/**
 	 * Build the slug readings of a set of target keywords, to be matched
 	 * against a permalink whose dashes have already been turned into spaces.
 	 *
@@ -169,6 +195,350 @@ abstract class ContentAnalysis {
 		}
 
 		return array_values( array_unique( $variants ) );
+	}
+
+	/**
+	 * Impacts a check reports when the page satisfies it. 'low' belongs here
+	 * because every surface already treats it as a pass: the posts list column
+	 * only flips to "Should be improved" on 'medium' or 'high', and the editor
+	 * aggregate ignores 'good' and 'low' alike.
+	 *
+	 * @var array
+	 */
+	const PASSING_IMPACTS = array( 'good', 'low' );
+
+	/**
+	 * Impacts a check reports when the page fails it, using the same partition
+	 * as PASSING_IMPACTS so the two lists together describe the whole scale.
+	 *
+	 * @var array
+	 */
+	const FAILING_IMPACTS = array( 'medium', 'high' );
+
+	/**
+	 * Count how many of the checks that actually ran are satisfied.
+	 *
+	 * The analysis already produces a verdict per check; the aggregate then
+	 * collapses all of them into "Good" or "Should be improved", so a page
+	 * failing one check looks exactly like a page failing eight. This counts
+	 * the individual verdicts instead, without weighting anything: the figure
+	 * is the checklist the user is looking at, not a new scoring model.
+	 *
+	 * A check only counts when it reported an impact on the known scale. One
+	 * left at null was not evaluated (a single-check run, or a third-party
+	 * entry added through `seopress_get_content_analysis_data` that nothing
+	 * filled in), and counting it either way would be a verdict nobody gave.
+	 *
+	 * Because the pass/fail partition is the one every surface already uses,
+	 * `passed === total` holds exactly when the aggregate verdict is "Good",
+	 * so the headline figure can never contradict the list underneath it.
+	 *
+	 * Checks the user ignored are left out of both counts, the way the editor
+	 * leaves them out, so the column and the editor give the same ratio.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param array    $analyzes Either the analyzes array (check key => array
+	 *                           with an `impact` entry) or the flat impact map
+	 *                           (check key => impact) stored in the score column.
+	 * @param string[] $ignored  Check keys to leave out. See getIgnoredChecks().
+	 *
+	 * @return array{passed: int, failed: int, total: int}
+	 */
+	public static function getScoreSummary( $analyzes, array $ignored = array() ) { // phpcs:ignore -- camelCase is the convention for this namespace.
+		$summary = array(
+			'passed' => 0,
+			'failed' => 0,
+			'total'  => 0,
+		);
+
+		if ( ! is_array( $analyzes ) ) {
+			return $summary;
+		}
+
+		foreach ( $analyzes as $key => $analyze ) {
+			// A numeric key means the impacts lost their check identity on the
+			// way in (the deduplicated list every version up to 10.3.x stored
+			// in the score column), so nothing can be counted per check.
+			if ( ! is_string( $key ) ) {
+				continue;
+			}
+
+			if ( in_array( $key, $ignored, true ) ) {
+				continue;
+			}
+
+			if ( is_array( $analyze ) ) {
+				$impact = self::isEvaluated( $analyze ) && isset( $analyze['impact'] ) ? $analyze['impact'] : null;
+			} else {
+				$impact = $analyze;
+			}
+
+			if ( ! is_string( $impact ) ) {
+				continue;
+			}
+
+			if ( in_array( $impact, self::PASSING_IMPACTS, true ) ) {
+				++$summary['passed'];
+				++$summary['total'];
+			} elseif ( in_array( $impact, self::FAILING_IMPACTS, true ) ) {
+				++$summary['failed'];
+				++$summary['total'];
+			}
+		}
+
+		return $summary;
+	}
+
+	/**
+	 * The verdict of a stored score, the one the ring and the toolbar show.
+	 *
+	 * With the per-check detail it is read from the counts, so it cannot
+	 * contradict the ratio, and a post whose every check is ignored is good,
+	 * as in the editor and the abilities. A row stored by 10.3.x or earlier
+	 * only kept its distinct impacts and is read from them.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param array $score   The stored score.
+	 * @param array $summary Its getScoreSummary(), ignored checks left out.
+	 *
+	 * @return bool
+	 */
+	public static function isGoodVerdict( $score, array $summary ) { // phpcs:ignore -- camelCase is the convention for this namespace.
+		if ( ! is_array( $score ) ) {
+			return false;
+		}
+
+		foreach ( array_keys( $score ) as $key ) {
+			if ( is_string( $key ) ) {
+				return empty( $summary['failed'] );
+			}
+		}
+
+		return ! in_array( 'medium', $score, true ) && ! in_array( 'high', $score, true );
+	}
+
+	/**
+	 * Whether a check of the analyzes array actually ran.
+	 *
+	 * The content checks are skipped on a page builder page whose post content
+	 * is too thin to read: they report 'good' so nothing alerts, and
+	 * `evaluated => false` so nobody counts them as passed.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param array $analyze One entry of the analyzes array.
+	 *
+	 * @return bool
+	 */
+	public static function isEvaluated( $analyze ) { // phpcs:ignore -- camelCase is the convention for this namespace.
+		return ! is_array( $analyze ) || ! isset( $analyze['evaluated'] ) || false !== $analyze['evaluated'];
+	}
+
+	/**
+	 * The impact of every check, keyed by check, as stored in the score column.
+	 *
+	 * A check that did not run is stored as null rather than 'good', so the
+	 * posts list column leaves it out of its count exactly like the editor
+	 * does. The aggregate verdict only looks for 'medium' and 'high', so it
+	 * reads the same as before.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param array $analyzes The analyzes array.
+	 *
+	 * @return array Check key => impact, or null when the check did not run.
+	 */
+	public static function getImpactMap( $analyzes ) { // phpcs:ignore -- camelCase is the convention for this namespace.
+		$map = array();
+
+		foreach ( (array) $analyzes as $key => $analyze ) {
+			$map[ $key ] = self::isEvaluated( $analyze ) && is_array( $analyze ) && isset( $analyze['impact'] ) ? $analyze['impact'] : null;
+		}
+
+		return $map;
+	}
+
+	/**
+	 * The issue type a check is stored under in `seopress_seo_issues`.
+	 *
+	 * Most checks share their name with their issue type; these four do not.
+	 * The editor keeps the same table in `ISSUE_TYPE_BY_KEY`.
+	 *
+	 * @var array
+	 */
+	const ISSUE_TYPE_BY_CHECK = array(
+		'schemas'            => 'json_schemas',
+		'keywords_permalink' => 'permalink',
+		'meta_title'         => 'title',
+		'meta_desc'          => 'description',
+	);
+
+	/**
+	 * Ignored checks already read in this request, by post.
+	 *
+	 * @var array
+	 */
+	protected static $ignored_cache = array();
+
+	/**
+	 * Whether the PRO issues table exists, read once per request.
+	 *
+	 * @var bool|null
+	 */
+	protected static $issues_table_exists = null;
+
+	/**
+	 * Whether PRO, which owns the issues table and the ignore controls, is
+	 * loaded. Read once per request; null until then.
+	 *
+	 * @var bool|null
+	 */
+	protected static $pro_loaded = null;
+
+	/**
+	 * Forget what getIgnoredChecks() read.
+	 *
+	 * Nothing in the plugin needs it within a request: the ignore state only
+	 * changes through PRO's REST routes, and the next request starts empty.
+	 * It exists so tests can change the issues table between two reads.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return void
+	 */
+	public static function flushIgnoredChecks() { // phpcs:ignore -- camelCase is the convention for this namespace.
+		self::$ignored_cache       = array();
+		self::$issues_table_exists = null;
+		self::$pro_loaded          = null;
+	}
+
+	/**
+	 * The checks of a post that the user ignored entirely.
+	 *
+	 * A check is ignored when every issue it raised is marked ignored, which is
+	 * the editor's rule in `isCheckFullyIgnored()`. The rows live in the
+	 * `seopress_seo_issues` table PRO creates, and the editor only learns about
+	 * them through PRO, so without PRO loaded nothing is ignored and no query
+	 * runs.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param int $post_id The post.
+	 *
+	 * @return string[] Check keys, as in getData().
+	 */
+	public static function getIgnoredChecks( $post_id ) { // phpcs:ignore -- camelCase is the convention for this namespace.
+		$post_id = (int) $post_id;
+
+		if ( $post_id < 1 ) {
+			return array();
+		}
+
+		$ignored = self::getIgnoredChecksForPostIds( array( $post_id ) );
+
+		return $ignored[ $post_id ];
+	}
+
+	/**
+	 * The ignored checks of several posts, read in one query.
+	 *
+	 * The posts list column and the site-wide ability show many posts at
+	 * once; reading them one by one cost one query per row. Posts already read
+	 * in this request are not queried again.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param int[] $post_ids The posts.
+	 *
+	 * @return array Post id => check keys.
+	 */
+	public static function getIgnoredChecksForPostIds( array $post_ids ) { // phpcs:ignore -- camelCase is the convention for this namespace.
+		global $wpdb;
+
+		$post_ids = array_values(
+			array_unique(
+				array_filter(
+					array_map( 'intval', $post_ids ),
+					static function ( $id ) {
+						return $id > 0;
+					}
+				)
+			)
+		);
+
+		$missing = array_values( array_diff( $post_ids, array_keys( self::$ignored_cache ) ) );
+
+		if ( ! empty( $missing ) ) {
+			$types_by_post = array_fill_keys( $missing, array() );
+
+			if ( null === self::$pro_loaded ) {
+				self::$pro_loaded = function_exists( 'seopress_pro_get_service' );
+			}
+
+			$table = $wpdb->prefix . 'seopress_seo_issues';
+
+			if ( self::$pro_loaded && null === self::$issues_table_exists ) {
+				// A query that matches nothing rather than SHOW TABLES, which does
+				// not list temporary tables: this answers the same on a real site
+				// and inside a test transaction.
+				$suppressed                = $wpdb->suppress_errors( true );
+				self::$issues_table_exists = null !== $wpdb->get_var( "SELECT COUNT(*) FROM {$table} WHERE 1 = 0" ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- table name built from the prefix.
+				$wpdb->suppress_errors( $suppressed );
+			}
+
+			if ( self::$pro_loaded && self::$issues_table_exists ) {
+				$placeholders = implode( ', ', array_fill( 0, count( $missing ), '%d' ) );
+
+				$rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+					$wpdb->prepare(
+						"SELECT post_id, issue_type, MIN( issue_ignore ) AS all_ignored FROM {$table} WHERE post_id IN ( {$placeholders} ) GROUP BY post_id, issue_type", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare -- table name built from the prefix, placeholders built above.
+						$missing
+					)
+				);
+
+				foreach ( (array) $rows as $row ) {
+					if ( 1 === (int) $row->all_ignored && isset( $types_by_post[ (int) $row->post_id ] ) ) {
+						$types_by_post[ (int) $row->post_id ][] = (string) $row->issue_type;
+					}
+				}
+			}
+
+			$checks = array_keys( self::getData() );
+
+			foreach ( $types_by_post as $post_id => $fully_ignored ) {
+				$ignored = array();
+
+				foreach ( $checks as $check ) {
+					$type = isset( self::ISSUE_TYPE_BY_CHECK[ $check ] ) ? self::ISSUE_TYPE_BY_CHECK[ $check ] : $check;
+
+					if ( in_array( $type, $fully_ignored, true ) ) {
+						$ignored[] = $check;
+					}
+				}
+
+				/**
+				 * Filter the checks of a post left out of the passed/total ratio.
+				 *
+				 * @since 10.4.0
+				 *
+				 * @param string[] $ignored Check keys.
+				 * @param int      $post_id The post.
+				 */
+				$ignored = apply_filters( 'seopress_content_analysis_ignored_checks', $ignored, $post_id );
+
+				self::$ignored_cache[ $post_id ] = is_array( $ignored ) ? array_values( $ignored ) : array();
+			}
+		}
+
+		$result = array();
+
+		foreach ( $post_ids as $post_id ) {
+			$result[ $post_id ] = self::$ignored_cache[ $post_id ];
+		}
+
+		return $result;
 	}
 
 	/**

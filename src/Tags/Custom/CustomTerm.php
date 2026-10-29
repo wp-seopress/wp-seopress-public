@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+use SEOPress\Helpers\Metas\PrimaryTerm;
 use SEOPress\Models\AbstractCustomTagValue;
 use SEOPress\Models\GetTagValue;
 
@@ -57,20 +58,45 @@ class CustomTerm extends AbstractCustomTagValue implements GetTagValue {
 
 		$field = $matches['field'];
 
-		$terms = wp_get_post_terms( $post->ID, $field );
-		if ( is_wp_error( $terms ) ) {
+		// An unknown taxonomy leaves the value untouched, as before.
+		if ( ! taxonomy_exists( $field ) ) {
 			return $value;
 		}
 
-		$value = isset( $terms[0] ) ? esc_attr( $terms[0]->name ) : '';
+		// The primary term when the author picked one, the first otherwise,
+		// through the same helper as the published title and description.
+		$term  = PrimaryTerm::get_display_term( $post->ID, $field );
+		$value = null !== $term ? esc_attr( $term->name ) : '';
 
 		/**
 		 * Filter to change the value of the custom term.
 		 *
-		 * @deprecated 4.4.0 Use seopress_get_tag' . $tag . '_value
+		 * @deprecated 4.4.0 Use seopress_get_tag_{$tag}_value, e.g. seopress_get_tag__ct_category_value.
 		 */
 		$value = apply_filters( 'seopress_titles_custom_tax', $value, $field );
 
-		return apply_filters( 'seopress_get_tag' . $tag . '_value', $value, $context );
+		// Until 10.4.0 this hook missed the underscore after "tag", unlike every
+		// other variable (seopress_get_tag_ct_category_value). Callbacks on the
+		// old name keep running.
+		$value = apply_filters_deprecated(
+			'seopress_get_tag' . $tag . '_value',
+			array( $value, $context ),
+			'10.4.0',
+			'seopress_get_tag_' . $tag . '_value'
+		);
+
+		/**
+		 * Filter the resolved value of a single custom-term variable.
+		 *
+		 * The tag keeps its leading underscore, hence the double underscore:
+		 * %%_ct_category%% is filtered by seopress_get_tag__ct_category_value,
+		 * like %%_cf_price%% by seopress_get_tag__cf_price_value.
+		 *
+		 * @since 10.4.0
+		 *
+		 * @param string $value   Rendered value.
+		 * @param array  $context Resolution context.
+		 */
+		return apply_filters( 'seopress_get_tag_' . $tag . '_value', $value, $context );
 	}
 }

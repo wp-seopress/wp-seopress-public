@@ -468,6 +468,45 @@
     border-color: rgba(var(--wp-admin-theme-color--rgb), 0.35);
 }
 
+/* Space chip — one per space between two variables, so a missing space is
+ * visible instead of being a two-pixel difference in the gap. The remove
+ * button sits on top of the dot rather than next to it, so the chip keeps
+ * the same width whether or not the pointer is on it. */
+.seopress-token--space {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    width: 18px;
+    padding: 0;
+}
+
+.seopress-token-mark {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.seopress-token--space .seopress-token-remove {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+.seopress-token--space:hover .seopress-token-mark {
+    opacity: 0;
+}
+
+.seopress-token--space:hover .seopress-token-remove {
+    opacity: 1;
+}
+
 /* Drag & drop states */
 .seopress-token--dragging {
     opacity: 0.3;
@@ -498,9 +537,9 @@
     pointer-events: none;
 }
 
-/* CSS tooltip showing the %%var%% key on hover */
+/* CSS tooltip showing the %%var%% key, or what a space chip is, on hover */
 .seopress-token::after {
-    content: attr(data-var);
+    content: attr(data-hint);
     position: absolute;
     bottom: calc(100% + 6px);
     left: 50%;
@@ -1280,6 +1319,68 @@
 
 .seopress-indexing-urls li {
     word-break: break-all;
+}
+
+/* Instant Indexing › History */
+.seopress-indexing-history__toolbar {
+    margin: 16px 0 12px;
+}
+
+.seopress-indexing-history__search {
+    min-width: 260px;
+}
+
+.seopress-indexing-history__table td {
+    vertical-align: top;
+}
+
+.seopress-indexing-history__date {
+    width: 170px;
+}
+
+.seopress-indexing-history__url {
+    word-break: break-all;
+}
+
+.seopress-indexing-history__status {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.seopress-indexing-history__status .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.seopress-indexing-history__status.is-success .dashicons {
+    color: var(--colorSuccess, #4ab866);
+}
+
+.seopress-indexing-history__status.is-error .dashicons {
+    color: var(--colorAlert, #eb0f00);
+}
+
+.seopress-indexing-history__message {
+    display: block;
+    margin-top: 2px;
+    color: #646970;
+    word-break: break-word;
+}
+
+.seopress-indexing-history__footer {
+    margin: 12px 0;
+}
+
+.seopress-indexing-history__count {
+    color: #646970;
 }
 
 /* Color Picker Field */
@@ -2601,6 +2702,11 @@
 	background: var(--colorAlert, #eb0f00);
 }
 
+/* Expected for this setup: neither a pass nor something to fix. */
+.seopress-mcp-check--info .seopress-mcp-check-status {
+	background: var(--wp-admin-theme-color, #2271b1);
+}
+
 .seopress-mcp-check-body {
 	-webkit-box-flex: 1;
 	    -ms-flex: 1 1 auto;
@@ -2802,6 +2908,55 @@
 
 .seopress-mcp-client__fallback {
 	margin-top: 16px;
+}
+
+/* How the client signs in, said before anything else in its tab. */
+.seopress-mcp-client__auth {
+	margin: 0 0 16px;
+	padding: 8px 12px;
+	max-width: 70ch;
+	border-left: 3px solid var(--wp-admin-theme-color, #2271b1);
+	background: rgba(var(--wp-admin-theme-color--rgb), 0.08);
+}
+
+.seopress-mcp-client__notes {
+	margin: 0;
+	padding-left: 18px;
+	list-style: disc;
+}
+
+/* One kind of app inside a client's tab, with its own title and steps. */
+.seopress-mcp-client__section {
+	margin-top: 24px;
+	padding-top: 16px;
+	border-top: 1px solid #dcdcde;
+}
+
+.seopress-mcp-client__section-title {
+	margin: 0 0 6px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.seopress-mcp-trouble {
+	margin: 0 0 8px;
+}
+
+.seopress-mcp-trouble__symptoms {
+	margin: 0 0 12px;
+	padding: 0;
+	list-style: none;
+}
+
+.seopress-mcp-trouble__symptoms code {
+	display: inline-block;
+	white-space: normal;
+	background: #f0f0f1;
+}
+
+.seopress-mcp-trouble__url {
+	margin-top: 8px;
 }
 
 .seopress-mcp-client .components-notice {

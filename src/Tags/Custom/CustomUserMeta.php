@@ -57,18 +57,20 @@ class CustomUserMeta extends AbstractCustomTagValue implements GetTagValue {
 
 		$field = $matches['field'];
 
-		$user_id = $context['user_id'] ?? get_current_user_id();
+		// The author of the content, as the legacy resolution does, never the
+		// visitor: a page cache primed by a logged-in administrator would
+		// otherwise serve their own profile fields to everybody.
+		$user_id = isset( $context['user_id'] ) ? (int) $context['user_id'] : 0;
 
-		if ( ! $user_id || intval( $user_id ) === 0 ) {
+		if ( ! $user_id ) {
 			if ( isset( $context['is_author'] ) && isset( $context['author']->ID ) ) {
-				$author_id = $context['author']->ID;
-			}
-			if ( isset( $post->post_author ) ) {
-				$author_id = $post->post_author;
+				$user_id = (int) $context['author']->ID;
+			} elseif ( isset( $post->post_author ) ) {
+				$user_id = (int) $post->post_author;
 			}
 		}
 
-		$raw_value = get_user_meta( $user_id, $field, true );
+		$raw_value = seopress_get_meta_tag_value( 'user', $user_id, $field );
 
 		// A user meta can hold an array (multi value meta, ACF repeater...).
 		// esc_attr() would cast it and output the literal string "Array".

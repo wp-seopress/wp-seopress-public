@@ -7,6 +7,9 @@
 
 defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
+use SEOPress\Actions\Api\Metas\AdvancedSettings;
+use SEOPress\Helpers\Metas\PrimaryTerm as PrimaryTermHelper;
+
 /**
  * Display metabox in Custom Post Type
  */
@@ -17,100 +20,129 @@ function seopress_display_date_snippet() {
 }
 
 /**
- * Primary category select
+ * Primary term select for one taxonomy.
  *
- * @param bool $echo Echo the HTML.
- * @param bool $with_description Display the description.
+ * Renders the `<select>` the Classic Editor injector appends to the
+ * taxonomy metabox. The field name is derived from the taxonomy's meta
+ * key, so `category` and `product_cat` keep the historical
+ * `seopress_robots_primary_cat` name while every other taxonomy gets its
+ * own `seopress_robots_primary_term_{taxonomy}` field.
+ *
+ * @since 10.4.0
+ *
+ * @param WP_Post|null $post             The post being edited.
+ * @param string       $taxonomy_name    Taxonomy name.
+ * @param bool         $with_description Display the description.
+ * @param bool         $print_html       Print the HTML instead of returning it.
  *
  * @return string HTML.
  */
-function seopress_primary_category_select( $echo = true, $with_description = true ) {
-	global $post;
-	global $typenow;
-	$seopress_robots_primary_cat = get_post_meta( $post->ID, '_seopress_robots_primary_cat', true );
+function seopress_primary_term_select( $post, $taxonomy_name, $with_description = true, $print_html = false ) {
+	$taxonomy = get_taxonomy( $taxonomy_name );
 
-	$cats    = 'product' == $typenow && seopress_get_service( 'WooCommerceActivate' )->isActive() ? get_the_terms( $post, 'product_cat' ) : get_categories();
-	$cats    = apply_filters( 'seopress_primary_category_list', $cats );
+	if ( ! $taxonomy instanceof WP_Taxonomy ) {
+		return '';
+	}
+
+	$post_type  = $post instanceof WP_Post ? $post->post_type : '';
+	$field_name = PrimaryTermHelper::get_field_name( $taxonomy_name, $post_type );
+	$current    = $post instanceof WP_Post ? PrimaryTermHelper::get_raw_value( $post->ID, $taxonomy_name ) : '';
+
+	if ( 'category' === $taxonomy_name ) {
+		// Historical behaviour kept for the core category: every category of
+		// the site is offered, the browser then narrows the list down to the
+		// ones actually checked on the post.
+		$terms = get_categories();
+	} else {
+		$terms = $post instanceof WP_Post ? get_the_terms( $post, $taxonomy_name ) : array();
+	}
+
+	if ( in_array( $taxonomy_name, PrimaryTermHelper::get_legacy_taxonomies(), true ) ) {
+		$terms = apply_filters( 'seopress_primary_category_list', $terms );
+	}
+
+	/**
+	 * Filter the terms offered by the primary term selector.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param WP_Term[]|false|WP_Error $terms         The terms.
+	 * @param string                   $taxonomy_name Taxonomy name.
+	 * @param WP_Post|null             $post          The post being edited.
+	 */
+	$terms = apply_filters( 'seopress_primary_term_list', $terms, $taxonomy_name, $post );
+
 	$options = sprintf(
 		'<option value="none" %s>%s</option>',
-		selected( 'none', $seopress_robots_primary_cat, false ),
+		selected( 'none', $current, false ),
 		__( 'None (will disable this feature)', 'wp-seopress' )
 	);
 
-	if ( ! empty( $cats ) && ! is_wp_error( $cats ) ) {
-		foreach ( $cats as $category ) {
+	if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+		foreach ( $terms as $term ) {
 			$options .= sprintf(
 				'<option value="%s" %s>%s</option>',
-				(int) $category->term_id,
-				selected( $category->term_id, $seopress_robots_primary_cat, false ),
-				esc_html( $category->name )
+				(int) $term->term_id,
+				selected( $term->term_id, $current, false ),
+				esc_html( $term->name )
 			);
 		}
 	}
 
-	$html        = '';
-	$description = sprintf(
-		/* translators: category permalink structure */
-		__( 'Set the category that gets used in the %s permalink and in our breadcrumbs if you have multiple categories.', 'wp-seopress' ),
-		'<code>%category%</code>'
-	);
-	if ( ! empty( $options ) ) {
-		$html = sprintf(
-			'<p>
-				<label for="seopress_robots_primary_cat" style="display:block; margin-bottom:8px;">%s</label>
-				%s
-				<br><select id="seopress_robots_primary_cat" name="seopress_robots_primary_cat">%s</select>
+	$html = sprintf(
+		'<p>
+				<label for="%1$s" style="display:block; margin-bottom:8px;">%2$s</label>
+				%3$s
+				<br><select id="%1$s" name="%1$s">%4$s</select>
 			</p>',
-			__( 'Select a primary category', 'wp-seopress' ),
-			$with_description ? sprintf( '<span class="description">%s</span>', $description ) : '',
-			$options
-		);
-	}
+		esc_attr( $field_name ),
+		esc_html( PrimaryTermHelper::get_label( $taxonomy ) ),
+		$with_description ? sprintf( '<span class="description">%s</span>', wp_kses_post( PrimaryTermHelper::get_description( $taxonomy ) ) ) : '',
+		$options
+	);
 
-	if ( $echo ) {
+	if ( $print_html ) {
 		echo $html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Admin markup assembled above, its dynamic parts already escaped.
 	}
+
 	return $html;
 }
 
 /**
- * Register `_seopress_robots_primary_cat` as a REST-exposed post meta.
+ * Register the primary category post meta.
  *
- * Required so the Gutenberg primary category sidebar bundle can read and
- * write the value through `select('core/editor').getEditedPostAttribute('meta')`
- * and `dispatch('core/editor').editPost({ meta: ... })`. The same meta key
- * is consumed by `seopress_titles_primary_cat_hook()` for `%category%`
- * permalinks, by the React universal metabox's Advanced tab and by the
- * Rank Math / Yoast / SEO Framework migrators, so we keep that single
- * key as the source of truth.
- *
- * @since 9.8.x
+ * @deprecated 10.4.0 The meta keys are registered per taxonomy by
+ *             `SEOPress\Actions\Api\Metas\AdvancedSettings::register_primary_term_metas()`
+ *             and by the advanced settings registration beside it. Kept as a
+ *             no-op because it was a public global function, and a theme or a
+ *             snippet calling it would otherwise fatal.
  *
  * @return void
  */
 function seopress_register_primary_category_post_meta() {
-	$post_types = array( 'post', 'product' );
-
-	foreach ( $post_types as $post_type ) {
-		if ( ! post_type_exists( $post_type ) ) {
-			continue;
-		}
-		register_post_meta(
-			$post_type,
-			'_seopress_robots_primary_cat',
-			array(
-				'show_in_rest'  => true,
-				'single'        => true,
-				'type'          => 'string',
-				'default'       => '',
-				'auth_callback' => function ( $allowed, $meta_key, $object_id ) {
-					return current_user_can( 'edit_post', $object_id );
-				},
-			)
-		);
-	}
+	_deprecated_function( __FUNCTION__, '10.4.0' );
 }
-add_action( 'init', 'seopress_register_primary_category_post_meta', 11 );
+
+/**
+ * Primary category select.
+ *
+ * Back-compatible wrapper resolving the taxonomy from the post type being
+ * edited, kept because PRO, the legacy metabox form and third parties call
+ * it directly.
+ *
+ * @param bool $print_html Print the HTML instead of returning it.
+ * @param bool $with_description Display the description.
+ *
+ * @return string HTML.
+ */
+function seopress_primary_category_select( $print_html = true, $with_description = true ) {
+	global $post;
+	global $typenow;
+
+	$taxonomy = 'product' === $typenow && seopress_get_service( 'WooCommerceActivate' )->isActive() ? 'product_cat' : 'category';
+
+	return seopress_primary_term_select( $post, $taxonomy, $with_description, $print_html );
+}
 
 /**
  * Inject the primary category dropdown into the WordPress Categories panel.
@@ -136,7 +168,30 @@ function seopress_enqueue_primary_category_injector() {
 		return;
 	}
 
-	if ( ! in_array( $typenow, array( 'post', 'product' ), true ) ) {
+	$taxonomies = array_filter(
+		PrimaryTermHelper::get_taxonomies( $typenow ),
+		static function ( $taxonomy_name ) use ( $typenow ) {
+			/**
+			 * Filter whether the primary term selector is added to the box of
+			 * a taxonomy on the post edit screen.
+			 *
+			 * Returning false only removes the selector from that box: a
+			 * primary term already saved keeps driving the permalink and the
+			 * breadcrumbs, and the Advanced tab of the SEO metabox still
+			 * offers it.
+			 *
+			 * @since 10.4.0
+			 *
+			 * @param bool   $enabled       Whether to add the selector. Default true.
+			 * @param string $taxonomy_name Taxonomy name.
+			 * @param string $post_type     Post type being edited.
+			 */
+			return (bool) apply_filters( 'seopress_primary_term_inline_selector', true, $taxonomy_name, $typenow );
+		},
+		ARRAY_FILTER_USE_KEY
+	);
+
+	if ( empty( $taxonomies ) ) {
 		return;
 	}
 
@@ -151,6 +206,22 @@ function seopress_enqueue_primary_category_injector() {
 		if ( version_compare( $wp_version, '5.8', '<' ) ) {
 			return;
 		}
+
+		// The panel saves through the post's `meta`, and core only exposes and
+		// writes `meta` over REST for post types supporting `custom-fields`.
+		// Without it the choice was dropped on save without a word. The
+		// universal metabox still offers the selector there, and saves it
+		// through its own route.
+		if ( ! post_type_supports( $typenow, 'custom-fields' ) ) {
+			return;
+		}
+
+		// A role kept out of the SEO metabox can neither read the stored
+		// choice over REST nor save a new one: the panel would show "None"
+		// and silently drop whatever it picks.
+		if ( AdvancedSettings::role_is_blocked_on( $typenow, 'GLOBAL' ) ) {
+			return;
+		}
 		wp_enqueue_script(
 			'seopress-primary-category',
 			SEOPRESS_URL_PUBLIC . '/editor/primary-category-select/index.js',
@@ -159,10 +230,27 @@ function seopress_enqueue_primary_category_injector() {
 			true
 		);
 		wp_set_script_translations( 'seopress-primary-category', 'wp-seopress', WP_LANG_DIR . '/plugins' );
+
+		$meta_keys = array();
+		$excluded  = array();
+		foreach ( array_keys( $taxonomies ) as $taxonomy_name ) {
+			$meta_keys[ $taxonomy_name ] = PrimaryTermHelper::get_meta_key( $taxonomy_name, $typenow );
+			$excluded[ $taxonomy_name ]  = $post instanceof WP_Post ? PrimaryTermHelper::get_excluded_term_ids( $post->ID, $taxonomy_name ) : array();
+		}
+
+		// PHP stays the single source of truth for the taxonomy / meta key
+		// mapping: the Block Editor panel only renders for the taxonomies
+		// listed here and writes to the key it is given.
+		wp_localize_script(
+			'seopress-primary-category',
+			'seopressPrimaryTermData',
+			array(
+				'metaKeys' => $meta_keys,
+				'excluded' => $excluded,
+			)
+		);
 		return;
 	}
-
-	$primary_category_id = $post ? get_post_meta( $post->ID, '_seopress_robots_primary_cat', true ) : '';
 
 	wp_enqueue_script(
 		'seopress-primary-category-classic',
@@ -174,20 +262,32 @@ function seopress_enqueue_primary_category_injector() {
 
 	$nonce_field = wp_nonce_field( 'seopress_save_primary_category', 'seopress_primary_category_nonce', true, false );
 
+	$payload = array();
+	foreach ( array_keys( $taxonomies ) as $taxonomy_name ) {
+		$payload[] = array(
+			'taxonomy'     => $taxonomy_name,
+			'metaboxId'    => PrimaryTermHelper::get_metabox_id( $taxonomy_name ),
+			'fieldId'      => PrimaryTermHelper::get_field_name( $taxonomy_name, $typenow ),
+			'checkboxName' => PrimaryTermHelper::get_checkbox_name( $taxonomy_name ),
+			'selectHTML'   => seopress_primary_term_select( $post, $taxonomy_name, false ),
+			'value'        => $post instanceof WP_Post ? PrimaryTermHelper::get_raw_value( $post->ID, $taxonomy_name ) : '',
+			'excluded'     => $post instanceof WP_Post ? array_map( 'strval', PrimaryTermHelper::get_excluded_term_ids( $post->ID, $taxonomy_name ) ) : array(),
+		);
+	}
+
 	wp_localize_script(
 		'seopress-primary-category-classic',
 		'seopressPrimaryCategorySelectData',
 		array(
-			'selectHTML'      => seopress_primary_category_select( false, false ),
-			'nonceField'      => $nonce_field,
-			'primaryCategory' => $primary_category_id,
+			'nonceField' => $nonce_field,
+			'taxonomies' => $payload,
 		)
 	);
 }
 add_action( 'admin_enqueue_scripts', 'seopress_enqueue_primary_category_injector' );
 
 /**
- * Save the primary category submitted from the Categories metabox in the
+ * Save the primary terms submitted from the taxonomy metaboxes in the
  * Classic Editor. The dedicated nonce + capability check makes this
  * handler self-contained, independent of the legacy SEO metabox save
  * pipeline (which only runs when the universal metabox is suppressed).
@@ -208,18 +308,15 @@ function seopress_save_primary_category_from_categories_metabox( $post_id, $post
 	if ( ! current_user_can( 'edit_post', $post_id ) ) {
 		return;
 	}
-	if ( ! in_array( $post->post_type, array( 'post', 'product' ), true ) ) {
-		return;
-	}
-	if ( ! isset( $_POST['seopress_robots_primary_cat'] ) ) {
-		return;
-	}
 
-	$value = sanitize_text_field( wp_unslash( $_POST['seopress_robots_primary_cat'] ) );
-	if ( '' === $value || 'none' === $value ) {
-		delete_post_meta( $post_id, '_seopress_robots_primary_cat' );
-	} else {
-		update_post_meta( $post_id, '_seopress_robots_primary_cat', $value );
+	foreach ( array_keys( PrimaryTermHelper::get_taxonomies( $post->post_type ) ) as $taxonomy_name ) {
+		$field = PrimaryTermHelper::get_field_name( $taxonomy_name, $post->post_type );
+
+		if ( ! isset( $_POST[ $field ] ) ) {
+			continue;
+		}
+
+		PrimaryTermHelper::save( $post_id, $taxonomy_name, sanitize_text_field( wp_unslash( $_POST[ $field ] ) ) );
 	}
 }
 add_action( 'save_post', 'seopress_save_primary_category_from_categories_metabox', 10, 2 );
@@ -688,26 +785,9 @@ function seopress_display_ca_metaboxe() {
 	}
 }
 
-if ( is_user_logged_in() ) {
-	if ( is_super_admin() ) {
-		seopress_display_seo_metaboxe();
-	} else {
-		global $wp_roles;
-		$user = wp_get_current_user();
-		// Get current user role.
-		if ( isset( $user->roles ) && is_array( $user->roles ) && ! empty( $user->roles ) ) {
-			$seopress_user_role = current( $user->roles );
-
-			// If current user role matchs values from Security settings then apply -- SEO Metaboxe.
-			if ( ! empty( seopress_get_service( 'AdvancedOption' )->getSecurityMetaboxRole() ) ) {
-				if ( array_key_exists( $seopress_user_role, seopress_get_service( 'AdvancedOption' )->getSecurityMetaboxRole() ) ) {
-					// Do nothing.
-				} else {
-					seopress_display_seo_metaboxe();
-				}
-			} else {
-				seopress_display_seo_metaboxe();
-			}
-		}
-	}
+// Every role of the user counts, as in seopress_metabox_role_is_blocked(): only
+// the first one was checked, so a user with a second, restricted role kept a
+// metabox the settings hide from them.
+if ( is_user_logged_in() && ! seopress_metabox_role_is_blocked( 'GLOBAL' ) ) {
+	seopress_display_seo_metaboxe();
 }

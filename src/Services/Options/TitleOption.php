@@ -731,6 +731,49 @@ class TitleOption {
 	}
 
 	/**
+	 * The noindex set for every term of a taxonomy in the Titles & Metas settings.
+	 *
+	 * Unlike getTaxNoIndex(), which works out the taxonomy from the page being
+	 * displayed, it answers for a term named by an API call.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param string $taxonomy The taxonomy name.
+	 *
+	 * @return string|null
+	 */
+	public function getTaxonomyNoIndex( $taxonomy ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$option = $this->searchOptionByKey( 'seopress_titles_tax_titles' );
+
+		if ( ! isset( $option[ $taxonomy ]['noindex'] ) ) {
+			return;
+		}
+
+		return $option[ $taxonomy ]['noindex'];
+	}
+
+	/**
+	 * The nofollow set for every term of a taxonomy in the Titles & Metas settings.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @see getTaxonomyNoIndex()
+	 *
+	 * @param string $taxonomy The taxonomy name.
+	 *
+	 * @return string|null
+	 */
+	public function getTaxonomyNoFollow( $taxonomy ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
+		$option = $this->searchOptionByKey( 'seopress_titles_tax_titles' );
+
+		if ( ! isset( $option[ $taxonomy ]['nofollow'] ) ) {
+			return;
+		}
+
+		return $option[ $taxonomy ]['nofollow'];
+	}
+
+	/**
 	 * The getTaxEnable function.
 	 *
 	 * @since 6.6.0

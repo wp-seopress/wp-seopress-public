@@ -76,6 +76,38 @@ class GetPost implements ExecuteHooks {
 			return null;
 		}
 
+		// The route is open to anyone, so it may only describe content the
+		// visitor could already reach. A post type that is not viewable has no
+		// public URL, and publish is not a meaningful filter on it: reusable
+		// blocks, template parts and a plugin's own internal records are all
+		// stored published. Without this, their titles and SEO metadata were
+		// readable by anyone who could guess an ID. See SEC-01.
+		$post_type = get_post_type( $id );
+
+		/**
+		 * Filter whether a post may be described by the public SEO route.
+		 *
+		 * Defaults to the post type being viewable. Return true to expose an
+		 * internal type on purpose, for an integration that relied on the
+		 * previous behaviour.
+		 *
+		 * @since 10.4.0
+		 *
+		 * @param bool   $allowed   Whether the object may be described.
+		 * @param int    $id        The post ID.
+		 * @param string $post_type The post type.
+		 */
+		$allowed = apply_filters(
+			'seopress_api_public_post_is_readable',
+			$post_type && is_post_type_viewable( $post_type ),
+			$id,
+			$post_type
+		);
+
+		if ( ! $allowed ) {
+			return null;
+		}
+
 		$context = seopress_get_service( 'ContextPage' )->buildContextWithCurrentId( $id )->getContext();
 
 		$title           = seopress_get_service( 'TitleMeta' )->getValue( $context );

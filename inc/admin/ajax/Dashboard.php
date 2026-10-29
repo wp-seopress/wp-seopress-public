@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 function seopress_toggle_features() {
 	check_ajax_referer( 'seopress_toggle_features_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) ) {
 		if ( isset( $_POST['feature'] ) && isset( $_POST['feature_value'] ) ) {
 			$feature       = sanitize_text_field( wp_unslash( $_POST['feature'] ) );
 			$feature_value = sanitize_text_field( wp_unslash( $_POST['feature_value'] ) );
@@ -88,7 +88,7 @@ add_action( 'wp_ajax_seopress_toggle_features', 'seopress_toggle_features' );
 function seopress_hide_notices() {
 	check_ajax_referer( 'seopress_hide_notices_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) ) {
 		if ( isset( $_POST['notice'] ) && isset( $_POST['notice_value'] ) ) {
 			$seopress_notices_options = get_option( 'seopress_notices', array() );
 
@@ -111,7 +111,7 @@ add_action( 'wp_ajax_seopress_hide_notices', 'seopress_hide_notices' );
 function seopress_switch_view() {
 	check_ajax_referer( 'seopress_switch_view_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) && is_admin() ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) ) {
 		if ( isset( $_POST['view'] ) ) {
 			$seopress_dashboard_options = get_option( 'seopress_dashboard', array() );
 
@@ -135,7 +135,7 @@ add_action( 'wp_ajax_seopress_switch_view', 'seopress_switch_view' );
 function seopress_dismiss_promotion() {
 	check_ajax_referer( 'seopress_dismiss_promotion_nonce', '_ajax_nonce', true );
 
-	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) || ! is_admin() ) {
+	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) ) {
 		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-seopress' ) ) );
 	}
 
@@ -165,7 +165,7 @@ add_action( 'wp_ajax_seopress_dismiss_promotion', 'seopress_dismiss_promotion' )
 function seopress_toggle_promotions() {
 	check_ajax_referer( 'seopress_toggle_promotions_nonce', '_ajax_nonce', true );
 
-	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) || ! is_admin() ) {
+	if ( ! current_user_can( seopress_capability( 'manage_options', 'dashboard' ) ) ) {
 		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'wp-seopress' ) ) );
 	}
 

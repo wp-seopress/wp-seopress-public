@@ -115,10 +115,11 @@ add_action( 'template_redirect', 'seopress_instant_indexing_api_key_txt', 0 );
  *
  * @param bool   $is_manual_submission Is manual submission.
  * @param string $permalink Permalink.
+ * @param int    $post_id   Post the permalink belongs to, for automatic submissions.
  *
  * @return void
  */
-function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink = null ) {
+function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink = null, $post_id = 0 ) {
 	// Is instant indexing enabled?
 	if ( '1' !== seopress_get_toggle_option( 'instant-indexing' ) ) {
 		return;
@@ -214,13 +215,13 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	// Prepare the URLS.
 	if ( true === $is_manual_submission ) {
 		$urls          = preg_split( '/\r\n|\r|\n/', $urls );
-		$x_source_info = 'https://www.seopress.org/10.3/true';
+		$x_source_info = 'https://www.seopress.org/10.4/true';
 
 		$urls = array_slice( $urls, 0, 100 );
 	} elseif ( false === $is_manual_submission && ! empty( $permalink ) ) {
 		$urls          = null;
 		$urls[]        = $permalink;
-		$x_source_info = 'https://www.seopress.org/10.3/false';
+		$x_source_info = 'https://www.seopress.org/10.4/false';
 	}
 
 	// Bing API.
@@ -375,14 +376,25 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
 	}
 
 	// Log URLs submitted.
+	$submitted_at       = time();
 	$log['log']['urls'] = $urls;
 	$log['log']['date'] = current_time( get_option( 'date_format' ) . ', ' . get_option( 'time_format' ) );
+	// The date above is for display only: it cannot be read back reliably.
+	$log['log']['timestamp'] = $submitted_at;
 
 	update_option( 'seopress_instant_indexing_log_option_name', $log, false );
 
-	if ( true === $is_manual_submission ) {
-		exit();
-	}
+	// Keep every submission, not just the latest one. The log above is
+	// replaced by the next submission, automatic ones on publish included.
+	$history  = seopress_get_service( 'IndexingHistory' );
+	$post_ids = true === $is_manual_submission
+		? $history->resolve_post_ids( (array) $urls )
+		: array( $permalink => absint( $post_id ) );
+
+	$history->record(
+		$history->entries_from_log( $log, true === $is_manual_submission ? 'manual' : 'auto', $post_ids ),
+		$submitted_at
+	);
 }
 
 /**
@@ -392,10 +404,15 @@ function seopress_instant_indexing_fn( $is_manual_submission = true, $permalink 
  */
 function seopress_instant_indexing_post() {
 	check_ajax_referer( 'seopress_instant_indexing_post_nonce' );
-	require_once SEOPRESS_PLUGIN_DIR_PATH . 'vendor/autoload.php';
-	if ( current_user_can( seopress_capability( 'manage_options', PagesAdmin::INSTANT_INDEXING ) ) && is_admin() ) {
-		seopress_instant_indexing_fn();
+
+	// The log lists the URLs submitted and the answers of Google and Bing: it
+	// is only for those allowed to submit.
+	if ( ! current_user_can( seopress_capability( 'manage_options', PagesAdmin::INSTANT_INDEXING ) ) ) {
+		wp_send_json_error( null, 403 );
 	}
+
+	require_once SEOPRESS_PLUGIN_DIR_PATH . 'vendor/autoload.php';
+	seopress_instant_indexing_fn();
 
 	wp_send_json_success( array(
 		'log' => get_option( 'seopress_instant_indexing_log_option_name', array() ),
@@ -410,14 +427,46 @@ add_action( 'wp_ajax_seopress_instant_indexing_post', 'seopress_instant_indexing
  */
 function seopress_instant_indexing_generate_api_key() {
 	check_ajax_referer( 'seopress_instant_indexing_generate_api_key_nonce' );
-	if ( current_user_can( seopress_capability( 'manage_options', PagesAdmin::INSTANT_INDEXING ) ) && is_admin() ) {
-		seopress_instant_indexing_generate_api_key_fn();
+	if ( ! current_user_can( seopress_capability( 'manage_options', PagesAdmin::INSTANT_INDEXING ) ) ) {
+		wp_send_json_error( null, 403 );
 	}
+
+	seopress_instant_indexing_generate_api_key_fn();
 
 	wp_safe_redirect( admin_url( 'admin.php?page=seopress-instant-indexing' ) );
 	exit();
 }
 add_action( 'wp_ajax_seopress_instant_indexing_generate_api_key', 'seopress_instant_indexing_generate_api_key' );
+
+/**
+ * The post as it was before being moved to the trash.
+ *
+ * By the time `transition_post_status` fires for a trashed post, WordPress has
+ * already renamed its slug to `{slug}__trashed` and set its status to `trash`.
+ * The permalink built from that object is not the URL search engines know,
+ * and the `trash` status is not public. The copy returned here carries the
+ * published status and the slug WordPress kept aside to reclaim on restore.
+ *
+ * @param WP_Post $post Trashed post.
+ *
+ * @return WP_Post Copy of the post, as published.
+ */
+function seopress_instant_indexing_get_published_post( $post ) {
+	$published              = clone $post;
+	$published->post_status = 'publish';
+
+	$desired_slug = get_post_meta( $post->ID, '_wp_desired_post_slug', true );
+
+	if ( is_string( $desired_slug ) && '' !== $desired_slug ) {
+		$published->post_name = $desired_slug;
+	} else {
+		// No stored slug, e.g. the suffix was added by another plugin: drop
+		// the suffix, and the number wp_unique_post_slug() may have appended.
+		$published->post_name = preg_replace( '/__trashed(-\d+)?$/', '', $post->post_name );
+	}
+
+	return $published;
+}
 
 /**
  * Automatic submission
@@ -458,25 +507,18 @@ function seopress_instant_indexing_on_post_publish( $new_status, $old_status, $p
 
 	// do submission.
 	if ( $do_submit ) {
-		$permalink = get_permalink( $post );
+		// A trashed post is submitted at the URL it was published at.
+		$submitted_post = 'delete' === $type ? seopress_instant_indexing_get_published_post( $post ) : $post;
 
-		// clean permalink if trashed post.
-		if ( strpos( $permalink, '__trashed' ) > 0 ) {
-			$permalink = substr( $permalink, 0, strlen( $permalink ) - 10 ) . '/';
-		}
+		$permalink = get_permalink( $submitted_post );
+
 		if ( empty( $permalink ) ) {
 			return;
 		}
 
 		// is it a public post type?
 		if ( function_exists( 'is_post_publicly_viewable' ) ) {
-			$is_public_post = is_post_publicly_viewable( $post );
-
-			if ( ! $is_public_post && 'delete' !== $type ) {
-				return;
-			}
-
-			if ( ! $is_public_post ) {
+			if ( ! is_post_publicly_viewable( $submitted_post ) ) {
 				return;
 			}
 
@@ -509,9 +551,10 @@ function seopress_instant_indexing_on_post_publish( $new_status, $old_status, $p
 				return;
 			}
 
-			$permalink = apply_filters( 'seopress_instant_indexing_permalink', $permalink, $post );
+			// Callbacks get the post the URL was built from: on trash, the published copy.
+			$permalink = apply_filters( 'seopress_instant_indexing_permalink', $permalink, $submitted_post );
 
-			return seopress_instant_indexing_fn( false, $permalink );
+			return seopress_instant_indexing_fn( false, $permalink, $post->ID );
 		}
 	}
 }

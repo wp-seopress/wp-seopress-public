@@ -63,9 +63,9 @@ class CustomPostMeta extends AbstractCustomTagValue implements GetTagValue {
 
 		// Get meta value based on context type
 		if ( isset( $post->ID ) ) {
-			$raw_value = get_post_meta( $post->ID, $field, true );
+			$raw_value = seopress_get_meta_tag_value( 'post', $post->ID, $field );
 		} elseif ( $term_id ) {
-			$raw_value = get_term_meta( $term_id, $field, true );
+			$raw_value = seopress_get_meta_tag_value( 'term', $term_id, $field );
 		} else {
 			$raw_value = '';
 		}

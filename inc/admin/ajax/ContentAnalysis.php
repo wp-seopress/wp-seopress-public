@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 function seopress_do_real_preview() {
 	check_ajax_referer( 'seopress_real_preview_nonce', '_ajax_nonce', true );
 
-	if ( ! is_admin() || ! isset( $_GET['post_id'] ) ) {
+	if ( ! isset( $_GET['post_id'] ) ) {
 		return;
 	}
 
@@ -41,39 +41,28 @@ function seopress_do_real_preview() {
 		return;
 	}
 
+	// Like the metabox routes: nothing for a role both metabox areas are
+	// closed to by the Advanced > Security settings.
+	if ( seopress_metabox_role_is_blocked( 'GLOBAL' ) && seopress_metabox_role_is_blocked( 'CONTENT_ANALYSIS' ) ) {
+		return;
+	}
+
 	if ( 'yes' === get_post_meta( $id, '_seopress_redirections_enabled', true ) ) {
 		$data['title'] = __( 'A redirect is active for this URL. Turn it off to get the Google preview and content analysis.', 'wp-seopress' );
 		wp_send_json_error( $data );
 		return;
 	}
 
-	$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id, $taxname );
+	$request_preview = seopress_get_service( 'RequestPreview' );
+	$dom_result      = $request_preview->getDomById( $id, $taxname );
 
 	if ( ! $dom_result['success'] ) {
-		$default_response = array(
-			'title'     => '...',
-			'meta_desc' => '...',
+		wp_send_json_success(
+			array(
+				'title'     => $request_preview->getFailureMessage( $dom_result['code'] ),
+				'meta_desc' => '...',
+			)
 		);
-
-		switch ( $dom_result['code'] ) {
-			case 404:
-				$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
-				break;
-			case 401:
-				$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
-				break;
-			case 'redirected':
-				$default_response['title'] = __( 'This URL redirects outside your site. Turn off the redirect to get the Google preview and content analysis.', 'wp-seopress' );
-				break;
-			case 'blocked':
-				$default_response['title'] = __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
-				break;
-			case 'unreachable':
-				$default_response['title'] = __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
-				break;
-		}
-
-		wp_send_json_success( $default_response );
 		return;
 	}
 

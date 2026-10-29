@@ -536,21 +536,26 @@ class McpOauth implements ExecuteHooks {
 	/**
 	 * Which well-known document, if any, a request path asks for.
 	 *
+	 * Only the bare paths and the ones followed by our own resource path are
+	 * ours. Another MCP server on the same site describes itself under the
+	 * same well-known segment followed by its own path, and those requests
+	 * are left for it to answer.
+	 *
 	 * @since 10.3.0
+	 * @since 10.4.0 A suffix other than our own resource path is not matched.
 	 *
 	 * @param string $path The path component of the request.
 	 *
 	 * @return string One of "protected_resource", "authorization_server", or "".
 	 */
 	public static function well_known_document_for_path( $path ) {
-		$path = '/' . ltrim( (string) $path, '/' );
+		$path = untrailingslashit( '/' . ltrim( (string) $path, '/' ) );
 
 		// A WordPress install in a subdirectory only ever sees its own prefix,
 		// so the prefix is stripped before the well-known path is matched.
-		$home_path = wp_parse_url( home_url(), PHP_URL_PATH );
-		$home_path = is_string( $home_path ) ? untrailingslashit( $home_path ) : '';
+		$home_path = self::home_path();
 
-		if ( '' !== $home_path && '/' !== $home_path && 0 === strpos( $path, $home_path . '/' ) ) {
+		if ( '' !== $home_path && 0 === strpos( $path, $home_path . '/' ) ) {
 			$path = substr( $path, strlen( $home_path ) );
 		}
 
@@ -560,12 +565,59 @@ class McpOauth implements ExecuteHooks {
 		);
 
 		foreach ( $documents as $base => $document ) {
-			if ( $path === $base || 0 === strpos( $path, $base . '/' ) ) {
-				return $document;
+			foreach ( self::well_known_suffixes() as $suffix ) {
+				if ( $path === $base . $suffix ) {
+					return $document;
+				}
 			}
 		}
 
 		return '';
+	}
+
+	/**
+	 * Path of the home URL, without its trailing slash.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return string Empty for a site at the root of its host.
+	 */
+	protected static function home_path() {
+		$home_path = wp_parse_url( home_url(), PHP_URL_PATH );
+
+		return is_string( $home_path ) ? untrailingslashit( $home_path ) : '';
+	}
+
+	/**
+	 * The paths that may follow a well-known segment and still mean us.
+	 *
+	 * Nothing at all, and the path of our MCP endpoint, which is the suffix
+	 * RFC 9728 builds from the resource URI. On a subdirectory install that
+	 * path starts with the home path; it is accepted with and without it, as
+	 * clients do not all agree on which one to send. With plain permalinks
+	 * the endpoint is /index.php?rest_route=..., so its path is /index.php.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return string[]
+	 */
+	protected static function well_known_suffixes() {
+		$suffixes = array( '' );
+
+		$resource_path = wp_parse_url( self::canonical_resource(), PHP_URL_PATH );
+		$resource_path = is_string( $resource_path ) ? untrailingslashit( $resource_path ) : '';
+
+		if ( '' !== $resource_path ) {
+			$suffixes[] = $resource_path;
+
+			$home_path = self::home_path();
+
+			if ( '' !== $home_path && 0 === strpos( $resource_path, $home_path . '/' ) ) {
+				$suffixes[] = substr( $resource_path, strlen( $home_path ) );
+			}
+		}
+
+		return $suffixes;
 	}
 
 	/**

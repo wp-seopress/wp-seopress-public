@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooksBackend;
+use SEOPress\Helpers\ContentAnalysis;
 use SEOPress\Services\TagsToString;
 
 /**
@@ -28,6 +29,72 @@ class ManageColumn implements ExecuteHooksBackend {
 	 */
 	public function __construct() {
 		$this->tags_to_string_service = seopress_get_service( 'TagsToString' );
+	}
+
+	/**
+	 * Build the content analysis cell: the ring, and the number of checks the
+	 * page passes when that detail is available.
+	 *
+	 * The ring alone says "something is wrong" without saying how much, so a
+	 * page failing one check looks like a page failing eight. The ratio is the
+	 * same checklist the editor shows, counted, which moves as the user fixes
+	 * things instead of flipping once at the very end.
+	 *
+	 * The ratio is left out for an analysis stored by 10.3.x or earlier: those
+	 * rows only kept the distinct impacts, so the individual checks can no
+	 * longer be counted and the cell falls back to the ring on its own until
+	 * the post is analysed again.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param bool  $is_good Whether the aggregate verdict is "Good".
+	 * @param array $summary Optional. The passed/failed/total counts.
+	 *
+	 * @return string The escaped markup.
+	 */
+	private static function get_score_markup( $is_good, array $summary = array() ) {
+		$verdict = $is_good ? __( 'Good', 'wp-seopress' ) : __( 'Should be improved', 'wp-seopress' );
+		$bar     = $is_good
+			? '<circle id="bar" class="good" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>'
+			: '<circle id="bar" class="notgood" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>';
+
+		$ratio = '';
+		$label = $verdict;
+
+		if ( ! empty( $summary['total'] ) ) {
+			$passed = number_format_i18n( $summary['passed'] );
+			$total  = number_format_i18n( $summary['total'] );
+
+			$checks = sprintf(
+				/* translators: 1: number of checks the page passes, 2: number of checks that ran. */
+				_n( '%1$s of %2$s check passed', '%1$s of %2$s checks passed', (int) $summary['total'], 'wp-seopress' ),
+				$passed,
+				$total
+			);
+
+			// The visible "12/17" carries its own legend as a tooltip; screen
+			// readers get the sentence below instead, so it stays hidden from them.
+			$ratio = '<span class="seopress-score-ratio" aria-hidden="true" title="' . esc_attr( $checks ) . '">' . esc_html(
+				sprintf(
+					/* translators: 1: number of checks the page passes, 2: number of checks that ran. */
+					__( '%1$s/%2$s', 'wp-seopress' ),
+					$passed,
+					$total
+				)
+			) . '</span>';
+
+			$label = sprintf(
+				/* translators: 1: the verdict, "Good" or "Should be improved", 2: e.g. "12 of 17 checks passed". */
+				__( '%1$s. %2$s.', 'wp-seopress' ),
+				$verdict,
+				$checks
+			);
+		}
+
+		return '<div class="analysis-score"><p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
+                        ' . $bar . '
+                    </svg>' . $ratio . '<span class="screen-reader-text">' . esc_html( $label ) . '</span></p></div>';
 	}
 
 	/**
@@ -305,19 +372,27 @@ class ManageColumn implements ExecuteHooksBackend {
 						return;
 					}
 
-					echo '<div class="analysis-score">';
-					if ( in_array( 'medium', $score, true ) || in_array( 'high', $score, true ) ) {
-						echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                        <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-                        <circle id="bar" class="notgood" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0" style="stroke-dashoffset: 101.788px;"></circle>
-                    </svg><span class="screen-reader-text">' . esc_html__( 'Should be improved', 'wp-seopress' ) . '</span></p>';
-					} else {
-						echo '<p><svg role="img" aria-hidden="true" focusable="false" width="100%" height="100%" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                        <circle r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-                        <circle id="bar" class="good" r="90" cx="100" cy="100" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
-                    </svg><span class="screen-reader-text">' . esc_html__( 'Good', 'wp-seopress' ) . '</span></p>';
+					// One query for the ignored checks of the whole list rather
+					// than one per row; rows already read are not queried again.
+					// On a hierarchical list (fields id=>parent) the list is the
+					// whole page tree of the site, of which one page is shown:
+					// each row is read on its own there.
+					global $wp_query;
+					if ( isset( $wp_query->posts ) && is_array( $wp_query->posts ) && 'id=>parent' !== $wp_query->get( 'fields' ) ) {
+						ContentAnalysis::getIgnoredChecksForPostIds( wp_list_pluck( $wp_query->posts, 'ID' ) );
 					}
-					echo '</div>';
+
+					$summary = ContentAnalysis::getScoreSummary( $score, ContentAnalysis::getIgnoredChecks( $post_id ) );
+
+					// With the per-check detail, the ring is read from the same
+					// counts as the ratio, ignored checks left out of both the
+					// way the editor leaves them out, so the two can never
+					// disagree. A row stored before that detail existed only
+					// has its distinct impacts: the ring falls back to them and
+					// no ratio is shown.
+					$is_good = ContentAnalysis::isGoodVerdict( $score, $summary );
+
+					echo self::get_score_markup( $is_good, $summary ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- markup built and escaped in get_score_markup().
 					return;
 				}
 

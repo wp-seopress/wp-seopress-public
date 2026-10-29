@@ -125,6 +125,17 @@ class AdvancedOption {
 	}
 
 	/**
+	 * Merge every schema into a single `@graph` block.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return string|null
+	 */
+	public function getSchemaGraph() { // phpcs:ignore -- Reader names follow the existing camelCase convention of this class.
+		return $this->searchOptionByKey( 'seopress_advanced_advanced_schema_graph' );
+	}
+
+	/**
 	 * The getAdvancedWPShortlink function.
 	 *
 	 * @since 5.4.0

@@ -431,7 +431,14 @@ class Diagnostic {
 		$has_bom = 0 === strncmp( $body, "\xEF\xBB\xBF", 3 );
 		$work    = $has_bom ? substr( $body, 3 ) : $body;
 		$first   = strpos( $work, '<' );
-		$prefix  = false === $first ? $work : substr( $work, 0, $first );
+
+		// PHP notices in HTML format start with "<br />", so when the XML
+		// declaration comes later, everything before it is leading output.
+		if ( preg_match( '/<\?xml\s/', $work, $declaration, PREG_OFFSET_CAPTURE ) && 0 !== $declaration[0][1] ) {
+			$first = $declaration[0][1];
+		}
+
+		$prefix = false === $first ? $work : substr( $work, 0, $first );
 
 		if ( $has_bom || '' !== $prefix ) {
 			if ( $has_bom ) {

@@ -44,7 +44,7 @@ class TargetKeywords implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'GLOBAL', 'CONTENT_ANALYSIS' ) );
 				},
 			)
 		);

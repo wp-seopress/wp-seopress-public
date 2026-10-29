@@ -229,6 +229,39 @@ class RequestPreview {
 	}
 
 	/**
+	 * The user-facing message for a failed getDomById() result.
+	 *
+	 * Shared by the page preview and the content analysis endpoints so both
+	 * explain the same failure the same way. Unknown codes get a generic
+	 * message: the editor shows it in place of the title, and an empty string
+	 * would leave a blank title field and preview.
+	 *
+	 * @param int|string $code The `code` returned by getDomById().
+	 *
+	 * @return string
+	 */
+	public function getFailureMessage( $code ) {
+		switch ( $code ) {
+			case 404:
+				return __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
+			case 401:
+				return __( 'Your site is protected by an authentication.', 'wp-seopress' );
+			case 'redirected':
+				return __( 'This URL redirects outside your site. Turn off the redirect to get the Google preview and content analysis.', 'wp-seopress' );
+			case 'blocked':
+				return __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
+			case 'unreachable':
+				return __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
+			case 'http_error':
+				return __( 'The page returned an HTTP error or an incomplete response. Your previous content analysis has been kept. Please try again when the page is available.', 'wp-seopress' );
+			case 'empty':
+				return __( 'The page returned no content. Your previous content analysis has been kept. Please check the page and try again.', 'wp-seopress' );
+			default:
+				return __( 'Your page could not be loaded to build the Google preview and content analysis. Please try again.', 'wp-seopress' );
+		}
+	}
+
+	/**
 	 * Fetch the preview HTML by loading the post's own public URL — exactly
 	 * what the metabox has always done.
 	 *

@@ -62,7 +62,7 @@ function seopress_oembed_title_hook( $post ) {
 		}
 
 		foreach ( $matches['1'] as $key => $value ) {
-			$seopress_titles_cf_template_replace_array[] = esc_attr( get_post_meta( $post->ID, $value, true ) );
+			$seopress_titles_cf_template_replace_array[] = esc_attr( seopress_get_meta_tag_value( 'post', $post->ID, $value ) );
 		}
 	}
 
@@ -77,11 +77,12 @@ function seopress_oembed_title_hook( $post ) {
 		}
 
 		foreach ( $matches2['1'] as $key => $value ) {
-			$term = wp_get_post_terms( $post->ID, $value );
-			if ( ! is_wp_error( $term ) ) {
-				$terms                                       = esc_attr( $term[0]->name );
-				$seopress_titles_ct_template_replace_array[] = apply_filters( 'seopress_titles_custom_tax', $terms, $value );
-			}
+			// One entry per placeholder, the primary term first, as in the
+			// title and meta description.
+			$term  = \SEOPress\Helpers\Metas\PrimaryTerm::get_display_term( $post->ID, $value );
+			$terms = null !== $term ? esc_attr( $term->name ) : '';
+
+			$seopress_titles_ct_template_replace_array[] = apply_filters( 'seopress_titles_custom_tax', $terms, $value );
 		}
 	}
 

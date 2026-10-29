@@ -22,9 +22,8 @@ class QueryExistTable {
 
 		global $wpdb;
 
-		$query = $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . $table->getName() ) );
 		try {
-			$result = $wpdb->query( $query );
+			$result = $wpdb->query( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->esc_like( $wpdb->prefix . $table->getName() ) ) );
 
 			return false !== $result && 0 < $result;
 		} catch ( \Exception $e ) {

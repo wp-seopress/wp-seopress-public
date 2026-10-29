@@ -1,90 +1,113 @@
 'use strict';
 /**
- * Inject the SEOPress primary category dropdown into the WordPress
- * Categories (or Product Categories) metabox in the Classic Editor.
+ * Inject the SEOPress primary term dropdown into every hierarchical
+ * taxonomy metabox of the Classic Editor (Categories, Product categories
+ * and any custom taxonomy).
  *
- * Self-contained: does not require any source <select> on the page.
- * The localized payload provides the rendered <select> markup (with
- * name="seopress_robots_primary_cat" so it ships with the post form)
- * and the dedicated nonce that the server-side save handler verifies.
+ * Self-contained: does not require any source <select> on the page. The
+ * localized payload lists one entry per taxonomy, each providing the
+ * rendered <select> markup (whose name ships with the post form), the id
+ * of the WordPress metabox to inject it into and the name of the term
+ * checkboxes to mirror. The nonce is shared by all of them and the
+ * server-side save handler verifies it once.
  */
 document.addEventListener('DOMContentLoaded', function () {
     var data = window.seopressPrimaryCategorySelectData;
-    if (!data || !data.selectHTML) {
+    if (!data) {
         return;
     }
 
-    var categoriesMetabox = document.querySelector('#product_catdiv') || document.querySelector('#categorydiv');
-    if (!categoriesMetabox) {
+    var taxonomies = data.taxonomies;
+    if (!Array.isArray(taxonomies) || !taxonomies.length) {
         return;
     }
 
-    var inside = categoriesMetabox.querySelector('.inside');
-    if (!inside) {
-        return;
-    }
+    var nonceInjected = false;
 
-    if (inside.querySelector('#seopress_robots_primary_cat')) {
-        return;
-    }
+    taxonomies.forEach(function (taxonomy) {
+        if (!taxonomy || !taxonomy.selectHTML || !taxonomy.metaboxId || !taxonomy.fieldId) {
+            return;
+        }
 
-    var wrapper = document.createElement('div');
-    wrapper.className = 'seopress-primary-category-wrapper';
-    wrapper.innerHTML = data.selectHTML + (data.nonceField || '');
-    inside.appendChild(wrapper);
+        var metabox = document.getElementById(taxonomy.metaboxId);
+        if (!metabox) {
+            return;
+        }
 
-    var select = wrapper.querySelector('#seopress_robots_primary_cat');
-    if (!select) {
-        return;
-    }
-    if (data.primaryCategory) {
-        select.value = data.primaryCategory;
-    }
+        var inside = metabox.querySelector('.inside');
+        if (!inside) {
+            return;
+        }
 
-    var noneOption = select.querySelector('option[value="none"]').cloneNode(true);
-    var checkboxSelector = 'input[type="checkbox"][name="post_category[]"], input[type="checkbox"][name="tax_input[product_cat][]"]';
+        if (inside.querySelector('#' + taxonomy.fieldId)) {
+            return;
+        }
 
-    function syncCategories(changedCheckbox) {
-        var previous = select.value;
-        var terms = new Map();
-        inside.querySelectorAll(checkboxSelector).forEach(function (checkbox) {
-            var label = checkbox.closest('label');
-            if (checkbox.checked && label) {
-                terms.set(checkbox.value, label.textContent.trim());
-            }
-        });
-        // WordPress synchronizes the All / Most Used copies in its own handler.
-        // Honour the changed checkbox even before that synchronization runs.
-        if (changedCheckbox) {
-            if (changedCheckbox.checked) {
-                var label = changedCheckbox.closest('label');
-                if (label) {
-                    terms.set(changedCheckbox.value, label.textContent.trim());
+        var wrapper = document.createElement('div');
+        wrapper.className = 'seopress-primary-category-wrapper';
+        wrapper.innerHTML = taxonomy.selectHTML + (nonceInjected ? '' : data.nonceField || '');
+        inside.appendChild(wrapper);
+        nonceInjected = true;
+
+        var select = wrapper.querySelector('#' + taxonomy.fieldId);
+        if (!select) {
+            return;
+        }
+        if (taxonomy.value) {
+            select.value = taxonomy.value;
+        }
+
+        var noneOption = select.querySelector('option[value="none"]').cloneNode(true);
+        // Assigned terms the `seopress_primary_term_list` filter left out.
+        // Rebuilding the list from the checkboxes used to bring them back.
+        var excluded = Array.isArray(taxonomy.excluded) ? taxonomy.excluded.map(String) : [];
+        var checkboxSelector = 'input[type="checkbox"][name="' + taxonomy.checkboxName + '"]';
+
+        function syncTerms(changedCheckbox) {
+            var previous = select.value;
+            var terms = new Map();
+            inside.querySelectorAll(checkboxSelector).forEach(function (checkbox) {
+                var label = checkbox.closest('label');
+                if (checkbox.checked && label) {
+                    terms.set(checkbox.value, label.textContent.trim());
                 }
-            } else {
-                terms.delete(changedCheckbox.value);
+            });
+            // WordPress synchronizes the All / Most Used copies in its own
+            // handler. Honour the changed checkbox even before that runs.
+            if (changedCheckbox) {
+                if (changedCheckbox.checked) {
+                    var label = changedCheckbox.closest('label');
+                    if (label) {
+                        terms.set(changedCheckbox.value, label.textContent.trim());
+                    }
+                } else {
+                    terms.delete(changedCheckbox.value);
+                }
             }
+            excluded.forEach(function (id) {
+                terms.delete(id);
+            });
+            select.replaceChildren(noneOption.cloneNode(true));
+            terms.forEach(function (name, id) {
+                var option = document.createElement('option');
+                option.value = id;
+                option.textContent = name;
+                select.appendChild(option);
+            });
+            select.value = terms.has(previous) ? previous : 'none';
         }
-        select.replaceChildren(noneOption.cloneNode(true));
-        terms.forEach(function (name, id) {
-            var option = document.createElement('option');
-            option.value = id;
-            option.textContent = name;
-            select.appendChild(option);
-        });
-        select.value = terms.has(previous) ? previous : 'none';
-    }
 
-    inside.addEventListener('change', function (event) {
-        if (event.target.matches(checkboxSelector)) {
-            syncCategories(event.target);
-        }
+        inside.addEventListener('change', function (event) {
+            if (event.target.matches(checkboxSelector)) {
+                syncTerms(event.target);
+            }
+        });
+        // Newly added terms arrive via AJAX without a change event.
+        new MutationObserver(function (records) {
+            if (records.some(function (record) { return !wrapper.contains(record.target); })) {
+                syncTerms();
+            }
+        }).observe(inside, { childList: true, subtree: true });
+        syncTerms();
     });
-    // Newly added categories arrive via AJAX without a change event.
-    new MutationObserver(function (records) {
-        if (records.some(function (record) { return !wrapper.contains(record.target); })) {
-            syncCategories();
-        }
-    }).observe(inside, { childList: true, subtree: true });
-    syncCategories();
 });

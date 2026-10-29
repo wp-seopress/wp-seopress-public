@@ -12,6 +12,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Image {
 
 	/**
+	 * Default number of image size requests running at the same time.
+	 */
+	const CONCURRENCY = 5;
+
+	/**
+	 * Seconds after which no further batch of image size requests is started.
+	 */
+	const TIME_BUDGET = 10;
+
+	/**
+	 * Base URLs of this site's files, mapped to their directories.
+	 *
+	 * @var array|null
+	 */
+	private $local_roots = null;
+
+	/**
 	 * The getDataByXPath function.
 	 *
 	 * @param object $xpath The xpath.
@@ -68,40 +85,151 @@ class Image {
 
 		// Second pass — drop sub-100-byte tracking pixels / spacers.
 		//
-		// Previously every image was downloaded in full (download_url) just to
-		// read its size. On an image-heavy page that meant dozens of sequential
-		// HTTP GETs — several seconds — and, behind a host WAF, the site fetching
-		// its own images would hang or fail. Instead, measure all candidates at
-		// once with parallel HEAD requests and read Content-Length. Static images
-		// are served outside the PHP/WAF path, so this is fast and reliable, and
-		// anything we cannot measure is kept (matching the old "download failed
+		// Anything we cannot measure is kept (matching the old "download failed
 		// -> keep" behaviour), so analysis results are preserved.
-		//
-		// Bound the number of outbound probes regardless of how many <img> tags
-		// the (client-supplied) source carries, so the analysis can never be
-		// turned into a request amplifier.
+
+		/**
+		 * Filter the maximum number of outbound requests made to measure images.
+		 *
+		 * Bounds the probes regardless of how many <img> tags the (client
+		 * supplied) source carries, so the analysis can never be turned into a
+		 * request amplifier. Images stored on this site are measured on disk and
+		 * do not count.
+		 *
+		 * @since 10.0.0
+		 * @since 10.4.0 Returning 0 or less skips the byte size check entirely,
+		 *               instead of lifting the cap.
+		 *
+		 * @param int $max_checks Maximum number of distinct image URLs requested.
+		 */
 		$max_checks = (int) apply_filters( 'seopress_content_analysis_image_size_checks', 100 );
-		if ( $max_checks > 0 && count( $to_measure ) > $max_checks ) {
-			$to_measure = array_slice( $to_measure, 0, $max_checks, true );
+		if ( $max_checks <= 0 ) {
+			return array_values( $data );
 		}
 
-		foreach ( $this->find_tiny_images( $to_measure ) as $key ) {
-			unset( $data[ $key ] );
+		// A logo repeated in the header, the mobile menu and the footer is the
+		// same file: measure each URL once, then apply the result to every tag.
+		$keys_by_url = array();
+		foreach ( $to_measure as $key => $url ) {
+			$keys_by_url[ $url ][] = $key;
+		}
+
+		$tiny   = array();
+		$remote = array();
+		foreach ( array_keys( $keys_by_url ) as $url ) {
+			// On a typical page nearly every image is the site's own. Asking
+			// ourselves over HTTP for the size of a file on our own disk is
+			// what made this check expensive.
+			$size = $this->get_local_file_size( $url );
+			if ( null === $size ) {
+				$remote[] = $url;
+			} elseif ( $size > 0 && $size < 100 ) {
+				$tiny[] = $url;
+			}
+		}
+
+		$remote = array_slice( $remote, 0, $max_checks );
+		$tiny   = array_merge( $tiny, $this->find_tiny_images( $remote ) );
+
+		foreach ( $tiny as $url ) {
+			foreach ( $keys_by_url[ $url ] as $key ) {
+				unset( $data[ $key ] );
+			}
 		}
 
 		return array_values( $data );
 	}
 
 	/**
-	 * Return the keys of the images confirmed to be smaller than 100 bytes.
+	 * Size in bytes of an image stored on this site, read from disk.
 	 *
-	 * Uses one batch of parallel HEAD requests (Content-Length) rather than a
-	 * full download per image. Unknown / unreachable sizes are not reported, so
-	 * the caller keeps those images.
+	 * Covers the uploads directory, wherever it lives, and wp-content (theme
+	 * and plugin images). The resolved path must stay inside the directory it
+	 * was mapped to, so a "../" in a client-supplied URL cannot reach out of it.
 	 *
-	 * @param array $urls Map of key => image URL.
+	 * @param string $url The image URL.
 	 *
-	 * @return array List of keys whose image is under 100 bytes.
+	 * @return int|null The size, or null when the URL is not a file of this site.
+	 */
+	private function get_local_file_size( $url ) {
+		// Compared without the scheme: a page mixing http and https URLs for
+		// its own uploads is common after a migration.
+		$url = preg_replace( '#^https?:#i', '', preg_replace( '/[?#].*$/', '', $url ) );
+
+		foreach ( $this->get_local_roots() as $root_url => $root_dir ) {
+			if ( 0 !== stripos( $url, $root_url ) ) {
+				continue;
+			}
+
+			$path = rawurldecode( substr( $url, strlen( $root_url ) ) );
+			// A "%00" in the URL decodes to a NUL byte, which realpath() rejects
+			// with a ValueError on PHP 8. No file of the site has one in its name.
+			if ( false !== strpos( $path, "\0" ) ) {
+				return null;
+			}
+
+			$file = realpath( $root_dir . $path );
+			if ( false === $file || 0 !== strpos( $file, $root_dir ) || ! is_file( $file ) ) {
+				// Not on disk (an image generated on the fly, for instance):
+				// let the network check have it.
+				return null;
+			}
+
+			$size = filesize( $file );
+
+			return false === $size ? null : $size;
+		}
+
+		return null;
+	}
+
+	/**
+	 * Map of scheme-less base URL => real directory path, both with a trailing slash.
+	 *
+	 * @return array
+	 */
+	private function get_local_roots() {
+		if ( null !== $this->local_roots ) {
+			return $this->local_roots;
+		}
+
+		$this->local_roots = array();
+
+		$uploads = wp_get_upload_dir();
+		$pairs   = array(
+			array( isset( $uploads['baseurl'] ) ? $uploads['baseurl'] : '', isset( $uploads['basedir'] ) ? $uploads['basedir'] : '' ),
+			array( content_url(), WP_CONTENT_DIR ),
+		);
+
+		foreach ( $pairs as $pair ) {
+			$dir = '' !== $pair[1] ? realpath( $pair[1] ) : false;
+			if ( '' === $pair[0] || false === $dir ) {
+				continue;
+			}
+
+			$root_url = trailingslashit( preg_replace( '#^https?:#i', '', $pair[0] ) );
+			if ( ! isset( $this->local_roots[ $root_url ] ) ) {
+				$this->local_roots[ $root_url ] = trailingslashit( $dir );
+			}
+		}
+
+		return $this->local_roots;
+	}
+
+	/**
+	 * Return the URLs of the images confirmed to be smaller than 100 bytes.
+	 *
+	 * Uses HEAD requests (Content-Length) rather than a full download per
+	 * image, a few at a time. All at once looks faster, but libcurl starts a
+	 * resolver thread per concurrent transfer and each one can reserve its own
+	 * malloc arena for the life of the PHP worker: on hosting that caps a
+	 * worker's address space, a page with dozens of images took the worker
+	 * down, and unrelated requests with it. Unknown / unreachable sizes are not
+	 * reported, so the caller keeps those images.
+	 *
+	 * @param array $urls List of image URLs.
+	 *
+	 * @return array List of URLs whose image is under 100 bytes.
 	 */
 	private function find_tiny_images( $urls ) {
 		$tiny = array();
@@ -121,8 +249,8 @@ class Image {
 		}
 
 		$requests = array();
-		foreach ( $urls as $key => $url ) {
-			$requests[ $key ] = array(
+		foreach ( array_values( $urls ) as $index => $url ) {
+			$requests[ $index ] = array(
 				'url'  => $url,
 				'type' => 'HEAD',
 			);
@@ -136,32 +264,73 @@ class Image {
 			'redirects'        => 0,
 		);
 
-		try {
-			$responses = call_user_func( array( $requests_class, 'request_multiple' ), $requests, $request_options );
-		} catch ( \Throwable $e ) {
-			return $tiny;
-		}
+		/**
+		 * Filter how many image size requests run at the same time.
+		 *
+		 * @since 10.4.0
+		 *
+		 * @param int $concurrency Number of concurrent HEAD requests.
+		 */
+		$concurrency = max( 1, (int) apply_filters( 'seopress_content_analysis_image_size_concurrency', self::CONCURRENCY ) );
 
-		if ( ! is_array( $responses ) ) {
-			return $tiny;
-		}
+		// Batches add up where a single call did not: stop measuring once the
+		// budget is spent and keep the remaining images, as for any unknown size.
+		$deadline = microtime( true ) + $this->get_time_budget();
 
-		foreach ( $responses as $key => $response ) {
-			// A failed request (Exception object or unsuccessful response) means
-			// "unknown size" -> keep the image.
-			if ( ! is_object( $response ) || empty( $response->success ) ) {
+		foreach ( array_chunk( $requests, $concurrency, true ) as $batch ) {
+			if ( microtime( true ) >= $deadline ) {
+				break;
+			}
+
+			try {
+				$responses = $this->send_requests( $requests_class, $batch, $request_options );
+			} catch ( \Throwable $e ) {
 				continue;
 			}
-			if ( ! isset( $response->headers['content-length'] ) ) {
+
+			if ( ! is_array( $responses ) ) {
 				continue;
 			}
-			$length = (int) $response->headers['content-length'];
-			if ( $length > 0 && $length < 100 ) {
-				$tiny[] = $key;
+
+			foreach ( $responses as $index => $response ) {
+				// A failed request (Exception object or unsuccessful response)
+				// means "unknown size" -> keep the image.
+				if ( ! is_object( $response ) || empty( $response->success ) ) {
+					continue;
+				}
+				if ( ! isset( $response->headers['content-length'] ) ) {
+					continue;
+				}
+				$length = (int) $response->headers['content-length'];
+				if ( $length > 0 && $length < 100 && isset( $batch[ $index ] ) ) {
+					$tiny[] = $batch[ $index ]['url'];
+				}
 			}
 		}
 
 		return $tiny;
+	}
+
+	/**
+	 * Seconds after which no further batch of image size requests is started.
+	 *
+	 * @return int
+	 */
+	protected function get_time_budget() {
+		return self::TIME_BUDGET;
+	}
+
+	/**
+	 * Send one batch of requests in parallel.
+	 *
+	 * @param string $requests_class The Requests class name.
+	 * @param array  $requests       The requests, keyed by index.
+	 * @param array  $options        The transfer options.
+	 *
+	 * @return array The responses, keyed like the requests.
+	 */
+	protected function send_requests( $requests_class, $requests, $options ) {
+		return call_user_func( array( $requests_class, 'request_multiple' ), $requests, $options );
 	}
 
 	/**

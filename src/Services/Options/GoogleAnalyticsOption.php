@@ -290,6 +290,33 @@ class GoogleAnalyticsOption {
 	}
 
 	/**
+	 * The text of the button opening the per-category choices.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return string|null
+	 */
+	public function getOptOutMessageCustomize() { // phpcs:ignore -- Named like its siblings.
+		return $this->searchOptionByKey( 'seopress_google_analytics_opt_out_msg_customize' );
+	}
+
+	/**
+	 * Whether visitors may consent per category.
+	 *
+	 * On unless it was explicitly turned off: the setting did not exist before,
+	 * and a site that never saved it gets the per-category choice.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return bool
+	 */
+	public function is_granular_consent_enabled() {
+		$value = $this->searchOptionByKey( 'seopress_google_analytics_cb_granular' );
+
+		return null === $value || '1' === $value;
+	}
+
+	/**
 	 * Ads
 	 *
 	 * @since 5.8.0

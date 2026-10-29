@@ -130,6 +130,13 @@ class ModuleSettings implements ExecuteHooks {
 			return array();
 		}
 
+		// The License page has its own status banner. The reminder would only
+		// link to the page the user is on, and it would stay on screen after
+		// an activation done there, since the page does not reload.
+		if ( 'seopress-license' === $this->getCurrentPageKey() ) {
+			return array();
+		}
+
 		return array(
 			'title'    => __( 'Welcome to SEOPress PRO!', 'wp-seopress' ),
 			'message'  => __( 'Please activate your license to receive automatic updates and get premium support.', 'wp-seopress' ),
@@ -392,6 +399,9 @@ class ModuleSettings implements ExecuteHooks {
 		$dynamic_variables = function_exists( 'seopress_get_dyn_variables' )
 			? seopress_get_dyn_variables()
 			: array();
+		$variable_aliases  = function_exists( 'seopress_get_dyn_variable_aliases' )
+			? seopress_get_dyn_variable_aliases()
+			: array();
 
 		// Get docs links.
 		$docs_links = function_exists( 'seopress_get_docs_links' )
@@ -450,6 +460,7 @@ class ModuleSettings implements ExecuteHooks {
 				'PAGE_TYPE'           => $page_config['type'],
 				'OPTION_NAME'         => $page_config['option'],
 				'DYNAMIC_VARIABLES'   => $dynamic_variables,
+				'VARIABLE_ALIASES'    => $variable_aliases,
 				'PREVIEW_VALUES'        => array(
 					'%%sitetitle%%' => get_bloginfo( 'name' ),
 					'%%tagline%%'   => get_bloginfo( 'description' ),

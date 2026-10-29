@@ -352,26 +352,9 @@ function seopress_display_seo_term_metaboxe() {
 	}
 }
 
-if ( is_user_logged_in() ) {
-	if ( is_super_admin() ) {
-		seopress_display_seo_term_metaboxe();
-	} else {
-		global $wp_roles;
-
-		// Get current user role.
-		if ( isset( wp_get_current_user()->roles[0] ) ) {
-			$seopress_user_role = wp_get_current_user()->roles[0];
-
-			// If current user role matchs values from Security settings then apply.
-			if ( ! empty( seopress_get_service( 'AdvancedOption' )->getSecurityMetaboxRole() ) ) {
-				if ( array_key_exists( $seopress_user_role, seopress_get_service( 'AdvancedOption' )->getSecurityMetaboxRole() ) ) {
-					// Do nothing.
-				} else {
-					seopress_display_seo_term_metaboxe();
-				}
-			} else {
-				seopress_display_seo_term_metaboxe();
-			}
-		}
-	}
+// Every role of the user counts, as in seopress_metabox_role_is_blocked(): only
+// the first one was checked, so a user with a second, restricted role kept a
+// metabox the settings hide from them.
+if ( is_user_logged_in() && ! seopress_metabox_role_is_blocked( 'GLOBAL' ) ) {
+	seopress_display_seo_term_metaboxe();
 }

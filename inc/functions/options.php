@@ -170,9 +170,9 @@ if ( '1' == seopress_get_toggle_option( 'google-analytics' ) && ! isset( $_GET['
 		$days = apply_filters( 'seopress_cookies_expiration_days', $days );
 
 		$seopress_cookies_user_consent = array(
-			'seopress_nonce'                   => wp_create_nonce( 'seopress_cookies_user_consent_nonce' ),
-			'seopress_cookies_user_consent'    => admin_url( 'admin-ajax.php' ),
 			'seopress_cookies_expiration_days' => $days,
+			// Which consent categories each deferred tracker waits for.
+			'requirements'                     => seopress_user_consent_snippet_categories(),
 		);
 		wp_localize_script( 'seopress-cookies-ajax', 'seopressAjaxGAUserConsent', $seopress_cookies_user_consent );
 	}
@@ -281,48 +281,6 @@ if ( '1' == seopress_get_toggle_option( 'google-analytics' ) && ! isset( $_GET['
 		// User Consent.
 		require_once plugin_dir_path( __FILE__ ) . '/options-user-consent.php';
 	}
-
-	/**
-	 * Hand back the trackers held until the visitor accepts.
-	 *
-	 * The bundled banner no longer calls this: the same payload is embedded in
-	 * the page, so a visitor who already accepted does not pay for an uncached
-	 * PHP request on every page view. Kept for anything wired to the endpoint.
-	 */
-	function seopress_cookies_user_consent() {
-		// Auto-accept prints the trackers on every page already.
-		if ( '1' === seopress_get_service( 'GoogleAnalyticsOption' )->getHalfDisable() ) {
-			wp_send_json_success();
-		}
-
-		if ( seopress_user_consent_role_is_excluded() ) {
-			wp_send_json_success();
-		}
-
-		require_once plugin_dir_path( __FILE__ ) . '/options-google-analytics.php'; // Google Analytics.
-		require_once plugin_dir_path( __FILE__ ) . '/options-matomo.php'; // Matomo.
-		require_once plugin_dir_path( __FILE__ ) . '/options-clarity.php'; // Clarity.
-
-		wp_send_json_success( seopress_user_consent_payload() );
-	}
-	add_action( 'wp_ajax_seopress_cookies_user_consent', 'seopress_cookies_user_consent' );
-	add_action( 'wp_ajax_nopriv_seopress_cookies_user_consent', 'seopress_cookies_user_consent' );
-
-	/**
-	 * Cookies user consent close.
-	 */
-	function seopress_cookies_user_consent_close() {
-		require_once plugin_dir_path( __FILE__ ) . '/options-google-analytics.php'; // Google Analytics.
-		require_once plugin_dir_path( __FILE__ ) . '/options-clarity.php'; // Clarity.
-
-		$data                       = array();
-		$data['gtag_consent_js']    = seopress_google_analytics_js( false );
-		$data['clarity_consent_js'] = seopress_clarity_js( false );
-
-		wp_send_json_success( $data );
-	}
-	add_action( 'wp_ajax_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close' );
-	add_action( 'wp_ajax_nopriv_seopress_cookies_user_consent_close', 'seopress_cookies_user_consent_close' );
 }
 
 add_action( 'wp', 'seopress_load_redirections_options', 0 );
@@ -356,6 +314,37 @@ if ( '1' == seopress_get_toggle_option( 'xml-sitemap' ) ) { // phpcs:ignore -- T
 	require_once plugin_dir_path( __FILE__ ) . '/options-robots-txt.php'; // Robots.txt.
 }
 
+/**
+ * Advanced comments website hook.
+ *
+ * Removes the `<p class="comment-form-url">` paragraph and keeps the rest of the url field.
+ * The whole field is unset when nothing else is left or when it has no such paragraph.
+ *
+ * A theme that wraps the paragraph, e.g. `<div class="row"><p class="comment-form-url">...</p></div>`,
+ * keeps an empty `<div class="row"></div>`. If a theme shows extra spacing in the comment form
+ * with this option on, check this first.
+ *
+ * @param array $fields The fields.
+ * @return array The fields.
+ */
+function seopress_advanced_advanced_comments_website_hook( $fields ) {
+	if ( ! isset( $fields['url'] ) ) {
+		return $fields;
+	}
+
+	// Some themes (Astra) close a wrapper opened in the author field at the end of the url field: only remove the Website paragraph.
+	// The match stops at the first </p>, so a <p> nested in the url paragraph (invalid HTML) would leave a stray </p>.
+	$rest = preg_replace( '#<p\b[^>]*\bcomment-form-url\b[^>]*>.*?</p>#is', '', $fields['url'] );
+
+	if ( is_string( $rest ) && $rest !== $fields['url'] && '' !== trim( $rest ) ) {
+		$fields['url'] = $rest;
+	} else {
+		unset( $fields['url'] );
+	}
+
+	return $fields;
+}
+
 if ( '1' == seopress_get_toggle_option( 'advanced' ) ) { // phpcs:ignore -- TODO: null comparison check.
 	require_once plugin_dir_path( __FILE__ ) . '/options-advanced-rewriting.php'; // Advanced Rewriting.
 
@@ -366,17 +355,6 @@ if ( '1' == seopress_get_toggle_option( 'advanced' ) ) { // phpcs:ignore -- TODO
 		}
 
 		if ( '1' === seopress_get_service( 'AdvancedOption' )->getAdvancedCommentsWebsiteDisable() ) {
-			/**
-			 * Advanced comments website hook.
-			 *
-			 * @param array $fields The fields.
-			 * @return array The fields.
-			 */
-			function seopress_advanced_advanced_comments_website_hook( $fields ) {
-				unset( $fields['url'] );
-
-				return $fields;
-			}
 			add_filter( 'comment_form_default_fields', 'seopress_advanced_advanced_comments_website_hook', 40 );
 		}
 

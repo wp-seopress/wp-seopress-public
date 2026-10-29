@@ -75,7 +75,11 @@ class ProSettings implements ExecuteHooks {
 	public function processPost( \WP_REST_Request $request ) {
 		$new_options = $request->get_json_params();
 
-		if ( empty( $new_options ) || ! is_array( $new_options ) ) {
+		// An empty object is a valid payload: it is what a settings screen sends
+		// when nothing has ever been saved for it and no field was touched.
+		// Rejecting it told the user their data was invalid for pressing Save on
+		// an untouched page. Only a body that is not an array is invalid.
+		if ( ! is_array( $new_options ) ) {
 			return new \WP_Error(
 				'invalid_data',
 				__( 'Invalid data provided.', 'wp-seopress' ),

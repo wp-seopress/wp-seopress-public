@@ -7,12 +7,19 @@
     var pending = false;
     var selector = 'li.product, .wc-block-product';
 
+    // Product-list events are audience measurement: the Analytics category.
+    function analyticsGranted() {
+        if (window.seopressConsent) return window.seopressConsent.has('analytics');
+        var cookies = document.cookie.split(';').map(function (cookie) { return cookie.trim(); });
+        var choice = cookies.filter(function (cookie) { return cookie.indexOf('seopress-user-consent=') === 0; })[0];
+        if (choice) return choice.slice(22).split(/\||%7C/i).indexOf('analytics') > -1;
+        return cookies.indexOf('seopress-user-consent-accept=1') > -1;
+    }
+
     function allowed() {
         var config = window.seopressProductListTracking;
         return config && typeof window.gtag === 'function' && (!config.requiresConsent ||
-            document.cookie.split(';').some(function (cookie) {
-                return cookie.trim() === 'seopress-user-consent-accept=1';
-            }));
+            analyticsGranted());
     }
 
     function cards() {

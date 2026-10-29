@@ -31,25 +31,24 @@ function seopress_clarity_build_js() {
 	);
 
 	// User consent - Required for EEA, UK, and Switzerland (effective Oct 31, 2025).
-	// Microsoft Clarity requires checking analytics_storage and ad_storage consent types.
-	// Reference: https://learn.microsoft.com/en-us/clarity/setup-and-installation/consent-management#consent-type
+	// Clarity's Consent API v2 answers analytics_Storage and ad_Storage separately.
+	// Reference: https://learn.microsoft.com/en-us/clarity/setup-and-installation/clarity-consent-api-v2
 	//
-	// SEOPress cookie consent system grants BOTH analytics_storage AND ad_storage when user accepts.
-	// This aligns with Google Consent Mode v2 implementation in options-google-analytics.php.
+	// Clarity belongs to the Analytics category; its ad storage follows the
+	// Advertising category, as the Consent Mode signals do.
 	//
 	// Clarity's stub is defined a few lines above, so the signal is passed
 	// inline rather than from the consent block at the top of the head, which
-	// runs long before window.clarity exists. On a page render the value is a
-	// cookie test the browser evaluates itself: the served HTML then says the
-	// same thing to everyone and survives a full-page cache.
-	$state = seopress_user_consent_state();
+	// runs long before window.clarity exists. On a page render, and in the
+	// deferred payload, the value is read by the browser from its own cookie:
+	// the served HTML then says the same thing to everyone and survives a
+	// full-page cache.
+	$granted = seopress_user_consent_granted_categories();
 
-	if ( 'accept' === $state ) {
-		$consent = "window.clarity('consent');";
-	} elseif ( 'decline' === $state ) {
-		$consent = "window.clarity('consent', false);";
+	if ( null === $granted || seopress_user_consent_building_payload() ) {
+		$consent = seopress_user_consent_clarity_js();
 	} else {
-		$consent = "window.clarity('consent', " . seopress_user_consent_js_test() . ');';
+		$consent = seopress_user_consent_clarity_for( $granted );
 	}
 
 	/**

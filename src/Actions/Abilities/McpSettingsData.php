@@ -68,6 +68,19 @@ class McpSettingsData {
 	const STATUS_SKIPPED = 'skipped';
 
 	/**
+	 * A check whose answer is expected for the way this site is set up.
+	 *
+	 * OAuth switched off on purpose, for instance, is not something to fix on a
+	 * site that connects with an Application Password. Shown so the reader
+	 * knows, but not counted as needing attention: a red or amber line there
+	 * sent people looking for a problem they did not have.
+	 *
+	 * @since 10.4.0
+	 * @var string
+	 */
+	const STATUS_INFO = 'info';
+
+	/**
 	 * WordPress version that introduced the Abilities API.
 	 *
 	 * @var string
@@ -114,16 +127,20 @@ class McpSettingsData {
 	 * @return array
 	 */
 	public static function get_data() {
+		// The checks run first so the walkthrough can follow what they found:
+		// a discovery document the host never lets through to WordPress makes
+		// OAuth unusable, whatever McpOauth::is_enabled() says.
 		$diagnostics = self::diagnostics();
 
 		return array(
 			'endpoint'            => self::endpoint(),
-			'steps'               => self::steps(),
+			'steps'               => self::steps( $diagnostics ),
 			'connection'          => self::connection(),
 			'oauth'               => self::oauth(),
 			'tools'               => self::tools(),
 			'diagnostics'         => $diagnostics,
 			'diagnostics_summary' => self::diagnostics_summary( $diagnostics ),
+			'troubleshooting'     => self::troubleshooting(),
 		);
 	}
 
@@ -135,10 +152,13 @@ class McpSettingsData {
 	 * here rather than being spread across JSX.
 	 *
 	 * @since 10.3.0
+	 * @since 10.4.0 Takes the readiness checks that already ran.
+	 *
+	 * @param array[] $checks The readiness checks, empty when none ran.
 	 *
 	 * @return array[]
 	 */
-	public static function steps() {
+	public static function steps( $checks = array() ) {
 		// Creating an Application Password used to be step 1, for everyone.
 		// Then three of the four clients turned out never to want one: they
 		// sign in over OAuth from the consent screen. Leaving it first sent
@@ -153,7 +173,7 @@ class McpSettingsData {
 				'summary'       => __( 'Choose the client you use. Each one is set up differently, so only the instructions for the one you choose are shown.', 'wp-seopress' ),
 				'instructions'  => array(),
 				'snippet_state' => self::snippet_states(),
-				'clients'       => self::clients(),
+				'clients'       => self::clients( $checks ),
 			),
 			array(
 				'id'           => 'mcp.step.verify',
@@ -162,7 +182,7 @@ class McpSettingsData {
 				'summary'      => __( 'Confirm the client can see this site before you rely on it, so a silent misconfiguration does not look like an empty site.', 'wp-seopress' ),
 				'instructions' => array(
 					__( 'Ask your client which tools it has. It should list the tools shown under "Exposed tools" further down this page.', 'wp-seopress' ),
-					__( 'If nothing appears, run the readiness checks in the Diagnostics panel. Every line that is not green says what to change on this site.', 'wp-seopress' ),
+					__( 'If nothing appears, run the readiness checks in the Diagnostics panel. Every amber or red line says what to change on this site. A blue line is expected for the way this site is set up.', 'wp-seopress' ),
 				),
 			),
 		);
@@ -187,11 +207,13 @@ class McpSettingsData {
 		$username = self::current_username();
 
 		return array(
+			// "info", not "warning": this is the state every reader starts in,
+			// not a fault, and the amber notice was read as one.
 			'pending' => array(
-				'status'  => 'warning',
+				'status'  => 'info',
 				'message' => sprintf(
 					/* translators: %s: the WordPress user name the configurations are written for. */
-					__( 'No Application Password has been created in this page view, so the configuration below still carries a placeholder instead of a credential for "%s". Create one above and it fills itself in.', 'wp-seopress' ),
+					__( 'Expected until you create an Application Password on this page: the configuration below carries a placeholder instead of a credential for "%s". Create one below and it fills itself in.', 'wp-seopress' ),
 					$username
 				),
 			),
@@ -216,142 +238,350 @@ class McpSettingsData {
 	 * that answers over plain HTTP would fail after the reader had pasted the
 	 * URL rather than before.
 	 *
+	 * A third half only shows from outside: the discovery document actually
+	 * reaching WordPress. Some hosts answer /.well-known/ themselves, before
+	 * PHP runs, and OAuth then cannot work however it is configured here. So
+	 * when the readiness checks ran and that one failed, the walkthrough falls
+	 * back to the Application Password instead of offering a connector that
+	 * would fail at sign-in.
+	 *
 	 * @since 10.3.0
+	 * @since 10.4.0 Takes the readiness checks that already ran.
+	 *
+	 * @param array[] $checks The readiness checks, empty when none ran.
 	 *
 	 * @return bool
 	 */
-	public static function oauth_supported() {
-		return McpOauth::is_enabled() && McpOauth::transport_is_secure();
+	public static function oauth_supported( $checks = array() ) {
+		return McpOauth::is_enabled() && McpOauth::transport_is_secure() && ! self::discovery_failed( $checks );
+	}
+
+	/**
+	 * Whether the readiness run found the OAuth discovery document unreachable.
+	 *
+	 * Only a failure that came back as an HTTP answer counts: the document was
+	 * fetched, and something other than WordPress's JSON came back. A site that
+	 * cannot call itself at all fails the same check with a transport error,
+	 * but that says nothing about what outside clients get, so it must not take
+	 * the OAuth setup away from them. A skipped check means OAuth was not
+	 * running in the first place, which oauth_supported() already knows.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param array[] $checks The readiness checks, empty when none ran.
+	 *
+	 * @return bool
+	 */
+	public static function discovery_failed( $checks ) {
+		foreach ( (array) $checks as $check ) {
+			if ( isset( $check['id'], $check['status'] ) && 'mcp.oauth_discovery' === $check['id'] ) {
+				// check_oauth_discovery() writes "HTTP <code>" as the detail of
+				// an answer, and the transport error otherwise.
+				$detail = isset( $check['detail'] ) ? (string) $check['detail'] : '';
+
+				return self::STATUS_FAIL === $check['status'] && 0 === strpos( $detail, 'HTTP ' );
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Whether the OAuth server is off on purpose rather than unable to run.
+	 *
+	 * Everything it depends on is there, so the only thing left that turns it
+	 * off is the seopress_mcp_oauth_enabled filter. That is how a site that
+	 * connects with Application Passwords only is set up, and the checks treat
+	 * it as such instead of as a fault.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return bool
+	 */
+	public static function oauth_switched_off() {
+		return seopress_abilities_api_available()
+			&& seopress_abilities_api_rest_enabled()
+			&& function_exists( 'wp_fast_hash' )
+			&& function_exists( 'wp_verify_fast_hash' )
+			&& ! McpOauth::is_enabled();
+	}
+
+	/**
+	 * Every key a client branch carries, so the tab never meets a missing one.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param array $fields The keys this client sets.
+	 *
+	 * @return array
+	 */
+	protected static function client( $fields ) {
+		return array_merge(
+			array(
+				'id'                          => '',
+				'label'                       => '',
+				'kind'                        => '',
+				'summary'                     => '',
+				'auth'                        => '',
+				'notes'                       => array(),
+				'snippet'                     => '',
+				'snippet_hint'                => '',
+				'extra_snippet'               => '',
+				'extra_hint'                  => '',
+				'fallback_snippet'            => '',
+				'fallback_hint'               => '',
+				'fallback_powershell_snippet' => '',
+				'fallback_powershell_hint'    => '',
+				'instructions'                => array(),
+				'locations'                   => array(),
+				'sections'                    => array(),
+			),
+			$fields
+		);
 	}
 
 	/**
 	 * The clients step 2 branches between, in the order they are offered.
 	 *
-	 * Each client says what kind of thing it is set up with, which snippet it
-	 * needs, where its configuration file lives and what to do with it. They
-	 * genuinely differ, so stacking all four sets of instructions would leave
-	 * the reader to work out which paragraph is theirs.
+	 * Each client says what kind of thing it is set up with, how it signs in,
+	 * which snippet it needs, where its configuration file lives and what to do
+	 * with it. They genuinely differ, so stacking all four sets of instructions
+	 * would leave the reader to work out which paragraph is theirs.
 	 *
 	 * @since 10.3.0
+	 * @since 10.4.0 Takes the readiness checks that already ran, and every
+	 *               client says how it signs in.
+	 *
+	 * @param array[] $checks The readiness checks, empty when none ran.
 	 *
 	 * @return array[] {
-	 *     @type string   $id           Stable, untranslated identifier.
-	 *     @type string   $label        The name shown on the client's tab.
-	 *     @type string   $kind         One of "command", "file", "oauth", "unavailable".
-	 *     @type string   $summary      One sentence saying what this client is.
-	 *     @type string   $snippet          Which connection snippet it needs, empty when none.
-	 *     @type string   $fallback_snippet A helper shown while no password exists, empty when none.
-	 *     @type string   $fallback_hint    What that helper is for.
-	 *     @type string[] $instructions     What to do, in order.
-	 *     @type array[]  $locations        Where its configuration file lives.
+	 *     @type string   $id                          Stable, untranslated identifier.
+	 *     @type string   $label                       The name shown on the client's tab.
+	 *     @type string   $kind                        One of "command", "file", "oauth", "unavailable".
+	 *     @type string   $summary                     One sentence saying what this client is.
+	 *     @type string   $auth                        How it signs in, and what that needs.
+	 *     @type string[] $notes                       Why part of it cannot connect, when that is so.
+	 *     @type string   $snippet                     Which connection snippet it needs, empty when none.
+	 *     @type string   $fallback_snippet            A helper shown while no password exists, empty when none.
+	 *     @type string   $fallback_hint               What that helper is for.
+	 *     @type string   $fallback_powershell_snippet The same helper for Windows, empty when none.
+	 *     @type string   $fallback_powershell_hint    What that one is for.
+	 *     @type string[] $instructions                What to do, in order.
+	 *     @type array[]  $locations                   Where its configuration file lives.
+	 *     @type array[]  $sections                    Apps of the same vendor set up apart, each with its own steps.
 	 * }
 	 */
-	public static function clients() {
+	public static function clients( $checks = array() ) {
+		$oauth = self::oauth_supported( $checks );
+
 		return array(
-			self::claude_client(),
-			self::browser_client( 'chatgpt' ),
+			self::claude_client( $oauth, $checks ),
+			self::browser_client( 'chatgpt', $oauth, $checks ),
+			self::cursor_client( $oauth ),
+		);
+	}
+
+	/**
+	 * The Cursor branch.
+	 *
+	 * Cursor reads a file rather than taking a URL in a dialog. It signs itself
+	 * in over OAuth like the rest when it can, and it runs on the reader's own
+	 * machine, so when OAuth cannot run here it sends an Application Password
+	 * in a header instead of being handed a block that cannot sign in.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param bool $oauth Whether a client can sign in over OAuth here.
+	 *
+	 * @return array One client, shaped like the others.
+	 */
+	protected static function cursor_client( $oauth ) {
+		$cursor = array(
+			'id'        => 'cursor',
+			'label'     => 'Cursor',
+			'kind'      => 'file',
+			'locations' => array(
+				array(
+					'label' => __( 'This project only', 'wp-seopress' ),
+					'path'  => '.cursor/mcp.json',
+				),
+				array(
+					'label' => __( 'Every project', 'wp-seopress' ),
+					'path'  => '~/.cursor/mcp.json',
+				),
+			),
+		);
+
+		if ( $oauth ) {
+			return self::client(
+				array_merge(
+					$cursor,
+					array(
+						'summary'      => __( 'A code editor that reads its MCP servers from a JSON file you edit yourself. It signs you in over OAuth the first time it uses the server, so there is nothing to create beforehand.', 'wp-seopress' ),
+						'auth'         => __( 'OAuth, from your own machine, in your browser. Nothing to create beforehand.', 'wp-seopress' ),
+						'snippet'      => 'json_config_oauth',
+						'snippet_hint' => __( 'Paste this into the file above.', 'wp-seopress' ),
+						'instructions' => array(
+							__( 'Open, or create, one of the configuration files listed below.', 'wp-seopress' ),
+							__( 'Paste the block into it. If the file already has an "mcpServers" object, add the "SEOPress" entry inside it instead of replacing the file.', 'wp-seopress' ),
+							__( 'Restart Cursor, open Settings, Customize, MCPs, then Authenticate next to SEOPress and approve the connection here.', 'wp-seopress' ),
+						),
+					)
+				)
+			);
+		}
+
+		return self::client(
+			array_merge(
+				$cursor,
+				array(
+					'summary'                     => __( 'A code editor that reads its MCP servers from a JSON file you edit yourself. This site cannot sign it in over OAuth right now, so it sends an Application Password instead, which you create right below.', 'wp-seopress' ),
+					'auth'                        => __( 'Application Password, sent from your own machine in a header. Create one below and the block fills itself in.', 'wp-seopress' ),
+					'snippet'                     => 'json_config',
+					'snippet_hint'                => __( 'Paste this into the file above.', 'wp-seopress' ),
+					'fallback_snippet'            => 'base64_command',
+					'fallback_hint'               => __( 'Already created an Application Password from your profile instead? On macOS or Linux, run this in a terminal to get the Base64 that replaces the placeholder above.', 'wp-seopress' ),
+					'fallback_powershell_snippet' => 'base64_powershell',
+					'fallback_powershell_hint'    => __( 'On Windows, run this in PowerShell instead.', 'wp-seopress' ),
+					'instructions'                => array(
+						__( 'Open, or create, one of the configuration files listed below.', 'wp-seopress' ),
+						__( 'Paste the block into it. If the file already has an "mcpServers" object, add the "SEOPress" entry inside it instead of replacing the file.', 'wp-seopress' ),
+						__( 'Restart Cursor and open Settings, Customize, MCPs: SEOPress should be listed with its tools.', 'wp-seopress' ),
+					),
+				)
+			)
+		);
+	}
+
+	/**
+	 * Where the Claude desktop app keeps its configuration file.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return array[]
+	 */
+	protected static function claude_desktop_locations() {
+		return array(
 			array(
-				'id'               => 'cursor',
-				'label'            => 'Cursor',
-				'kind'             => 'file',
-				// Cursor reads a file rather than taking a URL in a dialog, and
-				// that is the only thing that sets it apart here: it signs
-				// itself in over OAuth like the rest, so the block carries no
-				// credential and nothing has to be created first.
-				'summary'          => __( 'A code editor that reads its MCP servers from a JSON file you edit yourself. It signs you in over OAuth the first time it uses the server, so there is nothing to create beforehand.', 'wp-seopress' ),
-				'snippet'          => 'json_config_oauth',
-				'snippet_hint'     => __( 'Paste this into the file above.', 'wp-seopress' ),
-				'extra_snippet'    => '',
-				'extra_hint'       => '',
-				'fallback_snippet' => '',
-				'fallback_hint'    => '',
-				'instructions'     => array(
-					__( 'Open, or create, one of the configuration files listed below.', 'wp-seopress' ),
-					__( 'Paste the block into it. If the file already has an "mcpServers" object, add the "SEOPress" entry inside it instead of replacing the file.', 'wp-seopress' ),
-					__( 'Restart Cursor, open Settings, Customize, MCPs, then Authenticate next to SEOPress and approve the connection here.', 'wp-seopress' ),
-				),
-				'locations'        => array(
-					array(
-						'label' => __( 'This project only', 'wp-seopress' ),
-						'path'  => '.cursor/mcp.json',
-					),
-					array(
-						'label' => __( 'Every project', 'wp-seopress' ),
-						'path'  => '~/.cursor/mcp.json',
-					),
-				),
+				'label' => 'macOS',
+				'path'  => '~/Library/Application Support/Claude/claude_desktop_config.json',
+			),
+			array(
+				'label' => 'Windows',
+				'path'  => '%APPDATA%\\Claude\\claude_desktop_config.json',
+			),
+			array(
+				'label' => 'Linux',
+				'path'  => '~/.config/Claude/claude_desktop_config.json',
 			),
 		);
 	}
 
 	/**
-	 * The one branch every Claude client shares.
+	 * The one tab every Claude client shares, in two titled blocks.
 	 *
-	 * Claude Code, the desktop app and claude.ai are set up on three different
-	 * screens, and for a while this page had three tabs to match. They turned
-	 * out to do the same thing: measured against all three, each one takes the
-	 * endpoint URL, reads the 401 challenge, fetches both discovery documents,
-	 * registers itself and signs in over OAuth. None of them is handed an
-	 * Application Password. Three tabs saying that three times only hid it.
+	 * Claude Code, the desktop app and claude.ai all take the endpoint URL and
+	 * sign in over OAuth when this site can offer it, so they share one tab.
+	 * Where they differ is where the URL goes, and readers who had never heard
+	 * of Claude Code could not tell which of the two snippets was theirs. So
+	 * the tab is split into one block per kind of app, each saying what it is
+	 * and carrying its own steps.
 	 *
-	 * So it is one tab, and what differs between them is a single line each:
-	 * where the URL goes.
+	 * When OAuth cannot run, claude.ai and the desktop app's Connectors screen
+	 * are out of reach, because both connect from Anthropic's servers. The two
+	 * apps that run on the reader's machine are not: Claude Code sends an
+	 * Application Password itself, and the desktop app does through the
+	 * mcp-remote bridge, its configuration file only starting local servers.
 	 *
 	 * @since 10.3.0
+	 * @since 10.4.0 Split into a desktop app block and a Claude Code block.
+	 *
+	 * @param bool    $oauth  Whether a client can sign in over OAuth here.
+	 * @param array[] $checks The readiness checks, empty when none ran.
 	 *
 	 * @return array One client, shaped like the others.
 	 */
-	protected static function claude_client() {
-		if ( self::oauth_supported() ) {
-			return array(
-				'id'               => 'claude',
-				'label'            => 'Claude',
-				'kind'             => 'oauth',
-				'summary'          => __( 'Claude Code, the desktop app and claude.ai all connect the same way: you give them this URL and sign in here in your browser. Nothing to create beforehand.', 'wp-seopress' ),
-				'snippet'          => 'connect_url',
-				'snippet_hint'     => __( 'For claude.ai and the desktop app: paste this as the connector URL.', 'wp-seopress' ),
-				'extra_snippet'    => 'claude_code_oauth',
-				'extra_hint'       => __( 'In Claude Code, this one command adds the same server. Run /mcp afterwards to sign in.', 'wp-seopress' ),
-				'fallback_snippet' => '',
-				'fallback_hint'    => '',
-				'instructions'     => array(
-					__( 'In claude.ai or the desktop app, open Settings, Connectors, then Add custom connector, and paste the URL below. In Claude Code, run the command below instead.', 'wp-seopress' ),
-					__( 'Leave every other field empty. This site registers the client by itself and tells it where to sign in.', 'wp-seopress' ),
-					__( 'Sign in to this site when your browser is sent here, then choose whether this connection may only read or may also change data. It works with your own WordPress permissions, and nothing else.', 'wp-seopress' ),
-				),
-				'locations'        => array(),
+	protected static function claude_client( $oauth, $checks = array() ) {
+		if ( $oauth ) {
+			return self::client(
+				array(
+					'id'       => 'claude',
+					'label'    => 'Claude',
+					'kind'     => 'oauth',
+					'summary'  => __( 'Claude comes as a chat app, on claude.ai or installed on your computer, and as Claude Code in a terminal. Both connect with this URL and sign in here in your browser, but from different places: follow the block for the one you use.', 'wp-seopress' ),
+					'auth'     => __( 'OAuth only, nothing to create beforehand. claude.ai and the desktop app\'s Connectors screen connect from Anthropic\'s servers, so this site needs a public HTTPS address for them. Claude Code signs in from your own machine.', 'wp-seopress' ),
+					'sections' => array(
+						array(
+							'id'           => 'claude-desktop',
+							'title'        => __( 'claude.ai and the Claude desktop app', 'wp-seopress' ),
+							'summary'      => __( 'The chat app, in your browser or installed on your computer. Both add this site from the same Connectors screen.', 'wp-seopress' ),
+							'instructions' => array(
+								__( 'Open Settings, Connectors, then Add custom connector, and paste the URL below. Leave every other field empty: this site registers the client by itself and tells it where to sign in.', 'wp-seopress' ),
+								__( 'Sign in to this site when your browser is sent here, then choose whether this connection may only read or may also change data. It works with your own WordPress permissions, and nothing else.', 'wp-seopress' ),
+							),
+							'snippet'      => 'connect_url',
+							'snippet_hint' => __( 'Paste this as the connector URL.', 'wp-seopress' ),
+							'locations'    => array(),
+						),
+						array(
+							'id'           => 'claude-code',
+							'title'        => __( 'Claude Code (terminal)', 'wp-seopress' ),
+							'summary'      => __( 'The command-line tool, run in a terminal or from a code editor.', 'wp-seopress' ),
+							'instructions' => array(
+								__( 'Run the command below in a terminal.', 'wp-seopress' ),
+								__( 'Start Claude Code, type /mcp, choose SEOPress and sign in to this site in the browser window it opens.', 'wp-seopress' ),
+							),
+							'snippet'      => 'claude_code_oauth',
+							'snippet_hint' => __( 'Run this in a terminal.', 'wp-seopress' ),
+							'locations'    => array(),
+						),
+					),
+				)
 			);
 		}
 
-		// OAuth cannot run here, so claude.ai is out of reach whatever is
-		// pasted into it. The two clients that run on the reader's own machine
-		// still are not: they can send an Application Password themselves.
-		return array(
-			'id'               => 'claude',
-			'label'            => 'Claude',
-			'kind'             => 'command',
-			'summary'          => __( 'This site cannot sign a client in over OAuth, so claude.ai cannot reach it at all. Claude Code and the desktop app still can, with an Application Password, which you create right below.', 'wp-seopress' ),
-			'snippet'          => 'claude_code',
-			'snippet_hint'     => __( 'For Claude Code: run this in a terminal.', 'wp-seopress' ),
-			'extra_snippet'    => 'json_config',
-			'extra_hint'       => __( 'For the desktop app instead: open Settings, Developer, Edit Config, and paste this into the file it opens.', 'wp-seopress' ),
-			'fallback_snippet' => 'base64_command',
-			'fallback_hint'    => __( 'Already created an Application Password from your profile instead? Run this to get the Base64 that replaces the placeholder above.', 'wp-seopress' ),
-			'instructions'     => self::browser_client_blockers( 'claude.ai' ),
-			'locations'        => array(
-				array(
-					'label' => 'macOS',
-					'path'  => '~/Library/Application Support/Claude/claude_desktop_config.json',
+		return self::client(
+			array(
+				'id'                          => 'claude',
+				'label'                       => 'Claude',
+				'kind'                        => 'command',
+				'summary'                     => __( 'This site cannot sign a client in over OAuth right now, so claude.ai and the desktop app\'s Connectors screen cannot reach it. The Claude desktop app and Claude Code still can, from your own machine, with an Application Password.', 'wp-seopress' ),
+				'auth'                        => __( 'Application Password, sent from your own machine. Create one below and both blocks fill themselves in.', 'wp-seopress' ),
+				'notes'                       => self::browser_client_blockers( 'claude.ai', $checks ),
+				'fallback_snippet'            => 'base64_command',
+				'fallback_hint'               => __( 'Already created an Application Password from your profile instead? On macOS or Linux, run this in a terminal to get the Base64 that replaces the placeholder in both blocks.', 'wp-seopress' ),
+				'fallback_powershell_snippet' => 'base64_powershell',
+				'fallback_powershell_hint'    => __( 'On Windows, run this in PowerShell instead.', 'wp-seopress' ),
+				'sections'                    => array(
+					array(
+						'id'           => 'claude-desktop',
+						'title'        => __( 'Claude desktop app', 'wp-seopress' ),
+						'summary'      => __( 'The chat app installed on your computer. Its configuration file only starts servers on your own machine, so it reaches this site through mcp-remote, a small bridge that needs Node.js.', 'wp-seopress' ),
+						'instructions' => array(
+							__( 'Install Node.js, the LTS version from nodejs.org, if this computer does not have it yet. The bridge runs with npx, which comes with it.', 'wp-seopress' ),
+							__( 'In the desktop app, open Settings, then Developer, and click Edit Config. On macOS, Settings is in the Claude menu; on Windows, in the menu at the top left of the window, under File. It shows you claude_desktop_config.json, listed below for each system: open it in a text editor.', 'wp-seopress' ),
+							__( 'Paste the block below into it. If the file already has an "mcpServers" object, add the "SEOPress" entry inside it instead of replacing the file.', 'wp-seopress' ),
+							__( 'Quit the app completely, then open it again: closing its window leaves it running. On macOS, choose Quit Claude in the Claude menu. On Windows, right-click the Claude icon in the system tray, next to the clock, and choose Quit.', 'wp-seopress' ),
+							__( 'Open Settings, Developer again: SEOPress should be listed as running. If it shows an error instead, its log, opened from there, says why.', 'wp-seopress' ),
+						),
+						'snippet'      => 'desktop_config',
+						'snippet_hint' => __( 'Paste this into claude_desktop_config.json.', 'wp-seopress' ),
+						'locations'    => self::claude_desktop_locations(),
+					),
+					array(
+						'id'           => 'claude-code',
+						'title'        => __( 'Claude Code (terminal)', 'wp-seopress' ),
+						'summary'      => __( 'The command-line tool, run in a terminal or from a code editor. It sends the Application Password itself, so it needs no bridge.', 'wp-seopress' ),
+						'instructions' => array(
+							__( 'Run the command below in a terminal.', 'wp-seopress' ),
+							__( 'Start Claude Code and type /mcp: SEOPress should be listed as connected.', 'wp-seopress' ),
+						),
+						'snippet'      => 'claude_code',
+						'snippet_hint' => __( 'Run this in a terminal.', 'wp-seopress' ),
+						'locations'    => array(),
+					),
 				),
-				array(
-					'label' => 'Windows',
-					'path'  => '%APPDATA%\\Claude\\claude_desktop_config.json',
-				),
-				array(
-					'label' => 'Linux',
-					'path'  => '~/.config/Claude/claude_desktop_config.json',
-				),
-			),
+			)
 		);
 	}
 
@@ -373,10 +603,17 @@ class McpSettingsData {
 				'label'        => 'ChatGPT',
 				'vendor'       => 'ChatGPT',
 				'summary'      => __( 'Added as a custom MCP server. ChatGPT signs you in over OAuth in your browser, so there is nothing to create beforehand.', 'wp-seopress' ),
+				// The desktop app and chatgpt.com are not known to reach a
+				// site the same way, so only chatgpt.com is said to connect
+				// from OpenAI's servers.
+				'auth'         => __( 'OAuth only: an Application Password cannot be used. chatgpt.com connects from OpenAI\'s servers, so it needs this site on a public HTTPS address.', 'wp-seopress' ),
 				'instructions' => array(
-					__( 'In the ChatGPT app, open Settings, Integrations, Plugins, then Add, and choose Add MCP server. The browser version keeps the same screen under a different menu name, look for the one that lists your connectors.', 'wp-seopress' ),
-					__( 'Give it a name, choose the Streamable HTTP type, paste the URL below, and save. Leave the bearer token and header fields empty: this site signs the connection in over OAuth by itself.', 'wp-seopress' ),
-					__( 'Click Authenticate next to the server, sign in to this site when your browser is sent here, and approve the connection. The connector then works with your own WordPress permissions, and nothing else.', 'wp-seopress' ),
+					__( 'In the ChatGPT desktop app, open Settings, then Plugins under Integrations. Click Add, choose Add MCP server, give it a name, choose the Streamable HTTP type, paste the URL below, and save. Leave the bearer token and header fields empty: this site signs the connection in over OAuth by itself. Then click Authenticate next to the server.', 'wp-seopress' ),
+					// The button that opens the form is not labelled the same
+					// on every account, so the form is described rather than
+					// the button.
+					__( 'On chatgpt.com, custom MCP servers only show up in developer mode. Open Settings and turn on Developer mode in the security and login section. Then, from the Plugins page, open the form that creates a custom plugin: depending on your account, a + button, or Browse directory then Add. Fill it in with a name and the URL below as the server URL, keep OAuth as the authentication, confirm the risk notice, and create it.', 'wp-seopress' ),
+					__( 'Sign in to this site when your browser is sent here, and approve the connection. The connector then works with your own WordPress permissions, and nothing else.', 'wp-seopress' ),
 				),
 			),
 		);
@@ -387,50 +624,48 @@ class McpSettingsData {
 	 *
 	 * An Application Password cannot reach a client that runs on someone else's
 	 * servers, so this branch is the OAuth connector flow when OAuth can run,
-	 * and otherwise says which of the two halves is missing. "Not implemented"
-	 * and "implemented, but refused over plain HTTP" are different problems with
-	 * different fixes, so they must not be reported with the same sentence.
+	 * and otherwise says which of the halves is missing. "Not implemented",
+	 * "implemented, but refused over plain HTTP" and "implemented, but never
+	 * reached" are different problems with different fixes, so they must not
+	 * be reported with the same sentence.
 	 *
 	 * @since 10.3.0
+	 * @since 10.4.0 Takes whether OAuth can run, and the checks that ran.
 	 *
-	 * @param string $id Which browser client to build.
+	 * @param string  $id     Which browser client to build.
+	 * @param bool    $oauth  Whether a client can sign in over OAuth here.
+	 * @param array[] $checks The readiness checks, empty when none ran.
 	 *
 	 * @return array One client, shaped like the others.
 	 */
-	protected static function browser_client( $id ) {
+	protected static function browser_client( $id, $oauth, $checks = array() ) {
 		$clients = self::browser_clients();
 		$client  = $clients[ $id ];
 
-		if ( self::oauth_supported() ) {
-			return array(
-				'id'               => $id,
-				'label'            => $client['label'],
-				'kind'             => 'oauth',
-				'summary'          => $client['summary'],
-				'snippet'          => 'connect_url',
-				'snippet_hint'     => __( 'Paste this as the MCP server URL.', 'wp-seopress' ),
-				'extra_snippet'    => '',
-				'extra_hint'       => '',
-				'fallback_snippet' => '',
-				'fallback_hint'    => '',
-				'instructions'     => $client['instructions'],
-				'locations'        => array(),
+		if ( $oauth ) {
+			return self::client(
+				array(
+					'id'           => $id,
+					'label'        => $client['label'],
+					'kind'         => 'oauth',
+					'summary'      => $client['summary'],
+					'auth'         => $client['auth'],
+					'snippet'      => 'connect_url',
+					'snippet_hint' => __( 'Paste this as the MCP server URL.', 'wp-seopress' ),
+					'instructions' => $client['instructions'],
+				)
 			);
 		}
 
-		return array(
-			'id'               => $id,
-			'label'            => $client['label'],
-			'kind'             => 'unavailable',
-			'summary'          => __( 'Not possible from this site right now, whatever you paste into the browser.', 'wp-seopress' ),
-			'snippet'          => '',
-			'snippet_hint'     => '',
-			'extra_snippet'    => '',
-			'extra_hint'       => '',
-			'fallback_snippet' => '',
-			'fallback_hint'    => '',
-			'instructions'     => self::browser_client_blockers( $client['vendor'] ),
-			'locations'        => array(),
+		return self::client(
+			array(
+				'id'           => $id,
+				'label'        => $client['label'],
+				'kind'         => 'unavailable',
+				'summary'      => __( 'Not possible from this site right now, whatever you paste into the browser.', 'wp-seopress' ),
+				'auth'         => $client['auth'],
+				'instructions' => self::browser_client_blockers( $client['vendor'], $checks ),
+			)
 		);
 	}
 
@@ -438,12 +673,14 @@ class McpSettingsData {
 	 * Why the browser cannot connect, in the order the reader has to fix them.
 	 *
 	 * @since 10.3.0
+	 * @since 10.4.0 Takes the checks that ran, to name an unreachable discovery document.
 	 *
-	 * @param string $vendor The name of the client the reader picked.
+	 * @param string  $vendor The name of the client the reader picked.
+	 * @param array[] $checks The readiness checks, empty when none ran.
 	 *
 	 * @return string[]
 	 */
-	protected static function browser_client_blockers( $vendor ) {
+	protected static function browser_client_blockers( $vendor, $checks = array() ) {
 		$blockers = array(
 			sprintf(
 				/* translators: %s: the name of the browser client, for instance claude.ai. */
@@ -460,11 +697,120 @@ class McpSettingsData {
 				__( 'OAuth is refused over plain HTTP, and this site is served on %s, so the connector would be turned away. Install a TLS certificate and switch the WordPress Address and Site Address to https.', 'wp-seopress' ),
 				McpServer::endpoint_url()
 			);
+		} elseif ( self::discovery_failed( $checks ) ) {
+			$blockers[] = sprintf(
+				/* translators: %s: the URL of the OAuth discovery document. */
+				__( 'The OAuth discovery document at %s does not reach WordPress, so the connector cannot find out where to sign in. Some hosts answer /.well-known/ addresses themselves, before WordPress runs. The "OAuth discovery document" line in Diagnostics says what to ask your host.', 'wp-seopress' ),
+				McpOauth::protected_resource_metadata_url()
+			);
 		}
 
-		$blockers[] = __( 'Claude Code, the Claude desktop app and Cursor still work in the meantime: all three run on your own machine and can send an Application Password.', 'wp-seopress' );
+		$blockers[] = __( 'Claude Code, the Claude desktop app and Cursor still work in the meantime: all three run on your own machine and can send an Application Password. The Claude and Cursor tabs show how.', 'wp-seopress' );
 
 		return $blockers;
+	}
+
+	/**
+	 * What to look at when a client fails although every check is green.
+	 *
+	 * The readiness checks call this site from itself, and a firewall or a CDN
+	 * in front of it never sees those calls. claude.ai and ChatGPT come from
+	 * their vendor's servers, with no browser, and that is what bot protection
+	 * is built to stop. The messages they show then name the server URL or
+	 * the registration, never the firewall, so each entry starts from what the
+	 * reader actually sees.
+	 *
+	 * The quoted client messages are left untranslated: they are what the
+	 * client shows, and what the reader will search for.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @return array[] {
+	 *     @type string   $id       Stable, untranslated identifier.
+	 *     @type string   $title    The question the reader has.
+	 *     @type string[] $symptoms What the client shows, verbatim.
+	 *     @type string   $cause    Why it happens.
+	 *     @type string[] $steps    What to do, in order.
+	 *     @type array[]  $urls     The addresses the steps name, as label and url.
+	 * }
+	 */
+	public static function troubleshooting() {
+		return array(
+			array(
+				'id'       => 'mcp.troubleshooting.firewall',
+				'title'    => __( 'claude.ai or ChatGPT is refused while every check is green', 'wp-seopress' ),
+				'symptoms' => array(
+					'Dynamic client registration failed: registration endpoint returned 403',
+					'Some app settings were rejected. Check the server URL or tunnel ID, icon, and authentication settings, then try again.',
+				),
+				'cause'    => __( 'This site only refuses a registration with HTTP 403 when its MCP server or its OAuth server is switched off, and it then answers with a JSON error, access_denied. Any other 403, usually an HTML page or a challenge, comes from something in front of WordPress: a CDN, a firewall or a security plugin. claude.ai and ChatGPT call the registration, the token and the MCP addresses from their own servers, with no browser, which bot protection treats as a bot. ChatGPT\'s message does not mention registration at all, but this is the usual cause.', 'wp-seopress' ),
+				'steps'    => array(
+					__( 'Cloudflare: open Security, Events, and look for the addresses below. If Bot Fight Mode challenged them, turn Bot Fight Mode off, under Security, Bots: on the Free plan, a custom WAF rule cannot skip it. On a paid plan, a WAF rule that skips bot protection for these addresses is enough.', 'wp-seopress' ),
+					__( 'Another firewall, a security plugin such as Wordfence, or your host\'s firewall: allow GET and POST requests to the addresses below from any IP address, and check its log for requests it blocked when you tried to connect.', 'wp-seopress' ),
+					__( 'Then add the server to your client again.', 'wp-seopress' ),
+				),
+				'urls'     => array(
+					array(
+						'label' => __( 'Registration', 'wp-seopress' ),
+						'url'   => McpOauth::rest_endpoint_url( McpOauth::REGISTER_ROUTE ),
+					),
+					array(
+						'label' => __( 'Token', 'wp-seopress' ),
+						'url'   => McpOauth::rest_endpoint_url( McpOauth::TOKEN_ROUTE ),
+					),
+					array(
+						'label' => __( 'MCP server', 'wp-seopress' ),
+						'url'   => McpServer::endpoint_url(),
+					),
+				),
+			),
+			array(
+				'id'       => 'mcp.troubleshooting.discovery',
+				'title'    => __( 'claude.ai or ChatGPT finds the site, then cannot sign in', 'wp-seopress' ),
+				'symptoms' => array(
+					'couldn\'t register with … sign-in service',
+				),
+				'cause'    => __( 'The client could not read the OAuth discovery documents, so it does not know where to sign in. When the "OAuth discovery document" line in Diagnostics is red, your server does not let /.well-known/ addresses through to WordPress: some hosts answer them themselves, before WordPress runs.', 'wp-seopress' ),
+				'steps'    => array(
+					__( 'Open the two addresses below in a browser. Both must answer with JSON, not a "not found" page.', 'wp-seopress' ),
+					__( 'If they do not, ask your host to pass them through to WordPress.', 'wp-seopress' ),
+					__( 'Until then, connect Claude Code, the Claude desktop app or Cursor with an Application Password: their tabs switch to that method by themselves while the check is red.', 'wp-seopress' ),
+				),
+				'urls'     => array(
+					array(
+						'label' => __( 'Protected resource metadata', 'wp-seopress' ),
+						'url'   => McpOauth::protected_resource_metadata_url(),
+					),
+					array(
+						'label' => __( 'Authorization server metadata', 'wp-seopress' ),
+						'url'   => McpOauth::authorization_server_metadata_url(),
+					),
+				),
+			),
+			array(
+				'id'       => 'mcp.troubleshooting.desktop_config',
+				'title'    => __( 'The Claude desktop app does not list the server', 'wp-seopress' ),
+				'symptoms' => array(),
+				'cause'    => __( 'The desktop app\'s configuration file only accepts servers it starts itself, with a command. An entry with a "url" is not supported, and can make the app drop every server in the file. The configuration in the Claude tab starts the mcp-remote bridge instead, which needs Node.js.', 'wp-seopress' ),
+				'steps'    => array(
+					__( 'Check that Node.js is installed: in a terminal, npx --version should print a version number. If it does not, install the LTS version from nodejs.org.', 'wp-seopress' ),
+					__( 'Quit the app completely and open it again: closing its window leaves it running. On Windows, right-click the Claude icon in the system tray and choose Quit.', 'wp-seopress' ),
+					__( 'Open Settings, Developer: the server is listed there with its state, and its log says why it failed.', 'wp-seopress' ),
+				),
+				'urls'     => array(),
+			),
+			array(
+				'id'       => 'mcp.troubleshooting.credential',
+				'title'    => __( 'Claude Code, the desktop app or Cursor is refused with HTTP 401', 'wp-seopress' ),
+				'symptoms' => array(),
+				'cause'    => __( 'The Authorization header has to carry "Basic", a space, then the Base64 of your user name, a colon and the Application Password. A placeholder left in the configuration, another account\'s user name, or a revoked password is refused.', 'wp-seopress' ),
+				'steps'    => array(
+					__( 'Create a new Application Password in step 1: the configurations fill themselves in with it.', 'wp-seopress' ),
+					__( 'Or run the Base64 helper for your system, shown under the configuration, and paste its output in place of the placeholder.', 'wp-seopress' ),
+				),
+				'urls'     => array(),
+			),
+		);
 	}
 
 	/**
@@ -552,7 +898,9 @@ class McpSettingsData {
 			'claude_code_template'      => self::claude_code_command( self::AUTH_PLACEHOLDER ),
 			'json_config'               => self::json_config( self::AUTH_PLACEHOLDER ),
 			'json_config_oauth'         => self::json_config_oauth(),
+			'desktop_config'            => self::desktop_config( self::AUTH_PLACEHOLDER ),
 			'base64_command'            => self::base64_command( $username ),
+			'base64_powershell'         => self::base64_powershell_command( $username ),
 			'application_passwords_url' => admin_url( 'profile.php' ) . '#application-passwords',
 			'application_passwords'     => self::application_passwords(),
 		);
@@ -604,8 +952,10 @@ class McpSettingsData {
 	 * @return string
 	 */
 	public static function claude_code_command( $authorization ) {
+		// --scope user for the same reason as the OAuth line: without it the
+		// server only exists in the directory the command was run in.
 		return sprintf(
-			'claude mcp add --transport http %1$s "%2$s" --header "Authorization: Basic %3$s"',
+			'claude mcp add --transport http --scope user %1$s "%2$s" --header "Authorization: Basic %3$s"',
 			self::SERVER_KEY,
 			McpServer::endpoint_url(),
 			$authorization
@@ -654,6 +1004,27 @@ class McpSettingsData {
 	}
 
 	/**
+	 * The same helper for Windows, where neither read nor base64 exists.
+	 *
+	 * It prompts for the password for the same reason the bash one does, reads
+	 * it as a secure string so it is not echoed, and drops it afterwards.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param string $username The login to encode alongside the password.
+	 *
+	 * @return string
+	 */
+	public static function base64_powershell_command( $username ) {
+		// Single quotes are literal in PowerShell, and a quote inside one is
+		// written twice.
+		return sprintf(
+			'$pw = Read-Host \'Application password\' -AsSecureString; [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes(\'%s:\' + [Net.NetworkCredential]::new(\'\', $pw).Password)); Remove-Variable pw',
+			str_replace( "'", "''", $username )
+		);
+	}
+
+	/**
 	 * The MCP configuration file block, for clients configured from JSON.
 	 *
 	 * @since 10.3.0
@@ -681,7 +1052,9 @@ class McpSettingsData {
 	/**
 	 * The MCP configuration file block, carrying a Basic credential.
 	 *
-	 * Only needed on a site where OAuth cannot run.
+	 * Only needed on a site where OAuth cannot run, and only for a client that
+	 * accepts a remote server in its file, such as Cursor. The Claude desktop
+	 * app does not: it gets desktop_config() instead.
 	 *
 	 * @since 10.3.0
 	 *
@@ -698,6 +1071,53 @@ class McpSettingsData {
 						'url'     => McpServer::endpoint_url(),
 						'headers' => array(
 							'Authorization' => 'Basic ' . $authorization,
+						),
+					),
+				),
+			),
+			JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE
+		);
+
+		return false === $json ? '' : $json;
+	}
+
+	/**
+	 * The claude_desktop_config.json block, through the mcp-remote bridge.
+	 *
+	 * The desktop app's configuration file only accepts servers it starts
+	 * itself, with a command. An entry with a url is not supported, and was
+	 * reported to make the app drop the whole mcpServers section on start, so
+	 * the block json_config() builds could never work there. mcp-remote is
+	 * the stdio bridge that forwards to a remote server, run with npx.
+	 *
+	 * The header value goes through an environment variable: written straight
+	 * into args, the space after "Basic" splits it into two arguments on
+	 * Windows.
+	 *
+	 * @since 10.4.0
+	 *
+	 * @param string $authorization What follows "Basic " in the header.
+	 *
+	 * @return string
+	 */
+	public static function desktop_config( $authorization ) {
+		$args = array( '-y', 'mcp-remote', McpServer::endpoint_url(), '--header', 'Authorization:${AUTH_HEADER}' );
+
+		// mcp-remote refuses a plain HTTP URL unless told to, except on
+		// localhost. A site that reached this branch over HTTP is one the
+		// reader chose to run that way.
+		if ( ! self::endpoint_is_https() ) {
+			$args[] = '--allow-http';
+		}
+
+		$json = wp_json_encode(
+			array(
+				'mcpServers' => array(
+					self::SERVER_KEY => array(
+						'command' => 'npx',
+						'args'    => $args,
+						'env'     => array(
+							'AUTH_HEADER' => 'Basic ' . $authorization,
 						),
 					),
 				),
@@ -738,7 +1158,7 @@ class McpSettingsData {
 			'rest_path'     => self::APPLICATION_PASSWORDS_REST_PATH,
 			'manage_url'    => admin_url( 'profile.php' ) . '#application-passwords',
 			'name_required' => __( 'Give this password a name before creating it, so you can recognise it on your profile later.', 'wp-seopress' ),
-			'error_intro'   => __( 'WordPress refused to create the Application Password, so nothing was created and step 2 still carries a placeholder.', 'wp-seopress' ),
+			'error_intro'   => __( 'WordPress refused to create the Application Password, so nothing was created and the configurations below still carry a placeholder.', 'wp-seopress' ),
 			'shown_once'    => __( 'This is the only time this password is shown. Copy it now, or leave this page and create another one. SEOPress does not store it, and it is gone as soon as you reload.', 'wp-seopress' ),
 		);
 	}
@@ -1069,8 +1489,11 @@ class McpSettingsData {
 	 * @return string One of the STATUS_* constants.
 	 */
 	public static function worst_status( $checks ) {
+		// An expected state ranks with a pass: it is not something to fix,
+		// so it must never colour the collapsed panel's header.
 		$rank = array(
 			self::STATUS_OK      => 0,
+			self::STATUS_INFO    => 0,
 			self::STATUS_SKIPPED => 1,
 			self::STATUS_WARNING => 2,
 			self::STATUS_FAIL    => 3,
@@ -1115,6 +1538,7 @@ class McpSettingsData {
 			self::STATUS_WARNING => 0,
 			self::STATUS_FAIL    => 0,
 			self::STATUS_SKIPPED => 0,
+			self::STATUS_INFO    => 0,
 		);
 
 		foreach ( $checks as $check ) {
@@ -1313,9 +1737,17 @@ class McpSettingsData {
 		$status = (int) $probe['status'];
 
 		// 401 is the healthy answer: the route ran, and it refused an
-		// unauthenticated caller, which is exactly what it should do.
+		// unauthenticated caller, which is exactly what it should do. Said in
+		// words, because a bare "HTTP 401" next to a green dot was read as an
+		// error by readers who know that code as "unauthorized".
 		if ( 401 === $status ) {
-			return self::check( self::STATUS_OK, 'mcp.endpoint', $label, '', 'HTTP 401' );
+			return self::check(
+				self::STATUS_OK,
+				'mcp.endpoint',
+				$label,
+				__( 'HTTP 401 is the expected answer: this check calls the endpoint without credentials, and the endpoint rightly asks for them.', 'wp-seopress' ),
+				'HTTP 401'
+			);
 		}
 
 		// SEOPress's own refusal when exposure is off. The route is alive, and
@@ -1477,6 +1909,9 @@ class McpSettingsData {
 		// local install with a problem it does not have and cannot fix. Say
 		// what is actually true instead: the clients on this machine work, the
 		// ones on someone else's servers cannot see localhost at all.
+		//
+		// chatgpt.com only: whether the ChatGPT desktop app reaches a local
+		// site has not been established, so it is not lumped in with it.
 		if ( McpOauth::transport_is_secure() ) {
 			return self::check(
 				self::STATUS_OK,
@@ -1484,7 +1919,7 @@ class McpSettingsData {
 				$label,
 				sprintf(
 					/* translators: %s: the MCP endpoint URL. */
-					__( 'This site answers on %s, which only this machine can reach. Claude Code, the Claude desktop app, Cursor and VS Code connect to it normally. claude.ai and ChatGPT run on their own servers and cannot see it, so they need a site with a public HTTPS address.', 'wp-seopress' ),
+					__( 'This site answers on %s, which only this machine can reach. Claude Code, the Claude desktop app, Cursor and VS Code connect to it normally. claude.ai and chatgpt.com run on their own servers and cannot see it, so they need a site with a public HTTPS address.', 'wp-seopress' ),
 					McpServer::endpoint_url()
 				)
 			);
@@ -1580,12 +2015,24 @@ class McpSettingsData {
 			);
 		}
 
+		// Everything OAuth needs is there, so the filter is what turned it
+		// off: the way a site that connects with Application Passwords only
+		// is set up. Expected, then, not a failure.
+		if ( self::oauth_switched_off() ) {
+			return self::check(
+				self::STATUS_INFO,
+				'mcp.oauth',
+				$label,
+				__( 'The OAuth server is switched off on this site: something is filtering seopress_mcp_oauth_enabled to false. That is expected if you connect with an Application Password, from Claude Code, the Claude desktop app or Cursor. Only claude.ai and ChatGPT need OAuth, and they cannot sign in until it is back on.', 'wp-seopress' )
+			);
+		}
+
 		if ( ! McpOauth::is_enabled() ) {
 			return self::check(
 				self::STATUS_FAIL,
 				'mcp.oauth',
 				$label,
-				__( 'The OAuth server is switched off on this site, so claude.ai and ChatGPT cannot sign in. Something is filtering seopress_mcp_oauth_enabled to false.', 'wp-seopress' )
+				__( 'The OAuth server cannot run on this site, so claude.ai and ChatGPT cannot sign in. The WordPress Abilities API line above says what is missing.', 'wp-seopress' )
 			);
 		}
 
@@ -1608,6 +2055,15 @@ class McpSettingsData {
 	protected static function check_oauth_discovery() {
 		$label = __( 'OAuth discovery document', 'wp-seopress' );
 		$url   = McpOauth::protected_resource_metadata_url();
+
+		if ( McpOauth::transport_is_secure() && self::oauth_switched_off() ) {
+			return self::check(
+				self::STATUS_INFO,
+				'mcp.oauth_discovery',
+				$label,
+				__( 'Not needed: OAuth is switched off on this site, so there is no discovery document to serve. Only claude.ai and ChatGPT would read it.', 'wp-seopress' )
+			);
+		}
 
 		if ( ! McpOauth::is_enabled() || ! McpOauth::transport_is_secure() ) {
 			return self::check(
@@ -1646,7 +2102,7 @@ class McpSettingsData {
 			$label,
 			sprintf(
 				/* translators: %s: the URL of the OAuth discovery document. */
-				__( 'The discovery document at %s is not being served, so a browser client has no way to find out where to sign in. Your server is not routing /.well-known/ to WordPress: choose any permalink structure other than Plain in Settings, Permalinks, and if WordPress is installed in a subdirectory, add a rule that forwards /.well-known/ requests to it.', 'wp-seopress' ),
+				__( 'The discovery document at %s is not being served, so a browser client has no way to find out where to sign in. Your server is not routing /.well-known/ to WordPress: choose any permalink structure other than Plain in Settings, Permalinks, and if WordPress is installed in a subdirectory, add a rule that forwards /.well-known/ requests to it. Some hosts answer /.well-known/ addresses themselves, before WordPress runs: ask yours to pass /.well-known/oauth-protected-resource and /.well-known/oauth-authorization-server through to WordPress. Until then, Claude Code, the Claude desktop app and Cursor can connect with an Application Password, which the setup steps below now show.', 'wp-seopress' ),
 				$url
 			),
 			'HTTP ' . (int) $probe['status']

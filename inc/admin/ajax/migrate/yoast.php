@@ -192,12 +192,73 @@ function seopress_yoast_map_attachment_redirect( $wpseo_titles, $seopress_advanc
 }
 
 /**
+ * Translate Yoast template variables to SEOPress names.
+ *
+ * SEOPress renders a few Yoast names as aliases (`%%title%%`, `%%sitename%%`,
+ * `%%sitedesc%%`, `%%excerpt%%`, `%%date%%`), but the others (`%%name%%`,
+ * `%%searchphrase%%`, `%%pt_plural%%`, `%%cf_*%%`…) would print literally.
+ * Rewriting all of them gives templates that render and read the same as the
+ * ones created in SEOPress. Yoast variables with no SEOPress equivalent
+ * (`%%id%%`, `%%pt_single%%`, `%%ct_desc_*%%`…) are kept as is.
+ *
+ * Yoast resolves `%%category%%`, `%%tag%%` and `%%date%%` from the page being
+ * displayed, so they map to a different SEOPress variable on a term or a
+ * date archive than on a post.
+ *
+ * @param mixed  $value   Raw Yoast template.
+ * @param string $context Where the template is used: 'post', 'term' or 'date_archive'.
+ *
+ * @return string Translated template, not escaped.
+ */
+function seopress_yoast_translate_template( $value, $context = 'post' ) {
+	if ( ! is_string( $value ) || '' === $value ) {
+		return is_scalar( $value ) ? (string) $value : '';
+	}
+
+	$map = array(
+		'%%title%%'                => '%%post_title%%',
+		'%%sitename%%'             => '%%sitetitle%%',
+		'%%sitedesc%%'             => '%%tagline%%',
+		'%%excerpt%%'              => '%%post_excerpt%%',
+		'%%excerpt_only%%'         => '%%post_excerpt%%',
+		'%%date%%'                 => '%%post_date%%',
+		'%%modified%%'             => '%%post_modified_date%%',
+		'%%name%%'                 => '%%post_author%%',
+		'%%user_description%%'     => '%%author_bio%%',
+		'%%category%%'             => '%%post_category%%',
+		'%%primary_category%%'     => '%%post_category%%',
+		'%%tag%%'                  => '%%post_tag%%',
+		'%%category_description%%' => '%%_category_description%%',
+		'%%category_title%%'       => '%%_category_title%%',
+		'%%searchphrase%%'         => '%%search_keywords%%',
+		'%%pagenumber%%'           => '%%current_pagination%%',
+		'%%pt_plural%%'            => '%%cpt_plural%%',
+		'%%permalink%%'            => '%%post_url%%',
+		'%%focuskw%%'              => '%%target_keyword%%',
+		'%%wc_price%%'             => '%%wc_single_price%%',
+		'%%wc_shortdesc%%'         => '%%wc_single_short_desc%%',
+	);
+
+	if ( 'term' === $context ) {
+		$map['%%category%%'] = '%%term_title%%';
+		$map['%%tag%%']      = '%%term_title%%';
+	} elseif ( 'date_archive' === $context ) {
+		$map['%%date%%'] = '%%archive_date%%';
+	}
+
+	// Custom fields and taxonomies: %%cf_<key>%% and %%ct_<slug>%%.
+	$value = preg_replace( '/%%(cf|ct)_(?!desc_)([^%\s]+)%%/', '%%_$1_$2%%', $value );
+
+	return strtr( $value, $map );
+}
+
+/**
  * Yoast migration
  */
 function seopress_yoast_migration() {
 	check_ajax_referer( 'seopress_yoast_migrate_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) {
 		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
 			$offset = absint( $_POST['offset'] );
 		}
@@ -220,6 +281,12 @@ function seopress_yoast_migration() {
 		$seopress_social   = get_option( 'seopress_social_option_name' );
 		$seopress_advanced = get_option( 'seopress_advanced_option_name' );
 		$seopress_pro      = get_option( 'seopress_pro_option_name' );
+
+		// A SEOPress option never saved yet comes back as false.
+		$seopress_titles   = is_array( $seopress_titles ) ? $seopress_titles : array();
+		$seopress_social   = is_array( $seopress_social ) ? $seopress_social : array();
+		$seopress_advanced = is_array( $seopress_advanced ) ? $seopress_advanced : array();
+		$seopress_pro      = is_array( $seopress_pro ) ? $seopress_pro : array();
 
 		if ( ! empty( $wpseo ) ) {
 			foreach ( $wpseo as $key => $value ) {
@@ -295,33 +362,41 @@ function seopress_yoast_migration() {
 		if ( ! empty( $wpseo_titles ) ) {
 			foreach ( $wpseo_titles as $key => $value ) {
 				if ( 'separator' === $key ) {
+					// Plain characters, as the settings screen saves them: the
+					// front end encodes the separator when printing it, so an
+					// entity here would show up as "&gt;" in the title.
 					$separator = array(
 						'sc-dash'   => '-',
-						'sc-ndash'  => '&ndash;',
-						'sc-mdash'  => '&mdash;',
+						'sc-ndash'  => '–',
+						'sc-mdash'  => '—',
 						'sc-colon'  => ':',
-						'sc-middot' => '&middot;',
-						'sc-bull'   => '&bull;',
+						'sc-middot' => '·',
+						'sc-bull'   => '•',
 						'sc-star'   => '*',
-						'sc-smstar' => '&#8902;',
+						'sc-smstar' => '⋆',
 						'sc-pipe'   => '|',
 						'sc-tilde'  => '~',
-						'sc-laquo'  => '&laquo;',
-						'sc-raquo'  => '&raquo;',
-						'sc-gt'     => '&lt;', // For some reason, the separator is reversed.
-						'sc-lt'     => '&gt;', // For some reason, the separator is reversed.
+						'sc-laquo'  => '«',
+						'sc-raquo'  => '»',
+						// Yoast swaps these two: "sc-gt" prints "<" and "sc-lt" prints ">".
+						'sc-gt'     => '<',
+						'sc-lt'     => '>',
 					);
 
-					$seopress_titles['seopress_titles_sep'] = esc_html( $separator[ $value ] );
+					if ( isset( $separator[ $value ] ) ) {
+						$seopress_titles['seopress_titles_sep'] = $separator[ $value ];
+					}
 				}
-				if ( 'website_name' === $key ) {
-					$seopress_titles['seopress_titles_home_site_title'] = esc_html( $value );
+				// Not `website_name`: that is the site name of Yoast's Schema
+				// graph, the home title template is `title-home-wpseo`.
+				if ( 'title-home-wpseo' === $key ) {
+					$seopress_titles['seopress_titles_home_site_title'] = esc_html( seopress_yoast_translate_template( $value ) );
 				}
 				if ( 'alternate_website_name' === $key ) {
 					$seopress_titles['seopress_titles_home_site_title_alt'] = esc_html( $value );
 				}
 				if ( 'metadesc-home-wpseo' === $key ) {
-					$seopress_titles['seopress_titles_home_site_desc'] = esc_html( $value );
+					$seopress_titles['seopress_titles_home_site_desc'] = esc_html( seopress_yoast_translate_template( $value ) );
 				}
 				if ( 'company_or_person' === $key ) {
 					$type = array(
@@ -408,11 +483,11 @@ function seopress_yoast_migration() {
 				foreach ( $post_types as $seopress_cpt_key => $seopress_cpt_value ) {
 					// Single title.
 					if ( 'title-' . $seopress_cpt_key === $key ) {
-						$seopress_titles['seopress_titles_single_titles'][ $seopress_cpt_key ]['title'] = esc_html( $value );
+						$seopress_titles['seopress_titles_single_titles'][ $seopress_cpt_key ]['title'] = esc_html( seopress_yoast_translate_template( $value ) );
 					}
 					// Single description.
 					if ( 'metadesc-' . $seopress_cpt_key === $key ) {
-						$seopress_titles['seopress_titles_single_titles'][ $seopress_cpt_key ]['description'] = esc_html( $value );
+						$seopress_titles['seopress_titles_single_titles'][ $seopress_cpt_key ]['description'] = esc_html( seopress_yoast_translate_template( $value ) );
 					}
 					// Single noindex.
 					if ( 'noindex-' . $seopress_cpt_key === $key ) {
@@ -438,11 +513,11 @@ function seopress_yoast_migration() {
 				foreach ( $taxonomies as $seopress_tax_key => $seopress_tax_value ) {
 					// Tax title.
 					if ( 'title-tax-' . $seopress_tax_key === $key ) {
-						$seopress_titles['seopress_titles_tax_titles'][ $seopress_tax_key ]['title'] = esc_html( $value );
+						$seopress_titles['seopress_titles_tax_titles'][ $seopress_tax_key ]['title'] = esc_html( seopress_yoast_translate_template( $value, 'term' ) );
 					}
 					// Tax description.
 					if ( 'metadesc-tax-' . $seopress_tax_key === $key ) {
-						$seopress_titles['seopress_titles_tax_titles'][ $seopress_tax_key ]['description'] = esc_html( $value );
+						$seopress_titles['seopress_titles_tax_titles'][ $seopress_tax_key ]['description'] = esc_html( seopress_yoast_translate_template( $value, 'term' ) );
 					}
 					// Tax noindex.
 					if ( 'noindex-tax-' . $seopress_tax_key === $key ) {
@@ -465,11 +540,11 @@ function seopress_yoast_migration() {
 				}
 				// 404.
 				if ( 'title-404-wpseo' === $key ) {
-					$seopress_titles['seopress_titles_archives_404_title'] = esc_html( $value );
+					$seopress_titles['seopress_titles_archives_404_title'] = esc_html( seopress_yoast_translate_template( $value ) );
 				}
 				// Internal search.
 				if ( 'title-search-wpseo' === $key ) {
-					$seopress_titles['seopress_titles_archives_search_title'] = esc_html( $value );
+					$seopress_titles['seopress_titles_archives_search_title'] = esc_html( seopress_yoast_translate_template( $value ) );
 				}
 				// Date archive.
 				if ( 'disable-date' === $key ) {
@@ -487,10 +562,10 @@ function seopress_yoast_migration() {
 					}
 				}
 				if ( 'title-archive-wpseo' === $key ) {
-					$seopress_titles['seopress_titles_archives_date_title'] = esc_html( $value );
+					$seopress_titles['seopress_titles_archives_date_title'] = esc_html( seopress_yoast_translate_template( $value, 'date_archive' ) );
 				}
 				if ( 'metadesc-archive-wpseo' === $key ) {
-					$seopress_titles['seopress_titles_archives_date_desc'] = esc_html( $value );
+					$seopress_titles['seopress_titles_archives_date_desc'] = esc_html( seopress_yoast_translate_template( $value, 'date_archive' ) );
 				}
 				// Author.
 				if ( 'disable-author' === $key ) {
@@ -508,10 +583,10 @@ function seopress_yoast_migration() {
 					}
 				}
 				if ( 'title-author-wpseo' === $key ) {
-					$seopress_titles['seopress_titles_archives_author_title'] = esc_html( $value );
+					$seopress_titles['seopress_titles_archives_author_title'] = esc_html( seopress_yoast_translate_template( $value ) );
 				}
 				if ( 'metadesc-author-wpseo' === $key ) {
-					$seopress_titles['seopress_titles_archives_author_desc'] = esc_html( $value );
+					$seopress_titles['seopress_titles_archives_author_desc'] = esc_html( seopress_yoast_translate_template( $value ) );
 				}
 			}
 		}
@@ -543,25 +618,25 @@ function seopress_yoast_migration() {
 				foreach ( $yoast_query_terms as $taxonomies => $taxonomie ) {
 					foreach ( $taxonomie as $term_id => $term_value ) {
 						if ( ! empty( $term_value['wpseo_title'] ) ) { // Import title tag.
-							update_term_meta( $term_id, '_seopress_titles_title', esc_html( $term_value['wpseo_title'] ) );
+							update_term_meta( $term_id, '_seopress_titles_title', esc_html( seopress_yoast_translate_template( $term_value['wpseo_title'], 'term' ) ) );
 						}
 						if ( ! empty( $term_value['wpseo_desc'] ) ) { // Import meta desc.
-							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( $term_value['wpseo_desc'] ) );
+							update_term_meta( $term_id, '_seopress_titles_desc', esc_html( seopress_yoast_translate_template( $term_value['wpseo_desc'], 'term' ) ) );
 						}
 						if ( ! empty( $term_value['wpseo_opengraph-title'] ) ) { // Import Facebook Title.
-							update_term_meta( $term_id, '_seopress_social_fb_title', esc_html( $term_value['wpseo_opengraph-title'] ) );
+							update_term_meta( $term_id, '_seopress_social_fb_title', esc_html( seopress_yoast_translate_template( $term_value['wpseo_opengraph-title'], 'term' ) ) );
 						}
 						if ( ! empty( $term_value['wpseo_opengraph-description'] ) ) { // Import Facebook Desc.
-							update_term_meta( $term_id, '_seopress_social_fb_desc', esc_html( $term_value['wpseo_opengraph-description'] ) );
+							update_term_meta( $term_id, '_seopress_social_fb_desc', esc_html( seopress_yoast_translate_template( $term_value['wpseo_opengraph-description'], 'term' ) ) );
 						}
 						if ( ! empty( $term_value['wpseo_opengraph-image'] ) ) { // Import Facebook Image.
 							update_term_meta( $term_id, '_seopress_social_fb_img', esc_url( $term_value['wpseo_opengraph-image'] ) );
 						}
 						if ( ! empty( $term_value['wpseo_twitter-title'] ) ) { // Import Twitter Title.
-							update_term_meta( $term_id, '_seopress_social_twitter_title', esc_html( $term_value['wpseo_twitter-title'] ) );
+							update_term_meta( $term_id, '_seopress_social_twitter_title', esc_html( seopress_yoast_translate_template( $term_value['wpseo_twitter-title'], 'term' ) ) );
 						}
 						if ( ! empty( $term_value['wpseo_twitter-description'] ) ) { // Import Twitter Desc.
-							update_term_meta( $term_id, '_seopress_social_twitter_desc', esc_html( $term_value['wpseo_twitter-description'] ) );
+							update_term_meta( $term_id, '_seopress_social_twitter_desc', esc_html( seopress_yoast_translate_template( $term_value['wpseo_twitter-description'], 'term' ) ) );
 						}
 						if ( ! empty( $term_value['wpseo_twitter-image'] ) ) { // Import Twitter Image.
 							update_term_meta( $term_id, '_seopress_social_twitter_img', esc_url( $term_value['wpseo_twitter-image'] ) );
@@ -594,25 +669,25 @@ function seopress_yoast_migration() {
 			if ( $yoast_query ) {
 				foreach ( $yoast_query as $post ) {
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_title', true ) ) { // Import title tag.
-						update_post_meta( $post->ID, '_seopress_titles_title', esc_html( get_post_meta( $post->ID, '_yoast_wpseo_title', true ) ) );
+						update_post_meta( $post->ID, '_seopress_titles_title', esc_html( seopress_yoast_translate_template( get_post_meta( $post->ID, '_yoast_wpseo_title', true ) ) ) );
 					}
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ) ) { // Import meta desc.
-						update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ) ) );
+						update_post_meta( $post->ID, '_seopress_titles_desc', esc_html( seopress_yoast_translate_template( get_post_meta( $post->ID, '_yoast_wpseo_metadesc', true ) ) ) );
 					}
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_opengraph-title', true ) ) { // Import Facebook Title.
-						update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( get_post_meta( $post->ID, '_yoast_wpseo_opengraph-title', true ) ) );
+						update_post_meta( $post->ID, '_seopress_social_fb_title', esc_html( seopress_yoast_translate_template( get_post_meta( $post->ID, '_yoast_wpseo_opengraph-title', true ) ) ) );
 					}
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_opengraph-description', true ) ) { // Import Facebook Desc.
-						update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( get_post_meta( $post->ID, '_yoast_wpseo_opengraph-description', true ) ) );
+						update_post_meta( $post->ID, '_seopress_social_fb_desc', esc_html( seopress_yoast_translate_template( get_post_meta( $post->ID, '_yoast_wpseo_opengraph-description', true ) ) ) );
 					}
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_opengraph-image', true ) ) { // Import Facebook Image.
 						update_post_meta( $post->ID, '_seopress_social_fb_img', esc_url( get_post_meta( $post->ID, '_yoast_wpseo_opengraph-image', true ) ) );
 					}
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_twitter-title', true ) ) { // Import Twitter Title.
-						update_post_meta( $post->ID, '_seopress_social_twitter_title', esc_html( get_post_meta( $post->ID, '_yoast_wpseo_twitter-title', true ) ) );
+						update_post_meta( $post->ID, '_seopress_social_twitter_title', esc_html( seopress_yoast_translate_template( get_post_meta( $post->ID, '_yoast_wpseo_twitter-title', true ) ) ) );
 					}
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_twitter-description', true ) ) { // Import Twitter Desc.
-						update_post_meta( $post->ID, '_seopress_social_twitter_desc', esc_html( get_post_meta( $post->ID, '_yoast_wpseo_twitter-description', true ) ) );
+						update_post_meta( $post->ID, '_seopress_social_twitter_desc', esc_html( seopress_yoast_translate_template( get_post_meta( $post->ID, '_yoast_wpseo_twitter-description', true ) ) ) );
 					}
 					if ( '' !== get_post_meta( $post->ID, '_yoast_wpseo_twitter-image', true ) ) { // Import Twitter Image.
 						update_post_meta( $post->ID, '_seopress_social_twitter_img', esc_url( get_post_meta( $post->ID, '_yoast_wpseo_twitter-image', true ) ) );
@@ -667,20 +742,21 @@ function seopress_yoast_migration() {
 						}
 					}
 
-					// Primary category.
+					// Primary term, for every taxonomy that has one rather than
+					// only the two SEOPress used to support. Yoast stores one
+					// `_yoast_wpseo_primary_{taxonomy}` per taxonomy, which is
+					// exactly what WPSEO_Primary_Term reads, so a site migrating
+					// a `doc_cat` or a `genre` kept nothing before this.
 					if ( class_exists( 'WPSEO_Primary_Term' ) ) {
-						if ( 'product' === get_post_type( $post->ID ) ) {
-							$tax = 'product_cat';
-						} else {
-							$tax = 'category';
-						}
+						$taxonomies = \SEOPress\Helpers\Metas\PrimaryTerm::get_taxonomies( get_post_type( $post->ID ) );
 
-						$primary_term = new WPSEO_Primary_Term( $tax, $post->ID );
+						foreach ( array_keys( $taxonomies ) as $tax ) {
+							$primary_term = new WPSEO_Primary_Term( $tax, $post->ID );
+							$primary_term = absint( $primary_term->get_primary_term() );
 
-						$primary_term = absint( $primary_term->get_primary_term() );
-
-						if ( '' !== $primary_term && is_int( $primary_term ) ) {
-							update_post_meta( $post->ID, '_seopress_robots_primary_cat', $primary_term );
+							if ( $primary_term > 0 ) {
+								\SEOPress\Helpers\Metas\PrimaryTerm::save( $post->ID, $tax, $primary_term );
+							}
 						}
 					}
 				}

@@ -14,7 +14,7 @@ defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Than
 function seopress_seo_framework_migration() {
 	check_ajax_referer( 'seopress_seo_framework_migrate_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) {
 		if ( isset( $_POST['offset'] ) && isset( $_POST['offset'] ) ) {
 			$offset = absint( $_POST['offset'] );
 		}
@@ -113,17 +113,16 @@ function seopress_seo_framework_migration() {
 						update_post_meta( $post->ID, '_seopress_redirections_value', esc_url( get_post_meta( $post->ID, 'redirect', true ) ) );
 					}
 
-					// Primary category.
-					if ( 'post' === get_post_type( $post->ID ) ) {
-						$tax = 'category';
-					} elseif ( 'product' === get_post_type( $post->ID ) ) {
-						$tax = 'product_cat';
-					}
-					if ( isset( $tax ) ) {
-						$primary_term = get_post_meta( $post->ID, '_primary_term_' . $tax, true );
+					// Primary term, for every taxonomy that has one. The SEO
+					// Framework stores one `_primary_term_{taxonomy}` per
+					// taxonomy, so there is nothing to guess from the post type.
+					$taxonomies = \SEOPress\Helpers\Metas\PrimaryTerm::get_taxonomies( get_post_type( $post->ID ) );
 
-						if ( '' !== $primary_term ) {
-							update_post_meta( $post->ID, '_seopress_robots_primary_cat', absint( $primary_term ) );
+					foreach ( array_keys( $taxonomies ) as $tax ) {
+						$primary_term = absint( get_post_meta( $post->ID, '_primary_term_' . $tax, true ) );
+
+						if ( $primary_term > 0 ) {
+							\SEOPress\Helpers\Metas\PrimaryTerm::save( $post->ID, $tax, $primary_term );
 						}
 					}
 				}

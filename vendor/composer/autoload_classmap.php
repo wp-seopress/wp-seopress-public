@@ -137,6 +137,7 @@ return array(
     'SEOPress\\Vendor\\GuzzleHttp\\Promise\\PromisorInterface' => $vendorDir . '/guzzlehttp/promises/src/PromisorInterface.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Promise\\RejectedPromise' => $vendorDir . '/guzzlehttp/promises/src/RejectedPromise.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Promise\\RejectionException' => $vendorDir . '/guzzlehttp/promises/src/RejectionException.php',
+    'SEOPress\\Vendor\\GuzzleHttp\\Promise\\State' => $vendorDir . '/guzzlehttp/promises/src/State.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Promise\\TaskQueue' => $vendorDir . '/guzzlehttp/promises/src/TaskQueue.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Promise\\TaskQueueInterface' => $vendorDir . '/guzzlehttp/promises/src/TaskQueueInterface.php',
     'SEOPress\\Vendor\\GuzzleHttp\\Promise\\Utils' => $vendorDir . '/guzzlehttp/promises/src/Utils.php',

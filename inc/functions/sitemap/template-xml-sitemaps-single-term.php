@@ -134,19 +134,41 @@ function seopress_xml_sitemap_single_term() {
 	$seopress_sitemaps .= "\n";
 	$seopress_sitemaps .= apply_filters( 'seopress_sitemaps_urlset', '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' );
 
+	// Same terms as the index counts, so that its pages hold them all: a
+	// noindex term dropped after the query would take the place of an
+	// indexable one, pushed onto a page the index does not list.
 	$args = array(
 		'taxonomy'   => $path,
 		'offset'     => $offset,
 		'hide_empty' => true,
-		'number'     => 1000,
+		'number'     => $max,
 		'lang'       => '',
+		'meta_query' => array(
+			'relation' => 'OR',
+			array(
+				'key'     => '_seopress_robots_index',
+				'value'   => '',
+				'compare' => 'NOT EXISTS',
+			),
+			array(
+				'key'     => '_seopress_robots_index',
+				'value'   => 'yes',
+				'compare' => '!=',
+			),
+		),
 	);
 
 	$args = seopress_pll_exclude_hidden_lang( $args );
 
 	$args = apply_filters( 'seopress_sitemaps_single_term_query', $args, $path );
 
-	$termslist = new WP_Term_Query( $args );
+	// Keeps the empty parents of every language whose children have posts.
+	$termslist = \SEOPress\Helpers\SitemapTermLanguages::run(
+		$args,
+		function ( $args ) {
+			return new WP_Term_Query( $args );
+		}
+	);
 
 	if ( is_array( $termslist->terms ) && ! empty( $termslist->terms ) ) {
 		foreach ( $termslist->terms as $term ) {

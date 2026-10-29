@@ -62,7 +62,6 @@ class SocialFacebookMeta {
 	 */
 	protected function getMetasForPost( $context ) { // phpcs:ignore -- TODO: check if method is outside this class before renaming.
 
-		header( 'Content-Type: text/html; charset=utf-8' );
 		$variables = apply_filters( 'seopress_dyn_variables_fn', array() );
 
 		$post = $variables['post'] ?? $context['post'];

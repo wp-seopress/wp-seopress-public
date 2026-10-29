@@ -284,6 +284,13 @@ class McpOauthStore {
 	 * @return string
 	 */
 	public static function hash_secret( $secret ) {
+		// OAuth is off before WordPress 6.8 (see McpOauth::is_enabled()). Should a
+		// caller get here anyway, store a hash nothing verifies against: an empty
+		// one would read as a public client and skip its secret check.
+		if ( ! function_exists( 'wp_fast_hash' ) ) {
+			return '!';
+		}
+
 		return wp_fast_hash( (string) $secret );
 	}
 
@@ -298,7 +305,7 @@ class McpOauthStore {
 	 * @return bool
 	 */
 	public static function verify_secret( $secret, $hash ) {
-		if ( ! is_string( $hash ) || '' === $hash ) {
+		if ( ! is_string( $hash ) || '' === $hash || ! function_exists( 'wp_verify_fast_hash' ) ) {
 			return false;
 		}
 

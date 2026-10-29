@@ -46,7 +46,7 @@ class PagePreview implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'GLOBAL', 'CONTENT_ANALYSIS' ) );
 				},
 			)
 		);
@@ -76,7 +76,7 @@ class PagePreview implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'GLOBAL', 'CONTENT_ANALYSIS' ) );
 				},
 			)
 		);
@@ -129,24 +129,11 @@ class PagePreview implements ExecuteHooks {
 
 			$str = (string) $html;
 		} else {
-			$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id );
+			$request_preview = seopress_get_service( 'RequestPreview' );
+			$dom_result      = $request_preview->getDomById( $id );
 
 			if ( ! $dom_result['success'] ) {
-				$message = '';
-
-				switch ( $dom_result['code'] ) {
-					case 404:
-						$message = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
-						break;
-					case 401:
-						$message = __( 'Your site is protected by an authentication.', 'wp-seopress' );
-						break;
-					case 'redirected':
-						$message = __( 'This URL redirects outside your site. Turn off the redirect to get the Google preview and content analysis.', 'wp-seopress' );
-						break;
-				}
-
-				return $this->previewMessage( $message );
+				return $this->previewMessage( $request_preview->getFailureMessage( $dom_result['code'] ) );
 			}
 
 			$str = $dom_result['body'];

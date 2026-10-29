@@ -123,6 +123,8 @@ class SEOPRESS_Uninstall {
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}seopress_content_analysis" );
 		//phpcs:ignore
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}seopress_seo_issues" );
+		//phpcs:ignore
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->prefix}seopress_instant_indexing_history" );
 
 		// Clear CRON.
 		wp_clear_scheduled_hook( 'seopress_xml_sitemaps_ping_cron' );

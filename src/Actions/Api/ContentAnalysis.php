@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
+use SEOPress\Helpers\ContentAnalysis as ContentAnalysisHelper;
 use SEOPress\ManualHooks\ApiHeader;
 
 /**
@@ -60,7 +61,7 @@ class ContentAnalysis implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'CONTENT_ANALYSIS' ) );
 				},
 			)
 		);
@@ -106,7 +107,7 @@ class ContentAnalysis implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'CONTENT_ANALYSIS' ) );
 				},
 			)
 		);
@@ -263,39 +264,16 @@ class ContentAnalysis implements ExecuteHooks {
 		} else {
 			// Fallback: server-side loop-back when the client cannot supply the
 			// HTML (JS disabled, fetch failed...).
-			$dom_result = seopress_get_service( 'RequestPreview' )->getDomById( $id );
+			$request_preview = seopress_get_service( 'RequestPreview' );
+			$dom_result      = $request_preview->getDomById( $id );
 
 			if ( ! $dom_result['success'] ) {
-				$default_response = array(
-					'title'     => '...',
-					'meta_desc' => '...',
+				return new \WP_REST_Response(
+					array(
+						'title'     => $request_preview->getFailureMessage( $dom_result['code'] ),
+						'meta_desc' => '...',
+					)
 				);
-
-				switch ( $dom_result['code'] ) {
-					case 404:
-						$default_response['title'] = __( 'To get your Google snippet preview, publish your post!', 'wp-seopress' );
-						break;
-					case 401:
-						$default_response['title'] = __( 'Your site is protected by an authentication.', 'wp-seopress' );
-						break;
-					case 'redirected':
-						$default_response['title'] = __( 'This URL redirects outside your site. Turn off the redirect to get the Google preview and content analysis.', 'wp-seopress' );
-						break;
-					case 'blocked':
-						$default_response['title'] = __( 'Content analysis was blocked (HTTP 403/503). A CDN, firewall or security plugin is preventing your server from loading the preview.', 'wp-seopress' );
-						break;
-					case 'unreachable':
-						$default_response['title'] = __( 'Your site could not be reached for content analysis. Please check your server, DNS or firewall configuration.', 'wp-seopress' );
-						break;
-					case 'http_error':
-						$default_response['title'] = __( 'The page returned an HTTP error or an incomplete response. Your previous content analysis has been kept. Please try again when the page is available.', 'wp-seopress' );
-						break;
-					case 'empty':
-						$default_response['title'] = __( 'The page returned no content. Your previous content analysis has been kept. Please check the page and try again.', 'wp-seopress' );
-						break;
-				}
-
-				return new \WP_REST_Response( $default_response );
 			}
 
 			$str = $dom_result['body'];
@@ -514,9 +492,17 @@ class ContentAnalysis implements ExecuteHooks {
 		// AI content-quality cards below, instead of calling getScore()
 		// (which internally runs getAnalyzes() and then throws everything
 		// but the impacts away).
-		$analyzes      = seopress_get_service( 'GetContentAnalysis' )->getAnalyzes( $post );
-		$score         = array_unique( array_values( wp_list_pluck( $analyzes, 'impact' ) ) );
-		$data['score'] = $score;
+		$analyzes = seopress_get_service( 'GetContentAnalysis' )->getAnalyzes( $post );
+
+		// Impacts keyed by check, the shape DomAnalysis::getScore() returns, so
+		// the stored score keeps the per-check detail the summary is counted
+		// from. The set of values is what it has always been.
+		$data['score'] = ContentAnalysisHelper::getImpactMap( $analyzes );
+
+		// How many of the checks that ran are satisfied. Sits next to the
+		// verdict rather than replacing it, so a consumer reading `score`
+		// keeps reading exactly what it read before.
+		$data['score_summary'] = ContentAnalysisHelper::getScoreSummary( $analyzes, ContentAnalysisHelper::getIgnoredChecks( $id ) );
 
 		// Surface the AI content-quality checks (content depth, heading
 		// structure, media in content, content readability) so the editor
@@ -529,8 +515,9 @@ class ContentAnalysis implements ExecuteHooks {
 				continue;
 			}
 			$data[ $check ] = array(
-				'impact' => isset( $analyzes[ $check ]['impact'] ) ? $analyzes[ $check ]['impact'] : 'good',
-				'desc'   => isset( $analyzes[ $check ]['desc'] ) ? $analyzes[ $check ]['desc'] : '',
+				'impact'    => isset( $analyzes[ $check ]['impact'] ) ? $analyzes[ $check ]['impact'] : 'good',
+				'desc'      => isset( $analyzes[ $check ]['desc'] ) ? $analyzes[ $check ]['desc'] : '',
+				'evaluated' => ContentAnalysisHelper::isEvaluated( $analyzes[ $check ] ),
 			);
 		}
 

@@ -7,6 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use SEOPress\Core\Hooks\ExecuteHooks;
+use SEOPress\Helpers\Metas\PrimaryTerm;
 use SEOPress\Helpers\Metas\RobotSettings as MetaRobotSettingsHelper;
 
 /**
@@ -47,7 +48,7 @@ class RobotSettings implements ExecuteHooks {
 					),
 				),
 				'permission_callback' => function ( $request ) {
-					return current_user_can( 'edit_post', (int) $request['id'] );
+					return seopress_metabox_can_read_post( (int) $request['id'], array( 'GLOBAL', 'CONTENT_ANALYSIS' ) );
 				},
 			)
 		);
@@ -109,7 +110,11 @@ class RobotSettings implements ExecuteHooks {
 				}
 				$item = $params[ $value['key'] ];
 
-				if ( ! in_array( $value['key'], $data_keys_save, true ) ) {
+				// Primary term keys are one per taxonomy, so they are matched on
+				// their prefix rather than listed above.
+				$is_primary_term = 0 === strpos( $value['key'], PrimaryTerm::META_KEY_PREFIX );
+
+				if ( ! in_array( $value['key'], $data_keys_save, true ) && ! $is_primary_term ) {
 					continue;
 				}
 
@@ -118,7 +123,8 @@ class RobotSettings implements ExecuteHooks {
 				}
 
 				if (
-					'_seopress_robots_primary_cat' === $value['key']
+					$is_primary_term
+					|| '_seopress_robots_primary_cat' === $value['key']
 					|| '_seopress_robots_index' === $value['key']
 					|| '_seopress_robots_follow' === $value['key']
 					|| '_seopress_robots_imageindex' === $value['key']
@@ -128,6 +134,21 @@ class RobotSettings implements ExecuteHooks {
 					|| '_seopress_robots_custom_modified_date' === $value['key']
 				) {
 					$item = sanitize_text_field( $item );
+				}
+
+				// A primary term is a term id or nothing. `none`, free text or a
+				// negative number removes the meta, as PrimaryTerm::save() does.
+				// Whether the term is assigned is not checked here: in the block
+				// editor the Advanced tab offers terms checked but not saved yet.
+				if ( $is_primary_term || PrimaryTerm::LEGACY_META_KEY === $value['key'] ) {
+					$item = PrimaryTerm::sanitize_term_id( $item );
+				}
+
+				// "None" on a taxonomy with its own key also drops the legacy
+				// value it would otherwise inherit, see PrimaryTerm::clear().
+				if ( $is_primary_term && '' === $item ) {
+					PrimaryTerm::clear( $id, PrimaryTerm::get_taxonomy_from_meta_key( $value['key'] ) );
+					continue;
 				}
 
 				if ( ! empty( $item ) ) {

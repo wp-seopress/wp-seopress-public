@@ -88,6 +88,7 @@
 	  <key name="seopress_google_analytics_opt_out_msg_ok"/>
 	  <key name="seopress_google_analytics_opt_out_msg_close"/>
 	  <key name="seopress_google_analytics_opt_out_msg_edit"/>
+	  <key name="seopress_google_analytics_opt_out_msg_customize"/>
 	  <key name="seopress_google_analytics_other_tracking"/>
 	  <key name="seopress_google_analytics_other_tracking_body"/>
 	  <key name="seopress_google_analytics_other_tracking_footer"/>

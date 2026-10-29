@@ -684,6 +684,7 @@ class ModuleDashboard implements ExecuteHooks {
 			'xml-sitemap'      => 'technical',
 			'instant-indexing' => 'technical',
 			'tools'            => 'technical',
+			'mcp'              => 'technical',
 			'google-analytics' => 'data-tracking',
 		);
 	}
@@ -771,6 +772,17 @@ class ModuleDashboard implements ExecuteHooks {
 			'toggle'      => false,
 		);
 
+		// No module toggle: the server is switched on by the Abilities API
+		// option, and the MCP tab says whether this site is ready for it.
+		$features['mcp'] = array(
+			'svg'         => SEOPRESS_URL_ASSETS . '/img/ico-mcp.svg',
+			'title'       => __( 'MCP Server', 'wp-seopress' ),
+			'desc'        => __( 'Manage your SEO from your AI assistant: Claude, ChatGPT, Cursor or any MCP client.', 'wp-seopress' ),
+			'btn_primary' => admin_url( 'admin.php?page=seopress-advanced#tab=tab_seopress_advanced_mcp' ),
+			'filter'      => 'seopress_remove_feature_mcp',
+			'toggle'      => false,
+		);
+
 		$features = apply_filters( 'seopress_features_list_after_tools', $features );
 
 		$group_map = $this->getDefaultGroupMap();
@@ -826,7 +838,7 @@ class ModuleDashboard implements ExecuteHooks {
 	private function getFeatureOrder() {
 		$order = array(
 			'content'       => array( 'titles', 'advanced', 'social' ),
-			'technical'     => array( 'instant-indexing', 'xml-sitemap', 'tools' ),
+			'technical'     => array( 'instant-indexing', 'xml-sitemap', 'tools', 'mcp' ),
 			'data-tracking' => array( 'google-analytics' ),
 		);
 

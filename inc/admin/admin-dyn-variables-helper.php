@@ -8,101 +8,130 @@
 defined( 'ABSPATH' ) || exit( 'Please don&rsquo;t call the plugin directly. Thanks :)' );
 
 /**
+ * Get the variables the renderer accepts under a second name.
+ *
+ * They come from the Yoast and SmartCrawl naming and are still stored in
+ * settings saved before an import translated them. They are never offered
+ * for insertion, but a template that holds one must show a label.
+ *
+ * @return array Alias => canonical variable.
+ */
+function seopress_get_dyn_variable_aliases() {
+	return array(
+		'%%sitename%%'             => '%%sitetitle%%',
+		'%%sitedesc%%'             => '%%tagline%%',
+		'%%title%%'                => '%%post_title%%',
+		'%%excerpt%%'              => '%%post_excerpt%%',
+		'%%date%%'                 => '%%post_date%%',
+		'%%wc_get_price%%'         => '%%wc_single_price%%',
+		'%%alternate_site_title%%' => '%%site_alternate_name%%',
+	);
+}
+
+/**
  * Get dynamic variables
+ *
+ * Aliases (see seopress_get_dyn_variable_aliases()) come last, with the label
+ * of the variable they stand for.
  *
  * @return array Dynamic variables
  */
 function seopress_get_dyn_variables() {
-	return apply_filters(
-		'seopress_get_dynamic_variables',
-		array(
-			'%%sep%%'                             => __( 'Separator', 'wp-seopress' ),
-			'%%sitetitle%%'                       => __( 'Site Title', 'wp-seopress' ),
-			'%%tagline%%'                         => __( 'Tagline', 'wp-seopress' ),
-			'%%post_title%%'                      => __( 'Post Title', 'wp-seopress' ),
-			'%%post_excerpt%%'                    => __( 'Post excerpt', 'wp-seopress' ),
-			'%%post_content%%'                    => __( 'Post content / product description', 'wp-seopress' ),
-			'%%post_thumbnail_url%%'              => __( 'Post thumbnail URL', 'wp-seopress' ),
-			'%%post_url%%'                        => __( 'Post URL', 'wp-seopress' ),
-			'%%post_date%%'                       => __( 'Post date (human-readable, not valid in schemas)', 'wp-seopress' ),
-			'%%post_modified_date%%'              => __( 'Post modified date (human-readable, not valid in schemas)', 'wp-seopress' ),
-			// The two entries above are formatted per Settings > General, which a
-			// schema validator rejects. These are the ISO 8601 values that a
-			// datePublished / dateModified needs.
-			'%%post_date_iso8601%%'               => __( 'Post date, ISO 8601 format (for schemas)', 'wp-seopress' ),
-			'%%post_modified_iso8601%%'           => __( 'Post modified date, ISO 8601 format (for schemas)', 'wp-seopress' ),
-			'%%post_author%%'                     => __( 'Post author', 'wp-seopress' ),
-			'%%post_category%%'                   => __( 'Post category', 'wp-seopress' ),
-			'%%post_tag%%'                        => __( 'Post tag', 'wp-seopress' ),
-			'%%_category_title%%'                 => __( 'Category title', 'wp-seopress' ),
-			'%%_category_description%%'           => __( 'Category description', 'wp-seopress' ),
-			'%%tag_title%%'                       => __( 'Tag title', 'wp-seopress' ),
-			'%%tag_description%%'                 => __( 'Tag description', 'wp-seopress' ),
-			'%%term_title%%'                      => __( 'Term title', 'wp-seopress' ),
-			'%%term_description%%'                => __( 'Term description', 'wp-seopress' ),
-			'%%search_keywords%%'                 => __( 'Search keywords', 'wp-seopress' ),
-			'%%current_pagination%%'              => __( 'Current number page', 'wp-seopress' ),
-			'%%page%%'                            => __( 'Page number with context', 'wp-seopress' ),
-			'%%cpt_plural%%'                      => __( 'Plural Post Type Archive name', 'wp-seopress' ),
-			'%%archive_title%%'                   => __( 'Archive title', 'wp-seopress' ),
-			'%%archive_date%%'                    => __( 'Archive date', 'wp-seopress' ),
-			'%%archive_date_day%%'                => __( 'Day Archive date', 'wp-seopress' ),
-			'%%archive_date_month%%'              => __( 'Month Archive title', 'wp-seopress' ),
-			'%%archive_date_month_name%%'         => __( 'Month name Archive title', 'wp-seopress' ),
-			'%%archive_date_year%%'               => __( 'Year Archive title', 'wp-seopress' ),
-			'%%_cf_your_custom_field_name%%'      => __( 'Custom fields from post, page, post type and term taxonomy', 'wp-seopress' ),
-			'%%_ct_your_custom_taxonomy_slug%%'   => __( 'Custom term taxonomy from post, page or post type', 'wp-seopress' ),
-			'%%wc_single_cat%%'                   => __( 'Single product category', 'wp-seopress' ),
-			'%%wc_single_tag%%'                   => __( 'Single product tag', 'wp-seopress' ),
-			'%%wc_single_short_desc%%'            => __( 'Single product short description', 'wp-seopress' ),
-			'%%wc_single_price%%'                 => __( 'Single product price', 'wp-seopress' ),
-			'%%wc_single_price_exc_tax%%'         => __( 'Single product price taxes excluded', 'wp-seopress' ),
-			'%%wc_sku%%'                          => __( 'Single SKU product', 'wp-seopress' ),
-			'%%currentday%%'                      => __( 'Current day', 'wp-seopress' ),
-			'%%currentmonth%%'                    => __( 'Current month', 'wp-seopress' ),
-			'%%currentmonth_short%%'              => __( 'Current month in 3 letters', 'wp-seopress' ),
-			'%%currentyear%%'                     => __( 'Current year', 'wp-seopress' ),
-			'%%currentdate%%'                     => __( 'Current date', 'wp-seopress' ),
-			'%%currenttime%%'                     => __( 'Current time', 'wp-seopress' ),
-			'%%author_first_name%%'               => __( 'Author first name', 'wp-seopress' ),
-			'%%author_last_name%%'                => __( 'Author last name', 'wp-seopress' ),
-			'%%author_website%%'                  => __( 'Author website', 'wp-seopress' ),
-			'%%author_nickname%%'                 => __( 'Author nickname', 'wp-seopress' ),
-			'%%author_bio%%'                      => __( 'Author biography', 'wp-seopress' ),
-			'%%_ucf_your_user_meta%%'             => __( 'Custom User Meta', 'wp-seopress' ),
-			'%%currentmonth_num%%'                => __( 'Current month in digital format', 'wp-seopress' ),
-			'%%target_keyword%%'                  => __( 'Target keyword', 'wp-seopress' ),
-			// Schema tags (src/Tags/Schema). They resolve anywhere the tag engine
-			// runs, but a custom JSON-LD field is where they are meant to be used,
-			// so they close the list.
-			'%%siteurl%%'                         => __( 'Site URL', 'wp-seopress' ),
-			'%%site_alternate_name%%'             => __( 'Alternative site title', 'wp-seopress' ),
-			'%%knowledge_type%%'                  => __( 'Knowledge Graph type', 'wp-seopress' ),
-			'%%social_knowledge_name%%'           => __( 'Knowledge Graph name', 'wp-seopress' ),
-			'%%social_knowledge_legal_name%%'     => __( 'Knowledge Graph legal name', 'wp-seopress' ),
-			'%%social_knowledge_description%%'    => __( 'Knowledge Graph description', 'wp-seopress' ),
-			'%%social_knowledge_image%%'          => __( 'Knowledge Graph image / logo', 'wp-seopress' ),
-			'%%social_knowledge_email%%'          => __( 'Knowledge Graph email', 'wp-seopress' ),
-			'%%social_phone_number%%'             => __( 'Knowledge Graph phone number', 'wp-seopress' ),
-			'%%social_knowledge_contact_type%%'   => __( 'Knowledge Graph contact type', 'wp-seopress' ),
-			'%%social_knowledge_contact_option%%' => __( 'Knowledge Graph contact option', 'wp-seopress' ),
-			'%%social_knowledge_street%%'         => __( 'Knowledge Graph street address', 'wp-seopress' ),
-			'%%social_knowledge_locality%%'       => __( 'Knowledge Graph city', 'wp-seopress' ),
-			'%%social_knowledge_region%%'         => __( 'Knowledge Graph region', 'wp-seopress' ),
-			'%%social_knowledge_postal_code%%'    => __( 'Knowledge Graph postal code', 'wp-seopress' ),
-			'%%social_knowledge_country%%'        => __( 'Knowledge Graph country', 'wp-seopress' ),
-			'%%social_knowledge_founding_date%%'  => __( 'Knowledge Graph founding date', 'wp-seopress' ),
-			'%%social_knowledge_employees%%'      => __( 'Knowledge Graph number of employees', 'wp-seopress' ),
-			'%%social_knowledge_tax_id%%'         => __( 'Knowledge Graph tax / VAT ID', 'wp-seopress' ),
-			'%%social_account_facebook%%'         => __( 'Facebook page URL', 'wp-seopress' ),
-			'%%social_account_twitter%%'          => __( 'X / Twitter URL', 'wp-seopress' ),
-			'%%social_account_instagram%%'        => __( 'Instagram URL', 'wp-seopress' ),
-			'%%social_account_youtube%%'          => __( 'YouTube URL', 'wp-seopress' ),
-			'%%social_account_linkedin%%'         => __( 'LinkedIn URL', 'wp-seopress' ),
-			'%%social_account_pinterest%%'        => __( 'Pinterest URL', 'wp-seopress' ),
-			'%%social_account_extra%%'            => __( 'Additional accounts (sameAs)', 'wp-seopress' ),
-		)
+	$variables = array(
+		'%%sep%%'                             => __( 'Separator', 'wp-seopress' ),
+		'%%sitetitle%%'                       => __( 'Site Title', 'wp-seopress' ),
+		'%%tagline%%'                         => __( 'Tagline', 'wp-seopress' ),
+		'%%post_title%%'                      => __( 'Post Title', 'wp-seopress' ),
+		'%%post_excerpt%%'                    => __( 'Post excerpt', 'wp-seopress' ),
+		'%%post_content%%'                    => __( 'Post content / product description', 'wp-seopress' ),
+		'%%post_thumbnail_url%%'              => __( 'Post thumbnail URL', 'wp-seopress' ),
+		'%%post_url%%'                        => __( 'Post URL', 'wp-seopress' ),
+		'%%post_date%%'                       => __( 'Post date (human-readable, not valid in schemas)', 'wp-seopress' ),
+		'%%post_modified_date%%'              => __( 'Post modified date (human-readable, not valid in schemas)', 'wp-seopress' ),
+		// The two entries above are formatted per Settings > General, which a
+		// schema validator rejects. These are the ISO 8601 values that a
+		// datePublished / dateModified needs.
+		'%%post_date_iso8601%%'               => __( 'Post date, ISO 8601 format (for schemas)', 'wp-seopress' ),
+		'%%post_modified_iso8601%%'           => __( 'Post modified date, ISO 8601 format (for schemas)', 'wp-seopress' ),
+		'%%post_author%%'                     => __( 'Post author', 'wp-seopress' ),
+		'%%post_category%%'                   => __( 'Post category', 'wp-seopress' ),
+		'%%post_tag%%'                        => __( 'Post tag', 'wp-seopress' ),
+		'%%_category_title%%'                 => __( 'Category title', 'wp-seopress' ),
+		'%%_category_description%%'           => __( 'Category description', 'wp-seopress' ),
+		'%%tag_title%%'                       => __( 'Tag title', 'wp-seopress' ),
+		'%%tag_description%%'                 => __( 'Tag description', 'wp-seopress' ),
+		'%%term_title%%'                      => __( 'Term title', 'wp-seopress' ),
+		'%%term_description%%'                => __( 'Term description', 'wp-seopress' ),
+		'%%search_keywords%%'                 => __( 'Search keywords', 'wp-seopress' ),
+		'%%current_pagination%%'              => __( 'Current number page', 'wp-seopress' ),
+		'%%page%%'                            => __( 'Page number with context', 'wp-seopress' ),
+		'%%cpt_plural%%'                      => __( 'Plural Post Type Archive name', 'wp-seopress' ),
+		'%%archive_title%%'                   => __( 'Archive title', 'wp-seopress' ),
+		'%%archive_date%%'                    => __( 'Archive date', 'wp-seopress' ),
+		'%%archive_date_day%%'                => __( 'Day Archive date', 'wp-seopress' ),
+		'%%archive_date_month%%'              => __( 'Month Archive title', 'wp-seopress' ),
+		'%%archive_date_month_name%%'         => __( 'Month name Archive title', 'wp-seopress' ),
+		'%%archive_date_year%%'               => __( 'Year Archive title', 'wp-seopress' ),
+		'%%_cf_your_custom_field_name%%'      => __( 'Custom fields from post, page, post type and term taxonomy', 'wp-seopress' ),
+		'%%_ct_your_custom_taxonomy_slug%%'   => __( 'Custom term taxonomy from post, page or post type', 'wp-seopress' ),
+		'%%wc_single_cat%%'                   => __( 'Single product category', 'wp-seopress' ),
+		'%%wc_single_tag%%'                   => __( 'Single product tag', 'wp-seopress' ),
+		'%%wc_single_short_desc%%'            => __( 'Single product short description', 'wp-seopress' ),
+		'%%wc_single_price%%'                 => __( 'Single product price', 'wp-seopress' ),
+		'%%wc_single_price_exc_tax%%'         => __( 'Single product price taxes excluded', 'wp-seopress' ),
+		'%%wc_sku%%'                          => __( 'Single SKU product', 'wp-seopress' ),
+		'%%currentday%%'                      => __( 'Current day', 'wp-seopress' ),
+		'%%currentmonth%%'                    => __( 'Current month', 'wp-seopress' ),
+		'%%currentmonth_short%%'              => __( 'Current month in 3 letters', 'wp-seopress' ),
+		'%%currentyear%%'                     => __( 'Current year', 'wp-seopress' ),
+		'%%currentdate%%'                     => __( 'Current date', 'wp-seopress' ),
+		'%%currenttime%%'                     => __( 'Current time', 'wp-seopress' ),
+		'%%author_first_name%%'               => __( 'Author first name', 'wp-seopress' ),
+		'%%author_last_name%%'                => __( 'Author last name', 'wp-seopress' ),
+		'%%author_website%%'                  => __( 'Author website', 'wp-seopress' ),
+		'%%author_nickname%%'                 => __( 'Author nickname', 'wp-seopress' ),
+		'%%author_bio%%'                      => __( 'Author biography', 'wp-seopress' ),
+		'%%_ucf_your_user_meta%%'             => __( 'Custom User Meta', 'wp-seopress' ),
+		'%%currentmonth_num%%'                => __( 'Current month in digital format', 'wp-seopress' ),
+		'%%target_keyword%%'                  => __( 'Target keyword', 'wp-seopress' ),
+		// Schema tags (src/Tags/Schema). They resolve anywhere the tag engine
+		// runs, but a custom JSON-LD field is where they are meant to be used,
+		// so they close the list.
+		'%%siteurl%%'                         => __( 'Site URL', 'wp-seopress' ),
+		'%%site_alternate_name%%'             => __( 'Alternative site title', 'wp-seopress' ),
+		'%%knowledge_type%%'                  => __( 'Knowledge Graph type', 'wp-seopress' ),
+		'%%social_knowledge_name%%'           => __( 'Knowledge Graph name', 'wp-seopress' ),
+		'%%social_knowledge_legal_name%%'     => __( 'Knowledge Graph legal name', 'wp-seopress' ),
+		'%%social_knowledge_description%%'    => __( 'Knowledge Graph description', 'wp-seopress' ),
+		'%%social_knowledge_image%%'          => __( 'Knowledge Graph image / logo', 'wp-seopress' ),
+		'%%social_knowledge_email%%'          => __( 'Knowledge Graph email', 'wp-seopress' ),
+		'%%social_phone_number%%'             => __( 'Knowledge Graph phone number', 'wp-seopress' ),
+		'%%social_knowledge_contact_type%%'   => __( 'Knowledge Graph contact type', 'wp-seopress' ),
+		'%%social_knowledge_contact_option%%' => __( 'Knowledge Graph contact option', 'wp-seopress' ),
+		'%%social_knowledge_street%%'         => __( 'Knowledge Graph street address', 'wp-seopress' ),
+		'%%social_knowledge_locality%%'       => __( 'Knowledge Graph city', 'wp-seopress' ),
+		'%%social_knowledge_region%%'         => __( 'Knowledge Graph region', 'wp-seopress' ),
+		'%%social_knowledge_postal_code%%'    => __( 'Knowledge Graph postal code', 'wp-seopress' ),
+		'%%social_knowledge_country%%'        => __( 'Knowledge Graph country', 'wp-seopress' ),
+		'%%social_knowledge_founding_date%%'  => __( 'Knowledge Graph founding date', 'wp-seopress' ),
+		'%%social_knowledge_employees%%'      => __( 'Knowledge Graph number of employees', 'wp-seopress' ),
+		'%%social_knowledge_tax_id%%'         => __( 'Knowledge Graph tax / VAT ID', 'wp-seopress' ),
+		'%%social_account_facebook%%'         => __( 'Facebook page URL', 'wp-seopress' ),
+		'%%social_account_twitter%%'          => __( 'X / Twitter URL', 'wp-seopress' ),
+		'%%social_account_instagram%%'        => __( 'Instagram URL', 'wp-seopress' ),
+		'%%social_account_youtube%%'          => __( 'YouTube URL', 'wp-seopress' ),
+		'%%social_account_linkedin%%'         => __( 'LinkedIn URL', 'wp-seopress' ),
+		'%%social_account_pinterest%%'        => __( 'Pinterest URL', 'wp-seopress' ),
+		'%%social_account_extra%%'            => __( 'Additional accounts (sameAs)', 'wp-seopress' ),
 	);
+
+	foreach ( seopress_get_dyn_variable_aliases() as $alias => $canonical ) {
+		if ( isset( $variables[ $canonical ] ) ) {
+			$variables[ $alias ] = $variables[ $canonical ];
+		}
+	}
+
+	return apply_filters( 'seopress_get_dynamic_variables', $variables );
 }
 
 /**
@@ -118,7 +147,12 @@ function seopress_render_dyn_variables( $classes ) {
 		$html .= '<div class="sp-wrap-tag-variables-list">';
 		$html .= '<ul class="sp-tag-variables-list">';
 		$html .= '<li class="sp-tag-variables-search"><input type="text" class="sp-tag-variables-search-input" placeholder="' . esc_attr__( 'Search variables...', 'wp-seopress' ) . '" /></li>';
+
+		$aliases = seopress_get_dyn_variable_aliases();
 		foreach ( seopress_get_dyn_variables() as $key => $value ) {
+			if ( isset( $aliases[ $key ] ) ) {
+				continue;
+			}
 			// Labels are stored unescaped (the React screens render them as
 			// text and would double-escape otherwise); this PHP path is the
 			// one place that prints them as HTML, so escape at output.

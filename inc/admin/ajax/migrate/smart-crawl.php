@@ -59,7 +59,7 @@ function seopress_smart_crawl_translate_template( $value ) {
 function seopress_smart_crawl_migration() {
 	check_ajax_referer( 'seopress_smart_crawl_migrate_nonce', '_ajax_nonce', true );
 
-	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) && is_admin() ) {
+	if ( current_user_can( seopress_capability( 'manage_options', 'migration' ) ) ) {
 		// Offset can be either an integer (posts phase) or a sentinel string ('redirects:N', 'done').
 		$raw_offset = isset( $_POST['offset'] ) ? sanitize_text_field( wp_unslash( $_POST['offset'] ) ) : '0';
 
